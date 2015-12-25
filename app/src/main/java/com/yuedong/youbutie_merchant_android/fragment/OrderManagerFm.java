@@ -1,6 +1,7 @@
 package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -12,16 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yuedong.youbutie_merchant_android.MainActivity;
 import com.yuedong.youbutie_merchant_android.OrderDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
+import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +51,14 @@ public class OrderManagerFm extends BaseFragment {
 
     @Override
     public View getContentView(ViewGroup container) {
+        initTitleView(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"), R.drawable.icon_grey_swip, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 打开扫描界面扫描条形码或二维码
+                Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(openCameraIntent, 0);
+            }
+        }));
         return ViewUtils.inflaterView(getActivity(), R.layout.fragment_order_manager, container);
     }
 

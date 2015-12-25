@@ -29,14 +29,14 @@
 
             <TextView
                 style="@style/text_white_16sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:text="4000"
                 android:textSize="26sp" />
         </LinearLayout>
 
         <View
             style="@style/line_grey_1px"
-            android:background="@color/whiteffffff" />
+            android:background="@color/white66ffffff" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
 
                 <TextView
                     style="@style/text_white_14sp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="6dp"
                     android:text="123"
                     android:textSize="22sp" />
 
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/whiteffffff" />
+                android:background="@color/white66ffffff" />
 
 
             <LinearLayout
@@ -87,7 +87,7 @@
 
                 <TextView
                     style="@style/text_white_14sp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="6dp"
                     android:text="20"
                     android:textSize="22sp" />
 
@@ -116,9 +116,6 @@
             android:layout_centerVertical="true"
             android:src="@drawable/icon_black_add" />
 
-        <View
-            style="@style/line_grey_1px"
-            android:background="@color/greyd6d2ca" />
     </RelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView

@@ -3,10 +3,12 @@ package com.yuedong.youbutie_merchant_android;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
+import com.yuedong.youbutie_merchant_android.fragment.ClientManagetFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
@@ -16,25 +18,19 @@ import com.zxing.activity.CaptureActivity;
 public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBottomBarClickListener {
     private HomeBarSpanView[] homeBarSpanViews = new HomeBarSpanView[4];
     private OrderManagerFm orderManagerFm;
+    private ClientManagetFm clientManagetFm;
     private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
-        initTitleView(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"), R.drawable.icon_grey_swip, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 打开扫描界面扫描条形码或二维码
-                Intent openCameraIntent = new Intent(MainActivity.this, CaptureActivity.class);
-                startActivityForResult(openCameraIntent, 0);
-            }
-        }));
         setShowContentView(R.layout.activity_main);
     }
 
     private void ititFragment() {
         orderManagerFm = new OrderManagerFm();
+        clientManagetFm = new ClientManagetFm();
     }
 
     private void loadDefaultFm() {
@@ -105,10 +101,12 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         switch (viewId) {
             case R.id.id_home_order_manager:
                 chooseIndex = 1;
+                switchContent(mDisplayContext, orderManagerFm, R.id.id_container);
                 break;
 
             case R.id.id_home_customer_manager:
                 chooseIndex = 2;
+                switchContent(mDisplayContext, clientManagetFm, R.id.id_container);
                 break;
 
             case R.id.id_home_merchant_manager:
@@ -119,6 +117,11 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
                 chooseIndex = 4;
                 break;
         }
+    }
+
+    @Override
+    protected Fragment getDefaultFrag() {
+        return orderManagerFm;
     }
 
     /**
