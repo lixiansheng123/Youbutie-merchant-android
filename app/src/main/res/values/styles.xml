@@ -1,0 +1,205 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="style_my_dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_go_up</item>
+        <item name="android:windowExitAnimation">@anim/anim_decline</item>
+    </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="w_h_adapter">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="w_h_ww">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="w_h_mm">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="w_h_mw">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="w_h_wm">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="text_black_12sp" parent="w_h_ww">
+        <item name="android:textColor">@color/black2d211f</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_black_14sp" parent="text_black_12sp">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_black_16sp" parent="text_black_12sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_black_18sp" parent="text_black_12sp">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <style name="text_white_12sp" parent="w_h_ww">
+        <item name="android:textColor">@color/whiteffffff</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="text_white_14sp" parent="text_white_12sp">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_white_16sp" parent="text_white_12sp">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_white_18sp" parent="text_white_12sp">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="text_white_22sp" parent="text_white_12sp">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="text_deep_grey_14sp" parent="text_black_14sp">
+        <item name="android:textColor">@color/grey938381</item>
+    </style>
+
+    <style name="text_tint_grey_14sp" parent="text_black_14sp">
+        <item name="android:textColor">@color/greycbc0bf</item>
+    </style>
+
+    <style name="text_tint_grey_12sp" parent="text_black_12sp">
+        <item name="android:textColor">@color/greycbc0bf</item>
+    </style>
+
+    <style name="text_yellow_14sp" parent="text_white_14sp">
+        <item name="android:textColor">@color/yelloweeb600</item>
+    </style>
+
+    <style name="text_yellow_16sp" parent="text_white_16sp">
+        <item name="android:textColor">@color/yelloweeb600</item>
+    </style>
+
+
+    <style name="line_grey_1dp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+
+        <item name="android:background">@color/greyebe9e5</item>
+    </style>
+
+    <style name="line_grey_1px" parent="line_grey_1dp">
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="line_grey_2px" parent="line_grey_1dp">
+        <item name="android:layout_height">2px</item>
+    </style>
+
+    <!--描边-->
+    <style name="line_stroke_1px">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/greyd6d1ca</item>
+    </style>
+
+    <style name="style_refreshview" parent="@style/w_h_mm">
+        <item name="ptrHeaderTextColor">@color/grey938381</item>
+        <item name="ptrDrawableEnd">@color/transparent</item>
+        <item name="ptrDrawableStart">@mipmap/ic_launcher</item>
+        <item name="ptrAnimationStyle">rotate</item>
+        <item name="ptrHeaderBackground">@color/greyede9e4</item>
+        <!--<item name="ptrDrawable">@drawable/icon_desk_logn</item>-->
+        <!--<item name="ptrMode">both</item>-->
+    </style>
+
+    <style name="ratingBar_star" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/drawable_star_ratingbar</item>
+        <item name="android:minHeight">13dp</item>
+        <item name="android:maxHeight">13dp</item>
+    </style>
+
+    <style name="ratingBar_star2" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/drawable_star_ratingbar2</item>
+        <item name="android:minHeight">19dp</item>
+        <item name="android:maxHeight">19dp</item>
+    </style>
+
+
+    <style name="btn_yellow" parent="w_h_ww">
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@color/yellowf0c008</item>
+        <item name="android:textColor">@color/whiteffffff</item>
+    </style>
+
+    <style name="btn_round_yellow" parent="w_h_ww">
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_round_yellow</item>
+        <item name="android:textColor">@color/whiteffffff</item>
+    </style>
+
+    <style name="btn_round_grey" parent="btn_round_yellow">
+        <item name="android:background">@drawable/bg_round_grey</item>
+    </style>
+
+    <style name="register_input_box" parent="w_h_mm">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black7d6c6a</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColorHint">@color/greycbc0bf</item>
+    </style>
+    <!--灰框文字-->
+    <style name="grey_frame">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">39dp</item>
+        <item name="android:layout_width">79dp</item>
+        <item name="android:background">@drawable/shape_grey_frame</item>
+        <item name="android:textColor">@color/whitec7bcbb</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+</resources>

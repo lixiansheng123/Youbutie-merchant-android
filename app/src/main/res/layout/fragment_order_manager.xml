@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+    <!--<TextView-->
+    <!--style="@style/text_black_16sp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:text="你好"-->
+    <!--android:textSize="40sp"-->
+    <!--android:id="@+id/id_text"-->
+    <!--/>-->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/id_tab_order_manager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/whiteffffff"
+        app:layout_heightPercent="8.7%h"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/yellowf0c008"
+        app:tabSelectedTextColor="@color/yellowf0c008"
+        app:tabTextColor="@color/black81706e" />
+
+    <View
+        style="@style/line_stroke_1px"
+        android:layout_marginTop="11dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_vp_order_manager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/whiteffffff" />
+</com.zhy.android.percent.support.PercentLinearLayout>

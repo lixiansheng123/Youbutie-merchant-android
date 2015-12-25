@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteffffff"
+        android:paddingBottom="21dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/id_user_pic"
+            android:layout_width="66dp"
+            android:layout_height="66dp" />
+
+        <TextView
+            android:id="@+id/id_user_name"
+            style="@style/text_black_16sp"
+            android:layout_alignBottom="@+id/id_icon_vip"
+            android:layout_alignTop="@+id/id_icon_vip"
+            android:layout_marginLeft="22dp"
+            android:layout_toRightOf="@+id/id_user_pic"
+            android:gravity="center_vertical"
+            android:text="@string/str_test_nick"
+            android:textColor="@color/black81706e" />
+
+        <ImageView
+            android:id="@+id/id_icon_vip"
+            style="@style/w_h_ww"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@+id/id_user_name"
+            android:src="@drawable/icon_user_vip" />
+
+        <TextView
+            android:id="@+id/id_down_order_time"
+            style="@style/text_tint_grey_14sp"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignLeft="@+id/id_user_name"
+            android:layout_marginBottom="12dp"
+            android:text="@string/str_test_time" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignLeft="@+id/id_user_name" />
+
+        <GridView
+            android:id="@+id/id_merchant_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/id_user_pic"
+            android:layout_marginTop="16dp"
+            android:horizontalSpacing="10dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:verticalSpacing="16dp">
+
+        </GridView>
+    </RelativeLayout>
+
+    <View style="@style/line_grey_1px" />
+
+    <View
+        style="@style/line_grey_1px"
+        android:layout_marginTop="11dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/whiteffffff"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/id_service_cost_name"
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:text="@string/str_service_cost" />
+
+        <EditText
+            android:id="@+id/id_input_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/id_service_cost_name"
+            android:background="@color/transparent"
+            android:digits="0123456789."
+            android:gravity="center_vertical|right"
+            android:hint="@string/str_input_service_total_money"
+            android:textColor="@color/grey938381"
+            android:textColorHint="@color/greycbc0bf"
+            android:textCursorDrawable="@color/yellowf0c008"
+            android:textSize="14sp" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/id_btn_collection"
+        style="@style/btn_round_grey"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:clickable="false"
+        android:text="@string/str_contrim_collection" />
+
+
+</LinearLayout>

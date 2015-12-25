@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:leo="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyf0eeeb"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/greyd6d2ca" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.yuedong.youbutie_merchant_android.view.HomeBarSpanView
+            android:id="@+id/id_home_order_manager"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            leo:click="true"
+            leo:imageBackground="@drawable/icon_order_default"
+            leo:imageClickBackground="@drawable/icon_order_selected"
+            leo:textStr="@string/str_order_manager" />
+
+
+        <com.yuedong.youbutie_merchant_android.view.HomeBarSpanView
+            android:id="@+id/id_home_customer_manager"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            leo:imageBackground="@drawable/icon_customer_default"
+            leo:imageClickBackground="@drawable/icon_customer_selected"
+            leo:textStr="@string/str_clent_manager" />
+
+        <com.yuedong.youbutie_merchant_android.view.HomeBarSpanView
+            android:id="@+id/id_home_merchant_manager"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            leo:imageBackground="@drawable/ion_store_default"
+            leo:imageClickBackground="@drawable/icon_store_selected"
+            leo:textStr="@string/str_merchant_manager" />
+
+        <com.yuedong.youbutie_merchant_android.view.HomeBarSpanView
+            android:id="@+id/id_home_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            leo:imageBackground="@drawable/icon_statistics_default"
+            leo:imageClickBackground="@drawable/icon_statistics_selected"
+            leo:textStr="@string/str_statistics" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/selector_bg_white_item"
+    android:minHeight="100dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="12dp">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/id_user_pic"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/id_user_name"
+        style="@style/text_black_16sp"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/id_user_pic"
+        android:text="@string/str_test_nick"
+        android:textColor="@color/black81706e" />
+
+    <TextView
+        android:id="@+id/id_service"
+        style="@style/text_yellow_14sp"
+        android:layout_alignBottom="@+id/id_user_pic"
+        android:layout_alignLeft="@+id/id_user_name"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="7dp"
+        android:layout_toLeftOf="@+id/id_wait_pay_layout"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="洗车" />
+
+    <TextView
+        android:id="@+id/id_time"
+        style="@style/text_tint_grey_12sp"
+        android:layout_alignBottom="@+id/id_user_pic"
+        android:layout_alignLeft="@+id/id_user_name"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/id_wait_pay_layout"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/str_test_time" />
+
+
+    <RelativeLayout
+        android:id="@+id/id_wait_pay_layout"
+        style="@style/w_h_ww"
+        android:layout_alignBottom="@+id/id_user_pic"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/id_pay_money"
+            style="@style/text_black_16sp"
+            android:layout_alignParentRight="true"
+            android:text="￥120.00"
+            android:textColor="@color/redff8b3e"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/id_wait_pay_name"
+            android:layout_width="72dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/id_pay_money"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/red_frame"
+            android:gravity="center"
+            android:text="@string/str_wait_pay"
+            android:textColor="@color/redff8b3e"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/id_btn_receive_order"
+            style="@style/btn_round_yellow"
+            android:layout_width="72dp"
+            android:layout_height="33dp"
+            android:layout_alignParentBottom="true"
+            android:text="@string/str_receive_order" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

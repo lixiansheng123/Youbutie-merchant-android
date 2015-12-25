@@ -1,0 +1,156 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/greyede9e4"
+        android:orientation="vertical">
+
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/whiteffffff">
+
+
+            <ImageView
+                android:id="@+id/id_icon_down_order"
+                style="@style/w_h_ww"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/icon_down_order"
+                app:layout_heightPercent="12.56%w"
+                app:layout_marginLeftPercent="6.48%w"
+                app:layout_marginTopPercent="13.33%h"
+                app:layout_widthPercent="12.56%w" />
+
+            <TextView
+                android:id="@+id/id_text_down_order"
+                style="@style/text_black_12sp"
+                android:layout_alignLeft="@+id/id_icon_down_order"
+                android:layout_alignRight="@+id/id_icon_down_order"
+                android:layout_below="@+id/id_icon_down_order"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/str_str_already_down_order"
+                android:textColor="@color/black897775" />
+
+
+            <View
+                android:id="@+id/id_line1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/id_icon_down_order"
+                android:layout_toRightOf="@+id/id_icon_down_order"
+                android:background="@color/grey938381"
+                app:layout_marginLeftPercent="3.2%w"
+                app:layout_marginRightPercent="3.2%w"
+                app:layout_marginTopPercent="6.28%w"
+                app:layout_widthPercent="6.3%w" />
+
+
+            <ImageView
+                android:id="@+id/id_icon_merchant_receive_order"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@+id/id_line1"
+                android:src="@drawable/icon_merchant_receive_order"
+                app:layout_heightPercent="12.56%w"
+                app:layout_marginTopPercent="13.33%h"
+                app:layout_widthPercent="12.56%w" />
+
+            <TextView
+                android:id="@+id/id_text_merchant_receive_order"
+                style="@style/text_black_12sp"
+                android:layout_alignLeft="@+id/id_icon_merchant_receive_order"
+                android:layout_alignRight="@+id/id_icon_merchant_receive_order"
+                android:layout_below="@+id/id_icon_merchant_receive_order"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/str_merchant_receive_order"
+                android:textColor="@color/black897775" />
+
+
+            <View
+                android:id="@+id/id_line2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/id_icon_merchant_receive_order"
+                android:layout_toRightOf="@+id/id_icon_merchant_receive_order"
+                android:background="@color/grey938381"
+                app:layout_marginLeftPercent="3.2%w"
+                app:layout_marginRightPercent="3.2%w"
+                app:layout_marginTopPercent="6.28%w"
+                app:layout_widthPercent="6.3%w" />
+
+
+            <ImageView
+                android:id="@+id/id_icon_service_finish"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@+id/id_line2"
+                android:src="@drawable/icon_service_finish"
+                app:layout_heightPercent="12.56%w"
+                app:layout_marginTopPercent="13.33%h"
+                app:layout_widthPercent="12.56%w" />
+
+            <TextView
+                android:id="@+id/id_text_service_finish"
+                style="@style/text_black_12sp"
+                android:layout_alignLeft="@+id/id_icon_service_finish"
+                android:layout_alignRight="@+id/id_icon_service_finish"
+                android:layout_below="@+id/id_icon_service_finish"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/str_service_finish"
+                android:textColor="@color/black897775" />
+
+
+            <View
+                android:id="@+id/id_line3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_alignTop="@+id/id_icon_service_finish"
+                android:layout_toRightOf="@+id/id_icon_service_finish"
+                android:background="@color/grey938381"
+                app:layout_marginLeftPercent="3.2%w"
+                app:layout_marginRightPercent="3.2%w"
+                app:layout_marginTopPercent="6.28%w"
+                app:layout_widthPercent="6.3%w" />
+
+
+            <ImageView
+                android:id="@+id/id_icon_get_car"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_toRightOf="@+id/id_line3"
+                android:src="@drawable/icon_get_car"
+                app:layout_heightPercent="12.56%w"
+                app:layout_marginTopPercent="13.33%h"
+                app:layout_widthPercent="12.56%w" />
+
+            <TextView
+                android:id="@+id/id_text_get_car"
+                style="@style/text_black_12sp"
+                android:layout_alignLeft="@+id/id_icon_get_car"
+                android:layout_alignRight="@+id/id_icon_get_car"
+                android:layout_below="@+id/id_icon_get_car"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/str_get_car"
+                android:textColor="@color/black897775" />
+
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"></FrameLayout>
+
+    </LinearLayout>
+</ScrollView>

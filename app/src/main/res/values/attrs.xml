@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="attHomeSpan">
+        <attr name="imageBackground" format="reference" />
+        <attr name="imageClickBackground" format="reference" />
+        <attr name="textStr" format="string" />
+        <attr name="click" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="attRoundImage">
+        <attr name="insideColor" format="color" />
+        <attr name="outsideColor" format="color" />
+        <attr name="roundborderWidth" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

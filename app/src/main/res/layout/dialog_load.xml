@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:background="@drawable/bg_load"
+    android:gravity="center"
+    android:minHeight="150dp"
+    android:minWidth="150dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/id_load_pic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/progress_round" />
+
+    <TextView
+        android:id="@+id/id_dialog_msg"
+        style="@style/text_white_16sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/whiteffffff"
+        android:text="拼命加载中" />
+
+
+</LinearLayout>

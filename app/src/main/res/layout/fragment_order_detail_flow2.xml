@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyede9e4"
+    android:orientation="vertical"
+    android:paddingBottom="44dp">
+
+    <LinearLayout
+        style="@style/w_h_mw"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <TextView
+                style="@style/text_black_16sp"
+                android:layout_centerVertical="true"
+                android:text="@string/str_client_evaluate"
+                android:textColor="@color/black5d5352" />
+
+            <RatingBar
+                android:id="@+id/id_me_evaluate"
+                style="@style/ratingBar_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="0"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+        <View style="@style/line_grey_2px" />
+
+
+        <TextView
+            android:id="@+id/id_evaluate_cotent"
+            style="@style/text_black_14sp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="@string/str_not_evaluate"
+            android:textColor="@color/grey8d7c7a" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/w_h_mw"
+        android:layout_marginTop="10dp"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:text="@string/str_service_content"
+            android:textColor="@color/black5d5352"
+            android:textSize="16sp" />
+
+        <View style="@style/line_grey_2px" />
+
+        <com.yuedong.youbutie_merchant_android.view.SupportScrollConflictGridView
+            android:id="@+id/id_service_content_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="11dp"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:verticalSpacing="11dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/w_h_mw"
+        android:layout_marginTop="10dp"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical"
+        android:paddingBottom="19dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:text="@string/str_order_detail"
+            android:textColor="@color/black5d5352"
+            android:textSize="16sp" />
+
+        <View style="@style/line_grey_2px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:id="@+id/id_order_number_name"
+                style="@style/text_black_14sp"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_order_number"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_order_number"
+                style="@style/text_black_14sp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/id_order_number_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_down_order_time_name"
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_order_number_name"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_down_order_time"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_down_order_time"
+                style="@style/text_black_14sp"
+                android:layout_alignTop="@+id/id_down_order_time_name"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/id_down_order_time_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_time_name"
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_down_order_time_name"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_pay_time"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_time"
+                style="@style/text_black_14sp"
+                android:layout_alignTop="@+id/id_pay_time_name"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/id_pay_time_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_way_name"
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_pay_time_name"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_pay_way"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_way"
+                style="@style/text_black_14sp"
+                android:layout_alignTop="@+id/id_pay_way_name"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/id_pay_way_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_status_name"
+
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_pay_way_name"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_order_status"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_pay_status"
+                style="@style/text_black_14sp"
+                android:layout_alignTop="@+id/id_pay_status_name"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/id_pay_status_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_order_total_money_name"
+
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_pay_status_name"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_order_total_money"
+                android:textColor="@color/grey8d7c7a" />
+
+            <TextView
+                android:id="@+id/id_order_total_money"
+                style="@style/text_black_14sp"
+                android:layout_alignTop="@+id/id_order_total_money_name"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/id_order_total_money_name"
+                android:text="31231231231"
+                android:textColor="@color/grey8d7c7a" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

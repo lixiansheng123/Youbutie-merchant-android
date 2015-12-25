@@ -1,0 +1,2 @@
+include ':app', ':library_qrcode'
+include ':library_refresh'

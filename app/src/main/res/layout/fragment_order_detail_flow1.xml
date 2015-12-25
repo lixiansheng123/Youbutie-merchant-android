@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyede9e4">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/whiteffffff"
+        android:minHeight="130dp"
+        android:paddingBottom="14dp"
+        android:paddingLeft="23dp"
+        android:paddingRight="23dp"
+        android:paddingTop="14dp">
+
+
+        <TextView
+            android:id="@+id/id_order_info_name"
+            style="@style/text_black_16sp"
+            android:text="@string/str_order_info" />
+
+        <View
+            android:id="@+id/id_line"
+            style="@style/line_grey_1dp"
+            android:layout_below="@+id/id_order_info_name"
+            android:layout_marginTop="10dp" />
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/id_main_pic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_below="@+id/id_line"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/id_name"
+            style="@style/text_black_16sp"
+            android:layout_alignTop="@+id/id_main_pic"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/id_main_pic" />
+
+        <TextView
+            android:id="@+id/id_time"
+            style="@style/text_black_12sp"
+            android:layout_alignBottom="@+id/id_main_pic"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/id_main_pic"
+            android:text="@string/str_test_time"
+            android:textColor="@color/grey847270" />
+
+        <TextView
+            android:id="@+id/id_status"
+            android:layout_width="68dp"
+            android:layout_height="28dp"
+            android:layout_alignBottom="@+id/id_main_pic"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/grey_frame"
+            android:gravity="center"
+            android:text="已下单"
+            android:textColor="@color/grey847270"
+            android:textSize="12sp"
+
+            />
+    </RelativeLayout>
+
+    <Button
+        android:visibility="gone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/id_btn_collection"
+        style="@style/btn_round_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/str_collection" />
+
+
+</RelativeLayout>

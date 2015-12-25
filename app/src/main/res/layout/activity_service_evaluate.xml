@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyede9e4"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        app:cardBackgroundColor="@color/whiteffffff"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/w_h_ww"
+                android:drawableLeft="@drawable/icon_green_gou"
+                android:gravity="center_vertical"
+                android:text=" 支付成功"
+                android:textColor="@color/green2bd4a1"
+                android:textSize="20sp" />
+
+            <TextView
+                style="@style/text_black_14sp"
+                android:layout_marginTop="23dp"
+                android:text="@string/str_service_evaluate_desc"
+                android:textColor="@color/black82716f" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/whiteffffff"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="13dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/id_flag"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        style="@style/text_black_18sp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/str_service_evaluate"
+                        android:textColor="@color/black493d3c" />
+
+                    <View
+                        style="@style/line_grey_2px"
+                        android:layout_alignParentBottom="true" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/id_flag2"
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_below="@+id/id_flag"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/str_service_quality" />
+
+                <RatingBar
+                    android:id="@+id/id_grade"
+                    style="@style/ratingBar_star2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/id_flag2"
+                    android:layout_marginLeft="21dp"
+                    android:layout_toRightOf="@+id/id_flag2"
+                    android:numStars="5"
+                    android:rating="0" />
+
+                <EditText
+                    android:hint="@string/str_input_evaluate_content"
+                    android:textColorHint="@color/greycbc0bf"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/id_input_box"
+                    android:background="@color/greyede9e4"
+                    android:layout_marginTop="21dp"
+                    android:layout_below="@+id/id_flag2"
+                    android:layout_width="match_parent"
+                    android:layout_height="112dp"
+                    android:gravity="top|left"
+                    android:padding="13dp"
+                    android:textColor="@color/grey938381"
+                    android:textSize="14sp" />
+
+
+                <Button
+                    android:id="@+id/id_submit"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/str_submit"
+                    android:textSize="16sp"
+                    android:textColor="@color/whitedad6d4"
+                    android:background="@color/grey938381"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/id_input_box"
+                    android:layout_width="224dp"
+                    android:layout_height="43dp" />
+
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+</LinearLayout>
