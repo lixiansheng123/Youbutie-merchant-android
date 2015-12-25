@@ -48,4 +48,5 @@
     <string name="str_contrim_collection">确认收款</string>
     <string name="str_client_evaluate">客户评价</string>
     <string name="str_not_evaluate">暂无评价</string>
+    <string name="str_online_ad">在线广告</string>
 </resources>

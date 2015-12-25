@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/yellowf0c92b"
+        android:orientation="vertical"
+        app:layout_heightPercent="27.56%h"
+        app:layout_paddingLeftPercent="3.43%w"
+        app:layout_paddingRightPercent="3.43%w">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_heightPercent="53.65%h">
+
+            <TextView
+                style="@style/text_white_14sp"
+                android:drawableRight="@drawable/icon_white_point_triangle"
+                android:text="总客户数(人) " />
+
+            <TextView
+                style="@style/text_white_16sp"
+                android:layout_marginTop="10dp"
+                android:text="4000"
+                android:textSize="26sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/line_grey_1px"
+            android:background="@color/whiteffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:drawableRight="@drawable/icon_white_point_triangle"
+                    android:text="会员数(人) " />
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:layout_marginTop="7dp"
+                    android:text="123"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/whiteffffff" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:drawableRight="@drawable/icon_white_point_triangle"
+                    android:text="广告数(条) " />
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:layout_marginTop="7dp"
+                    android:text="20"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/whiteffffff"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_heightPercent="7.87%h">
+
+        <TextView
+            style="@style/text_black_16sp"
+            android:layout_centerVertical="true"
+            android:text="@string/str_online_ad"
+            android:textColor="@color/black81706e" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_black_add" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:background="@color/greyd6d2ca" />
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        style="@style/style_refreshview"
+        android:layout_marginTop="5dp"
+        android:background="#00ff00"
+        android:divider="@color/greyecebe4"
+        android:dividerHeight="5dp" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -4,7 +4,15 @@
         "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
         "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     }
 ]
