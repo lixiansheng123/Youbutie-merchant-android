@@ -28,6 +28,7 @@
                 android:text="总客户数(人) " />
 
             <TextView
+                android:id="@+id/id_total_client_num"
                 style="@style/text_white_16sp"
                 android:layout_marginTop="8dp"
                 android:text="4000"
@@ -57,6 +58,7 @@
                     android:text="会员数(人) " />
 
                 <TextView
+                    android:id="@+id/id_member_num"
                     style="@style/text_white_14sp"
                     android:layout_marginTop="6dp"
                     android:text="123"
@@ -86,6 +88,7 @@
                     android:text="广告数(条) " />
 
                 <TextView
+                    android:id="@+id/id_ad_num"
                     style="@style/text_white_14sp"
                     android:layout_marginTop="6dp"
                     android:text="20"
@@ -118,11 +121,11 @@
 
     </RelativeLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        style="@style/style_refreshview"
-        android:layout_marginTop="5dp"
-        android:background="#00ff00"
-        android:divider="@color/greyecebe4"
-        android:dividerHeight="5dp" />
+    <!--<com.handmark.pulltorefresh.library.PullToRefreshListView-->
+        <!--style="@style/style_refreshview"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="#00ff00"-->
+        <!--android:divider="@color/greyecebe4"-->
+        <!--android:dividerHeight="5dp" />-->
 
 </com.zhy.android.percent.support.PercentLinearLayout>
