@@ -1,7 +1,5 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -9,17 +7,18 @@ import android.view.View;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.fragment.ClientManagetFm;
+import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
-import com.zxing.activity.CaptureActivity;
 
 public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBottomBarClickListener {
     private HomeBarSpanView[] homeBarSpanViews = new HomeBarSpanView[4];
     private OrderManagerFm orderManagerFm;
     private ClientManagetFm clientManagetFm;
+    private MerchantManagerFm merchantManagerFm;
     private Bundle savedInstanceState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     private void ititFragment() {
         orderManagerFm = new OrderManagerFm();
         clientManagetFm = new ClientManagetFm();
+        merchantManagerFm = new MerchantManagerFm();
     }
 
     private void loadDefaultFm() {
@@ -110,6 +110,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
                 break;
 
             case R.id.id_home_merchant_manager:
+                switchContent(mDisplayContext, merchantManagerFm, R.id.id_container);
                 chooseIndex = 3;
                 break;
 
@@ -135,4 +136,6 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
                 bar.resetBackground();
         }
     }
+
+
 }

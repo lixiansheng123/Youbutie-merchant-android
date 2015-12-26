@@ -118,7 +118,6 @@ public final class ViewfinderView extends View {
 
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        line = BitmapFactory.decodeResource(getResources(), R.drawable.icon_swip_line);
         density = context.getResources().getDisplayMetrics().density;
         // 将像素转换成dp
         ScreenRate = (int) (20 * density);
@@ -138,6 +137,10 @@ public final class ViewfinderView extends View {
         Rect frame = CameraManager.get().getFramingRect();
         if (frame == null) {
             return;
+        }
+        if (line == null) {
+            Bitmap lineR = BitmapFactory.decodeResource(getResources(), R.drawable.icon_swip_line);
+            line = Bitmap.createScaledBitmap(lineR, (int) (frame.right - frame.left), lineR.getHeight(), true);
         }
 
         // 初始化中间线滑动的最上边和最下边

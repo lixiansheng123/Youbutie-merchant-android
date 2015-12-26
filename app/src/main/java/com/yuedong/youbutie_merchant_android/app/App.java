@@ -3,11 +3,13 @@ package com.yuedong.youbutie_merchant_android.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.SPUtils;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -22,10 +24,22 @@ public class App extends Application {
     private Executor executor;
     // 用户对象
     private User user;
+    // 我的门店信息
+    private List<Merchant> meMerchant;
+    // 我的门店信息是否改变
+    public boolean meMerchantInfoChange;
     // 用户信息是否变更
     public boolean userInfoChange;
     // 订单信息是否变更
     public boolean orderInfoChange;
+
+    public void setMeMerchant(List<Merchant> meMerchant) {
+        this.meMerchant = meMerchant;
+    }
+
+    public List<Merchant> getMeMerchant() {
+        return meMerchant;
+    }
 
     public Executor getExecutor() {
         return executor;

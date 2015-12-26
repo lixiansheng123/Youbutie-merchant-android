@@ -49,4 +49,7 @@
     <string name="str_client_evaluate">客户评价</string>
     <string name="str_not_evaluate">暂无评价</string>
     <string name="str_online_ad">在线广告</string>
+    <string name="str_service_list">服务列表</string>
+    <string name="str_merchant_ad">门店广告</string>
+    <string name="str_merchant_ad_des">您在门店广告这里输入的广告信息将会展示給所有查看您门店信息的用户</string>
 </resources>

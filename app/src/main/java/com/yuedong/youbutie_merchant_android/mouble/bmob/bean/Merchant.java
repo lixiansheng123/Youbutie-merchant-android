@@ -30,7 +30,15 @@ public class Merchant extends BmobObject {
     private List<ServiceInfoDetailBean> serviceInfo;//[{“objectId”:服务objectId, “name”:name,  “state”:闲时＝0/忙时=1}]
     private List<String> staffs;//员工表[“objectId”,“objectId”]
     private MerchantType type;//门店类型
+    private String introduced; // 门店广告
 
+    public String getIntroduced() {
+        return introduced;
+    }
+
+    public void setIntroduced(String introduced) {
+        this.introduced = introduced;
+    }
 
     public String getName() {
         return name;

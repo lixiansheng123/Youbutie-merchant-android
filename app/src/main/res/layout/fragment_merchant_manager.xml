@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greyecebe4"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteffffff"
+            android:padding="16dp">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/id_merchant_pic"
+                android:layout_width="66dp"
+                android:layout_height="66dp" />
+
+            <TextView
+                android:id="@+id/id_merchant_name"
+                style="@style/text_black_16sp"
+                android:layout_alignBottom="@+id/id_merchant_pic"
+                android:layout_alignTop="@+id/id_merchant_pic"
+                android:layout_marginLeft="22dp"
+                android:layout_toRightOf="@+id/id_merchant_pic"
+                android:gravity="center_vertical"
+                android:text="@string/str_test_nick"
+                android:textColor="@color/black81706e" />
+
+            <ImageView
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_yellow_edit" />
+
+            <TextView
+                android:id="@+id/id_merchant_address"
+                style="@style/text_deep_grey_14sp"
+                android:layout_below="@+id/id_merchant_pic"
+                android:layout_marginTop="12dp"
+                android:drawableLeft="@drawable/icon_grey_location"
+                android:text="     地址喔" />
+
+            <TextView
+                android:id="@+id/id_merchant_time"
+                style="@style/text_deep_grey_14sp"
+                android:layout_below="@+id/id_merchant_address"
+                android:layout_marginTop="7dp"
+                android:drawableLeft="@drawable/icon_grey_time"
+                android:text="     时间喔" />
+
+            <TextView
+                android:id="@+id/id_merchant_phone"
+                style="@style/text_deep_grey_14sp"
+                android:layout_below="@+id/id_merchant_time"
+                android:layout_marginTop="7dp"
+                android:drawableLeft="@drawable/icon_grey_phone"
+                android:text="     电话喔" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/selector_bg_white_item">
+
+            <TextView
+                style="@style/text_black_16sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:text="@string/str_service_list"
+                android:textColor="@color/black81706e" />
+
+            <ImageView
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_yellow_edit" />
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <com.yuedong.youbutie_merchant_android.view.SupportScrollConflictListView
+            android:id="@+id/id_merchant_service_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:listSelector="@color/transparent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/selector_bg_white_item">
+
+            <View style="@style/line_grey_1px" />
+
+            <TextView
+                style="@style/text_black_16sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:text="@string/str_merchant_ad"
+                android:textColor="@color/black81706e" />
+
+            <ImageView
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/icon_yellow_edit" />
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/id_merchant_ad"
+            style="@style/text_tint_grey_14sp"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:layout_marginBottom="11dp"
+            android:background="@color/whiteffffff"
+            android:gravity="center_vertical"
+            android:paddingLeft="27dp"
+            android:paddingRight="27dp"
+            android:text="@string/str_merchant_ad_des" />
+
+    </LinearLayout>
+</ScrollView>

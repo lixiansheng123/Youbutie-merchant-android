@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/id_total_client_num"
                 style="@style/text_white_16sp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="4000"
                 android:textSize="26sp" />
         </LinearLayout>
@@ -60,7 +60,7 @@
                 <TextView
                     android:id="@+id/id_member_num"
                     style="@style/text_white_14sp"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="2dp"
                     android:text="123"
                     android:textSize="22sp" />
 
@@ -90,7 +90,7 @@
                 <TextView
                     android:id="@+id/id_ad_num"
                     style="@style/text_white_14sp"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="2dp"
                     android:text="20"
                     android:textSize="22sp" />
 
