@@ -1,23 +1,15 @@
 ECLIPSE ANDROID PROJECT IMPORT SUMMARY
 ======================================
 
-Ignored Files:
---------------
-The following files were *not* copied into the new Gradle project; you
-should evaluate whether these are still needed in your project and if
-so manually move them:
-
-* LICENSE
-* pom.xml
-
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => library_refresh\src\main\AndroidManifest.xml
-* res\ => library_refresh\src\main\res\
-* src\ => library_refresh\src\main\java\
+* AndroidManifest.xml => library_wheel\src\main\AndroidManifest.xml
+* assets\ => library_wheel\src\main\assets
+* res\ => library_wheel\src\main\res\
+* src\ => library_wheel\src\main\java\
 
 Next Steps:
 -----------

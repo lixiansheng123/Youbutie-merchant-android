@@ -9,7 +9,11 @@ import android.widget.RatingBar;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.app.Config;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -91,6 +95,29 @@ public class AppUtils {
         loadingLayoutProxy.setPullLabel("刷新最新信息...");
         loadingLayoutProxy.setRefreshingLabel("正在刷新最新信息...");
         loadingLayoutProxy.setReleaseLabel("松开刷新...");
+    }
+
+    /**
+     * 统计门店客户人数
+     *
+     * @param orders
+     * @return
+     */
+    public static int countMerchantUser(List<Order> orders) {
+        int merchantUser = 0;
+        if (CommonUtils.listIsNotNull(orders)) {
+            List<String> objects = new ArrayList<String>();
+            for (Order order : orders) {
+                String objectId = order.getUser().getObjectId();
+                if (!objects.contains(objectId)) {
+                    merchantUser++;
+                    objects.add(objectId);
+                }
+            }
+            return merchantUser;
+        }
+
+        return 0;
     }
 
 }

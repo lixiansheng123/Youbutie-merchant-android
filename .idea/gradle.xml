@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library_qrcode" />
             <option value="$PROJECT_DIR$/library_refresh" />
+            <option value="$PROJECT_DIR$/library_wheel" />
           </set>
         </option>
       </GradleProjectSettings>

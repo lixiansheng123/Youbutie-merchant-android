@@ -3,8 +3,11 @@ package com.yuedong.youbutie_merchant_android.mouble;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.BaseEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
+import com.yuedong.youbutie_merchant_android.utils.T;
 
 import java.util.List;
 
@@ -39,8 +42,12 @@ public class MerchantEvent implements BaseEvent {
                 @Override
                 public void onSuccess(List<Merchant> list) {
                     instance.meMerchantInfoChange = false;
-                    instance.setMeMerchant(list);
-                    listener.onSuccess(instance.getMeMerchant());
+                    if (CommonUtils.listIsNotNull(list)) {
+                        instance.setMeMerchant(list);
+                        listener.onSuccess(instance.getMeMerchant());
+                    } else {
+                        T.showShort(context, "您还没有门店");
+                    }
                     listener.onFinish();
                 }
 
@@ -56,4 +63,59 @@ public class MerchantEvent implements BaseEvent {
         }
     }
 
+    /**
+     * 获取门店订单用户
+     *
+     * @param merchantObjectId
+     */
+    public void getMerchantOrderUser(String merchantObjectId, final FindListener<Order> listener) {
+        listener.onStart();
+        BmobQuery<Order> bmobQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantbmobQuery = new BmobQuery<Merchant>();
+        merchantbmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        // 只查询user对象
+        bmobQuery.addQueryKeys("user");
+        bmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantbmobQuery);
+        bmobQuery.findObjects(context, new FindListener<Order>() {
+            @Override
+            public void onSuccess(List<Order> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 获取门店vip用户
+     *
+     * @param merchantObjectId
+     * @param listener
+     */
+    public void getMerchantVipUser(String merchantObjectId, final FindListener<Vips> listener) {
+        listener.onStart();
+        BmobQuery<Vips> vipsBmobQuery = new BmobQuery<Vips>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        vipsBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        vipsBmobQuery.include("user");
+        vipsBmobQuery.findObjects(context, new FindListener<Vips>() {
+            @Override
+            public void onSuccess(List<Vips> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
 }

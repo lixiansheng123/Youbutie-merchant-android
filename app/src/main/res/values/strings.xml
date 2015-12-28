@@ -52,4 +52,17 @@
     <string name="str_service_list">服务列表</string>
     <string name="str_merchant_ad">门店广告</string>
     <string name="str_merchant_ad_des">您在门店广告这里输入的广告信息将会展示給所有查看您门店信息的用户</string>
+    <string name="str_ad_title">广告标题</string>
+    <string name="str_valid_time">有效期限</string>
+    <string name="str_zhi">至</string>
+    <string name="str_push_target">推送目标</string>
+    <string name="str_total_car">全部车型</string>
+    <string name="str_ad_content">广告内容</string>
+    <string name="str_send_ad_des">请先选择服务，并在此填写广告内容</string>
+    <string name="str_contrim_send">确认发布</string>
+    <string name="str_input_ad_title">请输入广告标题</string>
+    <string name="str_confirm">确定</string>
+    <string name="str_year">年</string>
+    <string name="str_month">月</string>
+    <string name="str_day">日</string>
 </resources>

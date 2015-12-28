@@ -51,6 +51,7 @@ public class RefreshHelper<T> {
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                L.i("---------------------------onPullDownToRefresh------------");
                 datas.clear();
                 adapter.notifyDataSetChanged();
                 executeNetworkTask(activity, 1, proxyRefreshListener);
@@ -63,6 +64,7 @@ public class RefreshHelper<T> {
 
             }
         });
+//        refreshListView.setRefreshing(true);
         activity.dialogStatus(true);
         executeNetworkTask(activity, 1, proxyRefreshListener);
 

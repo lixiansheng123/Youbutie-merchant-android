@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_wheel\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\wheel_bg.xml",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_wheel\\build\\intermediates\\bundles\\debug\\res\\drawable\\wheel_bg.xml"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_wheel\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\wheel_val.xml",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_wheel\\build\\intermediates\\bundles\\debug\\res\\drawable\\wheel_val.xml"
+    }
+]

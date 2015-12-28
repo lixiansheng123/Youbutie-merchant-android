@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyeeeae4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_bg_white_item"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp">
+
+                <TextView
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/str_ad_title" />
+
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    style="@style/text_tint_grey_14sp"
+                    android:drawableRight="@drawable/icon_grey_right_arrows"
+                    android:text="请输入广告标题    " />
+
+                <View
+                    style="@style/line_grey_2px"
+                    android:layout_alignParentBottom="true" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/whiteffffff"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp">
+
+
+                <TextView
+                    android:id="@+id/id_vaild_time_name"
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/str_valid_time" />
+
+                <TextView
+                    android:id="@+id/id_select_end_time"
+                    style="@style/text_tint_grey_14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:drawableRight="@drawable/icon_grey_down_arrows"
+                    android:text="选择结束时间  " />
+
+                <TextView
+                    android:id="@+id/id_flag_zhi"
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/id_select_end_time"
+                    android:text="@string/str_zhi"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/id_select_start_time"
+                    style="@style/text_tint_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/id_flag_zhi"
+                    android:layout_toRightOf="@+id/id_vaild_time_name"
+                    android:drawableRight="@drawable/icon_grey_down_arrows"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="选择结束时间  " />
+            </RelativeLayout>
+
+            <View style="@style/line_grey_1px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <View style="@style/line_grey_1px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/selector_bg_white_item"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp">
+
+                <TextView
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/str_push_target" />
+
+                <TextView
+                    style="@style/text_tint_grey_14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:drawableRight="@drawable/icon_grey_right_arrows"
+                    android:text="选择车型    " />
+
+                <View style="@style/line_grey_2px" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteffffff"
+                android:orientation="vertical"
+                android:paddingBottom="30dp"
+                android:paddingLeft="11dp"
+                android:paddingRight="11dp">
+
+                <RelativeLayout
+                    android:id="@+id/id_select_car_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/id_flag_total_car_name"
+                        style="@style/text_yellow_14sp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_round_yellow_2"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="9dp"
+                        android:paddingRight="9dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/str_total_car" />
+
+                    <TextView
+                        style="@style/text_deep_grey_14sp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/id_flag_total_car_name"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="(默认选择，可修改)"
+                        android:textColor="@color/greyaa9a9b" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View style="@style/line_grey_1px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteffffff"
+            android:orientation="vertical"
+            android:paddingBottom="26dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_height="39dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="@string/str_ad_content" />
+
+            <View style="@style/line_grey_1px" />
+
+            <com.yuedong.youbutie_merchant_android.view.SupportScrollConflictGridView
+                android:id="@+id/id_gv_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="11dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:verticalSpacing="8dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_round_tint_grey"
+                android:gravity="center_horizontal|top"
+                android:hint="@string/str_send_ad_des"
+                android:minHeight="90dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="19dp"
+                android:paddingRight="19dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/greycbc0bf"
+                android:textColorHint="@color/greycbc0bf"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp">
+
+            <View style="@style/line_grey_1px" />
+
+            <Button
+                style="@style/btn_round_grey"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/str_contrim_send"
+                android:textSize="16sp"
+
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>

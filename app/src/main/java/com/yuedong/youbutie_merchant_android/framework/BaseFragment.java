@@ -41,9 +41,7 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
     protected BaseDialog.Builder loginDialogBuilder;
     protected BaseDialog unOpenDialog;
     protected BaseDialog.Builder unOpenDialogBuilder;
-
     public boolean initFinshed;
-
 
     public <T extends View> T fvById(int resId) {
         return ViewUtils.fvById(resId, mContentLayout);
@@ -55,6 +53,11 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         L.i(TAG, "onCreate");
         mainHandler = new Handler(Looper.getMainLooper());
         initDialog();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -154,6 +157,7 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         L.i(TAG, "onCreateView");
         initUi();
         setShowContentView(getContentView(container));
+        ViewUtils.adapterUiText(mMainLayout);
         initViews(mMainLayout, savedInstanceState);
         initEvents();
         initFinshed = true;

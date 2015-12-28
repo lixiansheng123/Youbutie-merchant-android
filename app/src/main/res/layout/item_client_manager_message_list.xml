@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical">
+
+        <View style="@style/line_grey_1px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/id_message_name"
+                style="@style/text_yellow_16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="29dp"
+                android:layout_toLeftOf="@+id/id_message_time"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/str_test_nick" />
+
+            <TextView
+                android:id="@+id/id_message_time"
+                style="@style/text_tint_grey_14sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/str_test_time" />
+        </RelativeLayout>
+
+        <View style="@style/line_grey_2px" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_width="match_parent"
+            android:paddingBottom="11dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingTop="11dp"
+            android:text="什么鬼什么鬼什么鬼什么什么鬼什么鬼什么鬼什么什么鬼什么鬼什么鬼什么" />
+
+        <View style="@style/line_grey_1px" />
+
+        <TextView
+            style="@style/text_tint_grey_14sp"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="有效期:2015.12.12 至 2014.12.12" />
+
+        <View style="@style/line_grey_1px" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/id_icon_message_overdue"
+        style="@style/w_h_ww"
+        android:layout_gravity="center"
+        android:src="@drawable/icon_grey_message_overdue" />
+</FrameLayout>

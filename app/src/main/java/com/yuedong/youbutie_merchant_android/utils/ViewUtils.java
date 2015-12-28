@@ -1,9 +1,12 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
@@ -29,6 +32,27 @@ public class ViewUtils {
     }
 
     /**
+     * 适配屏幕上的textSize
+     *
+     * @param viewGroup
+     */
+    public static void adapterUiText(ViewGroup viewGroup) {
+//        int childCount = viewGroup.getChildCount();
+//        for (int i = 0; i < childCount; i++) {
+//            View childView = viewGroup.getChildAt(i);
+//            if (childView instanceof ViewGroup)
+//                adapterUiText((ViewGroup) childView);
+//            else if (childView instanceof TextView) {
+//                TextView textView = ((TextView) childView);
+//                int textSize = (int) textView.getTextSize();
+//                // setTextSize 默认是以dp
+//                textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getViewDisplaySize(textSize, ViewEnum.H));
+//            }
+//
+//        }
+    }
+
+    /**
      * 获取view合适的尺寸 根据设计的值
      *
      * @param designSize 设计的尺寸
@@ -41,13 +65,14 @@ public class ViewUtils {
         if (viewEnum == null) return -1;
         switch (viewEnum) {
             case W:
-                valua = (int) (designSize * phoneWh[0] / Config.DESIGN_W + 0.5f);
+                valua = (int) (designSize * (phoneWh[0] * 1.0f / Config.DESIGN_W) /*+ 0.5f*/);
                 break;
 
             case H:
-                valua = (int) (designSize * phoneWh[1] / Config.DESIGN_H + 0.5f);
+                valua = (int) (designSize * (phoneWh[1] * 1.0f / Config.DESIGN_H) /*+ 0.5f*/);
                 break;
         }
+        L.i("designSize" + designSize + "----getViewDisplaySize-value" + valua);
         return valua;
     }
 
@@ -90,6 +115,4 @@ public class ViewUtils {
             }
         }
     }
-
-
 }
