@@ -26,7 +26,8 @@
         <activity android:name=".OrderDetailActivity" />
         <activity android:name=".ServiceEvaluateActivity" />
         <activity android:name=".MerchantCollectionActivity" />
-        <activity android:name=".SendMessageActivity"></activity>
+        <activity android:name=".SendMessageActivity" />
+        <activity android:name=".SelectCarActivity"></activity>
     </application>
 
 </manifest>

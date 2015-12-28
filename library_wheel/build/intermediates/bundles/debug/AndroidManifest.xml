@@ -8,7 +8,4 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="7" />
 
-    <application android:label="Android Wheel Widget" >
-    </application>
-
 </manifest>

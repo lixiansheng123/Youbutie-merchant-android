@@ -13,7 +13,7 @@
         android:label="Tests for kankan.wheel.test"
         android:targetPackage="kankan.wheel.test" />
 
-    <application android:label="Android Wheel Widget" >
+    <application>
         <uses-library android:name="android.test.runner" />
     </application>
 
