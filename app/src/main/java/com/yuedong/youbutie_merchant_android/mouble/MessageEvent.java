@@ -35,11 +35,11 @@ public class MessageEvent implements BaseEvent {
         bmobQuery.addWhereMatchesQuery("sender", "_User", userBmobQuery);
         bmobQuery.setSkip(skip);
         bmobQuery.setLimit(limit);
-        bmobQuery.order("-createAt");
+        bmobQuery.order("-createdAt");
         // 是否筛选掉过期的数据
         if (filterOverdue) {
             // 查询不过期的数据
-            bmobQuery.addWhereLessThanOrEqualTo("endTime", new BmobDate(new Date()));
+            bmobQuery.addWhereGreaterThanOrEqualTo("endTime", new BmobDate(new Date()));
         }
         bmobQuery.findObjects(context, new FindListener<Messages>() {
             @Override
@@ -70,5 +70,6 @@ public class MessageEvent implements BaseEvent {
         bmobQuery.addWhereMatchesQuery("sender", "_User", userBmobQuery);
         bmobQuery.count(context, Messages.class, listener);
     }
+
 
 }

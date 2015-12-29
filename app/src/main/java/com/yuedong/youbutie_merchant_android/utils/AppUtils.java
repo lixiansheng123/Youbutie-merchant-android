@@ -120,4 +120,17 @@ public class AppUtils {
         return 0;
     }
 
+//    /**
+//     * 截取出年月日不要时分秒
+//     *
+//     * @param str
+//     * @return
+//     */
+//    public static String cutTimeYMR(String str) {
+//        if (str.length() > 11) {
+//            str = str.substring(0, 12);
+//        }
+//        return str;
+//    }
+
 }

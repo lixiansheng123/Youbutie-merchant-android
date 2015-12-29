@@ -119,6 +119,9 @@ public class DaySelectPop extends Dialog {
     }
 
     private void initViews() {
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
         yearWv = (WheelView) mContentView.findViewById(R.id.id_wheelview_year);
         monthWv = (WheelView) mContentView.findViewById(R.id.id_wheelview_month);
         dayWv = (WheelView) mContentView.findViewById(R.id.id_wheelview_day);
@@ -138,15 +141,12 @@ public class DaySelectPop extends Dialog {
         // 当前月
         curMonth = monthData.get(monthWv.getCurrentItem());
         daysData = DataUtils.getDays(Integer.parseInt(curYear), Integer.parseInt(curMonth));
-        int centerYears = (int) Math.round(yearsData.size() * 1.0 / 2);
-        int centerMonth = (int) Math.round(monthData.size() * 1.0 / 2);
-        int centerDay = (int) Math.round(daysData.size() * 1.0 / 2);
         adapter.setData(yearsData);
         adapter2.setData(monthData);
         adapter3.setData(daysData);
-        yearWv.setCurrentItem(centerYears);
-        monthWv.setCurrentItem(centerMonth);
-        dayWv.setCurrentItem(centerDay);
+        yearWv.setCurrentItem(0);
+        monthWv.setCurrentItem(month); //month 是从0开始的
+        dayWv.setCurrentItem(day - 1);
         curYear = yearsData.get(yearWv.getCurrentItem());
         curMonth = monthData.get(monthWv.getCurrentItem());
     }

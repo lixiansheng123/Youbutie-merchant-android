@@ -40,6 +40,7 @@
         <View style="@style/line_grey_2px" />
 
         <TextView
+            android:id="@+id/id_message_content"
             style="@style/text_deep_grey_14sp"
             android:layout_width="match_parent"
             android:paddingBottom="11dp"
@@ -51,6 +52,7 @@
         <View style="@style/line_grey_1px" />
 
         <TextView
+            android:id="@+id/id_validity_time"
             style="@style/text_tint_grey_14sp"
             android:layout_width="match_parent"
             android:layout_height="39dp"
@@ -66,5 +68,6 @@
         android:id="@+id/id_icon_message_overdue"
         style="@style/w_h_ww"
         android:layout_gravity="center"
-        android:src="@drawable/icon_grey_message_overdue" />
+        android:src="@drawable/icon_grey_message_overdue"
+        android:visibility="gone" />
 </FrameLayout>

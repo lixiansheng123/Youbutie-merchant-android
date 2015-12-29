@@ -1,11 +1,13 @@
 package com.yuedong.youbutie_merchant_android.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.yuedong.youbutie_merchant_android.AdListActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.SendMessageActivity;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
@@ -63,6 +65,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
 
     @Override
     public void initEvents() {
+        fvById(R.id.id_ad_layout).setOnClickListener(this);
         fvById(R.id.id_add_ad).setOnClickListener(this);
     }
 
@@ -160,9 +163,32 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.id_add_ad:
                 if (meMerchant != null) {
-                    LaunchWithExitUtils.startActivity(getActivity(), SendMessageActivity.class);
+                    Intent intent = new Intent(getActivity(), SendMessageActivity.class);
+                    intent.putExtra(Constants.KEY_BEAN, meMerchant);
+                    LaunchWithExitUtils.startActivityForResult(ClientManagetFm.this, intent, Constants.REQUESTCODE_ADD_AD);
+                }
+                break;
+
+            case R.id.id_ad_layout:
+                if (meMerchant != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
+                    LaunchWithExitUtils.startActivity(getActivity(), AdListActivity.class, bundle);
                 }
                 break;
         }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUESTCODE_ADD_AD && resultCode == Constants.RESULT_ADD_AD) {
+            refreshHelper.setEmptyUi();
+            refreshHelper.setEmpty();
+            // 刷新ui
+            ui();
+        }
+
     }
 }

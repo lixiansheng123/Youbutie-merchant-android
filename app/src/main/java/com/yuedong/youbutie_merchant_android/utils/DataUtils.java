@@ -14,10 +14,13 @@ public class DataUtils {
      */
     public static List<String> getYears(int minYear) {
         List<String> years = new ArrayList<String>();
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        while (currentYear >= minYear) {
-            years.add(0, "" + currentYear);
-            currentYear--;
+//        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+//        while (currentYear >= minYear) {
+//            years.add(0, "" + currentYear);
+//            currentYear--;
+//        }
+        for (int i = 0; i < 3; i++) {
+            years.add("" + (minYear + i));
         }
         return years;
     }
@@ -62,29 +65,29 @@ public class DataUtils {
      * @return
      */
     public static List<ServiceInfoDetailBean> getSmsSelectItem() {
-        List<ServiceInfoDetailBean> serviceInfoDetailBeans = new ArrayList<ServiceInfoDetailBean>();
+        List<ServiceInfoDetailBean> data = new ArrayList<ServiceInfoDetailBean>();
         ServiceInfoDetailBean serviceInfoDetailBean = new ServiceInfoDetailBean();
         serviceInfoDetailBean.name = "洗车";
         // 当一个短信模版内容
         serviceInfoDetailBean.icon = "洗车短信模版";
-        serviceInfoDetailBeans.add(serviceInfoDetailBean);
+        data.add(serviceInfoDetailBean);
         ServiceInfoDetailBean serviceInfoDetailBean2 = new ServiceInfoDetailBean();
         serviceInfoDetailBean2.name = "保养";
         // 当一个短信模版内容
         serviceInfoDetailBean2.icon = "保养短信模版";
-        serviceInfoDetailBeans.add(serviceInfoDetailBean2);
+        data.add(serviceInfoDetailBean2);
 
         ServiceInfoDetailBean serviceInfoDetailBean3 = new ServiceInfoDetailBean();
         serviceInfoDetailBean3.name = "美容";
         // 当一个短信模版内容
         serviceInfoDetailBean3.icon = "美容短信模版";
-        serviceInfoDetailBeans.add(serviceInfoDetailBean3);
+        data.add(serviceInfoDetailBean3);
 
         ServiceInfoDetailBean serviceInfoDetailBean4 = new ServiceInfoDetailBean();
         serviceInfoDetailBean4.name = "其他服务";
         // 当一个短信模版内容
         serviceInfoDetailBean4.icon = "其他服务短信模版";
-        serviceInfoDetailBeans.add(serviceInfoDetailBean4);
-        return serviceInfoDetailBeans;
+        data.add(serviceInfoDetailBean4);
+        return data;
     }
 }

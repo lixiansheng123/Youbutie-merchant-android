@@ -43,4 +43,14 @@ public class Vips extends BmobObject {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Vips{" +
+                "validity=" + validity +
+                ", merchant=" + merchant +
+                ", user=" + user +
+                ", car=" + car +
+                '}';
+    }
 }

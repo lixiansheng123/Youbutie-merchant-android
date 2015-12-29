@@ -15,6 +15,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/id_ad_title_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -30,6 +31,7 @@
 
 
                 <TextView
+                    android:id="@+id/id_ad_title"
                     style="@style/text_tint_grey_14sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -221,6 +223,7 @@
                 android:verticalSpacing="8dp" />
 
             <EditText
+                android:id="@+id/id_input_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -247,7 +250,8 @@
             <View style="@style/line_grey_1px" />
 
             <Button
-                style="@style/btn_round_grey"
+                android:id="@+id/id_confirm_send"
+                style="@style/btn_round_yellow"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_gravity="bottom"
