@@ -9,38 +9,38 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
+import com.yuedong.youbutie_merchant_android.mouble.SimplePicConfig;
 
 /**
  * 图片下载工具类
  */
 public class DisplayImageByVolleyUtils {
+    private static SimplePicConfig config = new SimplePicConfig();
     private static ImageLoader imageloader = new ImageLoader(Volley.newRequestQueue(App.getInstance().getAppContext()), new BitmapCache());
-
-    public static void loadImage(String url, ImageView imageView, int defaultPic, int errorPic) {
-        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, defaultPic, errorPic);
-        imageloader.get(url, imageListener);
-    }
-
 
     public static final ImageLoader IMAGELOADER = new ImageLoader(Volley.newRequestQueue(App.getInstance().getAppContext()),
             new BitmapCache());
 
+    public static void loadImage(String url, ImageView imageView, SimplePicConfig simplePicConfig) {
+        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, simplePicConfig.getLoadPic(), simplePicConfig.getErrorPic());
+        imageloader.get(url, imageListener);
+    }
 
     public static void loadImage(NetworkImageView niv, String url) {
-        niv.setErrorImageResId(R.mipmap.ic_launcher);
-        niv.setDefaultImageResId(R.mipmap.ic_launcher);
+        niv.setErrorImageResId(config.getErrorPic());
+        niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);
     }
 
     public static void loadImage(NetworkImageView niv, String url, int defaultImage) {
-        niv.setDefaultImageResId(defaultImage);
-        niv.setErrorImageResId(defaultImage);
+        niv.setErrorImageResId(config.getErrorPic());
+        niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);
     }
 
     public static void loadImage(NetworkImageView niv, String url, int defaultImage, int errorImage) {
-        niv.setDefaultImageResId(defaultImage);
-        niv.setErrorImageResId(errorImage);
+        niv.setErrorImageResId(config.getErrorPic());
+        niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);
     }
 

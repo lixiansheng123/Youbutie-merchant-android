@@ -29,7 +29,8 @@
         <activity android:name=".SendMessageActivity" />
         <activity android:name=".SelectCarActivity" />
         <activity android:name=".InfoEditActivity" />
-        <activity android:name=".AdListActivity"></activity>
+        <activity android:name=".AdListActivity" />
+        <activity android:name=".UserListActivity"></activity>
     </application>
 
 </manifest>
