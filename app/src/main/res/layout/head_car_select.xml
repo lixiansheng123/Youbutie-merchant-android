@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp">
+
+        <TextView
+            style="@style/text_black_16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_already_select_car"
+            android:textColor="@color/black81706e" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <com.yuedong.youbutie_merchant_android.view.SupportScrollConflictGridView
+        android:id="@+id/id_gv_already_select_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="14dp"
+        android:horizontalSpacing="3dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:verticalSpacing="16dp" />
+</LinearLayout>

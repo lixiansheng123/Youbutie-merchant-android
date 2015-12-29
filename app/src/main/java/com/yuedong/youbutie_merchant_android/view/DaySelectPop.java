@@ -125,7 +125,6 @@ public class DaySelectPop extends Dialog {
         setWheelViewParams(yearWv);
         setWheelViewParams(monthWv);
         setWheelViewParams(dayWv);
-
         adapter = new WheelOnlyTextAdapter(mContext);
         adapter2 = new WheelOnlyTextAdapter(mContext);
         adapter3 = new WheelOnlyTextAdapter(mContext);
@@ -148,6 +147,8 @@ public class DaySelectPop extends Dialog {
         yearWv.setCurrentItem(centerYears);
         monthWv.setCurrentItem(centerMonth);
         dayWv.setCurrentItem(centerDay);
+        curYear = yearsData.get(yearWv.getCurrentItem());
+        curMonth = monthData.get(monthWv.getCurrentItem());
     }
 
     @Override

@@ -43,6 +43,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     private PullToRefreshListView refreshListView;
     private RefreshHelper<Messages> refreshHelper;
     private ClientManagerMessageListAdapter adapter;
+    private Merchant meMerchant;
 
     @Override
     public View getContentView(ViewGroup container) {
@@ -74,7 +75,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
 
             @Override
             public void onSuccess(List<Merchant> list) {
-                final Merchant meMerchant = list.get(0);
+                meMerchant = list.get(0);
                 // 获取在本门店下单的用户
                 MerchantEvent.getInstance().getMerchantOrderUser(meMerchant.getObjectId(), new FindListener<Order>() {
 
@@ -158,7 +159,9 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_add_ad:
-                LaunchWithExitUtils.startActivity(getActivity(), SendMessageActivity.class);
+                if (meMerchant != null) {
+                    LaunchWithExitUtils.startActivity(getActivity(), SendMessageActivity.class);
+                }
                 break;
         }
     }

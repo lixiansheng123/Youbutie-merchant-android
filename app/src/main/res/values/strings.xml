@@ -65,4 +65,6 @@
     <string name="str_year">年</string>
     <string name="str_month">月</string>
     <string name="str_day">日</string>
+    <string name="str_already_select_car">已选车型</string>
+    <string name="str_cur_select_car">当前已选车型</string>
 </resources>

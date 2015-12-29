@@ -30,9 +30,9 @@
 
 
                 <TextView
+                    style="@style/text_tint_grey_14sp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    style="@style/text_tint_grey_14sp"
                     android:drawableRight="@drawable/icon_grey_right_arrows"
                     android:text="请输入广告标题    " />
 
@@ -103,6 +103,7 @@
             <View style="@style/line_grey_1px" />
 
             <RelativeLayout
+                android:id="@+id/id_select_car_layout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/selector_bg_white_item"
@@ -123,7 +124,9 @@
                     android:drawableRight="@drawable/icon_grey_right_arrows"
                     android:text="选择车型    " />
 
-                <View style="@style/line_grey_2px" />
+                <View
+                    style="@style/line_grey_2px"
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
 
             <LinearLayout
@@ -131,14 +134,20 @@
                 android:layout_height="wrap_content"
                 android:background="@color/whiteffffff"
                 android:orientation="vertical"
-                android:paddingBottom="30dp"
+                android:paddingBottom="16dp"
                 android:paddingLeft="11dp"
                 android:paddingRight="11dp">
+
+                <TextView
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_marginTop="9dp"
+                    android:text="@string/str_cur_select_car" />
 
                 <RelativeLayout
                     android:id="@+id/id_select_car_default"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp">
 
                     <TextView
                         android:id="@+id/id_flag_total_car_name"
@@ -162,6 +171,20 @@
                         android:textColor="@color/greyaa9a9b" />
                 </RelativeLayout>
 
+                <com.yuedong.youbutie_merchant_android.view.SupportScrollConflictGridView
+                    android:id="@+id/id_gv_already_select_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="14dp"
+                    android:horizontalSpacing="3dp"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="4"
+                    android:verticalSpacing="16dp"
+                    android:visibility="gone" />
+
+
             </LinearLayout>
 
             <View style="@style/line_grey_1px" />
@@ -171,6 +194,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/whiteffffff"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:paddingBottom="26dp">
 
@@ -187,6 +212,9 @@
                 android:id="@+id/id_gv_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
                 android:horizontalSpacing="11dp"
                 android:listSelector="@color/transparent"
                 android:numColumns="4"

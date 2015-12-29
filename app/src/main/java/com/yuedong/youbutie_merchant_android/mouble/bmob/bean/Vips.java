@@ -10,6 +10,15 @@ public class Vips extends BmobObject {
     private BmobDate validity; // 有效日期
     private Merchant merchant;
     private User user;
+    private Car car;
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
     public BmobDate getValidity() {
         return validity;

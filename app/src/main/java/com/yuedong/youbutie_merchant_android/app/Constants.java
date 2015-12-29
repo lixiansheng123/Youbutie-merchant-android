@@ -23,11 +23,13 @@ public class Constants {
     public static final int REQUESTCODE_ORDER_EVALUATE = 0x109;
     public static final int REQUESTCODE_COLLECTION = 0x110;
     public static final int REQUESTCODE_RECEIVE_ORDER = 0x111;
+    public static final int REQUESTCODE_SELECT_CAR = 0x112;
 
 
     public static final int RESULT_ORDER_EVALUATE = 0x209;
     public static final int RESULT_COLLECTION = 0x210;
     public static final int RESULT_RECEIVE_ORDER = 0x211;
+    public static final int RESULT_SELECT_CAR = 0x212;
 
 
     // 属性动画的propertyName
