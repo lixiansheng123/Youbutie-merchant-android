@@ -33,7 +33,7 @@ public class VipEvent implements BaseEvent {
     /**
      * 通过车型来查找vip门店用户
      */
-    public void findVipByCar(String merchantObjectId, List<Car> cars, final FindListener<Vips> listener) {
+    public void findMerchantVipByCar(String merchantObjectId, List<Car> cars, final FindListener<Vips> listener) {
         listener.onStart();
         BmobQuery<Vips> mainBmobQuery = new BmobQuery<Vips>();
         List<BmobQuery<Vips>> ors = new ArrayList<BmobQuery<Vips>>();
@@ -59,6 +59,33 @@ public class VipEvent implements BaseEvent {
                 listener.onSuccess(list);
                 listener.onFinish();
 
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 查找门店vip用户
+     *
+     * @param merchantObjectId
+     * @param listener
+     */
+    public void findVipByMerchant(String merchantObjectId, final FindListener<Vips> listener) {
+        listener.onStart();
+        BmobQuery<Vips> vipsBmobQuery = new BmobQuery<Vips>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        vipsBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        vipsBmobQuery.findObjects(context, new FindListener<Vips>() {
+            @Override
+            public void onSuccess(List<Vips> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
             }
 
             @Override

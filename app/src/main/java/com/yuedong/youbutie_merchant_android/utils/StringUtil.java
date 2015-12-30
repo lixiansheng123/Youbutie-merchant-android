@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android.utils;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -140,6 +141,16 @@ public final class StringUtil {
      */
     public static boolean isNumber(String value) {
         return isInteger(value) || isDouble(value);
+    }
+
+    /**
+     * double值去掉E
+     *
+     * @param value
+     * @return
+     */
+    public static String setDoubleValueCastE(double value) {
+        return new BigDecimal(value).toString();
     }
 
     /**

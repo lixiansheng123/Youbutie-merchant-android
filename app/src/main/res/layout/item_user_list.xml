@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/selector_bg_white_item"
@@ -11,7 +12,8 @@
         android:layout_width="66dp"
         android:layout_height="66dp"
         android:layout_centerVertical="true"
-        android:background="#00ff00" />
+        app:radius="3dp"
+        app:type="round" />
 
     <TextView
         android:id="@+id/id_user_name"
@@ -24,6 +26,7 @@
         android:textColor="@color/black81716f" />
 
     <ImageView
+        android:id="@+id/id_icon_vip"
         style="@style/w_h_ww"
         android:layout_alignTop="@+id/id_user_pic"
         android:layout_marginLeft="6dp"
@@ -39,6 +42,7 @@
         android:text="@string/str_test_time" />
 
     <TextView
+        android:id="@+id/id_service"
         style="@style/text_deep_grey_14sp"
         android:layout_alignBottom="@+id/id_user_pic"
         android:layout_alignLeft="@+id/id_user_name"
@@ -47,6 +51,7 @@
         android:text="洗车 什么" />
 
     <TextView
+        android:id="@+id/id_pay_money"
         style="@style/text_deep_grey_14sp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/id_user_name"
@@ -54,10 +59,11 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/id_buy_num"
+        style="@style/text_yellow_14sp"
+        android:layout_alignBottom="@+id/id_down_order_time"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
-        android:layout_alignBottom="@+id/id_down_order_time"
-        style="@style/text_yellow_14sp"
         android:text="来店20次" />
 
 

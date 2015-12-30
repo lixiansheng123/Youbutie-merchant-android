@@ -3,17 +3,13 @@ package com.yuedong.youbutie_merchant_android;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.adapter.AlreadySelectCarAdapter;
-import com.yuedong.youbutie_merchant_android.adapter.CollectionMerchantServiceAdapter;
 import com.yuedong.youbutie_merchant_android.adapter.SendAdSmsTemplateAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
@@ -184,7 +180,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
             if (!CommonUtils.listIsNotNull(selectCars)) {
                 selectCars = (ArrayList) CarDao.getInstance().findAll();
             }
-            VipEvent.getInstance().findVipByCar(myMerchant.getObjectId(), selectCars, new FindListener<Vips>() {
+            VipEvent.getInstance().findMerchantVipByCar(myMerchant.getObjectId(), selectCars, new FindListener<Vips>() {
 
                 @Override
                 public void onStart() {
@@ -197,7 +193,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onSuccess(List<Vips> list) {
-                    L.d("findVipByCar-succeed:" + list.toString());
+                    L.d("findMerchantVipByCar-succeed:" + list.toString());
                     L.d("条数:" + list.size());
                     if (CommonUtils.listIsNotNull(list)) {
                         List<String> userObjects = new ArrayList<String>();

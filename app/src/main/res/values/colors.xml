@@ -105,6 +105,7 @@
     <color name="black4c3a3230">#4c3a3230</color>
 
     <!-- 灰色 -->
+    <color name="greyaa9b9a">#aa9b9a</color>
     <color name="greyaa9b9e">#aa9b9e</color>
     <color name="greycac1c2">#cac1c2</color>
     <color name="greyaa9a9b">#aa9a9b</color>
@@ -215,6 +216,7 @@
     <color name="green89c9ae">#89c9ae</color>
     <color name="green45cdfd">#45cdfd</color>
     <!-- 黄色 -->
+    <color name="yelloweec107">#eec107</color>
     <color name="yellowf0c92b">#f0c92b</color>
     <color name="yellowefc107">#efc107</color>
     <color name="yelloweeb600">#eeb600</color>

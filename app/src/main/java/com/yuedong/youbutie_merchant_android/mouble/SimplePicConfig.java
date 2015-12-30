@@ -8,12 +8,10 @@ import com.yuedong.youbutie_merchant_android.R;
 public class SimplePicConfig {
     private int loadPic;
     private int errorPic;
-    private int emptyPic;
 
     public SimplePicConfig() {
         loadPic = R.mipmap.ic_launcher;
         errorPic = R.mipmap.ic_launcher;
-        emptyPic = R.mipmap.ic_launcher;
     }
 
     public int getLoadPic() {
@@ -32,11 +30,4 @@ public class SimplePicConfig {
         this.errorPic = errorPic;
     }
 
-    public int getEmptyPic() {
-        return emptyPic;
-    }
-
-    public void setEmptyPic(int emptyPic) {
-        this.emptyPic = emptyPic;
-    }
 }

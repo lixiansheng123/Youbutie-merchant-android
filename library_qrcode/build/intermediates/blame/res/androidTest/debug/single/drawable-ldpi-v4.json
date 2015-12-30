@@ -6,5 +6,9 @@
     {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4\\ic_launcher.png",
         "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4\\ic_launcher.png",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\drawable-ldpi-v4\\ic_launcher.png"
     }
 ]

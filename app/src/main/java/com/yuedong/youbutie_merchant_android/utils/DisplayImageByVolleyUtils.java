@@ -21,8 +21,8 @@ public class DisplayImageByVolleyUtils {
     public static final ImageLoader IMAGELOADER = new ImageLoader(Volley.newRequestQueue(App.getInstance().getAppContext()),
             new BitmapCache());
 
-    public static void loadImage(String url, ImageView imageView, SimplePicConfig simplePicConfig) {
-        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, simplePicConfig.getLoadPic(), simplePicConfig.getErrorPic());
+    public static void loadImage(String url, ImageView imageView) {
+        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, config.getLoadPic(), config.getErrorPic());
         imageloader.get(url, imageListener);
     }
 

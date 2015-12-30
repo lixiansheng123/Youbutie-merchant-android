@@ -11,6 +11,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,17 +121,21 @@ public class AppUtils {
         return 0;
     }
 
-//    /**
-//     * 截取出年月日不要时分秒
-//     *
-//     * @param str
-//     * @return
-//     */
-//    public static String cutTimeYMR(String str) {
-//        if (str.length() > 11) {
-//            str = str.substring(0, 12);
-//        }
-//        return str;
-//    }
+    /**
+     * 当前用户是否是vip身份
+     *
+     * @return
+     */
+    public static boolean curUserIsVip(User user, List<Vips> merchantVipsList) {
+        if (CommonUtils.listIsNotNull(merchantVipsList)) {
+            for (Vips vips : merchantVipsList) {
+                if (user.getObjectId().equals(vips.getUser().getObjectId()))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+
 
 }

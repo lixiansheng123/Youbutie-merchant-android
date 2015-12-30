@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            style="@style/text_white_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_car_num"
+            android:textColor="@color/greyaa9b9a" />
+
+        <TextView
+            android:id="@+id/id_car_num"
+            style="@style/text_deep_grey_14sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="LL21231" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            style="@style/text_white_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_car"
+            android:textColor="@color/greyaa9b9a" />
+
+        <TextView
+            android:id="@+id/id_car_desc"
+            style="@style/text_deep_grey_14sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="LL21231" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/id_mileage_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <TextView
+            style="@style/text_white_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/str_mileage"
+            android:textColor="@color/greyaa9b9a" />
+
+        <ImageView
+            android:id="@+id/if_flag_edit"
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/icon_yellow_edit" />
+
+
+        <TextView
+            android:id="@+id/id_mileage_num"
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/if_flag_edit"
+            android:text="LL21231" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -4,12 +4,20 @@
         "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\raw\\beep.ogg"
     },
     {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\realm_properties",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\raw\\realm_properties"
+    },
+    {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\beep.ogg",
         "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\raw\\beep.ogg"
     },
     {
         "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\realm_properties",
         "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\raw\\realm_properties"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\beep.ogg",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\raw\\beep.ogg"
     },
     {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\realm_properties",

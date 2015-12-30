@@ -26,6 +26,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
@@ -84,7 +85,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                     receiveOrder.setText(mCon.getString(R.string.str_receive_order));
                 } else if (orderState == 3) {
                     ViewUtils.showLayouts(money, waitPayName);
-                    money.setText("￥" + order.getPrice());
+                    money.setText("￥" + StringUtil.setDoubleValueCastE(order.getPrice()));
                 }
                 break;
 
@@ -97,7 +98,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                 waitPayName.setText(mCon.getString(R.string.str_already_collection));
                 service.setTextColor(Color.parseColor("#938381"));
                 service.setText("客户暂未评价");
-                money.setText("￥" + order.getPrice());
+                money.setText("￥" + StringUtil.setDoubleValueCastE(order.getPrice()));
                 break;
         }
 

@@ -76,6 +76,7 @@ public class RefreshHelper<T> {
      * @param proxyRefreshListener
      */
     protected void executeNetworkTask(final BaseActivity context, final int mode, ProxyRefreshListener<T> proxyRefreshListener) {
+        L.d("executeTask-onStart");
         int skip = 0;
         final int limit = Config.PAGER_SIZE;
         if (mode == 2) {
@@ -87,7 +88,7 @@ public class RefreshHelper<T> {
         proxyRefreshListener.executeTask(skip, limit, new FindListener<T>() {
             @Override
             public void onFinish() {
-                L.d("proxyRefreshListener-onFinish");
+                L.d("executeTask-onFinish");
                 context.dialogStatus(false);
                 refreshListView.onRefreshComplete();
             }
@@ -106,6 +107,7 @@ public class RefreshHelper<T> {
 
             @Override
             public void onError(int i, String s) {
+                L.i("executeTask-onError");
                 com.yuedong.youbutie_merchant_android.utils.T.showShort(context, "error:" + s);
             }
         });
@@ -128,7 +130,7 @@ public class RefreshHelper<T> {
     }
 
 
-    protected void refreshStatus() {
+    public void refreshStatus() {
         datas.clear();
         currentPager = 1;
 //        canLoadMore = true;

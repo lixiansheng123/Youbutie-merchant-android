@@ -17,7 +17,26 @@ public class Order extends BmobObject {
     private Double price; // 单价
     private Integer state; // 状态  1下单 2商家接单 3服务完成 4已取车(收款成功) 5收款失败
     private Integer payWay; // 支付类型（1=支付宝，2=微信）
+    private List<String> serviceIds;// 服务的Id
 
+
+    public List<String> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<String> serviceIds) {
+        this.serviceIds = serviceIds;
+    }
+
+    private int buyNum; // 来店次数 //基本类型不会同步的bmob表中
+
+    public int getBuyNum() {
+        return buyNum;
+    }
+
+    public void setBuyNum(int buyNum) {
+        this.buyNum = buyNum;
+    }
 
     public String getOrderNumber() {
         return orderNumber;
@@ -83,18 +102,18 @@ public class Order extends BmobObject {
         this.payWay = payWay;
     }
 
-
     @Override
     public String toString() {
         return "Order{" +
                 "orderNumber='" + orderNumber + '\'' +
                 ", user=" + user +
                 ", merchant=" + merchant +
-//                ", services=" + services +
+                ", services=" + services +
                 ", orderTime=" + orderTime +
                 ", price=" + price +
                 ", state=" + state +
                 ", payWay=" + payWay +
+                ", buyNum=" + buyNum +
                 '}';
     }
 }

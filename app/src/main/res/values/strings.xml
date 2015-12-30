@@ -67,4 +67,8 @@
     <string name="str_day">日</string>
     <string name="str_already_select_car">已选车型</string>
     <string name="str_cur_select_car">当前已选车型</string>
+    <string name="str_buy_num">来店%s次</string>
+    <string name="str_car_num">车牌号</string>
+    <string name="str_car">车型</string>
+    <string name="str_mileage">行驶公里数</string>
 </resources>

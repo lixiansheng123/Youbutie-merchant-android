@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/w_h_mm">
+
+    <View style="@style/line_grey_1dp" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/id_text"
+        style="@style/w_h_mm"
+        android:gravity="center"
+        android:minHeight="46dp"
+        android:text="测试"
+        android:textColor="@color/grey776462"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>

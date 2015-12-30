@@ -2,17 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyecebe4">
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/id_filter_layout"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="@color/whiteffffff">
+        android:layout_height="44dp">
 
         <LinearLayout
+            android:id="@+id/id_filter_service_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
             android:gravity="center">
 
             <TextView
@@ -26,26 +29,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/id_filter_car_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                style="@style/text_black_14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:drawableRight="@drawable/icon_tint_grey_down_arrows"
-                android:gravity="center_vertical"
-                android:text="消费次数 "
-                android:textColor="@color/black81706e" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
             android:gravity="center">
 
             <TextView
@@ -60,11 +48,11 @@
     </LinearLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@id/id_refresh_view"
         style="@style/style_refreshview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="6dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
 </LinearLayout>

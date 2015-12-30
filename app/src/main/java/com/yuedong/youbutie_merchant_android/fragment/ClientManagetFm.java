@@ -10,6 +10,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.AdListActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.SendMessageActivity;
+import com.yuedong.youbutie_merchant_android.UserListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -165,11 +166,23 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
         switch (v.getId()) {
 
             case R.id.id_total_client_num_layout:
-//                LaunchWithExitUtils.startActivity(getActivity());
+                if (meMerchant != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.KEY_TEXT, "用户消费记录");
+                    bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
+                    LaunchWithExitUtils.startActivity(getActivity(), UserListActivity.class, bundle);
+                }
                 break;
 
 
             case R.id.id_member_num_layout:
+                if (meMerchant != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constants.KEY_TEXT, "会员消费记录");
+                    bundle.putInt(Constants.KEY_ACTION, UserListActivity.ACTION_MEMBER_USER);
+                    bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
+                    LaunchWithExitUtils.startActivity(getActivity(), UserListActivity.class, bundle);
+                }
                 break;
 
 

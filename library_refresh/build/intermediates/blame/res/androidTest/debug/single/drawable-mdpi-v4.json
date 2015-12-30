@@ -1,5 +1,13 @@
 [
     {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
+    },
+    {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
         "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
     },
@@ -10,6 +18,10 @@
     {
         "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
         "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_flip.png",
+        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_refresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\default_ptr_flip.png"
     },
     {
         "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_refresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\default_ptr_rotate.png",
