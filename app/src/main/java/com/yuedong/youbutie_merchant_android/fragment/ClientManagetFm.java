@@ -65,8 +65,10 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
 
     @Override
     public void initEvents() {
+        fvById(R.id.id_total_client_num_layout).setOnClickListener(this);
         fvById(R.id.id_ad_layout).setOnClickListener(this);
         fvById(R.id.id_add_ad).setOnClickListener(this);
+        fvById(R.id.id_member_num_layout).setOnClickListener(this);
     }
 
     private void ui() {
@@ -161,6 +163,16 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.id_total_client_num_layout:
+//                LaunchWithExitUtils.startActivity(getActivity());
+                break;
+
+
+            case R.id.id_member_num_layout:
+                break;
+
+
             case R.id.id_add_ad:
                 if (meMerchant != null) {
                     Intent intent = new Intent(getActivity(), SendMessageActivity.class);

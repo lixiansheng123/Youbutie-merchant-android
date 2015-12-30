@@ -16,6 +16,7 @@
         app:layout_paddingRightPercent="3.43%w">
 
         <LinearLayout
+            android:id="@+id/id_total_client_num_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
@@ -46,6 +47,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/id_member_num_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -124,8 +126,8 @@
     </RelativeLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
-        style="@style/style_refreshview"
         android:id="@+id/id_refresh_view"
+        style="@style/style_refreshview"
         android:layout_marginTop="5dp"
         android:divider="@color/greyecebe4"
         android:dividerHeight="5dp" />
