@@ -38,6 +38,8 @@ public class Config {
     public static final String REGEX_NUM = "^[0-9]*$";
     // 判断手机号码正则
     public static final String REGEX_TEL = "[1]\\d{10}";
+    // 判断手机号码正则2 较为严谨的
+//    public static final String REGEX2_TEL = "[1][358]\\\\d{9}";
 
     // sp
     public static final String SP_NAME_USER = "sp_file_user";

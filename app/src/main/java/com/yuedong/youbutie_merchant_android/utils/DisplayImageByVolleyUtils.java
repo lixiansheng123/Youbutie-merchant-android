@@ -22,23 +22,31 @@ public class DisplayImageByVolleyUtils {
             new BitmapCache());
 
     public static void loadImage(String url, ImageView imageView) {
+        if (url == null)
+            url = "";
         ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, config.getLoadPic(), config.getErrorPic());
         imageloader.get(url, imageListener);
     }
 
     public static void loadImage(NetworkImageView niv, String url) {
+        if (url == null)
+            url = "";
         niv.setErrorImageResId(config.getErrorPic());
         niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);
     }
 
     public static void loadImage(NetworkImageView niv, String url, int defaultImage) {
+        if (url == null)
+            url = "";
         niv.setErrorImageResId(config.getErrorPic());
         niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);
     }
 
     public static void loadImage(NetworkImageView niv, String url, int defaultImage, int errorImage) {
+        if (url == null)
+            url = "";
         niv.setErrorImageResId(config.getErrorPic());
         niv.setDefaultImageResId(config.getLoadPic());
         niv.setImageUrl(url, IMAGELOADER);

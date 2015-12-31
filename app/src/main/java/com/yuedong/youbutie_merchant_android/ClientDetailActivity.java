@@ -19,6 +19,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
@@ -50,7 +51,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         initTitleView(new TitleViewHelper().createDefaultTitleView4("客户详情", "邀请会员", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LaunchWithExitUtils.startActivity(activity, InviteMemberActivity.class);
             }
         }));
         setShowContentView(R.layout.activity_client_detail);

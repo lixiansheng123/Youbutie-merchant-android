@@ -7,7 +7,9 @@ public class Constants {
     //第三方开发key
     public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
 
-
+    //------------------------------sp---------------------------
+    public static final  String SP_INVITE_REGIST = "sp_invite_regist";
+    public static final  String SP_INVITE_ADD_MEMBER = "sp_invite_add_member";
     //--------------------------标识---------------------------------
     public static final String KEY_TEXT = "key_text";
     public static final String KEY_TEXT2 = "key_text2";

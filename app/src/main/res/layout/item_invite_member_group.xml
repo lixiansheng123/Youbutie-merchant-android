@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="39dp"
+    android:layout_height="45dp"
     android:background="@color/greyecebe4">
 
-    <View
-        style="@style/line_grey_1px"
-        android:background="@color/greyd6d2ca" />
 
     <View
         style="@style/line_grey_1px"

@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="89dp"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/id_head_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <com.yuedong.youbutie_merchant_android.view.RoundImageView
+            android:id="@+id/id_user_pic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+          />
+
+        <TextView
+            android:id="@+id/id_user_pic_text"
+            style="@style/text_white_18sp"
+            android:layout_centerInParent="true"
+           />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/w_h_ww"
+        android:layout_alignBottom="@+id/id_head_layout"
+        android:layout_alignTop="@+id/id_head_layout"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/id_head_layout"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/id_user_name"
+            style="@style/text_black_16sp"
+            android:text="@string/str_test_nick"
+            android:textColor="@color/black81706e" />
+
+        <TextView
+            android:id="@+id/id_time"
+            style="@style/text_tint_grey_12sp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:text="@string/str_test_time" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/id_btn_invite"
+        style="@style/btn_round_yellow"
+        android:layout_width="72dp"
+        android:layout_height="33dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/str_invite" />
+
+    <View
+        android:id="@+id/id_line"
+        style="@style/line_grey_2px"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>

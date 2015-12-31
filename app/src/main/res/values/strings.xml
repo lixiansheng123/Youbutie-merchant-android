@@ -72,4 +72,8 @@
     <string name="str_car">车型</string>
     <string name="str_mileage">行驶公里数</string>
     <string name="str_search_address_book_friend">搜索通讯录好友</string>
+    <string name="str_invite">邀请</string>
+    <string name="str_already_invite">已邀请</string>
+
+    <string name="str_sms_moudle">亲，用户%s邀请您注册油补贴，油补贴官网下载APP，有优惠奖品丰富哦</string>
 </resources>

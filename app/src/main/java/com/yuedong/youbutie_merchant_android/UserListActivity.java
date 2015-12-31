@@ -73,7 +73,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
             titleView = new TitleViewHelper().createDefaultTitleView4(title, "邀请会员", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    LaunchWithExitUtils.startActivity(activity,InviteMemberActivity.class);
                 }
             });
         initTitleView(titleView);

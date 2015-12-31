@@ -26,6 +26,7 @@
     <color name="whitef8f8f8">#f8f8f8</color>
     <color name="whitef9f9f6">#f9f9f6</color>
     <!-- 蓝色 -->
+    <color name="blue35c8f4">#35c8f4</color>
     <color name="blue0d72ca">#0d72ca</color>
     <color name="blue00b8f6">#00b8f6</color>
     <color name="blue4aa2e3">#4aa2e3</color>
@@ -189,6 +190,7 @@
     <color name="greyeae9e4">#eae9e4</color>
     <color name="greye8e4df">#e8e4df</color>
     <!-- 红色 -->
+    <color name="redf66563">#f66563</color>
     <color name="redfd8536">#fd8536</color>
     <color name="redf74b49">#f74b49</color>
     <color name="rede78d8e">#e78d8e</color>
@@ -199,6 +201,7 @@
     <color name="redff8b3e">#ff8b3e</color>
 
     <!-- 绿色 -->
+    <color name="green14d39b">#14d39b</color>
     <color name="green15d29d">#15d29d</color>
     <color name="green2bd4a1">#2bd4a1</color>
     <color name="green00cf95">#00cf95</color>
@@ -217,6 +220,7 @@
     <color name="green89c9ae">#89c9ae</color>
     <color name="green45cdfd">#45cdfd</color>
     <!-- 黄色 -->
+    <color name="yellowefca31">#efca31</color>
     <color name="yelloweec107">#eec107</color>
     <color name="yellowf0c92b">#f0c92b</color>
     <color name="yellowefc107">#efc107</color>
