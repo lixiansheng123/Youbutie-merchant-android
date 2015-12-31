@@ -9,7 +9,7 @@ public class User extends BmobUser {
     private Integer age;// 年龄
     private BmobGeoPoint location;// 坐标
     private String address;//所在地址
-//    private Car car;//车型
+    //    private Car car;//车型
     private String carNumber;//车牌号
     private String idnumber;//识别号（后6位）
     private String VIN;//车架号（后4位）
@@ -17,6 +17,7 @@ public class User extends BmobUser {
     private Integer totalMoney;//总油点
     private Integer type;//用户类型（用户＝1，商家＝2）
     private String carString; // 车型描述
+
 
 //    public User() {
 //        setTableName("_User");

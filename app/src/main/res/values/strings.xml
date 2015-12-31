@@ -71,4 +71,5 @@
     <string name="str_car_num">车牌号</string>
     <string name="str_car">车型</string>
     <string name="str_mileage">行驶公里数</string>
+    <string name="str_search_address_book_friend">搜索通讯录好友</string>
 </resources>

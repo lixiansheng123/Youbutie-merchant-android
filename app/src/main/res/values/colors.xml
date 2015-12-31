@@ -26,6 +26,7 @@
     <color name="whitef8f8f8">#f8f8f8</color>
     <color name="whitef9f9f6">#f9f9f6</color>
     <!-- 蓝色 -->
+    <color name="blue0d72ca">#0d72ca</color>
     <color name="blue00b8f6">#00b8f6</color>
     <color name="blue4aa2e3">#4aa2e3</color>
     <color name="bluea1005baae5">#645baae5</color>
@@ -44,6 +45,7 @@
     <color name="blue5eace6">#5eace6</color>
     <color name="blue4aa1e3">#4aa1e3</color>
     <color name="blue4ba2e3">#4ba2e3</color>
+    <color name="blue4aa1e4">#4aa1e4</color>
     <color name="blue2585cd">#2585cd</color>
     <color name="bluecbd7df">#cbd7df</color>
     <color name="blue4ea2e0">#4ea2e0</color>
@@ -145,7 +147,6 @@
     <color name="greycacaca">#cacaca</color>
     <color name="greyaaaaaa">#aaaaaa</color>
     <color name="greya6cfef">#a6cfef</color>
-    <color name="blue4aa1e4">#4aa1e4</color>
     <color name="greyffe5e5e5">#ffe5e5e5</color>
     <color name="greyebebeb">#ebebeb</color>
     <color name="color454545">#454545</color>
@@ -208,7 +209,7 @@
     <color name="green87cc61">#87cc61</color>
     <color name="green95c87a">#95c87a</color>
     <color name="greenf8fcff">#f8fcff</color>
-    <color name="green0d72ca">#0d72ca</color>
+
     <color name="greend6eaf9">#d6eaf9</color>
     <color name="greendbecf9">#dbecf9</color>
     <color name="green3bd4a0">#3bd4a0</color>

@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.app.Config;
+import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
@@ -136,6 +137,23 @@ public class AppUtils {
         return false;
     }
 
+    /**
+     * 设置商家服务(文字的情况下)
+     *
+     * @param list
+     * @return
+     */
+    public static String setMerchantService(List<ServiceInfoDetailBean> list) {
+        if (CommonUtils.listIsNotNull(list)) {
+            StringBuilder sb = new StringBuilder();
+            for (ServiceInfoDetailBean bean : list) {
+                sb.append(bean.name + " ");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            return sb.toString();
+        }
+        return "";
+    }
 
 
 }

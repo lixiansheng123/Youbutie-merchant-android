@@ -128,6 +128,7 @@
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/id_refresh_view"
         style="@style/style_refreshview"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:divider="@color/greyecebe4"
         android:dividerHeight="5dp" />

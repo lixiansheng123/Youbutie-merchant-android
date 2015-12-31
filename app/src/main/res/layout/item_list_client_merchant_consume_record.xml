@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="vertical"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp">
+
+    <TextView
+        android:id="@+id/id_time"
+        style="@style/text_deep_grey_14sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:text="@string/str_test_time"
+        android:textColor="@color/greyaa9b9a" />
+
+    <TextView
+        android:id="@+id/id_pay_money"
+        style="@style/text_yellow_16sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:text="￥100.00" />
+
+    <TextView
+        android:id="@+id/id_service"
+        style="@style/text_deep_grey_14sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@+id/id_pay_money"
+        android:layout_toRightOf="@+id/id_time"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="洗车" />
+
+    <View
+
+        android:id="@+id/id_line"
+        style="@style/line_grey_1px"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

@@ -6,17 +6,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.yuedong.youbutie_merchant_android.adapter.ClientMerchantConsumeRecordAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
+import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.OrderEvent;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
+import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * 客户详情
@@ -27,12 +37,16 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
     private RoundImageView userHead;
     private TextView userName, userMobile, carNum, carDesc, carMileageNum;
     private View editMileageLayout;
+    private PullToRefreshListView refreshListView;
     private String[] tabTitles = new String[]{"车辆信息", "消费记录"};
     private List<View> views;
+    private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
+    private Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        order = (Order) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
         initTitleView(new TitleViewHelper().createDefaultTitleView4("客户详情", "邀请会员", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,11 +65,25 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         userName = fvById(R.id.id_user_name);
         userMobile = fvById(R.id.id_user_mobile);
         View item1 = ViewUtils.inflaterView(context, R.layout.item_vp_car_info);
+        View item2 = ViewUtils.inflaterView(context, R.layout.item_vp_consume_record);
         views.add(item1);
+        views.add(item2);
+        refreshListView = (PullToRefreshListView) item2.findViewById(R.id.id_refresh_view);
         carNum = (TextView) item1.findViewById(R.id.id_car_num);
         carDesc = (TextView) item1.findViewById(R.id.id_car_desc);
         carMileageNum = (TextView) item1.findViewById(R.id.id_mileage_num);
         editMileageLayout = item1.findViewById(R.id.id_mileage_layout);
+        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
+            @Override
+            public BaseAdapter<Order> getAdapter(List<Order> data) {
+                return new ClientMerchantConsumeRecordAdapter(context, data);
+            }
+
+            @Override
+            public void executeTask(int skip, int limit, FindListener<Order> listener) {
+                OrderEvent.getInstance().getUserOrderByMerchant(skip, limit, order.getUser().getObjectId(), order.getMerchant().getObjectId(), listener);
+            }
+        });
         viewPager.setAdapter(new AbstractPagerAdapter(views.size()) {
             @Override
             public Object getView(ViewGroup container, int position) {
@@ -78,7 +106,6 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void ui() {
-        Order order = (Order) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
         User orderUser = order.getUser();
         DisplayImageByVolleyUtils.loadImage(orderUser.getPhoto(), userHead);
         userName.setText(orderUser.getNickname());

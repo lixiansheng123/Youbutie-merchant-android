@@ -9,9 +9,11 @@ import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.T;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
@@ -76,6 +78,42 @@ public class OrderEvent implements BaseEvent {
             public void onError(int i, String s) {
                 findListener.onError(i, s);
                 findListener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 获取对应用户的门店订单
+     */
+    public void getUserOrderByMerchant(int skip, int limit, String userId, String merchantId, final FindListener<Order> listener) {
+        listener.onStart();
+        BmobQuery<Order> mainQurey = new BmobQuery<Order>();
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        BmobQuery<Order> eq1 = new BmobQuery<Order>();
+        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
+        userBmobQuery.addWhereEqualTo(OBJECT_ID, userId);
+        eq1.addWhereMatchesQuery("user", "_User", userBmobQuery);
+        BmobQuery<Order> eq2 = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantId);
+        eq2.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        ands.add(eq1);
+        ands.add(eq2);
+        mainQurey.and(ands);
+        mainQurey.order("-createdAt");
+        mainQurey.setSkip(skip);
+        mainQurey.setLimit(limit);
+        mainQurey.findObjects(context, new FindListener<Order>() {
+            @Override
+            public void onSuccess(List<Order> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
             }
         });
 

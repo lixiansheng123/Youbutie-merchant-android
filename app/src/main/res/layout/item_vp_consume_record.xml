@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_refresh_view"
+    style="@style/style_refreshview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteffffff"
+    android:divider="@null"
+    android:listSelector="@android:color/transparent">
+
+</com.handmark.pulltorefresh.library.PullToRefreshListView>
