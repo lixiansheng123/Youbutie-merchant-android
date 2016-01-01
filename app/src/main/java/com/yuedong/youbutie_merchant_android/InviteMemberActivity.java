@@ -19,9 +19,11 @@ import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.UserEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.SPUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.SystemUtils;
@@ -46,9 +48,6 @@ public class InviteMemberActivity extends BaseActivity {
     private List<List<InviteMemberListBean>> childs = new ArrayList<List<InviteMemberListBean>>();
     private List<PhoneAddressBookBean> phoneContacts;
     private MyAdapter myAdapter;
-    // 未注册用户头像随机色
-    public int[] userBgs = new int[]{R.drawable.bg_circle_yellow, R.drawable.bg_circle_green, R.drawable.bg_circle_blue, R.drawable.bg_circle_red};
-    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,14 @@ public class InviteMemberActivity extends BaseActivity {
 
     @Override
     protected void initEvents() {
-
+        fvById(R.id.id_input_box).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.KEY_LIST, (ArrayList) phoneContacts);
+                LaunchWithExitUtils.startActivity(activity, SearchAddressBookFriendActivity.class, bundle);
+            }
+        });
     }
 
     List<User> totalRegistUser = new ArrayList<User>();
@@ -219,7 +225,7 @@ public class InviteMemberActivity extends BaseActivity {
                     InviteMemberListBean bean = new InviteMemberListBean();
                     bean.remark = bookBean.getContactName();
                     bean.setPhoto(user.getPhoto());
-                    bean.bg = userBgs[random.nextInt(4)];
+                    bean.bg = AppUtils.randomGetAddressBookUnRegistFriendHead();
                     bean.setMobilePhoneNumber(bookBean.getPhoneNumber());
                     bean.setCreatedAt(user.getCreatedAt());
                     if (user.getMobilePhoneNumber().equals(bookBean.getPhoneNumber())) {
@@ -244,7 +250,7 @@ public class InviteMemberActivity extends BaseActivity {
                 InviteMemberListBean bean = new InviteMemberListBean();
                 bean.remark = bookBean.getContactName();
                 bean.regist = false;
-                bean.bg = userBgs[random.nextInt(4)];
+                bean.bg = AppUtils.randomGetAddressBookUnRegistFriendHead();
                 bean.setMobilePhoneNumber(bookBean.getPhoneNumber());
                 notRegistList.add(bean);
             }
@@ -349,7 +355,7 @@ public class InviteMemberActivity extends BaseActivity {
                             // 未注册邀请操作
                             // TODO 发送机短信 内容模版暂定
                             SystemUtils.sms(context, unRegistUserMobile, String.format(getString(R.string.str_sms_moudle), Constants.TEST_USER_ID));
-                            SPUtils.put(context, Constants.SP_INVITE_REGIST, unRegistUserMobile + ",");
+                            SPUtils.put(context, Constants.SP_INVITE_REGIST, unRegistInviteNum + unRegistUserMobile + ",");
                             notifyDataSetChanged();
                         }
                     });
@@ -380,14 +386,18 @@ public class InviteMemberActivity extends BaseActivity {
 
     private void btnStatus(Button btnInvite, InviteMemberListBean bean, String inviteNums) {
         String[] split = inviteNums.split(",");
+        boolean has = false;
         for (String inviteNum : split) {
-            if (StringUtil.isNotEmpty(inviteNum) && inviteNum.equals(bean.getMobilePhoneNumber())) {
-                btnInvite.setBackgroundResource(R.drawable.bg_round_grey);
-                btnInvite.setText(getString(R.string.str_already_invite));
-            } else {
-                btnInvite.setBackgroundResource(R.drawable.bg_round_yellow);
-                btnInvite.setText(getString(R.string.str_invite));
+            if (inviteNum.equals(bean.getMobilePhoneNumber())) {
+                has = true;
             }
+        }
+        if (has) {
+            btnInvite.setBackgroundResource(R.drawable.bg_round_grey);
+            btnInvite.setText(getString(R.string.str_already_invite));
+        } else {
+            btnInvite.setBackgroundResource(R.drawable.bg_round_yellow);
+            btnInvite.setText(getString(R.string.str_invite));
         }
     }
 

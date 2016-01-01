@@ -7,22 +7,28 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <EditText
+    <RelativeLayout
+        android:id="@+id/id_input_box"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/shape_round_white_band_frame"
-        android:drawableLeft="@drawable/icon_grey_search"
-        android:gravity="center"
-        android:hint="@string/str_search_address_book_friend"
-        android:orientation="horizontal"
-        android:paddingLeft="12dp"
-        android:singleLine="true"
-        android:textColor="@color/grey938381"
-        android:textColorHint="@color/greycbc0bf"
-        android:textSize="14sp" />
+        android:paddingLeft="12dp">
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_grey_search" />
+
+        <TextView
+            style="@style/text_tint_grey_14sp"
+            android:layout_centerInParent="true"
+            android:text="@string/str_search_address_book_friend"
+            android:textColor="@color/greycbc0bf" />
+
+    </RelativeLayout>
 
     <ExpandableListView
         android:id="@+id/id_list"

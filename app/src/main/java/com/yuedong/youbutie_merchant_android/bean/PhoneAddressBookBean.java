@@ -2,10 +2,12 @@ package com.yuedong.youbutie_merchant_android.bean;
 
 import android.net.Uri;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/12/31.
  */
-public class PhoneAddressBookBean {
+public class PhoneAddressBookBean implements Serializable {
     private String phoneId;
     private String contactName;
     private String contactid;

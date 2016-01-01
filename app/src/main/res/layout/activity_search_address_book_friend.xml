@@ -4,19 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/greyecebe4"
+        android:orientation="horizontal"
         android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:paddingTop="5dp">
 
         <EditText
+            android:id="@+id/id_input_box"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:layout_marginLeft="33dp"
-            android:layout_marginRight="33dp"
-            android:layout_marginTop="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/id_btn_search"
             android:background="@drawable/shape_round_white_band_frame"
             android:drawableLeft="@drawable/icon_grey_search"
             android:gravity="center"
@@ -27,9 +31,19 @@
             android:textColor="@color/grey938381"
             android:textColorHint="@color/greycbc0bf"
             android:textSize="14sp" />
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/id_btn_search"
+            style="@style/btn_round_grey"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="搜索" />
+    </RelativeLayout>
 
     <ListView
+        android:id="@+id/id_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

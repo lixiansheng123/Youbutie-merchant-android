@@ -8,6 +8,7 @@ import android.widget.RatingBar;
 
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
@@ -16,6 +17,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -155,5 +157,16 @@ public class AppUtils {
         return "";
     }
 
+    // 未注册用户头像随机色
+    private static int[] userBgs = new int[]{R.drawable.bg_circle_yellow, R.drawable.bg_circle_green, R.drawable.bg_circle_blue, R.drawable.bg_circle_red};
+    private static Random random = new Random();
 
+    /**
+     * 随机获取未注册通讯录用户的头像
+     *
+     * @return
+     */
+    public static int randomGetAddressBookUnRegistFriendHead() {
+        return userBgs[random.nextInt(4)];
+    }
 }
