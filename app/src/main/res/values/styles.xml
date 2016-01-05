@@ -201,5 +201,9 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="togglebutton_1" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@drawable/selector_service_switch</item>
+    </style>
+
 
 </resources>

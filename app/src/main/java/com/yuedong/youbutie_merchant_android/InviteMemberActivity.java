@@ -170,6 +170,7 @@ public class InviteMemberActivity extends BaseActivity {
                     mainHandle.post(new Runnable() {
                         @Override
                         public void run() {
+                            dialogStatus(false);
                             T.showShort(context, "您的手机通讯录不存在信息");
                         }
                     });

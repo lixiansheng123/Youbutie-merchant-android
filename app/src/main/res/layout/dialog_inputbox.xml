@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/id_title"
+        style="@style/text_white_18sp"
+        android:layout_width="match_parent"
+        android:background="@color/yellowf0c008"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="请输入价格" />
+
+    <EditText
+        android:id="@+id/id_input_box"
+        style="@style/w_h_mw"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/whiteffffff"
+        android:gravity="center_vertical"
+        android:singleLine="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/yellowf0c008" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:background="@color/transparent"
+            android:id="@+id/id_btn_confirm"
+            style="@style/text_yellow_16sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/str_confirm" />
+
+        <View
+
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/yellowf0c008" />
+
+        <Button
+            android:id="@+id/id_btn_cancle"
+            android:background="@color/transparent"
+            style="@style/text_yellow_16sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/str_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,7 +8,8 @@ import java.io.Serializable;
 public class ServiceInfoDetailBean implements Serializable {
     public String name;
     public String icon;
-    public Double state, price;
+    public Integer state = 0;
+    public Double price = 0.0;
     public String objectId;
 
     @Override

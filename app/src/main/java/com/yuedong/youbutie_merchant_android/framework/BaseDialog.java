@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.R;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
 
 
@@ -133,6 +136,8 @@ public class BaseDialog extends Dialog {
         private String mTitle;
         private ProgressBar progressBar;
         private Integer[] phoneWh;
+        private EditText inputBox;
+
 
         public Builder(Context context) {
             mContext = context;
@@ -218,13 +223,14 @@ public class BaseDialog extends Dialog {
         public BaseDialog createNetLoadingDialog() {
             LayoutInflater layoutinflater = LayoutInflater.from(mContext);
             View view = layoutinflater.inflate(R.layout.dialog_load, null);
+            Integer[] phoneWh = App.getInstance().getPhoneWh();
             dialog = new BaseDialog(mContext);
             dialog.mMessageView = (TextView) view.findViewById(R.id.id_dialog_msg);
             dialog.mLoaderPic = (ImageView) view.findViewById(R.id.id_load_pic);
             dialog.setContentView(view);
             mDialog = dialog;
             dialog.setCanCanceledOnTouchOutSide(false);
-//            dialog.setDialogCancelable(false);
+            dialog.setDialogCancelable(false);
             ViewGroup.LayoutParams rootParams = view.getLayoutParams();
             int windowW1_3 = phoneWh[0] / 3;
             rootParams.width = rootParams.height = windowW1_3;
@@ -249,8 +255,36 @@ public class BaseDialog extends Dialog {
             return dialog;
         }
 
+        /**
+         * 创建一个输入框
+         *
+         * @return
+         */
+        public BaseDialog createInputDialog() {
+            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+            dialog = new BaseDialog(mContext);
+            View view = layoutInflater.inflate(R.layout.dialog_inputbox, null);
+            dialog.mTitleView = (TextView) view.findViewById(R.id.id_title);
+            mBtnPositive = (Button) view.findViewById(R.id.id_btn_confirm);
+            dialog.mBtnNegative = (Button) view.findViewById(R.id.id_btn_cancle);
+            inputBox = (EditText) view.findViewById(R.id.id_input_box);
+            dialog.setContentView(view);
+            dialog.setCanCanceledOnTouchOutSide(false);
+            dialog.setCancelable(false);
+            mDialog = dialog;
+            ViewGroup.LayoutParams rootParams = view.getLayoutParams();
+            int windowW2_3 = phoneWh[0] * 2 / 3;
+            rootParams.width = windowW2_3;
+            rootParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            return dialog;
+        }
+
         public Context getContext() {
             return mContext;
+        }
+
+        public EditText getInputBox() {
+            return inputBox;
         }
 
         public Builder setMessage(String s) {

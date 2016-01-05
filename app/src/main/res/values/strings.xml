@@ -74,6 +74,27 @@
     <string name="str_search_address_book_friend">搜索通讯录好友</string>
     <string name="str_invite">邀请</string>
     <string name="str_already_invite">已邀请</string>
-
     <string name="str_sms_moudle">亲，用户%s邀请您注册油补贴，油补贴官网下载APP，有优惠奖品丰富哦</string>
+    <string name="str_car_wash">洗车</string>
+    <string name="str_wax">抛光打蜡</string>
+    <string name="str_pad_pasting">贴膜</string>
+    <string name="str_tyre">轮胎</string>
+    <string name="str_clean_trim">内饰清洗</string>
+    <string name="str_pan_bottom">盘底装甲</string>
+    <string name="str_dujing">镀晶</string>
+    <string name="str_clean_air_condition">空调清洗</string>
+    <string name="str_lacquer">钣金喷漆</string>
+    <string name="str_wheel_location">四轮定位</string>
+    <string name="str_refuel">加油</string>
+    <string name="str_brake_disc">刹车盘/片</string>
+    <string name="str_windshield_wiper">换雨刷</string>
+    <string name="str_accumulator">换蓄电池</string>
+    <string name="str_ignition_plug">换火花塞</string>
+    <string name="str_antifreezing_solution">防冻液</string>
+    <string name="str_dynamo_clean">发电机清洗</string>
+    <string name="str_restrictor">节气门</string>
+    <string name="str_idle_time">闲时</string>
+    <string name="str_busy_time">忙时</string>
+    <string name="str_service_list_desc">请选择本店的服务内容，若您需要添加新服务类型请点击右上角“添加”按钮</string>
+    <string name="str_setting_price">设置价格</string>
 </resources>

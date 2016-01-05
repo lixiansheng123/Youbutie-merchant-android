@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical"
+    android:paddingLeft="13dp"
+    android:paddingRight="13dp">
+
+    <TextView
+        android:id="@+id/id_service_name"
+        style="@style/text_deep_grey_14sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="14dp"
+        android:text="洗车" />
+
+    <LinearLayout
+        android:id="@+id/id_service_price_setting_layout"
+        style="@style/w_h_ww"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/id_service_price"
+            style="@style/text_yellow_16sp"
+            android:text="12元/次" />
+
+        <TextView
+            android:id="@+id/id_service_price_setting_name"
+            style="@style/text_tint_grey_14sp"
+            android:text="@string/str_setting_price"
+            android:visibility="gone" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/icon_grey_down_arrows" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/id_cb_select"
+        style="@style/w_h_ww"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="14dp"
+        android:button="@drawable/selector_yellow_gougou_cb" />
+
+    <View
+        style="@style/line_grey_1px"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

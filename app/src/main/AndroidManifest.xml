@@ -35,7 +35,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".ClientDetailActivity" />
         <activity android:name=".InviteMemberActivity" />
-        <activity android:name=".SearchAddressBookFriendActivity"></activity>
+        <activity android:name=".SearchAddressBookFriendActivity" />
+        <activity android:name=".ServiceListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/greyecebe4">
+
+        <View style="@style/line_grey_1px" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:text="@string/str_service_list_desc" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/id_service_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:background="@color/greyecebe4">
+
+        <View style="@style/line_grey_1px" />
+
+        <Button
+            android:id="@+id/id_btn_confirm"
+            style="@style/btn_round_yellow"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/str_confirm" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

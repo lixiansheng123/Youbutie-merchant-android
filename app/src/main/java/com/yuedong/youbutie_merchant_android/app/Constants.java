@@ -6,10 +6,14 @@ package com.yuedong.youbutie_merchant_android.app;
 public class Constants {
     //第三方开发key
     public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
+    // 悦动推送apikey
+    public static final String APIKEY_PUSH_YD = "android6ce073d5af79fa36986dadd3cd0e8a53";
+    // 悦动推送secretKey
+    public static final String SECRETKEY_PUSH_YD = "36986dadd3cd0e8a";
 
     //------------------------------sp---------------------------
-    public static final  String SP_INVITE_REGIST = "sp_invite_regist";
-    public static final  String SP_INVITE_ADD_MEMBER = "sp_invite_add_member";
+    public static final String SP_INVITE_REGIST = "sp_invite_regist";
+    public static final String SP_INVITE_ADD_MEMBER = "sp_invite_add_member";
     //--------------------------标识---------------------------------
     public static final String KEY_TEXT = "key_text";
     public static final String KEY_TEXT2 = "key_text2";
@@ -28,7 +32,7 @@ public class Constants {
     public static final int REQUESTCODE_SELECT_CAR = 0x112;
     public static final int REQUESTCODE_INPUT_AD_TITLE = 0x113;
     public static final int REQUESTCODE_ADD_AD = 0x114;
-
+    public static final int REQEUSTCODE_EDIT_SERVICE_LIST = 0x115;
 
 
     public static final int RESULT_ORDER_EVALUATE = 0x209;
@@ -37,7 +41,7 @@ public class Constants {
     public static final int RESULT_SELECT_CAR = 0x212;
     public static final int RESULT_INPUT_AD_TITLE = 0x113;
     public static final int RESULT_ADD_AD = 0x214;
-
+    public static final int RESULT_EDIT_SERVICE_LIST = 0x215;
 
 
     // 属性动画的propertyName
@@ -56,9 +60,17 @@ public class Constants {
 
     //---info
     public static final String DESCRIPTOR = "com.umeng.share";
+    public static final String CALLER = "youbutie_android";
+
+    // 悦动接口版本
+    public static final String V = "2.1";
+
     // 测试userId
     public static final String TEST_USER_ID = "5MWw666Q";
 
+    //--url
+    private static final String YD_URL = "http://youbutie.pkball.cn/";
+    public static final String URL_UMENG_PUSH = YD_URL + "UmengPush/AndroidGroupcast";
 
 
 }

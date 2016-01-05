@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.R;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
@@ -168,5 +169,98 @@ public class AppUtils {
      */
     public static int randomGetAddressBookUnRegistFriendHead() {
         return userBgs[random.nextInt(4)];
+    }
+
+    /**
+     * 获取serviceContent应该显示的样式
+     *
+     * @param serviceName
+     * @return
+     */
+    public static Integer[] getServiceInfoDisplayStyle(String serviceName) {
+        // 第一个是背景 第二个icon
+        Integer[] displayStyle = new Integer[2];
+        serviceName = serviceName.trim();
+        if (_equals(R.string.str_car_wash, serviceName)) {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_xiche;
+        } else if (_equals(R.string.str_wax, serviceName)) {
+            displayStyle[0] = getColor(R.color.purplece67f4);
+            displayStyle[1] = R.drawable.icon_service_dala;
+        } else if (_equals(R.string.str_pad_pasting, serviceName)) {
+            displayStyle[0] = getColor(R.color.green89c9ae);
+            displayStyle[1] = R.drawable.icon_service_tiemo;
+        } else if (_equals(R.string.str_tyre, serviceName)) {
+            displayStyle[0] = getColor(R.color.blue8781f0);
+            displayStyle[1] = R.drawable.icon_service_luntai;
+        } else if (_equals(R.string.str_clean_trim, serviceName)) {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_neishiqingxi;
+        } else if (_equals(R.string.str_pan_bottom, serviceName)) {
+            displayStyle[0] = getColor(R.color.purplece67f4);
+            displayStyle[1] = R.drawable.icon_service_dipanzhuangjia;
+
+        } else if (_equals(R.string.str_dujing, serviceName)) {
+            displayStyle[0] = getColor(R.color.green45cdfd);
+            displayStyle[1] = R.drawable.icon_service_dujing;
+        } else if (_equals(R.string.str_clean_air_condition, serviceName)) {
+            displayStyle[0] = getColor(R.color.green89c9ae);
+            displayStyle[1] = R.drawable.icon_service_kongtiaoqingxi;
+
+        } else if (_equals(R.string.str_lacquer, serviceName)) {
+            displayStyle[0] = getColor(R.color.blue8781f0);
+            displayStyle[1] = R.drawable.icon_service_banjinpenqi;
+
+        } else if (_equals(R.string.str_wheel_location, serviceName)) {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_silundingwei;
+
+        } else if (_equals(R.string.str_refuel, serviceName)) {
+            displayStyle[0] = getColor(R.color.green45cdfd);
+            displayStyle[1] = R.drawable.icon_service_jiayou;
+
+        } else if (_equals(R.string.str_brake_disc, serviceName)) {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_shachepapan;
+
+        } else if (_equals(R.string.str_windshield_wiper, serviceName)) {
+            displayStyle[0] = getColor(R.color.blue8781f0);
+            displayStyle[1] = R.drawable.icon_service_yushua;
+
+        } else if (_equals(R.string.str_accumulator, serviceName)) {
+            displayStyle[0] = getColor(R.color.purplece67f4);
+            displayStyle[1] = R.drawable.icon_service_xudianchi;
+
+        } else if (_equals(R.string.str_ignition_plug, serviceName)) {
+            displayStyle[0] = getColor(R.color.green45cdfd);
+            displayStyle[1] = R.drawable.icon_service_huohuasai;
+
+        } else if (_equals(R.string.str_antifreezing_solution, serviceName)) {
+            displayStyle[0] = getColor(R.color.green89c9ae);
+            displayStyle[1] = R.drawable.icon_service_fadongji;
+
+        } else if (_equals(R.string.str_dynamo_clean, serviceName)) {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_fangdongye;
+
+
+        } else if (_equals(R.string.str_restrictor, serviceName)) {
+            displayStyle[0] = getColor(R.color.purplece67f4);
+            displayStyle[1] = R.drawable.icon_service_jieqimen;
+        } else {
+            displayStyle[0] = getColor(R.color.yellowf8a815);
+            displayStyle[1] = R.drawable.icon_service_default;
+        }
+
+
+        return displayStyle;
+    }
+
+    private static int getColor(int resId) {
+        return App.getInstance().getResources().getColor(resId);
+    }
+
+    private static boolean _equals(int fromResId, String to) {
+        return ResourceUtils.getString(fromResId).equals(to);
     }
 }
