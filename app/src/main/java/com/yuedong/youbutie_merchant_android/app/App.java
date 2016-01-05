@@ -1,13 +1,21 @@
 package com.yuedong.youbutie_merchant_android.app;
 
 import android.app.Application;
+import android.app.DownloadManager;
 import android.content.Context;
 
+import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.SPUtils;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -32,6 +40,63 @@ public class App extends Application {
     public boolean userInfoChange;
     // 订单信息是否变更
     public boolean orderInfoChange;
+    // 悦动apiSecretKey
+    public String ydApiSecretKey;
+
+    /**
+     * 获取App secretkey
+     *
+     * @param listener
+     */
+    public void getYdApiSecretKey(final ObtainSecretKeyListener listener) {
+        if (ydApiSecretKey == null) {
+            RequestYDHelper requestYDHelper = new RequestYDHelper();
+            requestYDHelper.setOnYDRequestListener(new RequestYDHelper.OnYDRequestListener() {
+                @Override
+                public void onStart() {
+                    listener.start();
+                }
+
+                @Override
+                public void onSucceed(String json) {
+                    if (StringUtil.isNotEmpty(json)) {
+                        try {
+                            JSONObject job = new JSONObject(json);
+                            JSONObject stateJob = job.getJSONObject("state");
+                            String code = stateJob.getString("code");
+                            if (Constants.OK.equals(code)) {
+                                // 获取key成功
+                                JSONObject dataJob = job.getJSONObject("data");
+                                ydApiSecretKey = dataJob.getString("secretKey");
+                                listener.succeed(ydApiSecretKey);
+                            } else {
+                                listener.fail(0, "状态不正常");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            listener.fail(-1, e.getMessage());
+                        }
+
+                    } else {
+                        listener.fail(1, "返回数据出现异常");
+                    }
+                }
+
+                @Override
+                public void onFail(Exception e) {
+                    listener.fail(-1, e.getMessage());
+                }
+
+                @Override
+                public void onEnd() {
+                    listener.end();
+                }
+            });
+            requestYDHelper.getSecretkey();
+        } else {
+            listener.succeed(ydApiSecretKey);
+        }
+    }
 
     public void setMeMerchant(List<Merchant> meMerchant) {
         this.meMerchant = meMerchant;

@@ -11,10 +11,14 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
+import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -262,5 +266,26 @@ public class AppUtils {
 
     private static boolean _equals(int fromResId, String to) {
         return ResourceUtils.getString(fromResId).equals(to);
+    }
+
+    /**
+     * 请求结果是否正常
+     *
+     * @param json
+     * @return
+     */
+    public static boolean requestIsOk(String json) {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONObject stateJob = jsonObject.getJSONObject("state");
+            String code = stateJob.getString("code");
+            if (Constants.OK.equals(code))
+                return true;
+            else
+                return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

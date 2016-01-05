@@ -61,6 +61,7 @@ public class Constants {
     //---info
     public static final String DESCRIPTOR = "com.umeng.share";
     public static final String CALLER = "youbutie_android";
+    public static final String OK = "2000000";
 
     // 悦动接口版本
     public static final String V = "2.1";
@@ -71,8 +72,10 @@ public class Constants {
     //--url
     private static final String YD_URL = "http://youbutie.pkball.cn/";
     public static final String URL_UMENG_PUSH = YD_URL + "UmengPush/AndroidGroupcast";
+    public static final String URL_GET_SECRETKEY = YD_URL + "SecretKey/GetSecretKey";
 
-
+    // requestId
+    public static final String REQUEST_ID_INVITE_MEMBER = "request_id_invite_member";
 }
 
 
