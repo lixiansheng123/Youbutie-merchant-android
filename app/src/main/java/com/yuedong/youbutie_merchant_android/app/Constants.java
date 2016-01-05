@@ -33,6 +33,7 @@ public class Constants {
     public static final int REQUESTCODE_INPUT_AD_TITLE = 0x113;
     public static final int REQUESTCODE_ADD_AD = 0x114;
     public static final int REQEUSTCODE_EDIT_SERVICE_LIST = 0x115;
+    public static final int REQUESTCODE_MERCHANT_AD = 0x116;
 
 
     public static final int RESULT_ORDER_EVALUATE = 0x209;
@@ -42,6 +43,7 @@ public class Constants {
     public static final int RESULT_INPUT_AD_TITLE = 0x113;
     public static final int RESULT_ADD_AD = 0x214;
     public static final int RESULT_EDIT_SERVICE_LIST = 0x215;
+    public static final int RESULT_MERCHANT_AD = 0x216;
 
 
     // 属性动画的propertyName

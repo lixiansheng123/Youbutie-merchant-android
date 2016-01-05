@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="0dp"
+        android:background="@color/whiteffffff"
+        app:layout_heightPercent="29.8%h">
+
+        <ImageView
+            android:id="@+id/id_merchant_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_picture_default"
+            app:layout_heightPercent="53.57%h"
+            app:layout_marginTopPercent="13.09%h"
+            app:layout_widthPercent="41.66%w" />
+
+        <TextView
+            style="@style/text_tint_grey_14sp"
+            android:layout_below="@+id/id_merchant_pic"
+            android:layout_centerHorizontal="true"
+            android:text="@string/str_click_upload_merchant_pic"
+            app:layout_marginTopPercent="9.92%h" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="11dp"
+        android:orientation="vertical"
+        app:layout_heightPercent="39.73%h">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_merchant_name" />
+
+            <ImageView
+                android:id="@+id/id_arrows_1"
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_grey_right_arrows" />
+
+            <TextView
+                android:id="@+id/id_merchant_name"
+                style="@style/text_tint_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/id_arrows_1"
+                android:text="@string/str_please_inpit_merchant_name" />
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                android:id="@+id/id_flag_location"
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_location" />
+
+            <ImageView
+                android:id="@+id/id_arrows_2"
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_grey_right_arrows" />
+
+            <TextView
+                android:layout_marginLeft="42dp"
+                android:id="@+id/id_merchant_location"
+                style="@style/text_tint_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/id_arrows_2"
+                android:layout_toRightOf="@+id/id_flag_location"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text="@string/str_please_input_location" />
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_business_time" />
+
+            <LinearLayout
+                android:id="@+id/id_select_end_time_layout"
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_select_end_time"
+                    style="@style/text_tint_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/id_arrows_3"
+                    android:text="@string/str_select_end_time"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/id_arrows_3"
+                    style="@style/w_h_ww"
+
+
+                    android:src="@drawable/icon_grey_down_arrows" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/id_flag_zhi"
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/id_select_end_time_layout"
+                android:text="@string/str_zhi"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                style="@style/w_h_ww"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/id_flag_zhi"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_select_start_time"
+                    style="@style/text_tint_grey_14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/id_arrows_3_2"
+                    android:text="@string/str_select_end_time"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    style="@style/w_h_ww"
+                    android:src="@drawable/icon_grey_down_arrows" />
+
+
+            </LinearLayout>
+
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_tel" />
+
+            <ImageView
+                android:id="@+id/id_arrows_4"
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_grey_right_arrows" />
+
+            <TextView
+                android:id="@+id/id_merchant_tel"
+                style="@style/text_tint_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/id_arrows_4"
+                android:text="@string/str_please_inpit_tel" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
+
+    <!--<Button-->
+    <!--style="@style/btn_round_yellow"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--android:text="@string/str_confirm"-->
+    <!--android:visibility="gone"-->
+    <!--app:layout_heightPercent="8.04%h" />-->
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.yuedong.youbutie_merchant_android.EditMerchantActivity;
+import com.yuedong.youbutie_merchant_android.InfoEditActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.ServiceListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.MerchantServiceListAdapter;
@@ -47,6 +49,8 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     private SupportScrollConflictListView serviceList;
     private MerchantServiceListAdapter adapter;
     private Merchant merchant;
+    private static final String TAG = "MerchantManagerFm";
+
 
     @Override
     public View getContentView(ViewGroup container) {
@@ -57,6 +61,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     @Override
     public void initViews(View contentView, Bundle savedInstanceState) {
         adapter = new MerchantServiceListAdapter(getActivity());
+        merchantAd = fvById(R.id.id_merchant_ad);
         merchantPic = fvById(R.id.id_merchant_pic);
         merchantNmae = fvById(R.id.id_merchant_name);
         merchantAddress = fvById(R.id.id_merchant_address);
@@ -68,6 +73,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     }
 
     private void ui() {
+        // TODO 测试userId
         MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
 
             @Override
@@ -88,7 +94,6 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                     merchantAddress.setText("    " + merchant.getAddress());
                     merchantPhone.setText("    " + merchant.getTelephone());
                     DisplayImageByVolleyUtils.loadImage(merchantPic, merchant.getPhoto());
-
                     long startTime = BmobDate.getTimeStamp(merchant.getStartTime().getDate());
                     long endTIme = BmobDate.getTimeStamp(merchant.getEndTime().getDate());
                     Calendar calendar = Calendar.getInstance();
@@ -103,9 +108,9 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                         merchantAd.setText(mercantAdText);
                         merchantAd.setTextColor(Color.parseColor("#938381"));
                     }
-
                     adapter.setData(merchant.getServiceInfo());
                     adapter.notifyDataSetChanged();
+
 
                 } else {
                     T.showShort(getActivity(), "您还没有门店");
@@ -121,11 +126,12 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
 
     @Override
     public void initEvents() {
+        fvById(R.id.id_merchant_ad_layout).setOnClickListener(this);
+        fvById(R.id.id_edit_merchant).setOnClickListener(this);
         fvById(R.id.id_edit_service_list_layout).setOnClickListener(this);
         adapter.setOnButtonSwitchListener(new MerchantServiceListAdapter.OnButtonSwitchListener() {
             @Override
             public void bottonSwitch(boolean buttonStatus) {
-                dialogStatus(true);
                 int state = 0;
                 if (buttonStatus)
                     state = 1;
@@ -141,14 +147,12 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                     @Override
                     public void onSuccess() {
                         App.getInstance().meMerchantInfoChange = true;
-                        dialogStatus(false);
                         T.showShort(getActivity(), "修改成功");
                     }
 
                     @Override
                     public void onFailure(int i, String s) {
                         error(s);
-                        dialogStatus(false);
                     }
                 });
             }
@@ -181,6 +185,22 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.id_merchant_ad_layout:
+                Intent it = new Intent(getActivity(), InfoEditActivity.class);
+                Bundle b3 = new Bundle();
+                b3.putSerializable(Constants.KEY_BEAN, merchant);
+                b3.putString(Constants.KEY_TEXT, "门店广告");
+                b3.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MEMBER_AD);
+                it.putExtras(b3);
+                LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, it, Constants.REQUESTCODE_MERCHANT_AD);
+                break;
+            case R.id.id_edit_merchant:
+                Bundle bundle2 = new Bundle();
+                bundle2.putSerializable(Constants.KEY_BEAN, merchant);
+                LaunchWithExitUtils.startActivity(getActivity(), EditMerchantActivity.class, bundle2);
+                break;
+
+
             case R.id.id_edit_service_list_layout:
                 Intent intent = new Intent(getActivity(), ServiceListActivity.class);
                 Bundle bundle = new Bundle();
@@ -195,8 +215,11 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        L.d(TAG + "--onActivityResult");
         if (requestCode == Constants.REQEUSTCODE_EDIT_SERVICE_LIST && resultCode == Constants.RESULT_EDIT_SERVICE_LIST && data != null) {
+            ui();
+        } else if (requestCode == Constants.REQUESTCODE_MERCHANT_AD && resultCode == Constants.RESULT_MERCHANT_AD) {
+            L.d(TAG + "--REQUESTCODE_MERCHANT_AD");
             ui();
         }
     }

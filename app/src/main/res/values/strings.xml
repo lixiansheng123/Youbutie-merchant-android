@@ -97,4 +97,13 @@
     <string name="str_busy_time">忙时</string>
     <string name="str_service_list_desc">请选择本店的服务内容，若您需要添加新服务类型请点击右上角“添加”按钮</string>
     <string name="str_setting_price">设置价格</string>
+    <string name="str_click_upload_merchant_pic">点击上传门店图片</string>
+    <string name="str_merchant_name">店名</string>
+    <string name="str_please_inpit_merchant_name">请填写店名</string>
+    <string name="str_location">地理位置</string>
+    <string name="str_please_input_location">请输入地理位置</string>
+    <string name="str_business_time">经营时间</string>
+    <string name="str_select_end_time">选择结束时间</string>
+    <string name="str_tel">电话</string>
+    <string name="str_please_inpit_tel">请填写电话号码</string>
 </resources>

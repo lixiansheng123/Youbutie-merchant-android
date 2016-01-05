@@ -9,9 +9,9 @@
         android:id="@+id/id_title"
         style="@style/text_white_18sp"
         android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:background="@color/yellowf0c008"
         android:gravity="center"
-        android:padding="15dp"
         android:text="请输入价格" />
 
     <EditText
@@ -33,16 +33,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <Button
-            android:background="@color/transparent"
             android:id="@+id/id_btn_confirm"
             style="@style/text_yellow_16sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/transparent"
             android:gravity="center"
             android:text="@string/str_confirm" />
 
@@ -56,11 +56,11 @@
 
         <Button
             android:id="@+id/id_btn_cancle"
-            android:background="@color/transparent"
             style="@style/text_yellow_16sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/transparent"
             android:gravity="center"
             android:text="@string/str_cancel" />
     </LinearLayout>

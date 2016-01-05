@@ -230,7 +230,7 @@ public class BaseDialog extends Dialog {
             dialog.setContentView(view);
             mDialog = dialog;
             dialog.setCanCanceledOnTouchOutSide(false);
-            dialog.setDialogCancelable(false);
+//            dialog.setDialogCancelable(false);
             ViewGroup.LayoutParams rootParams = view.getLayoutParams();
             int windowW1_3 = phoneWh[0] / 3;
             rootParams.width = rootParams.height = windowW1_3;
