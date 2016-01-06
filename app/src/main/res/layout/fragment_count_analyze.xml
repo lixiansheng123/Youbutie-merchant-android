@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/yellowf0c92b"
+        android:orientation="vertical"
+        app:layout_heightPercent="27.56%h"
+        app:layout_paddingLeftPercent="3.43%w"
+        app:layout_paddingRightPercent="3.43%w">
+
+        <LinearLayout
+            android:id="@+id/id_total_client_num_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_heightPercent="53.65%h">
+
+            <TextView
+                style="@style/text_white_14sp"
+                android:drawableRight="@drawable/icon_white_point_triangle"
+                android:text="本月销售额(元) " />
+
+            <TextView
+                android:id="@+id/id_total_client_num"
+                style="@style/text_white_16sp"
+                android:layout_marginTop="5dp"
+                android:text="￥0"
+                android:textSize="26sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/line_grey_1px"
+            android:background="@color/white66ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:drawableRight="@drawable/icon_white_point_triangle"
+                    android:text="本月用户(人) " />
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:layout_marginTop="2dp"
+                    android:text="0"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white66ffffff" />
+
+            <LinearLayout
+                android:id="@+id/id_member_num_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:drawableRight="@drawable/icon_white_point_triangle"
+                    android:text="人均消费(元) " />
+
+                <TextView
+                    android:id="@+id/id_member_num"
+                    style="@style/text_white_14sp"
+                    android:layout_marginTop="2dp"
+                    android:text="0"
+                    android:textSize="22sp" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white66ffffff" />
+
+
+            <LinearLayout
+                android:id="@+id/id_ad_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/text_white_14sp"
+                    android:drawableRight="@drawable/icon_white_point_triangle"
+                    android:text="油点贡献值(点) " />
+
+                <TextView
+                    android:id="@+id/id_ad_num"
+                    style="@style/text_white_14sp"
+                    android:layout_marginTop="2dp"
+                    android:text="0"
+                    android:textSize="22sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/whiteffffff"
+        app:layout_heightPercent="9.93%h">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginTopPercent="14.07%h">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/id_cb_xiaofei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/selector_count_consume_icon_cb"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:scaleType="centerInside" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/id_cb_fandian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/selector_count_rebate_icon_cb"
+                    android:gravity="center"
+                    android:scaleType="centerInside" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/id_cb_pingjia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/selector_count_flower_icon_cb"
+                    android:gravity="center"
+                    android:scaleType="centerInside" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/id_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/whiteffffff"
+            app:layout_heightPercent="61.3%h"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/yellowf0c008"
+            app:tabSelectedTextColor="@color/yellowf0c008"
+            app:tabTextColor="@color/black81706e" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.fragment.ClientManagetFm;
+import com.yuedong.youbutie_merchant_android.fragment.CountAnalyzeFm;
 import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     private OrderManagerFm orderManagerFm;
     private ClientManagetFm clientManagetFm;
     private MerchantManagerFm merchantManagerFm;
+    private CountAnalyzeFm countAnalyzeFm;
     private Bundle savedInstanceState;
 
 
@@ -28,6 +30,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     }
 
     private void ititFragment() {
+        countAnalyzeFm = new CountAnalyzeFm();
         orderManagerFm = new OrderManagerFm();
         clientManagetFm = new ClientManagetFm();
         merchantManagerFm = new MerchantManagerFm();
@@ -51,8 +54,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             App.getInstance().orderInfoChange = false;
         }
 
-        if(App.getInstance().meMerchantInfoChange && (merchantManagerFm!=null && merchantManagerFm.initFinshed))
-        {
+        if (App.getInstance().meMerchantInfoChange && (merchantManagerFm != null && merchantManagerFm.initFinshed)) {
             merchantManagerFm.ui();
         }
 
@@ -121,6 +123,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
 
             case R.id.id_home_count:
                 chooseIndex = 4;
+                switchContent(mDisplayContext, countAnalyzeFm, R.id.id_container);
                 break;
         }
     }
