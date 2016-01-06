@@ -42,6 +42,7 @@
         app:layout_heightPercent="39.73%h">
 
         <RelativeLayout
+            android:id="@+id/id_edit_merchant_name_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -77,6 +78,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/id_edit_merchant_location_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -170,6 +172,7 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/id_select_start_time_layout"
                 style="@style/w_h_ww"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/id_flag_zhi"
@@ -199,6 +202,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/id_edit_merchant_tel_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

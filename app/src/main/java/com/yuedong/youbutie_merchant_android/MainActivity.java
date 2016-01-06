@@ -51,6 +51,11 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             App.getInstance().orderInfoChange = false;
         }
 
+        if(App.getInstance().meMerchantInfoChange && (merchantManagerFm!=null && merchantManagerFm.initFinshed))
+        {
+            merchantManagerFm.ui();
+        }
+
     }
 
     @Override

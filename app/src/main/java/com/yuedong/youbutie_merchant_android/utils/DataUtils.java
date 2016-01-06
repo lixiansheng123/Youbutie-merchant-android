@@ -8,6 +8,37 @@ import java.util.List;
 
 public class DataUtils {
 
+    /**
+     * 获取24小时
+     *
+     * @return
+     */
+    public static List<String> getHours() {
+        List<String> data = new ArrayList<String>();
+        for (int i = 1; i <= 24; i++) {
+            data.add(i + "");
+        }
+        return data;
+    }
+
+    /**
+     * 获取分钟集
+     *
+     * @return
+     */
+    public static List<String> getMinutes() {
+        List<String> data = new ArrayList<String>();
+        for (int i = 0; i < 60; i++) {
+            String minute = "";
+            if (i < 10) {
+                minute = "0" + i;
+            } else
+                minute = i + "";
+            data.add(minute);
+        }
+        return data;
+    }
+
 
     /**
      * 获取指定年份到当前年份的一个集合

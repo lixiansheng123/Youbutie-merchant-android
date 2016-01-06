@@ -11,4 +11,6 @@ public class Callback {
     public void callbackYMR(String year, String month, String day) {
 
     }
+
+    public void callbackHM(String hour,String minute){};
 }

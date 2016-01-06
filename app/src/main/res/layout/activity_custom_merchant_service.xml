@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/str_custom_merchant_service_desc"
+        android:textColor="@color/grey938580"
+        android:textSize="14sp"
+        app:layout_heightPercent="8.34%h" />
+
+    <View style="@style/line_grey_1px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_heightPercent="19.86%h">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_service_content" />
+
+
+            <EditText
+                android:gravity="right|center_vertical"
+                android:id="@+id/id_input_service_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="@color/transparent"
+                android:hint="@string/str_input_service_content"
+                android:maxLength="10"
+                android:textColor="@color/black81706e"
+                android:textColorHint="@color/greycbc0bf"
+                android:textSize="14sp" />
+
+            <View
+                style="@style/line_grey_1dp"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_price" />
+
+
+            <EditText
+                android:gravity="right|center_vertical"
+                android:id="@+id/id_input_service_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/id_flag"
+                android:background="@color/transparent"
+                android:digits="0123456789."
+                android:hint="@string/str_input_price"
+                android:maxLength="10"
+                android:textColor="@color/black81706e"
+                android:textColorHint="@color/greycbc0bf"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/id_flag"
+                style="@style/text_deep_grey_14sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:text="元/次"
+                android:textColor="@color/black81706e" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View style="@style/line_grey_1px" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -373,4 +373,19 @@ public final class DateUtils {
         return daysBetween(smData, formatDate(date, DATE_TIME_yyyy_MM_dd_HH_mm_ss));
     }
 
+    /**
+     * 获取当前年月日
+     *
+     * @return 以yyyy-MM-dd格式返回
+     */
+    public static String getCurYMD() {
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String monthStr = month < 10 ? "0" + month : "" + month;
+        String dayStr = day < 10 ? "0" + day : "" + day;
+        return calendar.get(Calendar.YEAR) + "-" + monthStr + "-" + dayStr;
+    }
+
+
 }

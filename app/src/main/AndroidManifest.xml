@@ -39,7 +39,8 @@
         <activity android:name=".InviteMemberActivity" />
         <activity android:name=".SearchAddressBookFriendActivity" />
         <activity android:name=".ServiceListActivity" />
-        <activity android:name=".EditMerchantActivity"></activity>
+        <activity android:name=".EditMerchantActivity" />
+        <activity android:name=".CustomMerchantServiceActivity"></activity>
     </application>
 
 </manifest>

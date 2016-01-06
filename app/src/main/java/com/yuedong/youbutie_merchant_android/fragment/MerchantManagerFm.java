@@ -72,7 +72,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
         ui();
     }
 
-    private void ui() {
+    public void ui() {
         // TODO 测试userId
         MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
 
@@ -186,27 +186,33 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_merchant_ad_layout:
-                Intent it = new Intent(getActivity(), InfoEditActivity.class);
-                Bundle b3 = new Bundle();
-                b3.putSerializable(Constants.KEY_BEAN, merchant);
-                b3.putString(Constants.KEY_TEXT, "门店广告");
-                b3.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MEMBER_AD);
-                it.putExtras(b3);
-                LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, it, Constants.REQUESTCODE_MERCHANT_AD);
+                if (merchant != null) {
+                    Intent it = new Intent(getActivity(), InfoEditActivity.class);
+                    Bundle b3 = new Bundle();
+                    b3.putSerializable(Constants.KEY_BEAN, merchant);
+                    b3.putString(Constants.KEY_TEXT, "门店广告");
+                    b3.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MEMBER_AD);
+                    it.putExtras(b3);
+                    LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, it, Constants.REQUESTCODE_MERCHANT_AD);
+                }
                 break;
             case R.id.id_edit_merchant:
-                Bundle bundle2 = new Bundle();
-                bundle2.putSerializable(Constants.KEY_BEAN, merchant);
-                LaunchWithExitUtils.startActivity(getActivity(), EditMerchantActivity.class, bundle2);
+                if(merchant!=null) {
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putSerializable(Constants.KEY_BEAN, merchant);
+                    LaunchWithExitUtils.startActivity(getActivity(), EditMerchantActivity.class, bundle2);
+                }
                 break;
 
 
             case R.id.id_edit_service_list_layout:
-                Intent intent = new Intent(getActivity(), ServiceListActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constants.KEY_BEAN, merchant);
-                intent.putExtras(bundle);
-                LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, intent, Constants.REQEUSTCODE_EDIT_SERVICE_LIST);
+                if(merchant!=null) {
+                    Intent intent = new Intent(getActivity(), ServiceListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN, merchant);
+                    intent.putExtras(bundle);
+                    LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, intent, Constants.REQEUSTCODE_EDIT_SERVICE_LIST);
+                }
                 break;
 
         }

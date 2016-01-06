@@ -59,6 +59,7 @@ public class InviteMemberActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initTitleView(new TitleViewHelper().createDefaultTitleView3("邀请加入会员"));
         setShowContentView(R.layout.activity_invite_member);
+
     }
 
     @Override
@@ -99,6 +100,10 @@ public class InviteMemberActivity extends BaseActivity {
             @Override
             public void succeed(String secretKey) {
                 mSecretKey = secretKey;
+                RequestYDHelper requestYDHelper = new RequestYDHelper();
+                requestYDHelper.setAppSecretkey(mSecretKey);
+                requestYDHelper.requestPush(Constants.REQUEST_ID_INVITE_MEMBER,//
+                        new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功BMOB洗车店门店会员");
                 // 获取手机的通讯录信息
                 App.getInstance().getExecutor().execute(new Runnable() {
                     @Override
@@ -376,7 +381,7 @@ public class InviteMemberActivity extends BaseActivity {
 
                     @Override
                     public void onEnd() {
-                        dialogStatus(true);
+                        dialogStatus(false);
                     }
                 });
                 String registInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_ADD_MEMBER, "");
@@ -397,7 +402,7 @@ public class InviteMemberActivity extends BaseActivity {
 //                            Messages messages = new Messages();
 //                            notifyDataSetChanged();
                             requestYDHelper.requestPush(Constants.REQUEST_ID_INVITE_MEMBER,//
-                                    new String[]{bean.getObjectId()}, "邀请成功店铺会员", "邀请您成功BMOB洗车店门店会员");
+                                    new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功BMOB洗车店门店会员");
                         }
                     });
                 else

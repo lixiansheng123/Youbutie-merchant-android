@@ -20,6 +20,9 @@ public class InfoEditActivity extends BaseActivity {
     private EditText inputbox;
     public static final int ACTION_INPUT_AD_TITLE = 0x001;
     public static final int ACTION_INPUT_MEMBER_AD = 0x002;
+    public static final int ACTION_INPUT_MEMBER_NAME = 0x003;
+    public static final int ACTION_INPUT_MEMBER_LOCATION = 0x004;
+    public static final int ACTION_INPUT_MEMBER_TEL = 0x005;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +56,21 @@ public class InfoEditActivity extends BaseActivity {
                         setResult(Constants.RESULT_INPUT_AD_TITLE, it);
                         defaultFinished();
                     } else if (action == ACTION_INPUT_MEMBER_AD) {
-                        dialogStatus(true);
-                        Merchant merchant = (Merchant) paramsBundle.getSerializable(Constants.KEY_BEAN);
                         Merchant updateMerchant = new Merchant();
                         updateMerchant.setIntroduced(inputText);
-                        updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
-                            @Override
-                            public void onSuccess() {
-                                dialogStatus(false);
-                                App.getInstance().meMerchantInfoChange = true;
-                                setResult(Constants.RESULT_MERCHANT_AD);
-                                defaultFinished();
-                            }
-
-                            @Override
-                            public void onFailure(int i, String s) {
-                                dialogStatus(false);
-                                error(s);
-                            }
-                        });
-
+                        updateMerchantInfo(updateMerchant, inputText, Constants.RESULT_MERCHANT_AD);
+                    } else if (action == ACTION_INPUT_MEMBER_NAME) {
+                        Merchant updateMerchant = new Merchant();
+                        updateMerchant.setName(inputText);
+                        updateMerchantInfo(updateMerchant, inputText, Constants.RESULT_MERCHANT_NAME);
+                    } else if (action == ACTION_INPUT_MEMBER_LOCATION) {
+                        Merchant updateMerchant = new Merchant();
+                        updateMerchant.setAddress(inputText);
+                        updateMerchantInfo(updateMerchant, inputText, Constants.RESULT_MERCHANT_LOCATION);
+                    } else if (action == ACTION_INPUT_MEMBER_TEL) {
+                        Merchant updateMerchant = new Merchant();
+                        updateMerchant.setTelephone(inputText);
+                        updateMerchantInfo(updateMerchant, inputText, Constants.RESULT_MERCHANT_TEL);
                     }
 
                 } else {
@@ -81,5 +79,27 @@ public class InfoEditActivity extends BaseActivity {
             }
 
         }));
+    }
+
+    private void updateMerchantInfo(Merchant updateMerchant, final String modifyText, final int resultCode) {
+        dialogStatus(true);
+        Merchant merchant = (Merchant) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
+        updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                Intent intent = new Intent();
+                intent.putExtra(Constants.KEY_TEXT, modifyText);
+                dialogStatus(false);
+                App.getInstance().meMerchantInfoChange = true;
+                setResult(resultCode, intent);
+                defaultFinished();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                dialogStatus(false);
+                error(s);
+            }
+        });
     }
 }

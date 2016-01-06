@@ -5,7 +5,10 @@ package com.yuedong.youbutie_merchant_android.app;
  */
 public class Constants {
     //第三方开发key
+    // bmob测试版key
     public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
+    // bmob数据版key
+//    public static final String APIKEY_BMOB = "269a4fea6f2998b31cf6815f4e692eb9";
     // 悦动推送apikey
     public static final String APIKEY_PUSH_YD = "android6ce073d5af79fa36986dadd3cd0e8a53";
     // 悦动推送secretKey
@@ -34,7 +37,10 @@ public class Constants {
     public static final int REQUESTCODE_ADD_AD = 0x114;
     public static final int REQEUSTCODE_EDIT_SERVICE_LIST = 0x115;
     public static final int REQUESTCODE_MERCHANT_AD = 0x116;
-
+    public static final int REQUESTCODE_MERCHANT_NAME = 0x117;
+    public static final int REQUESTCODE_MERCHANT_LOCATION = 0x118;
+    public static final int REQUESTCODE_MERCHANT_TEL = 0x119;
+    public static final int RREQUESTCODE_CUSTOM_MERCHANT_SERVICE = 0x120;
 
     public static final int RESULT_ORDER_EVALUATE = 0x209;
     public static final int RESULT_COLLECTION = 0x210;
@@ -44,6 +50,10 @@ public class Constants {
     public static final int RESULT_ADD_AD = 0x214;
     public static final int RESULT_EDIT_SERVICE_LIST = 0x215;
     public static final int RESULT_MERCHANT_AD = 0x216;
+    public static final int RESULT_MERCHANT_NAME = 0x217;
+    public static final int RESULT_MERCHANT_LOCATION = 0x218;
+    public static final int RESULT_MERCHANT_TEL = 0x219;
+    public static final int RESULT_CUSTOM_MERCHANT_SERVICE = 0x220;
 
 
     // 属性动画的propertyName

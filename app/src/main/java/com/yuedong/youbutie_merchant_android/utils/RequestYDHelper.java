@@ -95,12 +95,19 @@ public class RequestYDHelper {
      * @param content
      */
     public void requestPush(final String requestId, final String[] uids, final String title, final String content) {
-        if(mSecretKey == null)
-        {
-            T.showShort(App.getInstance().getAppContext(),"SecretKey为null");
+
+        if (mSecretKey == null) {
+            T.showShort(App.getInstance().getAppContext(), "SecretKey为null");
             return;
         }
         action = 1;
+        StringBuilder sb = new StringBuilder();
+        for (String uid : uids) {
+            sb.append(uid + ",");
+        }
+        if (sb.length() > 0)
+            sb.deleteCharAt(sb.length() - 1);
+        final String uidsStr = sb.toString();
         App.getInstance().getExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -111,7 +118,7 @@ public class RequestYDHelper {
                     JSONObject all = new JSONObject();
                     JSONObject data = new JSONObject();
                     client.put("caller", Constants.CALLER);
-                    data.put("uids", uids);
+                    data.put("uids", uidsStr);
                     data.put("title", title);
                     data.put("content", content);
                     all.put("data", data);

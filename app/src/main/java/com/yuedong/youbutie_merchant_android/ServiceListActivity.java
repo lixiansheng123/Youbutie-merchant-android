@@ -18,6 +18,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ServiceInfo;
 import com.yuedong.youbutie_merchant_android.mouble.db.ServiceInfoDao;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.T;
 
 import java.io.Serializable;
@@ -44,7 +45,7 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
         initTitleView(new TitleViewHelper().createDefaultTitleView4("服务列表", "添加", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LaunchWithExitUtils.startActivityForResult(activity, CustomMerchantServiceActivity.class, Constants.RREQUESTCODE_CUSTOM_MERCHANT_SERVICE);
             }
         }));
         setShowContentView(R.layout.activity_service_list);
@@ -76,7 +77,27 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
             bean.name = serviceInfo.getName();
             serviceInfoDetailBeans.add(bean);
         }
+
+        for (ServiceInfoDetailBean bean : alreadyAddServiceInfoDetailBeans) {
+            if (!hasService(bean.name)) {
+                ServiceInfoDetailBean newBean = new ServiceInfoDetailBean();
+                newBean.name = bean.name;
+                newBean.price = bean.price;
+                serviceInfoDetailBeans.add(newBean);
+            }
+        }
+
     }
+
+    private boolean hasService(String serviceName) {
+        for (ServiceInfoDetailBean bean : serviceInfoDetailBeans) {
+            if (serviceName.equals(bean.name))
+                return true;
+        }
+
+        return false;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -109,6 +130,21 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
                     T.showShort(context, "请上架一类门店服务!");
                 }
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.RREQUESTCODE_CUSTOM_MERCHANT_SERVICE && resultCode == Constants.RESULT_CUSTOM_MERCHANT_SERVICE && data != null) {
+            ServiceInfoDetailBean bean = (ServiceInfoDetailBean) data.getSerializableExtra(Constants.KEY_BEAN);
+            if (hasService(bean.name)) {
+                T.showShort(context, "该服务已经存在 请更改服务内容");
+                return;
+            }
+            serviceInfoDetailBeans.add(bean);
+            ui();
+
         }
     }
 }

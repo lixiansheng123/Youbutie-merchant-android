@@ -106,4 +106,11 @@
     <string name="str_select_end_time">选择结束时间</string>
     <string name="str_tel">电话</string>
     <string name="str_please_inpit_tel">请填写电话号码</string>
+    <string name="str_hour">时</string>
+    <string name="str_minute">分钟</string>
+    <string name="str_select_start_time">选择开始时间</string>
+    <string name="str_custom_merchant_service_desc">若您的店有特色服务，请再次输入服务类型</string>
+    <string name="str_input_service_content">请输入服务内容，不超过10个字</string>
+    <string name="str_price">价格</string>
+    <string name="str_input_price">输入价格</string>
 </resources>
