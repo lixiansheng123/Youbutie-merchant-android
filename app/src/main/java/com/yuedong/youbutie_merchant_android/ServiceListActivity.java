@@ -75,6 +75,8 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
         for (ServiceInfo serviceInfo : serviceInfos) {
             ServiceInfoDetailBean bean = new ServiceInfoDetailBean();
             bean.name = serviceInfo.getName();
+            bean.objectId = serviceInfo.getObjectId();
+            L.d("serviceInfo objectId:" + serviceInfo.getObjectId());
             serviceInfoDetailBeans.add(bean);
         }
 
@@ -83,6 +85,7 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
                 ServiceInfoDetailBean newBean = new ServiceInfoDetailBean();
                 newBean.name = bean.name;
                 newBean.price = bean.price;
+                newBean.objectId = bean.objectId;
                 serviceInfoDetailBeans.add(newBean);
             }
         }
@@ -105,8 +108,15 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
             case R.id.id_btn_confirm:
                 final List<ServiceInfoDetailBean> confirmPutawayServices = adapter.getConfirmPutawayServices();
                 if (CommonUtils.listIsNotNull(confirmPutawayServices)) {
+                    List<String> serviceIds = new ArrayList<String>();
+                    for (ServiceInfoDetailBean bean : confirmPutawayServices) {
+                        if (bean.objectId != null) {
+                            serviceIds.add(bean.objectId);
+                        }
+                    }
                     dialogStatus(true);
                     Merchant updateMerchant = new Merchant();
+                    updateMerchant.setServices(serviceIds);
                     updateMerchant.setServiceInfo(confirmPutawayServices);
                     updateMerchant.update(context, meMechant.getObjectId(), new UpdateListener() {
                         @Override

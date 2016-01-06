@@ -32,6 +32,37 @@ public class OrderEvent implements BaseEvent {
     }
 
     /**
+     * 获取门店订单数
+     */
+    public void getMerchantOrderNum(String merchantObjectId, final CountListener listener) {
+        listener.onStart();
+        BmobQuery<Order> orderBmobQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        orderBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        orderBmobQuery.count(context, Order.class, new CountListener() {
+            @Override
+            public void onSuccess(int i) {
+                listener.onSuccess(i);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+                listener.onFinish();
+            }
+        });
+
+    }
+
+    /**
+     * 获取门店对应服务订单个数
+     */
+//    public void getOrderTypeNumberByMerchant(String merchantObjectId,) {
+//    }
+
+    /**
      * 获取门店完成交易的订单并统计购买次数
      *
      * @param merchantObjectId 门店id
