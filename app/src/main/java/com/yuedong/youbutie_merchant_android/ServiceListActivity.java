@@ -147,6 +147,7 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.RREQUESTCODE_CUSTOM_MERCHANT_SERVICE && resultCode == Constants.RESULT_CUSTOM_MERCHANT_SERVICE && data != null) {
+            serviceInfoDetailBeans.clear();
             ServiceInfoDetailBean bean = (ServiceInfoDetailBean) data.getSerializableExtra(Constants.KEY_BEAN);
             if (hasService(bean.name)) {
                 T.showShort(context, "该服务已经存在 请更改服务内容");

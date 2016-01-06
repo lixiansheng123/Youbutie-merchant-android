@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
     private List<ServiceInfoDetailBean> alreadyAddServices;
-    private List<ServiceInfoDetailBean> confirmPutawayServices = new ArrayList<ServiceInfoDetailBean>();
 
     /**
      * 增加上架的服务
@@ -35,8 +34,9 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
      * @param bean
      */
     private void addPutawayService(ServiceInfoDetailBean bean) {
-        if (!confirmPutawayServices.contains(bean))
-            confirmPutawayServices.add(bean);
+        if (alreadyAddServices == null) alreadyAddServices = new ArrayList<ServiceInfoDetailBean>();
+        if (!alreadyAddServices.contains(bean))
+            alreadyAddServices.add(bean);
     }
 
     /**
@@ -45,8 +45,9 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
      * @param bean
      */
     private void delPutawayService(ServiceInfoDetailBean bean) {
-        if (confirmPutawayServices.contains(bean))
-            confirmPutawayServices.remove(bean);
+        if (alreadyAddServices == null) alreadyAddServices = new ArrayList<ServiceInfoDetailBean>();
+        if (alreadyAddServices.contains(bean))
+            alreadyAddServices.remove(bean);
     }
 
 
@@ -55,7 +56,7 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
     }
 
     public List<ServiceInfoDetailBean> getConfirmPutawayServices() {
-        return confirmPutawayServices;
+        return alreadyAddServices;
     }
 
     public ServiceListAdapter(Context con, List<ServiceInfoDetailBean> data) {
@@ -74,7 +75,6 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
         ServiceInfoDetailBean alreadyAddService = getAlreadyAddService(serviceNameStr);
         if (alreadyAddService != null) {
             serviceInfo = alreadyAddService;
-            addPutawayService(serviceInfo);
             gougou.setChecked(true);
 
         } else {
@@ -85,9 +85,10 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
             servicePrice.setText(serviceInfo.price + "元/次");
             ViewUtils.showLayout(servicePrice);
             ViewUtils.hideLayout(settingPriceText);
+
         } else {
-            if (confirmPutawayServices.contains(serviceInfo)) {
-                confirmPutawayServices.remove(serviceInfo);
+            if (alreadyAddServices.contains(serviceInfo)) {
+                alreadyAddServices.remove(serviceInfo);
                 gougou.setChecked(false);
             }
             ViewUtils.showLayout(settingPriceText);
@@ -145,7 +146,6 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
                 notifyDataSetChanged();
             }
         });
-        L.d("PutawayService------------------------" + confirmPutawayServices.size());
     }
 
     /**
