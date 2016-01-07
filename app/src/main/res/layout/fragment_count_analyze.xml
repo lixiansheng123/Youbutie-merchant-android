@@ -136,11 +136,24 @@
         android:background="@color/whiteffffff"
         app:layout_heightPercent="9.93%h">
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/id_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/whiteffffff"
+            app:layout_heightPercent="61.3%h"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/yellowf0c008"
+            app:tabSelectedTextColor="@color/yellowf0c008"
+            app:tabTextColor="@color/black81706e" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_marginTopPercent="14.07%h">
+            app:layout_marginTopPercent="13.07%h">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -188,19 +201,6 @@
                     android:scaleType="centerInside" />
             </LinearLayout>
         </LinearLayout>
-
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/id_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/whiteffffff"
-            app:layout_heightPercent="61.3%h"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/yellowf0c008"
-            app:tabSelectedTextColor="@color/yellowf0c008"
-            app:tabTextColor="@color/black81706e" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <android.support.v4.view.ViewPager

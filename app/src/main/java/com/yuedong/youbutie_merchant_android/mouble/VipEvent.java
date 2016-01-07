@@ -1,6 +1,5 @@
 package com.yuedong.youbutie_merchant_android.mouble;
 
-import com.yuedong.youbutie_merchant_android.mouble.bmob.BaseEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
@@ -8,7 +7,6 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 

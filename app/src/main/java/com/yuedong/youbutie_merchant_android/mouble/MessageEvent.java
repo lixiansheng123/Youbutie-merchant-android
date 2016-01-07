@@ -1,8 +1,5 @@
 package com.yuedong.youbutie_merchant_android.mouble;
 
-import android.os.Message;
-
-import com.yuedong.youbutie_merchant_android.mouble.bmob.BaseEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 

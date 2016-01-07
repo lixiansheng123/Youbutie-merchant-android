@@ -1,7 +1,5 @@
 package com.yuedong.youbutie_merchant_android.mouble;
 
-import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.BaseEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ServiceInfo;
 
 import java.util.List;

@@ -113,4 +113,5 @@
     <string name="str_input_service_content">请输入服务内容，不超过10个字</string>
     <string name="str_price">价格</string>
     <string name="str_input_price">输入价格</string>
+    <string name="str_service">服务</string>
 </resources>

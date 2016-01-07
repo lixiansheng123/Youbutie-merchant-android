@@ -28,15 +28,8 @@ public class Order extends BmobObject {
         this.serviceIds = serviceIds;
     }
 
-    private int buyNum; // 来店次数 //基本类型不会同步的bmob表中
+    public int buyNum; // 来店次数
 
-    public int getBuyNum() {
-        return buyNum;
-    }
-
-    public void setBuyNum(int buyNum) {
-        this.buyNum = buyNum;
-    }
 
     public String getOrderNumber() {
         return orderNumber;

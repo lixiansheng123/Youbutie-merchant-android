@@ -1,4 +1,4 @@
-package com.yuedong.youbutie_merchant_android.mouble.bmob;
+package com.yuedong.youbutie_merchant_android.mouble;
 
 import android.content.Context;
 

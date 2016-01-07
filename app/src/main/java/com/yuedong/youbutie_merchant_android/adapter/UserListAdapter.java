@@ -50,13 +50,13 @@ public class UserListAdapter extends BaseAdapter<Order> {
         userName.setText(user.getNickname());
         DisplayImageByVolleyUtils.loadImage(user.getPhoto(), userPic);
         money.setText("￥" + StringUtil.setDoubleValueCastE(o.getPrice()));
-        if (o.getBuyNum() == 1) {
+        if (o.buyNum == 1) {
             buyNum.setText("首次来店");
         } else {
             // 设置不textView不同的文字大小
-            String str = String.format(mCon.getString(R.string.str_buy_num), o.getBuyNum());
+            String str = String.format(mCon.getString(R.string.str_buy_num), o.buyNum);
             Spannable textSizesPannable = new SpannableString(str);
-            textSizesPannable.setSpan(new AbsoluteSizeSpan(DimenUtils.sp2px(mCon, 18)), 2, (2 + (o.getBuyNum() + "").length()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textSizesPannable.setSpan(new AbsoluteSizeSpan(DimenUtils.sp2px(mCon, 18)), 2, (2 + (o.buyNum + "").length()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             buyNum.setText(textSizesPannable);
         }
         List<ServiceInfoDetailBean> serviceInfoDetailBeans = o.getServices();
