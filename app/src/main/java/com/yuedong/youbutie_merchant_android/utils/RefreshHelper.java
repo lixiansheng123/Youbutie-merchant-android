@@ -64,7 +64,6 @@ public class RefreshHelper<T> {
 
             }
         });
-//        refreshListView.setRefreshing(true);
         activity.dialogStatus(true);
         executeNetworkTask(activity, 1, proxyRefreshListener);
 

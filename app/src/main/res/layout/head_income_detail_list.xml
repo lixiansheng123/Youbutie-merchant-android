@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:background="@color/yellowf0c82b"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_white_14sp"
+            android:drawableRight="@drawable/icon_white_point_triangle"
+            android:text="本月销售额(元) " />
+
+        <TextView
+            android:id="@+id/id_cur_month_sales"
+            style="@style/text_white_16sp"
+            android:layout_marginTop="5dp"
+            android:text="￥0"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:orientation="vertical"
+       >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_already_withdraw_money" />
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerInParent="true"
+                android:text="40次" />
+
+            <ImageView
+                android:id="@+id/id_arrows_1"
+                style="@style/w_h_ww"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/icon_grey_right_arrows" />
+
+            <TextView
+                style="@style/text_yellow_16sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@+id/id_arrows_1"
+                android:text="￥123" />
+
+            <View
+                style="@style/line_grey_1px"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_white_item"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/str_already_withdraw_money" />
+
+            <TextView
+                style="@style/text_yellow_16sp"
+                android:layout_centerInParent="true"
+                android:text="￥123" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        style="@style/text_deep_grey_14sp"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:background="@color/greyecebe4"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/str_money_bill"
+        android:textColor="@color/black81706e"
+  />
+
+</LinearLayout>

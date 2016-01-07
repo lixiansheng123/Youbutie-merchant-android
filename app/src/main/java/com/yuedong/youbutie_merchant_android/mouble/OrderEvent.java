@@ -301,6 +301,7 @@ public class OrderEvent implements BaseEvent {
         merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
         mainQurey.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         mainQurey.sum(new String[]{"price"});
+        mainQurey.addWhereEqualTo("state", 4);
         mainQurey.findStatistics(context, Order.class, new FindStatisticsListener() {
             @Override
             public void onSuccess(Object o) {
@@ -338,6 +339,7 @@ public class OrderEvent implements BaseEvent {
         mainQurey.and(and);
         // 查询制定列
         mainQurey.addQueryKeys("user");
+        mainQurey.addWhereEqualTo("state", 4);
         mainQurey.findObjects(context, new FindListener<Order>() {
             @Override
             public void onSuccess(List<Order> list) {
@@ -351,6 +353,33 @@ public class OrderEvent implements BaseEvent {
                 listener.onFinish();
             }
         });
-
     }
+
+    /**
+     * 获取自己门店月份订单
+     */
+    public void getOrderByMerchantAndTime(String merchantObjectId, String timeDesc, final FindListener<Order> listener) {
+        listener.onStart();
+        BmobQuery<Order> orderBmobQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        orderBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        orderBmobQuery.addWhereEqualTo("sumMonth", timeDesc);
+        // 只需要价格返回
+        orderBmobQuery.addQueryKeys("price");
+        orderBmobQuery.findObjects(context, new FindListener<Order>() {
+            @Override
+            public void onSuccess(List<Order> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
 }

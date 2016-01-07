@@ -18,7 +18,15 @@ public class Order extends BmobObject {
     private Integer state; // 状态  1下单 2商家接单 3服务完成 4已取车(收款成功) 5收款失败
     private Integer payWay; // 支付类型（1=支付宝，2=微信）
     private List<String> serviceIds;// 服务的Id
+    private String sumMonth;
 
+    public String getSumMonth() {
+        return sumMonth;
+    }
+
+    public void setSumMonth(String sumMonth) {
+        this.sumMonth = sumMonth;
+    }
 
     public List<String> getServiceIds() {
         return serviceIds;

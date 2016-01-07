@@ -114,4 +114,7 @@
     <string name="str_price">价格</string>
     <string name="str_input_price">输入价格</string>
     <string name="str_service">服务</string>
+    <string name="str_already_withdraw_money">已提现金额</string>
+    <string name="str_money_bill">月流水账单</string>
+    <string name="str_total_oli_number">总油点数</string>
 </resources>

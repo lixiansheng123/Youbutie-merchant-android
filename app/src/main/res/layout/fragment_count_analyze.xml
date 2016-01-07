@@ -29,7 +29,7 @@
                 android:text="本月销售额(元) " />
 
             <TextView
-                android:id="@+id/id_total_client_num"
+                android:id="@+id/id_cur_month_sales"
                 style="@style/text_white_16sp"
                 android:layout_marginTop="5dp"
                 android:text="￥0"
@@ -59,6 +59,7 @@
                     android:text="本月用户(人) " />
 
                 <TextView
+                    android:id="@+id/id_cur_month_user"
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"
@@ -89,7 +90,7 @@
                     android:text="人均消费(元) " />
 
                 <TextView
-                    android:id="@+id/id_member_num"
+                    android:id="@+id/id_avg_consume"
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"
@@ -108,7 +109,7 @@
 
 
             <LinearLayout
-                android:id="@+id/id_ad_layout"
+                android:id="@+id/id_oli_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -121,7 +122,7 @@
                     android:text="油点贡献值(点) " />
 
                 <TextView
-                    android:id="@+id/id_ad_num"
+                    android:id="@+id/id_oli_contribution"
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"

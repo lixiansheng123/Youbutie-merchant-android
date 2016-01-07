@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteffffff"
+    android:orientation="vertical"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    >
+
+    <RelativeLayout style="@style/w_h_mw">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/id_user_photo"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/id_user_photo"
+            android:layout_alignTop="@+id/id_user_photo"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/id_user_photo">
+
+            <TextView
+                android:id="@+id/id_user_name"
+                style="@style/text_black_16sp"
+                android:text="@string/str_test_nick"
+                android:textColor="@color/black877876" />
+
+            <TextView
+                android:id="@+id/id_time"
+                style="@style/text_black_14sp"
+                android:layout_below="@+id/id_user_name"
+                android:layout_marginTop="4dp"
+                android:text="@string/str_test_time"
+                android:textColor="@color/greycbc0bf" />
+
+            <View
+                style="@style/line_grey_1dp"
+                android:layout_alignParentBottom="true" />
+
+            <RatingBar
+                android:id="@+id/id_star_evaluate"
+                style="@style/ratingBar_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/id_evaluate_content"
+        style="@style/text_black_14sp"
+        android:layout_marginTop="9dp"
+        android:text="阿哒"
+        android:textColor="@color/grey776462"
+
+        />
+
+
+</LinearLayout>

@@ -10,19 +10,23 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.yuedong.youbutie_merchant_android.ContributionRankingActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.CountConsumeAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
 import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
+import com.yuedong.youbutie_merchant_android.mouble.MoneyContributionEvent;
 import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
@@ -39,7 +43,7 @@ import cn.bmob.v3.listener.FindStatisticsListener;
 /**
  * 统计分析fragment
  */
-public class CountAnalyzeFm extends BaseFragment {
+public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener {
     private String[] titles = new String[]{"消费类目", "返店率", "客户评价"};
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -48,6 +52,7 @@ public class CountAnalyzeFm extends BaseFragment {
     private CheckBox[] cbs = new CheckBox[3];
     private Fragment[] items = new Fragment[3];
     private Merchant merchant;
+    private TextView curMoneySales, curMoneyUser, avgConsume, oliContribution;
 
     @Override
     public View getContentView(ViewGroup container) {
@@ -57,9 +62,13 @@ public class CountAnalyzeFm extends BaseFragment {
 
     @Override
     public void initViews(View contentView, Bundle savedInstanceState) {
+        curMoneySales = fvById(R.id.id_cur_month_sales);
+        curMoneyUser = fvById(R.id.id_cur_month_user);
+        avgConsume = fvById(R.id.id_avg_consume);
+        oliContribution = fvById(R.id.id_oli_contribution);
         items[0] = new ConsumeTypeFm();
         items[1] = new ConsumeTypeFm();
-        items[2] = new ConsumeTypeFm();
+        items[2] = new CountUserEvaluateFm();
         tabLayout = fvById(R.id.id_tablayout);
         viewPager = fvById(R.id.id_viewpager);
         cbs[0] = fvById(R.id.id_cb_xiaofei);
@@ -106,41 +115,73 @@ public class CountAnalyzeFm extends BaseFragment {
                 orderEvent.getCurMonthSale(merchantObjectId, new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
+                        int totalSales = 0;
                         JSONArray ary = (JSONArray) o;
-                        if (ary != null) {//
+                        if (ary != null) {
                             try {
                                 JSONObject obj = ary.getJSONObject(0);
-                                int sum = obj.getInt("_sumPrice");//_(关键字)+首字母大写的列名
-                                L.d("当月总销售额:" + sum);
-                                orderEvent.getCurMonthUser(merchantObjectId, new FindListener<Order>() {
-                                    @Override
-                                    public void onSuccess(List<Order> list) {
-                                        List<String> userObjectIds = new ArrayList<String>();
-                                        if (CommonUtils.listIsNotNull(list)) {
-                                            for (Order order : list) {
-                                                String userOrderId = order.getUser().getObjectId();
-                                                if (!userObjectIds.contains(userOrderId)) {
-                                                    userObjectIds.add(userOrderId);
-                                                }
-                                            }
-                                        }
+                                totalSales = obj.getInt("_sumPrice");//_(关键字)+首字母大写的列名
+                                L.d("当月总销售额:" + totalSales);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            T.showShort(getActivity(), "查询当月总销售额成功，无数据");
+                        }
 
+                        final int finalTotalSales = totalSales;
+                        orderEvent.getCurMonthUser(merchantObjectId, new FindListener<Order>() {
+                            @Override
+                            public void onSuccess(List<Order> list) {
+                                final List<String> userObjectIds = new ArrayList<String>();
+                                if (CommonUtils.listIsNotNull(list)) {
+                                    for (Order order : list) {
+                                        String userOrderId = order.getUser().getObjectId();
+                                        if (!userObjectIds.contains(userOrderId)) {
+                                            userObjectIds.add(userOrderId);
+                                        }
+                                    }
+                                }
+                                L.d("当月用户:" + userObjectIds.size());
+                                MoneyContributionEvent.getInstance().getMerchantMoneyContribution(merchantObjectId, new FindStatisticsListener() {
+                                    @Override
+                                    public void onSuccess(Object o) {
+                                        dialogStatus(false);
+                                        JSONArray ary = (JSONArray) o;
+                                        if (ary != null) {//
+                                            try {
+                                                JSONObject obj = ary.getJSONObject(0);
+                                                int sum = obj.getInt("_sumMoney");//_(关键字)+首字母大写的列名
+                                                L.d("油点贡献度:" + sum);
+                                                curMoneySales.setText("￥" + finalTotalSales);
+                                                curMoneyUser.setText(userObjectIds.size() + "");
+                                                avgConsume.setText((int) (finalTotalSales * 1.0f / userObjectIds.size()) + "");
+                                                oliContribution.setText(sum + "");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else {
+                                            T.showShort(getActivity(), "查询油点贡献成功，无数据");
+                                        }
                                     }
 
                                     @Override
-                                    public void onError(int i, String s) {
+                                    public void onFailure(int i, String s) {
                                         error(s);
                                         dialogStatus(false);
                                     }
                                 });
-                            } catch (JSONException e) {
-                                dialogStatus(false);
-                                e.printStackTrace();
+
                             }
-                        } else {
-                            dialogStatus(false);
-                            T.showShort(getActivity(), "查询成功，无数据");
-                        }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                error(s);
+                                dialogStatus(false);
+                            }
+                        });
+
+
                     }
 
                     @Override
@@ -162,6 +203,7 @@ public class CountAnalyzeFm extends BaseFragment {
 
     @Override
     public void initEvents() {
+        fvById(R.id.id_oli_layout).setOnClickListener(this);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -191,4 +233,16 @@ public class CountAnalyzeFm extends BaseFragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.id_oli_layout:
+                if (merchant != null) {
+                    Bundle bundle  = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN,merchant);
+                    LaunchWithExitUtils.startActivity(getActivity(), ContributionRankingActivity.class,bundle);
+                }
+                break;
+        }
+    }
 }

@@ -40,7 +40,9 @@
         <activity android:name=".SearchAddressBookFriendActivity" />
         <activity android:name=".ServiceListActivity" />
         <activity android:name=".EditMerchantActivity" />
-        <activity android:name=".CustomMerchantServiceActivity"></activity>
+        <activity android:name=".CustomMerchantServiceActivity" />
+        <activity android:name=".IncomeDetailActivity" />
+        <activity android:name=".ContributionRankingActivity"></activity>
     </application>
 
 </manifest>
