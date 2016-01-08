@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.R;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.PhoneAddressBookBean;
 import com.yuedong.youbutie_merchant_android.bean.SearchAddressBookBean;
@@ -63,7 +64,7 @@ public class SearchAddressBookAdapter extends BaseAdapter<SearchAddressBookBean>
                 @Override
                 public void onClick(View v) {
                     // TODO 发送机短信 内容模版暂定
-                    SystemUtils.sms(mCon, phoneAddressBookBean.getPhoneNumber(), String.format(mCon.getString(R.string.str_sms_moudle), Constants.TEST_USER_ID));
+                    SystemUtils.sms(mCon, phoneAddressBookBean.getPhoneNumber(), String.format(mCon.getString(R.string.str_sms_moudle), App.getInstance().getUser().getObjectId()));
                     SPUtils.put(mCon, Constants.SP_INVITE_REGIST, unRegistInviteNum + phoneAddressBookBean.getPhoneNumber() + ",");
                     notifyDataSetChanged();
                 }

@@ -17,9 +17,63 @@ public class User extends BmobUser {
     private Integer totalMoney;//总油点
     private Integer type;//用户类型（用户＝1，商家＝2）
     private String carString; // 车型描述
+    private Double cash; // 可提现金额
+    private Double drawTotalCash; // 提现总金额
+    private Integer drawCount; // 提现次数
+    private String bankCard; // 提现银行卡
+    private String cardName; // 银行卡持卡人姓名
+    private String bankName; // 开户行名称
+
+    public Double getCash() {
+        return cash;
+    }
+
+    public void setCash(Double cash) {
+        this.cash = cash;
+    }
+
+    public Double getDrawTotalCash() {
+        return drawTotalCash;
+    }
+
+    public void setDrawTotalCash(Double drawTotalCash) {
+        this.drawTotalCash = drawTotalCash;
+    }
+
+    public Integer getDrawCount() {
+        return drawCount;
+    }
+
+    public void setDrawCount(Integer drawCount) {
+        this.drawCount = drawCount;
+    }
+
+    public String getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
 
-//    public User() {
+    //    public User() {
 //        setTableName("_User");
 //    }
 

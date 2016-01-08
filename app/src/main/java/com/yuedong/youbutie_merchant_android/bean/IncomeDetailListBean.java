@@ -5,7 +5,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 public class IncomeDetailListBean {
     private String dayDes;
     private int orderNumber;
-    private double totalMoney;
+    private int totalMoney;
     private String createdAt;
 
     public String getDayDes() {
@@ -24,11 +24,11 @@ public class IncomeDetailListBean {
         this.orderNumber = orderNumber;
     }
 
-    public double getTotalMoney() {
+    public int getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(double totalMoney) {
+    public void setTotalMoney(int totalMoney) {
         this.totalMoney = totalMoney;
     }
 

@@ -83,7 +83,7 @@ public class IncomeDetailActivity extends BaseActivity {
                                 List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
                                 for (int i = 0; i < len; i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    double totalPrice = jsonObject.getDouble("_sumPrice");
+                                    int totalPrice = jsonObject.getInt("_sumPrice");
                                     String dayDes = jsonObject.getString("sumMonth");
                                     int count = jsonObject.getInt("_count");
                                     IncomeDetailListBean bean = new IncomeDetailListBean();

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.UserEvaluateAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
@@ -47,8 +48,7 @@ public class CountUserEvaluateFm extends BaseFragment {
             @Override
             public void executeTask(final int skip, final int limit, final FindListener<Appraise> listener) {
                 if (merchant == null) {
-                    // TODO 测试用户
-                    MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+                    MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
 
                         @Override
                         public void onStart() {

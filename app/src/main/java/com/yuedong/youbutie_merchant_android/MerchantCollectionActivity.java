@@ -133,7 +133,7 @@ public class MerchantCollectionActivity extends BaseActivity {
         downOrderUser.setText(orderUser.getNickname());
         DisplayImageByVolleyUtils.loadImage(downOrderUserPic, orderUser.getPhoto());
         downOrderTime.setText(order.getOrderTime().getDate());
-        MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+        MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
             @Override
             public void onStart() {
                 dialogStatus(true);

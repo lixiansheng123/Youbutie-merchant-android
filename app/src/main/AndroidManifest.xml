@@ -42,7 +42,8 @@
         <activity android:name=".EditMerchantActivity" />
         <activity android:name=".CustomMerchantServiceActivity" />
         <activity android:name=".IncomeDetailActivity" />
-        <activity android:name=".ContributionRankingActivity"></activity>
+        <activity android:name=".ContributionRankingActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

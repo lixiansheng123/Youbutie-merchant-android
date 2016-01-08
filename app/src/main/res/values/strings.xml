@@ -117,4 +117,6 @@
     <string name="str_already_withdraw_money">已提现金额</string>
     <string name="str_money_bill">月流水账单</string>
     <string name="str_total_oli_number">总油点数</string>
+    <string name="str_can_withdraw_money">可提现金额</string>
+    <string name="str_request_withdraw">申请提现</string>
 </resources>

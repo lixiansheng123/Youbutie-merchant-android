@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.adapter.AlreadySelectCarAdapter;
 import com.yuedong.youbutie_merchant_android.adapter.SendAdSmsTemplateAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -206,9 +207,8 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                         messages.setTitle(adTitle.getText().toString().trim());
                         messages.setStartTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(startYear + "-" + startMonth + "-" + startDay + " 00:00:00"))));
                         messages.setEndTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(endYear + "-" + endMonth + "-" + endDay + " 00:00:00"))));
-                        // TODO TEST USER
                         User user = new User();
-                        user.setObjectId(Constants.TEST_USER_ID);
+                        user.setObjectId(App.getInstance().getUser().getObjectId());
                         messages.setSender(user);
                         messages.setTargets(userObjects);
                         messages.save(context, new SaveListener() {

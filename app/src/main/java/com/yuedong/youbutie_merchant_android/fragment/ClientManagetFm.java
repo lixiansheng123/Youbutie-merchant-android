@@ -12,6 +12,7 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.SendMessageActivity;
 import com.yuedong.youbutie_merchant_android.UserListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
@@ -73,7 +74,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     }
 
     private void ui() {
-        MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+        MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
             @Override
             public void onStart() {
                 dialogStatus(true);
@@ -107,7 +108,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                                 L.d("getMerchantVipUser-succeed:" + vipsList.toString());
                                 mVipsLists = vipsList;
                                 // 获取广告数量
-                                MessageEvent.getInstance().countMessaeByUserId(Constants.TEST_USER_ID, new CountListener() {
+                                MessageEvent.getInstance().countMessaeByUserId(App.getInstance().getUser().getObjectId(), new CountListener() {
                                     @Override
                                     public void onSuccess(int count) {
                                         dialogStatus(false);
@@ -124,7 +125,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
 
                                             @Override
                                             public void executeTask(int skip, int limit, FindListener<Messages> listener) {
-                                                MessageEvent.getInstance().findMessageByUserId(skip, limit, Constants.TEST_USER_ID, true, listener);
+                                                MessageEvent.getInstance().findMessageByUserId(skip, limit, App.getInstance().getUser().getObjectId(), true, listener);
                                             }
                                         });
                                     }

@@ -11,7 +11,11 @@ import com.yuedong.youbutie_merchant_android.fragment.CountAnalyzeFm;
 import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
+import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBottomBarClickListener {
     private HomeBarSpanView[] homeBarSpanViews = new HomeBarSpanView[4];
@@ -27,7 +31,11 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setShowContentView(R.layout.activity_main);
+
+
     }
+
+
 
     private void ititFragment() {
         countAnalyzeFm = new CountAnalyzeFm();

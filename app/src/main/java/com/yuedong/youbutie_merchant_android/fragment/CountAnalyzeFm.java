@@ -16,6 +16,7 @@ import com.yuedong.youbutie_merchant_android.ContributionRankingActivity;
 import com.yuedong.youbutie_merchant_android.IncomeDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.CountConsumeAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.IncomeDetailListBean;
 import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
@@ -101,8 +102,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
     }
 
     private void ui() {
-        // TODO 测试用户
-        MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+        MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
             @Override
             public void onStart() {
                 dialogStatus(true);

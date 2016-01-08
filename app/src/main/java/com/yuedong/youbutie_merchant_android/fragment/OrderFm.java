@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.OrderManagerAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
@@ -80,7 +81,7 @@ public class OrderFm extends Fragment {
                 } else if ("已完结".equals(flag)) {
                     orderState = new Integer[]{4};
                 }
-                OrderEvent.getInstance().findMyMerchantOrderInfo(skip, limit, orderState, Constants.TEST_USER_ID, listener);
+                OrderEvent.getInstance().findMyMerchantOrderInfo(skip, limit, orderState, App.getInstance().getUser().getObjectId(), listener);
             }
         });
     }

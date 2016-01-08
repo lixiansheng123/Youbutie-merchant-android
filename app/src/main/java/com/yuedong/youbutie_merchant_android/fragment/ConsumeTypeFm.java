@@ -46,8 +46,8 @@ public class ConsumeTypeFm extends BaseFragment {
     }
 
     private void getListInfo() {
-        // TODO 测试user
-        MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+        String userId = App.getInstance().getUser().getObjectId();
+        MerchantEvent.getInstance().findMeMetchant(userId, new FindListener<Merchant>() {
             @Override
             public void onStart() {
                 dialogStatus(true);

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
@@ -61,7 +62,7 @@ public class AdListActivity extends BaseActivity {
 
             @Override
             public void executeTask(int skip, int limit, FindListener<Messages> listener) {
-                MessageEvent.getInstance().findMessageByUserId(skip, limit, Constants.TEST_USER_ID, false, listener);
+                MessageEvent.getInstance().findMessageByUserId(skip, limit, App.getInstance().getUser().getObjectId(), false, listener);
             }
         });
     }

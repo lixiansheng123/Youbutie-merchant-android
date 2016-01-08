@@ -113,7 +113,7 @@ public class StartActivity extends BaseActivity {
             @Override
             public void run() {
 //                if ("-1".equals(loginType)) {
-                LaunchWithExitUtils.startActivity(activity, MainActivity.class);
+                LaunchWithExitUtils.startActivity(activity, LoginActivity.class);
                 defaultFinished();
 //                } else if ("1".equals(loginType)) {
 //                    // 自动登录 帐号密码来登录

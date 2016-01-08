@@ -73,8 +73,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
     }
 
     public void ui() {
-        // TODO 测试userId
-        MerchantEvent.getInstance().findMeMetchant(Constants.TEST_USER_ID, new FindListener<Merchant>() {
+        MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
 
             @Override
             public void onStart() {

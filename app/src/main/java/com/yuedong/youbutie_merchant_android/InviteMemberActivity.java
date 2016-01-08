@@ -419,7 +419,7 @@ public class InviteMemberActivity extends BaseActivity {
                         public void onClick(View v) {
                             // 未注册邀请操作
                             // TODO 发送机短信 内容模版暂定
-                            SystemUtils.sms(context, unRegistUserMobile, String.format(getString(R.string.str_sms_moudle), Constants.TEST_USER_ID));
+                            SystemUtils.sms(context, unRegistUserMobile, String.format(getString(R.string.str_sms_moudle), App.getInstance().getUser().getObjectId()));
                             SPUtils.put(context, Constants.SP_INVITE_REGIST, unRegistInviteNum + unRegistUserMobile + ",");
                             notifyDataSetChanged();
                         }
