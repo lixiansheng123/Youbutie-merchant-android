@@ -382,4 +382,33 @@ public class OrderEvent implements BaseEvent {
         });
     }
 
+    /**
+     * 获取月份订单 统计单数和计算总收入
+     */
+    public void getMonthOrder(int skip, int limit, String merchantObjectId, final FindStatisticsListener listener) {
+        BmobQuery<Order> orderBmobQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        orderBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        orderBmobQuery.sum(new String[]{"price"}); // 统计订单钱
+        orderBmobQuery.groupby(new String[]{"sumMonth"}); // 按照sumMonth进行分组
+        orderBmobQuery.setHasGroupCount(true);// 返回分组记录条数
+        orderBmobQuery.order("-createdAt");
+        orderBmobQuery.setSkip(skip);
+        orderBmobQuery.setLimit(limit);
+        orderBmobQuery.addWhereEqualTo("state", 4);
+        orderBmobQuery.findStatistics(context, Order.class, new FindStatisticsListener() {
+            @Override
+            public void onSuccess(Object o) {
+                listener.onSuccess(o);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+            }
+        });
+
+    }
+
 }

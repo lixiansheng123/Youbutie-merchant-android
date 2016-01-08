@@ -1,18 +1,12 @@
 package com.yuedong.youbutie_merchant_android.bean;
 
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+
 public class IncomeDetailListBean {
-    private int month;
     private String dayDes;
     private int orderNumber;
     private double totalMoney;
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
+    private String createdAt;
 
     public String getDayDes() {
         return dayDes;
@@ -37,4 +31,5 @@ public class IncomeDetailListBean {
     public void setTotalMoney(double totalMoney) {
         this.totalMoney = totalMoney;
     }
+
 }

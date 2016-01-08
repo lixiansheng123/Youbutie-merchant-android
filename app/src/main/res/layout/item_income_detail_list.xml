@@ -7,6 +7,7 @@
     android:paddingRight="11dp">
 
     <TextView
+        android:id="@+id/id_time_des"
         style="@style/text_deep_grey_14sp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
@@ -14,6 +15,7 @@
         android:textColor="@color/greyaa9b9a" />
 
     <TextView
+        android:id="@+id/id_order_num"
         style="@style/text_deep_grey_14sp"
         android:layout_centerInParent="true"
         android:text="50单" />
@@ -27,6 +29,7 @@
         android:src="@drawable/icon_grey_right_arrows" />
 
     <TextView
+        android:id="@+id/id_order_total_money"
         style="@style/text_yellow_16sp"
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp"

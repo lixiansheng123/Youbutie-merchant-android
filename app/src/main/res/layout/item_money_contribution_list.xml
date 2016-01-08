@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/whiteffffff"
+    android:layout_height="89dp">
+
+    <ImageView
+        android:id="@+id/id_ranking_icon"
+        style="@style/w_h_ww"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/icon_number_1" />
+
+    <TextView
+        android:id="@+id/id_ranking_text"
+        style="@style/text_deep_grey_14sp"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="7dp"
+        android:text="1"
+        android:visibility="gone" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/id_user_pic"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="48dp"
+ />
+
+    <TextView
+        android:id="@+id/id_user_name"
+        style="@style/text_black_16sp"
+        android:layout_alignBottom="@+id/id_user_pic"
+        android:layout_alignTop="@+id/id_user_pic"
+        android:layout_marginLeft="29dp"
+        android:layout_toRightOf="@+id/id_user_pic"
+        android:gravity="center_vertical"
+        android:text="@string/str_test_nick"
+        android:textColor="@color/black81706e" />
+
+    <TextView
+        android:id="@+id/id_total_oli"
+        style="@style/text_yellow_16sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="32dp"
+        android:text="1200油点" />
+
+
+</RelativeLayout>

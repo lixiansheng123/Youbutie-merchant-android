@@ -36,12 +36,14 @@ public class MoneyContributionEvent implements BaseEvent {
     /**
      * 获取油点排行
      */
-    public void getMoneyContributionRanking(String merchantObjectId, final FindStatisticsListener listener) {
+    public void getMoneyContributionRanking(int skip, int limit, String merchantObjectId, final FindStatisticsListener listener) {
         BmobQuery<MoneyContribute> moneyContributeBmobQuery = new BmobQuery<MoneyContribute>();
         moneyContributeBmobQuery.sum(new String[]{"money"});
         moneyContributeBmobQuery.groupby(new String[]{"user"});
         moneyContributeBmobQuery.order("-createdAt");//降序排列
         moneyContributeBmobQuery.include("user");
+        moneyContributeBmobQuery.setSkip(skip);
+        moneyContributeBmobQuery.setLimit(limit);
         moneyContributeBmobQuery.findStatistics(context, MoneyContribute.class, new FindStatisticsListener() {
             @Override
             public void onSuccess(Object o) {

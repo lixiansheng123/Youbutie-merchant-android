@@ -16,7 +16,7 @@
         app:layout_paddingRightPercent="3.43%w">
 
         <LinearLayout
-            android:id="@+id/id_total_client_num_layout"
+            android:id="@+id/id_total_sell_num_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"

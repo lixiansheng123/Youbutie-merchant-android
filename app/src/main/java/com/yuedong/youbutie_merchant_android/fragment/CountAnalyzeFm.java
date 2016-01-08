@@ -13,9 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.ContributionRankingActivity;
+import com.yuedong.youbutie_merchant_android.IncomeDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.CountConsumeAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
+import com.yuedong.youbutie_merchant_android.bean.IncomeDetailListBean;
 import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
 import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
@@ -53,6 +55,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
     private Fragment[] items = new Fragment[3];
     private Merchant merchant;
     private TextView curMoneySales, curMoneyUser, avgConsume, oliContribution;
+    private int oliContributionNum, totalSalesNum;
 
     @Override
     public View getContentView(ViewGroup container) {
@@ -115,13 +118,13 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                 orderEvent.getCurMonthSale(merchantObjectId, new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
-                        int totalSales = 0;
+
                         JSONArray ary = (JSONArray) o;
                         if (ary != null) {
                             try {
                                 JSONObject obj = ary.getJSONObject(0);
-                                totalSales = obj.getInt("_sumPrice");//_(关键字)+首字母大写的列名
-                                L.d("当月总销售额:" + totalSales);
+                                totalSalesNum = obj.getInt("_sumPrice");//_(关键字)+首字母大写的列名
+                                L.d("当月总销售额:" + totalSalesNum);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -129,7 +132,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                             T.showShort(getActivity(), "查询当月总销售额成功，无数据");
                         }
 
-                        final int finalTotalSales = totalSales;
+                        final int finalTotalSales = totalSalesNum;
                         orderEvent.getCurMonthUser(merchantObjectId, new FindListener<Order>() {
                             @Override
                             public void onSuccess(List<Order> list) {
@@ -151,12 +154,12 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                                         if (ary != null) {//
                                             try {
                                                 JSONObject obj = ary.getJSONObject(0);
-                                                int sum = obj.getInt("_sumMoney");//_(关键字)+首字母大写的列名
-                                                L.d("油点贡献度:" + sum);
+                                                oliContributionNum = obj.getInt("_sumMoney");//_(关键字)+首字母大写的列名
+                                                L.d("油点贡献度:" + oliContributionNum);
                                                 curMoneySales.setText("￥" + finalTotalSales);
                                                 curMoneyUser.setText(userObjectIds.size() + "");
                                                 avgConsume.setText((int) (finalTotalSales * 1.0f / userObjectIds.size()) + "");
-                                                oliContribution.setText(sum + "");
+                                                oliContribution.setText(oliContributionNum + "");
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
@@ -203,6 +206,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
 
     @Override
     public void initEvents() {
+        fvById(R.id.id_total_sell_num_layout).setOnClickListener(this);
         fvById(R.id.id_oli_layout).setOnClickListener(this);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -238,9 +242,19 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
         switch (v.getId()) {
             case R.id.id_oli_layout:
                 if (merchant != null) {
-                    Bundle bundle  = new Bundle();
-                    bundle.putSerializable(Constants.KEY_BEAN,merchant);
-                    LaunchWithExitUtils.startActivity(getActivity(), ContributionRankingActivity.class,bundle);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN, merchant);
+                    bundle.putInt(Constants.KEY_INT, oliContributionNum);
+                    LaunchWithExitUtils.startActivity(getActivity(), ContributionRankingActivity.class, bundle);
+                }
+                break;
+
+            case R.id.id_total_sell_num_layout:
+                if (merchant != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN, merchant);
+                    bundle.putInt(Constants.KEY_INT, totalSalesNum);
+                    LaunchWithExitUtils.startActivity(getActivity(), IncomeDetailActivity.class, bundle);
                 }
                 break;
         }
