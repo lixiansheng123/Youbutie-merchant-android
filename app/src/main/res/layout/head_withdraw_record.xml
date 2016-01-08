@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@color/yellowf0c92b"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_white_12sp"
+                android:text="已提现金额(元)" />
+
+            <TextView
+                style="@style/text_white_22sp"
+                android:layout_marginTop="8dp"
+                android:text="￥0" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/yellowf5da6c" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_white_12sp"
+                android:text="提现次数(次)" />
+
+            <TextView
+                style="@style/text_white_22sp"
+                android:layout_marginTop="8dp"
+                android:text="0" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:background="@color/greyecebe4"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/str_withdraw_record"
+        android:textColor="@color/black81706e"
+        android:textSize="14sp" />
+</LinearLayout>

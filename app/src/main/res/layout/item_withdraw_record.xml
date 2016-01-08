@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/whiteffffff"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp">
+
+    <TextView
+        android:id="@+id/id_time"
+        style="@style/text_deep_grey_14sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:text="@string/str_test_time"
+        android:textColor="@color/greyaa9b9a" />
+
+    <TextView
+        android:id="@+id/id_status"
+        android:layout_width="72dp"
+        android:layout_height="28dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/red_frame"
+        android:gravity="center"
+        android:text="@string/str_progress"
+        android:textColor="@color/redff8b3e"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/id_withdraw_money"
+        style="@style/text_yellow_16sp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="35dp"
+        android:layout_toLeftOf="@+id/id_status"
+        android:text="￥0" />
+
+    <View
+        android:id="@+id/id_line"
+        style="@style/line_grey_1px"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

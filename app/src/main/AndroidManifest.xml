@@ -50,7 +50,8 @@
             android:name=".ApplyWithdrawActivity"
             android:label="@string/title_activity_apply_withdraw"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ApplySucceedActivity"></activity>
+        <activity android:name=".ApplySucceedActivity" />
+        <activity android:name=".WithdrawRecordActivity"></activity>
     </application>
 
 </manifest>

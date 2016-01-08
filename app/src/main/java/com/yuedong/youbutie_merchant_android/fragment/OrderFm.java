@@ -38,17 +38,14 @@ public class OrderFm extends Fragment {
         super.onCreate(savedInstanceState);
         flag = getArguments().getString(Constants.KEY_ACTION);
         refreshHelper = new RefreshHelper<Order>();
-        L.d(TAG + flag + "-------------------oncreate");
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        L.d(TAG + flag + "-------------------onCreateView");
         View contentView = inflater.inflate(R.layout.fragment_order_fm, container, false);
         initViews(contentView);
-
         return contentView;
     }
 
@@ -95,19 +92,16 @@ public class OrderFm extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        L.d(TAG + flag + "-------------------onActivityCreated");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        L.d(TAG + flag + "-------------------onDestroyView");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        L.d(TAG + flag + "-------------------onDestroy");
     }
 
 }

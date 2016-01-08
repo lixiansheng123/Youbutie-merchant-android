@@ -127,4 +127,7 @@
     <string name="str_￥">￥%s</string>
     <string name="str_withdraw_succeed_desc">提现金额将在一个工作日到您的银行卡</string>
     <string name="str_card_info">银行卡信息</string>
+    <string name="str_withdraw_record">提现记录</string>
+    <string name="str_progress">处理中</string>
+    <string name="str_withdraw_succeed">提现成功</string>
 </resources>

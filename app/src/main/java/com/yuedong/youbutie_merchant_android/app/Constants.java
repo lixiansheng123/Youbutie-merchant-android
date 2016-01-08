@@ -24,6 +24,7 @@ public class Constants {
     public static final String KEY_LIST = "key_list";
     public static final String KEY_BOO = "key_boolean";
     public static final String KEY_INT = "key_int";
+    public static final String KEY_INT2 = "key_int2";
     public static final String KEY_ACTION = "key_action";
 
     //-----tag
