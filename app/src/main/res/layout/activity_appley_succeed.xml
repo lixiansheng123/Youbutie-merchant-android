@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="132dp"
+        android:background="@color/whiteffffff"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/w_h_ww"
+            android:drawableLeft="@drawable/icon_green_gou"
+            android:gravity="center_vertical"
+            android:text=" 提现申请已提交"
+            android:textColor="@color/green02cf96"
+            android:textSize="18sp" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_marginTop="21dp"
+            android:text="@string/str_withdraw_succeed_desc" />
+    </LinearLayout>
+
+    <View style="@style/line_grey_1px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff">
+
+        <View style="@style/line_grey_1px" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_apply_withdraw_money" />
+
+        <TextView
+            android:id="@+id/id_apply_withdraw_money"
+            style="@style/text_yellow_16sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="￥0" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/whiteffffff">
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_card_info" />
+
+        <TextView
+            android:id="@+id/id_card_info"
+            style="@style/text_yellow_16sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="******" />
+    </RelativeLayout>
+
+    <View style="@style/line_grey_1px" />
+
+
+    <Button
+        android:id="@+id/id_btn_know"
+        style="@style/btn_round_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/str_know" />
+</LinearLayout>

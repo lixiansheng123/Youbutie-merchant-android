@@ -17,9 +17,9 @@ public class User extends BmobUser {
     private Integer totalMoney;//总油点
     private Integer type;//用户类型（用户＝1，商家＝2）
     private String carString; // 车型描述
-    private Double cash; // 可提现金额
-    private Double drawTotalCash; // 提现总金额
-    private Integer drawCount; // 提现次数
+    private Double cash = 0.0; // 可提现金额
+    private Double drawTotalCash = 0.0; // 提现总金额
+    private Integer drawCount = 0; // 提现次数
     private String bankCard; // 提现银行卡
     private String cardName; // 银行卡持卡人姓名
     private String bankName; // 开户行名称
@@ -183,21 +183,27 @@ public class User extends BmobUser {
         this.type = type;
     }
 
-
     @Override
     public String toString() {
         return "User{" +
                 "nickname='" + nickname + '\'' +
                 ", photo='" + photo + '\'' +
+                ", age=" + age +
                 ", location=" + location +
                 ", address='" + address + '\'' +
-//                ", car=" + car +
                 ", carNumber='" + carNumber + '\'' +
                 ", idnumber='" + idnumber + '\'' +
                 ", VIN='" + VIN + '\'' +
                 ", strokelength='" + strokelength + '\'' +
                 ", totalMoney=" + totalMoney +
                 ", type=" + type +
+                ", carString='" + carString + '\'' +
+                ", cash=" + cash +
+                ", drawTotalCash=" + drawTotalCash +
+                ", drawCount=" + drawCount +
+                ", bankCard='" + bankCard + '\'' +
+                ", cardName='" + cardName + '\'' +
+                ", bankName='" + bankName + '\'' +
                 '}';
     }
 }

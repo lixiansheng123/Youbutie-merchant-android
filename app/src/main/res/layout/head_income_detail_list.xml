@@ -44,9 +44,10 @@
                 android:text="@string/str_already_withdraw_money" />
 
             <TextView
+                android:id="@+id/id_already_withdraw_num"
                 style="@style/text_deep_grey_14sp"
                 android:layout_centerInParent="true"
-                android:text="40次" />
+                android:text="0次" />
 
             <ImageView
                 android:id="@+id/id_arrows_1"
@@ -57,11 +58,12 @@
                 android:src="@drawable/icon_grey_right_arrows" />
 
             <TextView
+                android:id="@+id/id_already_withdraw_money"
                 style="@style/text_yellow_16sp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:layout_toLeftOf="@+id/id_arrows_1"
-                android:text="￥123" />
+                android:text="￥0" />
 
             <View
                 style="@style/line_grey_1px"
@@ -84,11 +86,13 @@
                 android:text="@string/str_can_withdraw_money" />
 
             <TextView
+                android:id="@+id/id_can_withdraw_money"
                 style="@style/text_yellow_16sp"
                 android:layout_centerInParent="true"
-                android:text="￥123" />
+                android:text="￥0" />
 
             <Button
+                android:id="@+id/id_btn_request_withdraw"
                 style="@style/btn_round_yellow"
                 android:layout_width="78dp"
                 android:layout_height="33dp"

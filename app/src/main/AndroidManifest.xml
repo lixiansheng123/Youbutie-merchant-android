@@ -41,9 +41,16 @@
         <activity android:name=".ServiceListActivity" />
         <activity android:name=".EditMerchantActivity" />
         <activity android:name=".CustomMerchantServiceActivity" />
-        <activity android:name=".IncomeDetailActivity" />
+        <activity
+            android:name=".IncomeDetailActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ContributionRankingActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".ApplyWithdrawActivity"
+            android:label="@string/title_activity_apply_withdraw"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ApplySucceedActivity"></activity>
     </application>
 
 </manifest>

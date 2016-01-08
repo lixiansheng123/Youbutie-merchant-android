@@ -115,22 +115,22 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             resetBottomBarBackground(view);
         switch (viewId) {
             case R.id.id_home_order_manager:
-                chooseIndex = 1;
+                chooseIndex = 0;
                 switchContent(mDisplayContext, orderManagerFm, R.id.id_container);
                 break;
 
             case R.id.id_home_customer_manager:
-                chooseIndex = 2;
+                chooseIndex = 1;
                 switchContent(mDisplayContext, clientManagetFm, R.id.id_container);
                 break;
 
             case R.id.id_home_merchant_manager:
                 switchContent(mDisplayContext, merchantManagerFm, R.id.id_container);
-                chooseIndex = 3;
+                chooseIndex = 2;
                 break;
 
             case R.id.id_home_count:
-                chooseIndex = 4;
+                chooseIndex = 3;
                 switchContent(mDisplayContext, countAnalyzeFm, R.id.id_container);
                 break;
         }

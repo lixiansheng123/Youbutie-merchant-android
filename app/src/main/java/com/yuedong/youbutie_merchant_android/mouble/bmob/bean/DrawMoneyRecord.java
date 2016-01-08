@@ -5,15 +5,24 @@ import android.renderscript.BaseObj;
 import cn.bmob.v3.BmobObject;
 
 public class DrawMoneyRecord extends BmobObject {
-    private Integer money; // 提现额度
+    private Double money; // 提现额度
     private Merchant merchant;// 门店
+    private User user;
     private Integer state; //提现状态（0=处理中，1=提现成功，2=提现失败）
 
-    public Integer getMoney() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 

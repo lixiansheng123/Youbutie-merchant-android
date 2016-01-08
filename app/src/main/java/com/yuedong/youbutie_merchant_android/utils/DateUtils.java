@@ -410,4 +410,24 @@ public final class DateUtils {
     }
 
 
+    public static long getCurDayStartTime() {
+        Calendar calendar = Calendar.getInstance();
+        int curYear = calendar.get(Calendar.YEAR);
+        int curMonth = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String start = curYear + "-" + curMonth + "-" + day + " 00:00:00";
+        return strTimeToLongTime(start);
+    }
+
+
+    public static long getCurDayEndTime() {
+        Calendar calendar = Calendar.getInstance();
+        int curYear = calendar.get(Calendar.YEAR);
+        int curMonth = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String end = curYear + "-" + curMonth + "-" + day + " 23:59:59";
+        return strTimeToLongTime(end);
+    }
+
+
 }

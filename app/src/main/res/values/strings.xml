@@ -119,4 +119,12 @@
     <string name="str_total_oli_number">总油点数</string>
     <string name="str_can_withdraw_money">可提现金额</string>
     <string name="str_request_withdraw">申请提现</string>
+    <string name="title_activity_apply_withdraw">ApplyWithdrawActivit</string>
+    <string name="str_apply_withdraw_money">申请提现金额</string>
+    <string name="str_input_money">请输入金额</string>
+    <string name="str_tips">温馨提示：</string>
+    <string name="str_submit_apply">提交申请</string>
+    <string name="str_￥">￥%s</string>
+    <string name="str_withdraw_succeed_desc">提现金额将在一个工作日到您的银行卡</string>
+    <string name="str_card_info">银行卡信息</string>
 </resources>

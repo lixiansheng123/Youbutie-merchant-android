@@ -5,11 +5,13 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.IncomeDetailListAdapter;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.IncomeDetailListBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -17,8 +19,10 @@ import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
@@ -36,7 +40,7 @@ import java.util.List;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.FindStatisticsListener;
 
-public class IncomeDetailActivity extends BaseActivity {
+public class IncomeDetailActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "IncomeDetailActivity";
     private PullToRefreshListView pullToRefreshListView;
     private IncomeDetailListAdapter adapter;
@@ -44,7 +48,8 @@ public class IncomeDetailActivity extends BaseActivity {
     private RefreshHelper<IncomeDetailListBean> refreshHelper = new RefreshHelper<IncomeDetailListBean>();
     private Merchant merchant;
     private int totalMoney;
-    private TextView curMonthTotalMoney;
+    private TextView curMonthTotalMoney, canWithdrawMoney, alreadyWithdrawNum, alreadyWithdrawMoney;
+    private Button requestWithdrawBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +62,24 @@ public class IncomeDetailActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (App.getInstance().userInfoChange) {
+            ui();
+            App.getInstance().userInfoChange = false;
+        }
+    }
+
+    @Override
     protected void initViews() {
         pullToRefreshListView = fvById(R.id.id_refresh_view);
         ListView listView = pullToRefreshListView.getRefreshableView();
         View headView = ViewUtils.inflaterView(context, R.layout.head_income_detail_list, listView);
         curMonthTotalMoney = (TextView) headView.findViewById(R.id.id_cur_month_sales);
+        alreadyWithdrawMoney = (TextView) headView.findViewById(R.id.id_already_withdraw_money);
+        alreadyWithdrawNum = (TextView) headView.findViewById(R.id.id_already_withdraw_num);
+        canWithdrawMoney = (TextView) headView.findViewById(R.id.id_can_withdraw_money);
+        requestWithdrawBtn = (Button) headView.findViewById(R.id.id_btn_request_withdraw);
         listView.addHeaderView(headView, null, false);
         refreshHelper.setPulltoRefreshRefreshProxy(this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
             @Override
@@ -145,11 +163,31 @@ public class IncomeDetailActivity extends BaseActivity {
 
     @Override
     protected void initEvents() {
-
+        requestWithdrawBtn.setOnClickListener(this);
     }
 
     @Override
     protected void ui() {
+        User user = App.getInstance().getUser();
+        L.d("User:" + user.toString());
         curMonthTotalMoney.setText("￥" + totalMoney);
+        if (user.getCash() != null)
+            canWithdrawMoney.setText("￥" + user.getCash());
+        if (user.getDrawCount() != null)
+            alreadyWithdrawNum.setText(user.getDrawCount() + "次");
+        if (user.getDrawTotalCash() != null)
+            alreadyWithdrawMoney.setText("￥" + user.getDrawTotalCash());
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.id_btn_request_withdraw:
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.KEY_BEAN, merchant);
+                LaunchWithExitUtils.startActivity(activity, ApplyWithdrawActivity.class, bundle);
+                break;
+
+        }
     }
 }

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff">
+
+        <View style="@style/line_grey_1dp" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_can_withdraw_money" />
+
+        <TextView
+            android:id="@+id/id_can_withdraw_money"
+            style="@style/text_yellow_16sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="￥0" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff">
+
+        <View style="@style/line_grey_1dp" />
+
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_apply_withdraw_money" />
+
+        <ImageView
+            android:id="@+id/id_arrows_1"
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+        <EditText
+            android:id="@+id/id_input_box"
+            style="@style/text_yellow_16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/id_arrows_1"
+            android:background="@color/transparent"
+            android:digits="0123456789."
+            android:gravity="right|center_vertical"
+            android:hint="@string/str_input_money"
+            android:textColorHint="@color/greycbc0bf"
+            android:textSize="14sp"
+
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/whiteffffff">
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+
+        <TextView
+            android:id="@+id/id_flag"
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_card_info" />
+
+        <ImageView
+            android:id="@+id/id_arrows_2"
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+        <TextView
+            android:id="@+id/id_bankcard_info"
+            style="@style/text_yellow_16sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/id_arrows_2"
+            android:layout_toRightOf="@+id/id_flag"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="*******" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:text="@string/str_tips" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_marginTop="9dp"
+            android:text="1.银行卡为您预留卡卡号，如需要更改，请联系客服更改" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_marginTop="9dp"
+            android:text="2.一天最多申请提现3次，每笔不得超过1000元" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/id_btn_submit_apply"
+        style="@style/btn_round_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/str_submit_apply" />
+
+</LinearLayout>
