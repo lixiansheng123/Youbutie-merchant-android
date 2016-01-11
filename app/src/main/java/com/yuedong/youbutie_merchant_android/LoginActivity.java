@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
+import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
@@ -21,7 +23,9 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 
 public class LoginActivity extends BaseActivity {
@@ -37,21 +41,18 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
-        BmobUser bmobUser = new BmobUser();
-        bmobUser.setUsername(acctionInputEt.getText().toString());
-        bmobUser.setPassword(psdInputEt.getText().toString());
-        bmobUser.login(context, new SaveListener() {
+        BmobUser.loginByAccount(context, acctionInputEt.getText().toString(), psdInputEt.getText().toString(), new LogInListener<User>() {
             @Override
-            public void onSuccess() {
+            public void done(User user, BmobException e) {
                 dialogStatus(false);
-                LaunchWithExitUtils.startActivity(activity, MainActivity.class);
-                defaultFinished();
-            }
+                if (e == null) {
+                    dialogStatus(false);
+                    LaunchWithExitUtils.startActivity(activity, MainActivity.class);
+                    defaultFinished();
+                } else {
+                    error(e.getMessage());
+                }
 
-            @Override
-            public void onFailure(int i, String s) {
-                dialogStatus(false);
-                error(s);
             }
         });
     }
@@ -78,7 +79,7 @@ public class LoginActivity extends BaseActivity {
                 dialogStatus(true);
                 // 先查询是否是商家端的帐号
                 BmobQuery<User> userBmobQuery = new BmobQuery<User>();
-                userBmobQuery.addWhereEqualTo("username", acctionInputEt.getText().toString());
+                userBmobQuery.addWhereEqualTo("mobilePhoneNumber", acctionInputEt.getText().toString());
                 userBmobQuery.findObjects(context, new FindListener<User>() {
                     @Override
                     public void onSuccess(List<User> list) {
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity {
                             }
                         } else {
                             dialogStatus(false);
-                            T.showShort(context, "不存在该帐号 请检查");
+                            T.showShort(context, "不存在该帐号或没有对手机号码进行验证 请检查");
                         }
                     }
 
