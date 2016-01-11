@@ -41,7 +41,6 @@ public class ForgetPsdActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void initEvents() {
-        btnConfirm.setOnClickListener(this);
         btnObtainTestCode.setOnClickListener(this);
         mobileEt.addTextChangedListener(textWatcher);
         testCodeEt.addTextChangedListener(textWatcher);
@@ -58,10 +57,10 @@ public class ForgetPsdActivity extends BaseActivity implements View.OnClickListe
         String inputP = psdEt.getText().toString();
         String inputT = testCodeEt.getText().toString();
         if (StringUtil.isNotEmpty(inputA) && StringUtil.isNotEmpty(inputP) && StringUtil.isNotEmpty(inputT)) {
-            btnConfirm.setClickable(true);
+            btnConfirm.setOnClickListener(this);
             btnConfirm.setBackgroundResource(R.drawable.bg_round_yellow);
         } else {
-            btnConfirm.setClickable(false);
+            btnConfirm.setOnClickListener(null);
             btnConfirm.setBackgroundResource(R.drawable.bg_round_grey);
         }
     }

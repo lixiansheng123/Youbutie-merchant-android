@@ -133,84 +133,118 @@
         </LinearLayout>
     </com.zhy.android.percent.support.PercentLinearLayout>
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
+
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/id_tablayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@color/whiteffffff"-->
+    <!--app:layout_heightPercent="61.3%h"-->
+    <!--app:tabGravity="fill"-->
+    <!--app:tabIndicatorColor="@color/yellowf0c008"-->
+    <!--app:tabSelectedTextColor="@color/yellowf0c008"-->
+    <!--app:tabTextColor="@color/black81706e" />-->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/whiteffffff"
         app:layout_heightPercent="9.93%h">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/id_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/whiteffffff"
-            app:layout_heightPercent="61.3%h"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/yellowf0c008"
-            app:tabSelectedTextColor="@color/yellowf0c008"
-            app:tabTextColor="@color/black81706e" />
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_marginTopPercent="13.07%h">
+            android:layout_height="match_parent"
+            android:background="@color/whiteffffff"
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/id_select_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <CheckBox
-                   android:clickable="false"
-                    android:focusable="false"
                     android:id="@+id/id_cb_xiaofei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/selector_count_consume_icon_cb"
                     android:checked="true"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:gravity="center"
                     android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/id_select_text1"
+                    style="@style/text_yellow_14sp"
+                    android:layout_marginTop="4dp"
+                    android:text="消费类目" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/id_select_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <CheckBox
-                    android:clickable="false"
-                    android:focusable="false"
                     android:id="@+id/id_cb_fandian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/selector_count_rebate_icon_cb"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:gravity="center"
                     android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/id_select_text2"
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_marginTop="4dp"
+                    android:text="返店率"
+                    android:textColor="@color/grey82706e" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/id_select_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <CheckBox
-                    android:clickable="false"
-                    android:focusable="false"
                     android:id="@+id/id_cb_pingjia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/selector_count_flower_icon_cb"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:gravity="center"
                     android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/id_select_text3"
+                    style="@style/text_deep_grey_14sp"
+                    android:layout_marginTop="4dp"
+                    android:text="客户评价"
+                    android:textColor="@color/grey82706e" />
             </LinearLayout>
+
         </LinearLayout>
-    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+        <View
+            android:id="@+id/id_line"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/yellowf0c008" />
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/id_viewpager"

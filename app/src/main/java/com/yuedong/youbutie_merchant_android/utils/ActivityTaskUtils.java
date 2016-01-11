@@ -62,11 +62,17 @@ public class ActivityTaskUtils {
     }
 
     public void exit() {
-        for (Activity activity : activities) {
-            if (activity != null)
-                activity.finish();
-            activities.remove(activity);
-        }
+        delAll();
         System.exit(0);
+    }
+
+    public void delAll() {
+        if (activities != null) {
+            while (activities.size() > 0) {
+                Activity activity = getLasActivity();
+                if (activity == null) break;
+                delActivity(activity);
+            }
+        }
     }
 }

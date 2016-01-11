@@ -121,7 +121,6 @@
     </LinearLayout>
 
     <Button
-        android:clickable="false"
         android:id="@+id/id_btn_login"
         style="@style/btn_round_grey"
         android:layout_width="match_parent"

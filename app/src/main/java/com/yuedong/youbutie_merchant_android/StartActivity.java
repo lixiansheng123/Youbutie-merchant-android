@@ -114,9 +114,9 @@ public class StartActivity extends BaseActivity {
             @Override
             public void run() {
                 Class cls = null;
-//                if (App.getInstance().isLogin())
-//                    cls = MainActivity.class;
-//                else
+                if (App.getInstance().isLogin())
+                    cls = MainActivity.class;
+                else
                     cls = LoginActivity.class;
                 LaunchWithExitUtils.startActivity(activity, cls);
                 defaultFinished();

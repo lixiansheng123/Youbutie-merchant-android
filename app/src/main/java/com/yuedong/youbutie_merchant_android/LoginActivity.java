@@ -28,7 +28,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private EditText acctionInputEt, psdInputEt;
     private Button btnLogin;
     private TextView forgetPasswordTv;
@@ -73,9 +73,48 @@ public class LoginActivity extends BaseActivity {
                 LaunchWithExitUtils.startActivity(activity, ForgetPsdActivity.class);
             }
         });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        acctionInputEt.addTextChangedListener(textWatcher);
+        psdInputEt.addTextChangedListener(textWatcher);
+    }
+
+    private void btnStatus() {
+        String inputA = acctionInputEt.getText().toString();
+        String inputP = psdInputEt.getText().toString();
+        if (StringUtil.isNotEmpty(inputA) && StringUtil.isNotEmpty(inputP)) {
+            btnLogin.setOnClickListener(this);
+            btnLogin.setBackgroundResource(R.drawable.bg_round_yellow);
+        } else {
+            btnLogin.setOnClickListener(null);
+            btnLogin.setBackgroundResource(R.drawable.bg_round_grey);
+        }
+    }
+
+    @Override
+    protected void ui() {
+
+    }
+
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            btnStatus();
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.id_btn_login:
                 dialogStatus(true);
                 // 先查询是否是商家端的帐号
                 BmobQuery<User> userBmobQuery = new BmobQuery<User>();
@@ -104,43 +143,7 @@ public class LoginActivity extends BaseActivity {
                         error(s);
                     }
                 });
-            }
-        });
-        acctionInputEt.addTextChangedListener(textWatcher);
-        psdInputEt.addTextChangedListener(textWatcher);
-    }
-
-    private void btnStatus() {
-        String inputA = acctionInputEt.getText().toString();
-        String inputP = psdInputEt.getText().toString();
-        if (StringUtil.isNotEmpty(inputA) && StringUtil.isNotEmpty(inputP)) {
-            btnLogin.setClickable(true);
-            btnLogin.setBackgroundResource(R.drawable.bg_round_yellow);
-        } else {
-            btnLogin.setClickable(false);
-            btnLogin.setBackgroundResource(R.drawable.bg_round_grey);
+                break;
         }
     }
-
-    @Override
-    protected void ui() {
-
-    }
-
-    TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            btnStatus();
-        }
-    };
 }

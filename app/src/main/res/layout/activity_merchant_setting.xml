@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff">
+
+        <View style="@style/line_grey_1px" />
+
+        <View
+            style="@style/line_grey_1px"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_manager_account" />
+
+        <TextView
+            android:id="@+id/id_user_name"
+            style="@style/text_yellow_16sp"
+            android:layout_centerInParent="true"
+            android:text="@string/str_test_nick" />
+
+        <Button
+            android:id="@+id/id_btn_quit"
+            style="@style/btn_round_yellow"
+            android:layout_width="73dp"
+            android:layout_height="33dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:text="@string/str_quit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/selector_bg_white_item">
+
+        <View style="@style/line_grey_2px" />
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_recommend_friend" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+        <View
+            style="@style/line_grey_2px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/selector_bg_white_item">
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_idea_feekback" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+        <View
+            style="@style/line_grey_2px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/selector_bg_white_item">
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_version_update" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+        <View
+            style="@style/line_grey_2px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/selector_bg_white_item">
+
+        <TextView
+            style="@style/text_deep_grey_14sp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/str_about_we" />
+
+        <ImageView
+            style="@style/w_h_ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/icon_grey_right_arrows" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/line_grey_2px" />
+
+
+</LinearLayout>

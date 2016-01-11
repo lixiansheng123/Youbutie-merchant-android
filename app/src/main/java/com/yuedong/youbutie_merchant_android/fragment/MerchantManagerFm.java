@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.youbutie_merchant_android.EditMerchantActivity;
 import com.yuedong.youbutie_merchant_android.InfoEditActivity;
+import com.yuedong.youbutie_merchant_android.MerchantSettingActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.ServiceListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.MerchantServiceListAdapter;
@@ -57,7 +58,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
         initTitleView(new TitleViewHelper().createDefaultTitleView("门店管理", R.drawable.icon_grey_setting, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                LaunchWithExitUtils.startActivity(getActivity(), MerchantSettingActivity.class);
             }
         }));
         return ViewUtils.inflaterView(getActivity(), R.layout.fragment_merchant_manager, container);

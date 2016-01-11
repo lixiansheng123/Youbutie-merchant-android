@@ -53,7 +53,8 @@
         <activity android:name=".ApplySucceedActivity" />
         <activity android:name=".WithdrawRecordActivity" />
         <activity android:name=".MonthOrderDetailActivity" />
-        <activity android:name=".ForgetPsdActivity"></activity>
+        <activity android:name=".ForgetPsdActivity" />
+        <activity android:name=".MerchantSettingActivity"></activity>
     </application>
 
 </manifest>

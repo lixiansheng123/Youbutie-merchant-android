@@ -131,7 +131,7 @@ public class App extends Application {
      * @return
      */
     public boolean isLogin() {
-        return getUser() != null;
+        return BmobUser.getCurrentUser(context) != null;
     }
 
 
