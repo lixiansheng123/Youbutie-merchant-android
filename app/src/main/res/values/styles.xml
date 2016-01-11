@@ -220,5 +220,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
+    <style name="login_input_box" parent="w_h_ww">
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/grey82706e</item>
+        <item name="android:textColorHint">@color/greycbc0bf</item>
+    </style>
 </resources>

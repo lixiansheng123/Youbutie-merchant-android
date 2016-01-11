@@ -12,6 +12,7 @@ import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
+import com.yuedong.youbutie_merchant_android.mouble.DrawMoneyRecordEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.DrawMoneyRecord;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
@@ -39,6 +40,8 @@ public class WithdrawRecordActivity extends BaseActivity {
         pullToRefreshListView = fvById(R.id.id_refresh_view);
         ListView listView = pullToRefreshListView.getRefreshableView();
         View headView = ViewUtils.inflaterView(context, R.layout.head_withdraw_record, listView);
+        alreadyWithdrawMoneyTv = (TextView) headView.findViewById(R.id.id_already_withdraw_money);
+        withdrawCountTv = (TextView) headView.findViewById(R.id.id_withdraw_count);
         listView.addHeaderView(headView, null, false);
     }
 
@@ -49,7 +52,7 @@ public class WithdrawRecordActivity extends BaseActivity {
 
     @Override
     protected void ui() {
-        User user = App.getInstance().getUser();
+        final User user = App.getInstance().getUser();
         double alreadyWithdrawMoney = user.getDrawTotalCash();
         alreadyWithdrawMoneyTv.setText("￥" + alreadyWithdrawMoney);
         withdrawCountTv.setText(user.getDrawCount() + "");
@@ -63,7 +66,7 @@ public class WithdrawRecordActivity extends BaseActivity {
 
             @Override
             public void executeTask(int skip, int limit, FindListener<DrawMoneyRecord> listener) {
-
+                DrawMoneyRecordEvent.getInstance().findMeWithdrawRecord(skip, limit, user.getObjectId(), listener);
             }
         });
     }

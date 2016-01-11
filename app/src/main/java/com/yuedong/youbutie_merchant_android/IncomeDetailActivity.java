@@ -5,8 +5,10 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -50,6 +52,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
     private int totalMoney;
     private TextView curMonthTotalMoney, canWithdrawMoney, alreadyWithdrawNum, alreadyWithdrawMoney;
     private Button requestWithdrawBtn;
+    private View withDrawLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         pullToRefreshListView = fvById(R.id.id_refresh_view);
         ListView listView = pullToRefreshListView.getRefreshableView();
         View headView = ViewUtils.inflaterView(context, R.layout.head_income_detail_list, listView);
+        withDrawLayout = headView.findViewById(R.id.id_withdraw_layout);
         curMonthTotalMoney = (TextView) headView.findViewById(R.id.id_cur_month_sales);
         alreadyWithdrawMoney = (TextView) headView.findViewById(R.id.id_already_withdraw_money);
         alreadyWithdrawNum = (TextView) headView.findViewById(R.id.id_already_withdraw_num);
@@ -163,7 +167,20 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initEvents() {
+        withDrawLayout.setOnClickListener(this);
         requestWithdrawBtn.setOnClickListener(this);
+        pullToRefreshListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (merchant != null) {
+                    String dayDesc = ((IncomeDetailListBean) parent.getAdapter().getItem(position)).getDayDes();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constants.KEY_BEAN, merchant);
+                    bundle.putString(Constants.KEY_TEXT, dayDesc);
+                    LaunchWithExitUtils.startActivity(activity, MonthOrderDetailActivity.class, bundle);
+                }
+            }
+        });
     }
 
     @Override
@@ -182,6 +199,9 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.id_withdraw_layout:
+                LaunchWithExitUtils.startActivity(activity, WithdrawRecordActivity.class);
+                break;
             case R.id.id_btn_request_withdraw:
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.KEY_BEAN, merchant);

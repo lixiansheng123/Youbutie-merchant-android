@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.CountListener;
@@ -393,7 +394,6 @@ public class OrderEvent implements BaseEvent {
         orderBmobQuery.sum(new String[]{"price"}); // 统计订单钱
         orderBmobQuery.groupby(new String[]{"sumMonth"}); // 按照sumMonth进行分组
         orderBmobQuery.setHasGroupCount(true);// 返回分组记录条数
-        orderBmobQuery.order("-createdAt");
         orderBmobQuery.setSkip(skip);
         orderBmobQuery.setLimit(limit);
         orderBmobQuery.addWhereEqualTo("state", 4);
@@ -408,7 +408,84 @@ public class OrderEvent implements BaseEvent {
                 listener.onFailure(i, s);
             }
         });
-
     }
 
+    /**
+     * 获取月份订单订单详情
+     *
+     * @param skip
+     * @param limit
+     * @param merchantId
+     * @param timeDesc
+     * @param listener
+     */
+    public void getMonthOrderDetail(int skip, int limit, String merchantId, String timeDesc, final FindListener<Order> listener) {
+        listener.onStart();
+        BmobQuery<Order> orderBmobQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantId);
+        orderBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        BmobQuery<Order> q1 = new BmobQuery<Order>();
+        q1.addWhereEqualTo("state", 4);
+        ands.add(q1);
+        BmobQuery<Order> q2 = new BmobQuery<Order>();
+        q2.addWhereEqualTo("sumMonth", timeDesc);
+        ands.add(q2);
+        orderBmobQuery.and(ands);
+        orderBmobQuery.setSkip(skip);
+        orderBmobQuery.setLimit(limit);
+        orderBmobQuery.order("createdAt");
+        orderBmobQuery.include("user");
+        orderBmobQuery.findObjects(context, new FindListener<Order>() {
+            @Override
+            public void onSuccess(List<Order> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 统计指定当年指定月份的客户下单情况
+     */
+    public void countAssignMonthClientDownOrderCase(String merchantObjectId, int month, final FindStatisticsListener listener) {
+        BmobQuery<Order> mainQuery = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        mainQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        // 时间查询
+        long startTime = DateUtils.getAssignMonthStartTime(month);
+        BmobQuery<Order> q1 = new BmobQuery<Order>();
+        q1.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(new Date(startTime)));
+        ands.add(q1);
+        long endTime = DateUtils.getAssignMonthEndTime(month);
+        BmobQuery<Order> q2 = new BmobQuery<Order>();
+        q2.addWhereLessThanOrEqualTo("createdAt", new BmobDate(new Date(endTime)));
+        ands.add(q2);
+        mainQuery.and(ands);
+//        mainQuery.order("-createdAt");//降序排列
+        mainQuery.addWhereEqualTo("state", 4);// 统计已经完成交易的订单
+        mainQuery.groupby(new String[]{"user"});// 以用户进行分组;
+        mainQuery.setHasGroupCount(true);// 返回分组个数
+        mainQuery.findStatistics(context, Order.class, new FindStatisticsListener() {
+            @Override
+            public void onSuccess(Object o) {
+                listener.onSuccess(o);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+            }
+        });
+
+    }
 }

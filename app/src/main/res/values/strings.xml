@@ -130,4 +130,9 @@
     <string name="str_withdraw_record">提现记录</string>
     <string name="str_progress">处理中</string>
     <string name="str_withdraw_succeed">提现成功</string>
+    <string name="str_please_input_you_mobile">请输入您的手机号码</string>
+    <string name="str_forget_password">忘记密码?</string>
+    <string name="str_please_inpit_psd">请输入您的帐号密码</string>
+    <string name="str_please_input_mobile_sms">请输入手机验证码</string>
+    <string name="str_get_test_code">获取验证码</string>
 </resources>

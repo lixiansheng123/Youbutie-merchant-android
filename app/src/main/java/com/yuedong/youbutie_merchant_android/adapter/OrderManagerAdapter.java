@@ -29,6 +29,7 @@ import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
 
     @Override
     public void convert(ViewHolder viewHolder, final Order order, final int position, View convertView) {
-        NetworkImageView networkImageView = viewHolder.getIdByView(R.id.id_user_pic);
+        RoundImageView networkImageView = viewHolder.getIdByView(R.id.id_user_pic);
         TextView name = viewHolder.getIdByView(R.id.id_user_name);
         TextView time = viewHolder.getIdByView(R.id.id_time);
         TextView service = viewHolder.getIdByView(R.id.id_service);
@@ -52,7 +53,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
         TextView money = viewHolder.getIdByView(R.id.id_pay_money);
         TextView waitPayName = viewHolder.getIdByView(R.id.id_wait_pay_name);
         User orderUser = order.getUser();
-        DisplayImageByVolleyUtils.loadImage(networkImageView, orderUser.getPhoto());
+        DisplayImageByVolleyUtils.loadImage(orderUser.getPhoto(), networkImageView);
         name.setText(orderUser.getNickname());
         time.setText(order.getOrderTime().getDate());
 

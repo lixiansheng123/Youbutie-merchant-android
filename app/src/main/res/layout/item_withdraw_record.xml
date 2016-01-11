@@ -9,8 +9,13 @@
     <TextView
         android:id="@+id/id_time"
         style="@style/text_deep_grey_14sp"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@+id/id_withdraw_money"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:text="@string/str_test_time"
         android:textColor="@color/greyaa9b9a" />
 
@@ -23,7 +28,7 @@
         android:background="@drawable/red_frame"
         android:gravity="center"
         android:text="@string/str_progress"
-        android:textColor="@color/redff8b3e"
+        android:textColor="@color/redfd8536"
         android:textSize="14sp" />
 
     <TextView

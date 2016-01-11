@@ -409,6 +409,34 @@ public final class DateUtils {
         return strTimeToLongTime(end);
     }
 
+    /**
+     * 获取当前年指定月份的开始时间戳，
+     *
+     * @param month
+     * @return
+     */
+    public static long getAssignMonthStartTime(int month) {
+        Calendar calendar = Calendar.getInstance();
+        int curYear = calendar.get(Calendar.YEAR);
+        String start = curYear + "-" + month + "-01" + " 00:00:00";
+        return strTimeToLongTime(start);
+    }
+
+    /**
+     * 获取当前年的指定月份结束时间戳 注意{@link #getAssignMonthStartTime}
+     *
+     * @param month
+     * @return
+     */
+    public static long getAssignMonthEndTime(int month) {
+        Calendar calendar = Calendar.getInstance();
+        int curYear = calendar.get(Calendar.YEAR);
+        calendar.set(Calendar.MONTH, month - 1);
+        int assignMonthLastDay = calendar.getActualMaximum(Calendar.DATE);
+        String end = curYear + "-" + month + "-" + assignMonthLastDay + " 23:59:59";
+        return strTimeToLongTime(end);
+    }
+
 
     public static long getCurDayStartTime() {
         Calendar calendar = Calendar.getInstance();

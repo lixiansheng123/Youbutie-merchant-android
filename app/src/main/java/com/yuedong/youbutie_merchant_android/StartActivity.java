@@ -1,5 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -112,23 +113,13 @@ public class StartActivity extends BaseActivity {
         mainHandle.postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if ("-1".equals(loginType)) {
-                LaunchWithExitUtils.startActivity(activity, LoginActivity.class);
+                Class cls = null;
+//                if (App.getInstance().isLogin())
+//                    cls = MainActivity.class;
+//                else
+                    cls = LoginActivity.class;
+                LaunchWithExitUtils.startActivity(activity, cls);
                 defaultFinished();
-//                } else if ("1".equals(loginType)) {
-//                    // 自动登录 帐号密码来登录
-//                    new UserEventImpl().autoLogin(loginType, new SaveListener() {
-//                        @Override
-//                        public void onSuccess() {
-//                            LaunchWithExitUtils.startActivity(launchActivity.this, MainActivity.class);
-//                            defaultFinished();
-//                        }
-//
-//                        @Override
-//                        public void onFailure(int i, String s) {
-//                        }
-//                    });
-//                }
             }
         }, delay);
     }

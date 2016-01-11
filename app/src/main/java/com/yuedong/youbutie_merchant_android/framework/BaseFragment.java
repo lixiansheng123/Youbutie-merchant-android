@@ -136,6 +136,15 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         }
     }
 
+    protected boolean getLoginDialogIsShowing() {
+        if (loginDialog == null)
+            return true;
+        else {
+            return loginDialog.isShowing();
+        }
+
+    }
+
     protected void dialogStatus(boolean isShow) {
         AnimationDrawable animationDrawable = (AnimationDrawable) loadDialog.mLoaderPic.getDrawable();
         if (isShow) {

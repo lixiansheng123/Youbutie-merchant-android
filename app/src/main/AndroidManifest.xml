@@ -51,7 +51,9 @@
             android:label="@string/title_activity_apply_withdraw"
             android:theme="@style/AppTheme" />
         <activity android:name=".ApplySucceedActivity" />
-        <activity android:name=".WithdrawRecordActivity"></activity>
+        <activity android:name=".WithdrawRecordActivity" />
+        <activity android:name=".MonthOrderDetailActivity" />
+        <activity android:name=".ForgetPsdActivity"></activity>
     </application>
 
 </manifest>

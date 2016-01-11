@@ -71,7 +71,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
         avgConsume = fvById(R.id.id_avg_consume);
         oliContribution = fvById(R.id.id_oli_contribution);
         items[0] = new ConsumeTypeFm();
-        items[1] = new ConsumeTypeFm();
+        items[1] = new MoreBuyRateFm();
         items[2] = new CountUserEvaluateFm();
         tabLayout = fvById(R.id.id_tablayout);
         viewPager = fvById(R.id.id_viewpager);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/selector_bg_white_item"
@@ -7,11 +8,13 @@
     android:paddingLeft="16dp"
     android:paddingRight="12dp">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <com.yuedong.youbutie_merchant_android.view.RoundImageView
         android:id="@+id/id_user_pic"
         android:layout_width="66dp"
         android:layout_height="66dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        app:radius="3dp"
+        app:type="round" />
 
     <TextView
         android:id="@+id/id_user_name"
@@ -61,7 +64,7 @@
             style="@style/text_black_16sp"
             android:layout_alignParentRight="true"
             android:text="￥120.00"
-            android:textColor="@color/redff8b3e"
+            android:textColor="@color/greyff8b3e"
             android:visibility="gone" />
 
         <TextView
@@ -74,7 +77,7 @@
             android:background="@drawable/red_frame"
             android:gravity="center"
             android:text="@string/str_wait_pay"
-            android:textColor="@color/redff8b3e"
+            android:textColor="@color/greyff8b3e"
             android:textSize="14sp"
             android:visibility="gone" />
 

@@ -9,24 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
-        app:layout_heightPercent="27.20%h">
-
-        <ImageView
-            style="@style/w_h_ww"
-            android:src="@mipmap/ic_launcher" />
-
-
-    </LinearLayout>
-
-    <View style="@style/line_grey_2px" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:background="@color/whiteffffff"
         android:orientation="vertical"
-        app:layout_heightPercent="23.65%h">
+        app:layout_heightPercent="35.48%h"
+        app:layout_marginTopPercent="5.91%h">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,10 +28,10 @@
 
 
                 <TextView
-                    android:layout_margin="16dp"
                     style="@style/text_deep_grey_14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:drawableLeft="@drawable/icon_grey_mobile"
                     android:gravity="center_vertical"
                     android:text="   手机号" />
@@ -75,6 +61,44 @@
             android:layout_marginLeft="11dp"
             android:layout_marginRight="11dp" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/id_input_test_code"
+                style="@style/login_input_box"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/id_btn_get_test_code"
+                android:ellipsize="end"
+                android:hint="@string/str_please_input_mobile_sms"
+                android:inputType="number"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/id_btn_get_test_code"
+                style="@style/btn_round_yellow"
+                android:layout_width="79dp"
+                android:layout_height="33dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:text="@string/str_get_test_code"
+
+                />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/line_grey_2px"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -89,10 +113,10 @@
 
 
                 <TextView
-                    android:layout_margin="16dp"
                     style="@style/text_deep_grey_14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:drawableLeft="@drawable/icon_grey_password"
                     android:gravity="center_vertical"
                     android:text="   密码" />
@@ -107,7 +131,6 @@
                 android:background="@color/greye3e2d9" />
 
             <EditText
-                android:password="true"
                 android:id="@+id/id_password_input"
                 style="@style/login_input_box"
                 android:layout_width="0dp"
@@ -115,29 +138,22 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:hint="@string/str_please_inpit_psd"
-                android:paddingLeft="28dp" />
+                android:paddingLeft="28dp"
+                android:password="true" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:clickable="false"
-        android:id="@+id/id_btn_login"
+        android:id="@+id/id_btn_confirm"
         style="@style/btn_round_grey"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:clickable="false"
+        android:text="@string/str_confirm"
         android:textSize="16sp"
-        android:text="@string/str_login"
         app:layout_heightPercent="7.86%h"
         app:layout_marginLeftPercent="4.81%w"
         app:layout_marginRightPercent="4.81%w"
         app:layout_marginTopPercent="4.79%h" />
-
-    <TextView
-        android:id="@+id/id_forget_psd"
-        style="@style/text_yellow_16sp"
-        android:layout_gravity="right"
-        android:text="@string/str_forget_password"
-        app:layout_marginRightPercent="6.94%w"
-        app:layout_marginTopPercent="2.5%h" />
 
 </com.zhy.android.percent.support.PercentLinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="20dp">
+
+    <com.yuedong.youbutie_merchant_android.view.LineChatView
+        android:id="@+id/id_line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="208dp" />
+
+    <TextView
+        style="@style/text_deep_grey_14sp"
+        android:layout_marginTop="13dp"
+        android:text="2015年返店率"
+        android:textColor="@color/black948282" />
+
+</LinearLayout>

@@ -52,6 +52,7 @@
     <color name="blue4ea2e0">#4ea2e0</color>
     <color name="blue8781f0">#8781f0</color>
     <!-- 黑色 -->
+    <color name="black948282">#948282</color>
     <color name="black81716f">#81716f</color>
     <color name="black81706e">#81706e</color>
     <color name="black2d211f">#2d211f</color>
@@ -108,6 +109,9 @@
     <color name="black4c3a3230">#4c3a3230</color>
 
     <!-- 灰色 -->
+    <color name="grey82706e">#82706e</color>
+    <color name="greye3e2d9">#e3e2d9</color>
+    <color name="greyff8b3e">#80716e</color>
     <color name="grey938580">#938580</color>
     <color name="greyaa9b9a">#aa9b9a</color>
     <color name="greyaa9b9e">#aa9b9e</color>
@@ -199,9 +203,9 @@
     <color name="rede74511">#e74511</color>
     <color name="rede95526">#e95526</color>
     <color name="reddf6f6e">#df6f6e</color>
-    <color name="redff8b3e">#ff8b3e</color>
 
     <!-- 绿色 -->
+    <color name="green00d096">#00d096</color>
     <color name="green02cf96">#02cf96</color>
     <color name="green14d39b">#14d39b</color>
     <color name="green15d29d">#15d29d</color>

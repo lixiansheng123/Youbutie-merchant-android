@@ -54,7 +54,12 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
 
     @Override
     public View getContentView(ViewGroup container) {
-        initTitleView(new TitleViewHelper().createDefaultTitleView2("门店管理"));
+        initTitleView(new TitleViewHelper().createDefaultTitleView("门店管理", R.drawable.icon_grey_setting, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }));
         return ViewUtils.inflaterView(getActivity(), R.layout.fragment_merchant_manager, container);
     }
 
@@ -196,7 +201,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                 }
                 break;
             case R.id.id_edit_merchant:
-                if(merchant!=null) {
+                if (merchant != null) {
                     Bundle bundle2 = new Bundle();
                     bundle2.putSerializable(Constants.KEY_BEAN, merchant);
                     LaunchWithExitUtils.startActivity(getActivity(), EditMerchantActivity.class, bundle2);
@@ -205,7 +210,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
 
 
             case R.id.id_edit_service_list_layout:
-                if(merchant!=null) {
+                if (merchant != null) {
                     Intent intent = new Intent(getActivity(), ServiceListActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(Constants.KEY_BEAN, merchant);

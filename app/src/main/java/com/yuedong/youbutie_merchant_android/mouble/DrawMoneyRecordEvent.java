@@ -12,6 +12,7 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.CountListener;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by Administrator on 2016/1/8.
@@ -65,6 +66,36 @@ public class DrawMoneyRecordEvent implements BaseEvent {
             @Override
             public void onFailure(int i, String s) {
                 listener.onFailure(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 获取我的提现记录
+     *
+     * @param userObjectId
+     * @param listener
+     */
+    public void findMeWithdrawRecord(int skip, int limit, String userObjectId, final FindListener<DrawMoneyRecord> listener) {
+        listener.onStart();
+        BmobQuery<DrawMoneyRecord> mainQuery = new BmobQuery<DrawMoneyRecord>();
+        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
+        userBmobQuery.addWhereEqualTo(OBJECT_ID, userObjectId);
+        mainQuery.addWhereMatchesQuery("user", "_User", userBmobQuery);
+        mainQuery.setSkip(skip);
+        mainQuery.setLimit(limit);
+        mainQuery.order("createdAt");
+        mainQuery.findObjects(context, new FindListener<DrawMoneyRecord>() {
+            @Override
+            public void onSuccess(List<DrawMoneyRecord> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
                 listener.onFinish();
             }
         });
