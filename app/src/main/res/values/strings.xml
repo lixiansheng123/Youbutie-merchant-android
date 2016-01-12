@@ -142,4 +142,7 @@
     <string name="str_version_update">版本更新</string>
     <string name="str_about_we">关于我们</string>
     <string name="str_setting">设置</string>
+    <string name="str_goods_detail">商品详情</string>
+    <string name="str_exchange_desc">信息正确，请予兑换</string>
+    <string name="str_exchange">兑换</string>
 </resources>

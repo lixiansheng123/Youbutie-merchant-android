@@ -76,7 +76,8 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
             ServiceInfoDetailBean bean = new ServiceInfoDetailBean();
             bean.name = serviceInfo.getName();
             bean.objectId = serviceInfo.getObjectId();
-            L.d("serviceInfo objectId:" + serviceInfo.getObjectId());
+            bean.icon = serviceInfo.getIcon();
+            bean.state = 0;
             serviceInfoDetailBeans.add(bean);
         }
 
@@ -86,6 +87,8 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
                 newBean.name = bean.name;
                 newBean.price = bean.price;
                 newBean.objectId = bean.objectId;
+                newBean.icon = bean.icon;
+                newBean.state = bean.state;
                 serviceInfoDetailBeans.add(newBean);
             }
         }

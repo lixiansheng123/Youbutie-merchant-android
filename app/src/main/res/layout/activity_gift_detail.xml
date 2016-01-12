@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyecebe4"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:background="@color/whiteffffff">
+
+        <com.yuedong.youbutie_merchant_android.view.RoundImageView
+            android:id="@+id/id_goods_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="#00ff00"
+            app:layout_heightPercent="62.5%h"
+            app:layout_widthPercent="62.5%h"
+            app:radius="3dp"
+            app:type="round" />
+
+        <LinearLayout
+            style="@style/w_h_ww"
+            android:layout_alignBottom="@+id/id_goods_pic"
+            android:layout_alignTop="@+id/id_goods_pic"
+            android:layout_marginLeft="26dp"
+            android:layout_toRightOf="@+id/id_goods_pic"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_goods_name"
+                style="@style/text_black_16sp"
+                android:text="商品"
+                android:textColor="@color/black81706e" />
+
+            <TextView
+                android:id="@+id/id_exchange_time"
+                style="@style/text_black_14sp"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_test_time"
+                android:textColor="@color/greyaa9b9a" />
+        </LinearLayout>
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical">
+
+        <View style="@style/line_grey_1px" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_heightPercent="22.73%h">
+
+            <TextView
+                style="@style/text_black_18sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/str_goods_detail"
+                android:textColor="@color/black81706e" />
+
+            <View
+                style="@style/line_grey_2px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="11dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:text="兑换人: 5" />
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_marginTop="3dp"
+                android:text="手机号: 5" />
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_marginTop="3dp"
+                android:text="流水号: 5" />
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_marginTop="3dp"
+                android:text="兑换时间: 5" />
+
+            <TextView
+                style="@style/text_deep_grey_14sp"
+                android:layout_marginTop="3dp"
+                android:text="兑换油点数: 5" />
+
+        </LinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <TextView
+        style="@style/text_yellow_16sp"
+        android:layout_width="253dp"
+        android:layout_height="73dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:background="@color/whitef8f8f5"
+        android:gravity="center"
+        android:text="@string/str_exchange_desc" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        style="@style/btn_round_yellow"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/str_exchange" />
+
+</LinearLayout>

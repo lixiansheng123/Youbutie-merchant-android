@@ -64,6 +64,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myMerchant = (Merchant) getIntent().getSerializableExtra(Constants.KEY_BEAN);
         initTitleView(new TitleViewHelper().createDefaultTitleView3("发广告"));
         setShowContentView(R.layout.activity_send_message);
     }
@@ -90,7 +91,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         adapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                inputBox.setText(smsTemplateDatas.get(position).icon);
+                inputBox.setText(String.format(smsTemplateDatas.get(position).icon, myMerchant.getName()));
             }
         });
         startDaySelectPop.setOnCallbcak(new Callback() {
@@ -134,7 +135,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void ui() {
-        myMerchant = (Merchant) getIntent().getSerializableExtra(Constants.KEY_BEAN);
+
     }
 
     @Override
@@ -194,22 +195,19 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onSuccess(List<Vips> list) {
-                    L.d("findMerchantVipByCar-succeed:" + list.toString());
-                    L.d("条数:" + list.size());
                     if (CommonUtils.listIsNotNull(list)) {
                         List<String> userObjects = new ArrayList<String>();
                         for (Vips vips : list) {
                             userObjects.add(vips.getUser().getObjectId());
                         }
+                        L.d("推送的objectid数组:" + userObjects.toString());
                         Messages messages = new Messages();
                         messages.setType(2);
                         messages.setContent(inputBox.getText().toString().trim());
                         messages.setTitle(adTitle.getText().toString().trim());
                         messages.setStartTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(startYear + "-" + startMonth + "-" + startDay + " 00:00:00"))));
                         messages.setEndTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(endYear + "-" + endMonth + "-" + endDay + " 00:00:00"))));
-                        User user = new User();
-                        user.setObjectId(App.getInstance().getUser().getObjectId());
-                        messages.setSender(user);
+                        messages.setSender(App.getInstance().getUser());
                         messages.setTargets(userObjects);
                         messages.save(context, new SaveListener() {
                             @Override
@@ -270,7 +268,6 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        L.d("onActivityResult-----------" + TAG);
         if (requestCode == Constants.REQUESTCODE_SELECT_CAR && resultCode == Constants.RESULT_SELECT_CAR && data != null) {
             selectCars = (ArrayList<Car>) data.getSerializableExtra(Constants.KEY_LIST);
             if (CommonUtils.listIsNotNull(selectCars)) {
@@ -282,7 +279,6 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
             }
 
         } else if (requestCode == Constants.REQUESTCODE_INPUT_AD_TITLE && resultCode == Constants.RESULT_INPUT_AD_TITLE && data != null) {
-            L.d("INPUT_AD_TITLE-----------" + TAG);
             String inputText = data.getStringExtra(Constants.KEY_TEXT);
             adTitle.setText(inputText + "    ");
             if (!adTitleTextColorChange) {

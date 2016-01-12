@@ -164,14 +164,6 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
         });
     }
 
-    /**
-     * 修改门店洗车的时间状态 分闲时，忙时
-     *
-     * @param buttonStatus
-     */
-    private void modifyMerchantServiceCarWashStatus(boolean buttonStatus) {
-
-    }
 
 
     /**

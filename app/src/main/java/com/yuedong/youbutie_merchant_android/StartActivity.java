@@ -59,6 +59,7 @@ public class StartActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(final List<ServiceInfo> list) {
+//                    L.d();
                     if (CommonUtils.listIsNotNull(list))
                         App.getInstance().getExecutor().execute(new Runnable() {
                             @Override

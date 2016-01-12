@@ -100,24 +100,24 @@ public class DataUtils {
         ServiceInfoDetailBean serviceInfoDetailBean = new ServiceInfoDetailBean();
         serviceInfoDetailBean.name = "洗车";
         // 当一个短信模版内容
-        serviceInfoDetailBean.icon = "洗车短信模版";
+        serviceInfoDetailBean.icon = "洗车：亲爱的车主，元旦洗车大酬宾，1月1日——1月10日期间，会员可享受19.9元精致洗车服务 + 车内消毒1次，无须预约。[%s]";
         data.add(serviceInfoDetailBean);
         ServiceInfoDetailBean serviceInfoDetailBean2 = new ServiceInfoDetailBean();
         serviceInfoDetailBean2.name = "保养";
         // 当一个短信模版内容
-        serviceInfoDetailBean2.icon = "保养短信模版";
+        serviceInfoDetailBean2.icon = "亲爱的车主，来保养你的爱车吧，原价390，现在只要260，无须预约，即刻享受。[%s]";
         data.add(serviceInfoDetailBean2);
 
         ServiceInfoDetailBean serviceInfoDetailBean3 = new ServiceInfoDetailBean();
         serviceInfoDetailBean3.name = "美容";
         // 当一个短信模版内容
-        serviceInfoDetailBean3.icon = "美容短信模版";
+        serviceInfoDetailBean3.icon = "亲爱的车主，来给你的爱车做个美容吧，原价390的套餐，现在只要260，无须预约，即刻享受。[%s]";
         data.add(serviceInfoDetailBean3);
 
         ServiceInfoDetailBean serviceInfoDetailBean4 = new ServiceInfoDetailBean();
         serviceInfoDetailBean4.name = "其他服务";
         // 当一个短信模版内容
-        serviceInfoDetailBean4.icon = "其他服务短信模版";
+        serviceInfoDetailBean4.icon = "亲爱的车主,...";
         data.add(serviceInfoDetailBean4);
         return data;
     }
