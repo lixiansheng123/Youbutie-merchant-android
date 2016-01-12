@@ -45,7 +45,7 @@ public class MerchantEvent implements BaseEvent {
                         instance.setMeMerchant(list);
                         listener.onSuccess(instance.getMeMerchant());
                     } else {
-                        T.showShort(context, "您还没有门店");
+                        listener.onError(-1, "您还没有门店");
                     }
                     listener.onFinish();
                 }

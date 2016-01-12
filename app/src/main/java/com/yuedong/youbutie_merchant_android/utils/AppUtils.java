@@ -288,4 +288,19 @@ public class AppUtils {
             return false;
         }
     }
+
+
+    /**
+     * 因为兑换号是由userObject加兑换的时间戳精确到毫秒,显示的时候把userObject去掉
+     */
+    public static String getExchangeNumber(String exchangeNumber, String userObject) {
+        L.d("兑换号:" + exchangeNumber + "==userObject:" + userObject);
+        if (exchangeNumber.contains(userObject)) {
+            int lastIndexOf = exchangeNumber.lastIndexOf(userObject);
+            exchangeNumber = exchangeNumber.substring(lastIndexOf + userObject.length(), exchangeNumber.length());
+            L.d("截取的兑换号:" + exchangeNumber);
+        }
+        return exchangeNumber;
+    }
+
 }

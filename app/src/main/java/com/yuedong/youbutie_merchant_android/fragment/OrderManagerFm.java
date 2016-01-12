@@ -13,23 +13,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yuedong.youbutie_merchant_android.GiftDetailActivity;
 import com.yuedong.youbutie_merchant_android.MainActivity;
 import com.yuedong.youbutie_merchant_android.OrderDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
+import com.yuedong.youbutie_merchant_android.mouble.ExchangeRecordEvent;
+import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ExchangedRecord;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
+import com.yuedong.youbutie_merchant_android.utils.TextUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -155,7 +165,46 @@ public class OrderManagerFm extends BaseFragment {
         if (requestCode == Constants.REQUESTCODE_RECEIVE_ORDER && resultCode == Constants.RESULT_RECEIVE_ORDER && data != null) {
             Order order = (Order) data.getSerializableExtra(Constants.KEY_BEAN);
             receiveOrder(order);
+        } else if (requestCode == 0 && resultCode == getActivity().RESULT_OK && data != null) {
+            Bundle bundle = data.getExtras();
+            final String scanResult = bundle.getString("result");
+            if (StringUtil.isNotEmpty(scanResult)) {
+                ExchangeRecordEvent.getInstance().findExchangeRecordByExchangeNumberAndMerchantObjectId(scanResult.trim(), new FindListener<ExchangedRecord>() {
+
+                    @Override
+                    public void onStart() {
+                        dialogStatus(true);
+                    }
+
+                    @Override
+                    public void onSuccess(List<ExchangedRecord> list) {
+                        if (CommonUtils.listIsNotNull(list)) {
+                            ExchangedRecord exchangedRecord = list.get(0);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putSerializable(Constants.KEY_BEAN, exchangedRecord);
+                            LaunchWithExitUtils.startActivity(getActivity(), GiftDetailActivity.class, bundle1);
+                        } else {
+                            T.showShort(getContext(), "请检查是否是本店的兑换礼品");
+                        }
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        error(s);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        dialogStatus(false);
+                    }
+                });
+
+            }
+
+        } else {
+            T.showShort(getContext(), "扫描不到什么喔");
         }
+
     }
 
 

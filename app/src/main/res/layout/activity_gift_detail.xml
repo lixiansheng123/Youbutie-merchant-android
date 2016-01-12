@@ -17,7 +17,6 @@
             android:layout_height="0dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:background="#00ff00"
             app:layout_heightPercent="62.5%h"
             app:layout_widthPercent="62.5%h"
             app:radius="3dp"
@@ -84,25 +83,30 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/id_tv1"
                 style="@style/text_deep_grey_14sp"
                 android:text="兑换人: 5" />
 
             <TextView
+                android:id="@+id/id_tv2"
                 style="@style/text_deep_grey_14sp"
                 android:layout_marginTop="3dp"
                 android:text="手机号: 5" />
 
             <TextView
+                android:id="@+id/id_tv3"
                 style="@style/text_deep_grey_14sp"
                 android:layout_marginTop="3dp"
                 android:text="流水号: 5" />
 
             <TextView
+                android:id="@+id/id_tv4"
                 style="@style/text_deep_grey_14sp"
                 android:layout_marginTop="3dp"
                 android:text="兑换时间: 5" />
 
             <TextView
+                android:id="@+id/id_tv5"
                 style="@style/text_deep_grey_14sp"
                 android:layout_marginTop="3dp"
                 android:text="兑换油点数: 5" />
@@ -127,6 +131,7 @@
         android:layout_weight="1" />
 
     <Button
+        android:id="@+id/id_btn_exchange"
         style="@style/btn_round_yellow"
         android:layout_width="match_parent"
         android:layout_marginBottom="12dp"
