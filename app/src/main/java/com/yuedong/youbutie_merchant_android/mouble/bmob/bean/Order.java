@@ -19,6 +19,7 @@ public class Order extends BmobObject {
     private Integer payWay; // 支付类型（1=支付宝，2=微信）
     private List<String> serviceIds;// 服务的Id
     private String sumMonth;
+    public Integer buyNum; // 来店次数
 
     public String getSumMonth() {
         return sumMonth;
@@ -35,8 +36,6 @@ public class Order extends BmobObject {
     public void setServiceIds(List<String> serviceIds) {
         this.serviceIds = serviceIds;
     }
-
-    public int buyNum; // 来店次数
 
 
     public String getOrderNumber() {

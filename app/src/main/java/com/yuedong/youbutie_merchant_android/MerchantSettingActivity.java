@@ -70,7 +70,8 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
             case R.id.id_idea_feedback_layout:
 //                FeedbackAgent agent = new FeedbackAgent(context);
 //                agent.startFeedbackActivity();
-                UmengFeedbackAgent.getInstance(context).startFeedbackActivity();
+//                UmengFeedbackAgent.getInstance(context).startFeedbackActivity();
+                LaunchWithExitUtils.startActivity(activity, FeedbackActivity.class);
                 break;
 
         }
