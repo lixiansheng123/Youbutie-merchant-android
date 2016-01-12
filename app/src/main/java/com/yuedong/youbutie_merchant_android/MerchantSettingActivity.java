@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.update.UmengUpdateAgent;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.ActivityTaskUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
@@ -38,6 +41,8 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initEvents() {
+        fvById(R.id.id_idea_feedback_layout).setOnClickListener(this);
+        fvById(R.id.id_checkout_app_update_layout).setOnClickListener(this);
         quitBtn.setOnClickListener(this);
     }
 
@@ -56,6 +61,16 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
                 App.getInstance().setUser(null);
                 ActivityTaskUtils.getInstance().delAll();
                 LaunchWithExitUtils.startActivity(activity, LoginActivity.class);
+                break;
+
+            case R.id.id_checkout_app_update_layout:
+                UmengUpdateAgent.forceUpdate(context);
+                break;
+
+            case R.id.id_idea_feedback_layout:
+//                FeedbackAgent agent = new FeedbackAgent(context);
+//                agent.startFeedbackActivity();
+                UmengFeedbackAgent.getInstance(context).startFeedbackActivity();
                 break;
 
         }

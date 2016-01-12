@@ -72,6 +72,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/id_idea_feedback_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@drawable/selector_bg_white_item">
@@ -99,6 +100,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/id_checkout_app_update_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@drawable/selector_bg_white_item">

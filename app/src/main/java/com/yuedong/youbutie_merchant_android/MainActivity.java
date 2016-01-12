@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.umeng.update.UmengUpdateAgent;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.fragment.ClientManagetFm;
@@ -11,6 +12,7 @@ import com.yuedong.youbutie_merchant_android.fragment.CountAnalyzeFm;
 import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
+import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
 
@@ -31,10 +33,15 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setShowContentView(R.layout.activity_main);
+        // 其他网络环境下进行更新自动提醒
+//        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        // 检查更新
+        UmengUpdateAgent.update(this);
+        // umeng开发者回复用户反馈 通知提醒用户
+        UmengFeedbackAgent.getInstance(context).sync();
 
 
     }
-
 
 
     private void ititFragment() {

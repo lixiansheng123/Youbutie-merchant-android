@@ -4,23 +4,7 @@
         "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\main.xml"
     },
     {
-        "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\camera.xml",
-        "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\camera.xml"
-    },
-    {
-        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\camera.xml",
-        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\camera.xml"
-    },
-    {
-        "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\main.xml",
-        "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\main.xml"
-    },
-    {
         "merged": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\camera.xml",
         "source": "E:\\android\\studioworkspace\\Youbutie-merchant-android2\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\camera.xml"
-    },
-    {
-        "merged": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\main.xml",
-        "source": "E:\\android\\work\\pkball\\Youbutie-merchant-android\\library_qrcode\\build\\intermediates\\bundles\\debug\\res\\layout\\main.xml"
     }
 ]
