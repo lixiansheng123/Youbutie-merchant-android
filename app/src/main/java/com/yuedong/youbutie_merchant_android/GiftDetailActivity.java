@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.app.App;
@@ -14,14 +15,18 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.DateUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
+import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
 import java.util.Date;
 
+import cn.bmob.v3.listener.UpdateListener;
+
 /**
  * 礼品详情
  */
-public class GiftDetailActivity extends BaseActivity {
+public class GiftDetailActivity extends BaseActivity implements View.OnClickListener {
     private ExchangedRecord exchangedRecord;
     private RoundImageView goodPicIv;
     private TextView goodNameTv, timev, tv1, tv2, tv3, tv4, tv5;
@@ -48,7 +53,7 @@ public class GiftDetailActivity extends BaseActivity {
 
     @Override
     protected void initEvents() {
-
+        fvById(R.id.id_btn_exchange).setOnClickListener(this);
     }
 
     @Override
@@ -63,6 +68,31 @@ public class GiftDetailActivity extends BaseActivity {
         tv3.setText("流水号: " + AppUtils.getExchangeNumber(exchangedRecord.getRecordNumber(), user.getObjectId()));
         tv4.setText("兑换时间: " + DateUtils.formatDate(new Date(), DateUtils.DATE_TIME_yyyy_MM_dd_HH_mm_ss));
         tv5.setText("兑换油点数: " + exchangedRecord.getTotalMoney() + "油点");
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.id_btn_exchange:
+                dialogStatus(true);
+                ExchangedRecord updateBean = new ExchangedRecord();
+                updateBean.setState(2);
+                updateBean.update(context, exchangedRecord.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        dialogStatus(false);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(Constants.KEY_BEAN, exchangedRecord);
+                        LaunchWithExitUtils.startActivity(activity, GetSucceedActivity.class, bundle);
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        dialogStatus(false);
+                        error(s);
+                    }
+                });
+                break;
+        }
     }
 }

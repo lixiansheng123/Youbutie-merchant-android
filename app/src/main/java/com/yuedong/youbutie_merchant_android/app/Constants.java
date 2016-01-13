@@ -75,6 +75,7 @@ public class Constants {
     public static final String DESCRIPTOR = "com.umeng.share";
     public static final String CALLER = "youbutie_android";
     public static final String OK = "2000000";
+    public static final String DESC_GET_SUCCEED = "车主%s已领走了%s个%s";
 
     // 悦动接口版本
     public static final String V = "2.1";

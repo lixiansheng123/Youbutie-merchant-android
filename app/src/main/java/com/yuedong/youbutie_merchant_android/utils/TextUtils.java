@@ -1,7 +1,10 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
 import android.graphics.Paint;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
+import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 /**
@@ -26,7 +29,6 @@ public class TextUtils {
             textPaint.setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             textPaint.setAntiAlias(true);
         }
-
-
     }
+
 }

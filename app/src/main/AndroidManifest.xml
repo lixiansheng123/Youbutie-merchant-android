@@ -74,7 +74,8 @@
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".FeedbackActivity" />
-        <activity android:name=".GiftDetailActivity"></activity>
+        <activity android:name=".GiftDetailActivity" />
+        <activity android:name=".GetSucceedActivity"></activity>
     </application>
 
 </manifest>

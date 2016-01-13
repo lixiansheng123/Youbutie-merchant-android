@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greyede9e4"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_heightPercent="23.41%h">
+
+
+        <TextView
+            style="@style/w_h_ww"
+            android:drawableLeft="@drawable/icon_green_gou"
+            android:gravity="center_vertical"
+            android:text=" 领取成功"
+            android:textColor="@color/green2bd4a1"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/id_get_succeed_desc"
+            style="@style/text_black_14sp"
+            android:layout_marginTop="18dp"
+            android:text="@string/str_get_succeed_desc"
+            android:textColor="@color/grey725e5c" />
+
+    </LinearLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/whiteffffff"
+        app:layout_heightPercent="19.86%h">
+
+        <View style="@style/line_grey_2px" />
+
+        <View
+            style="@style/line_grey_2px"
+            android:layout_alignParentBottom="true" />
+
+        <com.yuedong.youbutie_merchant_android.view.RoundImageView
+            android:id="@+id/id_goods_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            app:layout_heightPercent="74.4%h"
+            app:layout_widthPercent="74.4%h"
+            app:radius="3dp"
+            app:type="round" />
+
+        <TextView
+            android:id="@+id/id_goods_name"
+            style="@style/text_black_16sp"
+            android:layout_alignTop="@+id/id_goods_pic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/id_goods_pic"
+            android:text="商品"
+            android:textColor="@color/grey82706e" />
+
+        <View
+            android:id="@+id/id_line"
+            style="@style/line_grey_2px"
+            android:layout_below="@+id/id_goods_name"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/id_goods_pic" />
+
+        <TextView
+            android:id="@+id/id_goods_exchange_number"
+            style="@style/text_deep_grey_14sp"
+            android:layout_alignLeft="@+id/id_goods_name"
+            android:layout_below="@+id/id_line"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@+id/id_flag_already_get"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="兑换号:123131" />
+
+        <TextView
+            android:id="@+id/id_apply_exchange_time"
+            style="@style/text_tint_grey_14sp"
+            android:layout_alignBottom="@+id/id_goods_pic"
+            android:layout_alignLeft="@+id/id_goods_name"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/id_flag_already_get"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/str_test_time" />
+
+        <TextView
+            android:id="@+id/id_flag_already_get"
+            style="@style/text_yellow_14sp"
+            android:layout_width="56dp"
+            android:layout_height="28dp"
+            android:layout_alignBottom="@+id/id_goods_pic"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_yellow_frame"
+            android:gravity="center"
+            android:text="@string/str_already_get" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -145,4 +145,6 @@
     <string name="str_goods_detail">商品详情</string>
     <string name="str_exchange_desc">信息正确，请予兑换</string>
     <string name="str_exchange">兑换</string>
+    <string name="str_get_succeed_desc" formatted="false">车主%s已领走了%s个%s</string>
+    <string name="str_already_get">已领取</string>
 </resources>

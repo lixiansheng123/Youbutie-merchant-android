@@ -180,9 +180,13 @@ public class OrderManagerFm extends BaseFragment {
                     public void onSuccess(List<ExchangedRecord> list) {
                         if (CommonUtils.listIsNotNull(list)) {
                             ExchangedRecord exchangedRecord = list.get(0);
-                            Bundle bundle1 = new Bundle();
-                            bundle1.putSerializable(Constants.KEY_BEAN, exchangedRecord);
-                            LaunchWithExitUtils.startActivity(getActivity(), GiftDetailActivity.class, bundle1);
+                            if (exchangedRecord.getState() == 1) {
+                                Bundle bundle1 = new Bundle();
+                                bundle1.putSerializable(Constants.KEY_BEAN, exchangedRecord);
+                                LaunchWithExitUtils.startActivity(getActivity(), GiftDetailActivity.class, bundle1);
+                            } else {
+                                T.showShort(getContext(), "该礼品已经被领取");
+                            }
                         } else {
                             T.showShort(getContext(), "请检查是否是本店的兑换礼品");
                         }
