@@ -11,11 +11,9 @@ import com.yuedong.youbutie_merchant_android.utils.T;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.CountListener;
@@ -186,6 +184,8 @@ public class OrderEvent implements BaseEvent {
 
     }
 
+    private int succeedCount = 0;
+
     /**
      * 获取门店完成交易的订单并统计购买次数
      *
@@ -194,6 +194,7 @@ public class OrderEvent implements BaseEvent {
      * @param carObjectId      车型id 作为筛选条件
      */
     public void getMemberFinishedOrderAndCountBuyNum(int skip, int limit, final String merchantObjectId, String serviceId, String carObjectId, final FindListener<Order> listener) {
+        succeedCount = 0;
         L.i("getMemberFinishedOrderAndCountBuyNum->skip;" + skip + "-limit:" + limit + "-merchantObjectId:" + merchantObjectId + "-serviceId:" + serviceId + "-carObjectId:" + carObjectId);
         listener.onStart();
         BmobQuery<Order> bmobQuery = new BmobQuery<Order>();
@@ -245,13 +246,12 @@ public class OrderEvent implements BaseEvent {
                         ands.add(addWhereMatchesQuery1);
                         ands.add(addWhereMatchesQuery2);
                         countQuery.and(ands);
-                        final int index1 = i;
                         countQuery.count(context, Order.class, new CountListener() {
                             @Override
                             public void onSuccess(int count) {
                                 order.buyNum = count;
-                                int index2 = index1;
-                                if (index2 == list.size() - 1) {
+                                succeedCount++;
+                                if (succeedCount == list.size()) {
                                     listener.onSuccess(list);
                                     listener.onFinish();
                                 }

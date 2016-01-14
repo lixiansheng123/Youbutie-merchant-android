@@ -89,18 +89,19 @@ public class RequestYDHelper {
     /**
      * 请求推送
      *
-     * @param requestId
      * @param uids
      * @param title
      * @param content
      */
-    public void requestPush(final String requestId, final String[] uids, final String title, final String content) {
+    public void requestPush(final String[] uids, final String title, final String content) {
 
         if (mSecretKey == null) {
             T.showShort(App.getInstance().getAppContext(), "SecretKey为null");
             return;
         }
         action = 1;
+        if (onRequestYDListener != null)
+            onRequestYDListener.onStart();
         StringBuilder sb = new StringBuilder();
         for (String uid : uids) {
             sb.append(uid + ",");
@@ -126,6 +127,7 @@ public class RequestYDHelper {
                     all.put("v", Constants.V);
                     String[] keys = new String[]{"uids", "title", "content"};
                     all.put("sign", sign(keys, data));
+                    L.d("requestPush:请求参数:" + all.toString());
                     String result = writeAndResult(all);
                     responseSucceed(result);
                 } catch (final Exception e) {

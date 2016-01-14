@@ -15,10 +15,14 @@ import com.yuedong.youbutie_merchant_android.bean.InviteMemberListBean;
 import com.yuedong.youbutie_merchant_android.bean.PhoneAddressBookBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
+import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.UserEvent;
+import com.yuedong.youbutie_merchant_android.mouble.VipEvent;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
@@ -42,6 +46,7 @@ import java.util.List;
 import java.util.Random;
 
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 
 /**
  * 邀请会员
@@ -86,126 +91,160 @@ public class InviteMemberActivity extends BaseActivity {
 
     @Override
     protected void ui() {
-        // 获取secretkey
-        App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+        MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
             @Override
-            public void start() {
+            public void onStart() {
                 dialogStatus(true);
             }
 
             @Override
-            public void end() {
-            }
-
-            @Override
-            public void succeed(String secretKey) {
-                mSecretKey = secretKey;
-                RequestYDHelper requestYDHelper = new RequestYDHelper();
-                requestYDHelper.setAppSecretkey(mSecretKey);
-                requestYDHelper.requestPush(Constants.REQUEST_ID_INVITE_MEMBER,//
-                        new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功BMOB洗车店门店会员");
-                // 获取手机的通讯录信息
-                App.getInstance().getExecutor().execute(new Runnable() {
+            public void onSuccess(List<Merchant> list) {
+                dialogStatus(true);
+                Merchant merchant = list.get(0);
+                // 获取店铺vip用户
+                VipEvent.getInstance().findVipByMerchant(merchant.getObjectId(), new FindListener<Vips>() {
                     @Override
-                    public void run() {
-                        phoneContacts = SystemUtils.getPhoneContacts(context);
-                        // 预留不正确手机的去除
-                        Iterator<PhoneAddressBookBean> phoneAddressBookBeanIterator = phoneContacts.iterator();
-                        while (phoneAddressBookBeanIterator.hasNext()) {
-                            PhoneAddressBookBean bookBean = phoneAddressBookBeanIterator.next();
-                            // 不是正确的手机号码
-                            if (!bookBean.getPhoneNumber().matches(Config.REGEX_TEL))
-                                phoneAddressBookBeanIterator.remove();
-                        }
-
-                        // 获取手机通讯录信息完毕
-                        List<String> mobiles = new ArrayList<String>();
-                        for (PhoneAddressBookBean bookBean : phoneContacts) {
-                            if (StringUtil.isNotEmpty(bookBean.getPhoneNumber())) {
-                                mobiles.add(bookBean.getPhoneNumber());
+                    public void onSuccess(List<Vips> list) {
+                        L.d("findVipByMerchant succeed:" + list.toString());
+                        myAdapter.setVipsList(list);
+                        // 获取secretkey
+                        App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                            @Override
+                            public void start() {
+                                dialogStatus(true);
                             }
-                        }
-                        L.d("手机通讯录电话------>>" + mobiles.size());
-                        final List<String> tempMobiles = mobiles;
-                        if (CommonUtils.listIsNotNull(tempMobiles)) {
-                            mainHandle.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    // 查询号码超过50个bmob会异常 所以得分次来查询 恶心。。。
-                                    if (tempMobiles.size() > 50) {
-                                        // 全部已经注册的用户
-                                        double countD = tempMobiles.size() * 1.0f / 50;
-                                        int count = (int) countD;
-                                        if (countD != count) {
-                                            //查多少次
-                                            count++;
-                                        }
-                                        for (int i = 0; i < count; i++) {
-                                            int startIndex = i * 50;
-                                            int endIndex = (i + 1) * 50;
-                                            if (endIndex > tempMobiles.size())
-                                                endIndex = tempMobiles.size();
-                                            // subList 包头不包尾
-                                            List<String> partMobiles = tempMobiles.subList(startIndex, endIndex);
-                                            L.d("部分手机通讯录:" + partMobiles.size());
-                                            final int tempCount = count;
-                                            final int tempI = i;
-                                            UserEvent.getInstance().findUserByMobiles(partMobiles, new FindListener<User>() {
-                                                @Override
-                                                public void onSuccess(List<User> list) {
-                                                    if (CommonUtils.listIsNotNull(list)) {
-                                                        totalRegistUser.addAll(list);
-                                                    }
-                                                    if (tempI == (tempCount - 1)) {
-                                                        // 最后一次
-                                                        updateList(totalRegistUser);
-                                                    }
-                                                }
 
+                            @Override
+                            public void end() {
+                            }
+
+                            @Override
+                            public void succeed(String secretKey) {
+                                mSecretKey = secretKey;
+                                RequestYDHelper requestYDHelper = new RequestYDHelper();
+                                requestYDHelper.setAppSecretkey(mSecretKey);
+                                requestYDHelper.requestPush(//
+                                        new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功车店门店会员");
+                                // 获取手机的通讯录信息
+                                App.getInstance().getExecutor().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        phoneContacts = SystemUtils.getPhoneContacts(context);
+                                        // 预留不正确手机的去除
+                                        Iterator<PhoneAddressBookBean> phoneAddressBookBeanIterator = phoneContacts.iterator();
+                                        while (phoneAddressBookBeanIterator.hasNext()) {
+                                            PhoneAddressBookBean bookBean = phoneAddressBookBeanIterator.next();
+                                            // 不是正确的手机号码
+                                            if (!bookBean.getPhoneNumber().matches(Config.REGEX_TEL))
+                                                phoneAddressBookBeanIterator.remove();
+                                        }
+
+                                        // 获取手机通讯录信息完毕
+                                        List<String> mobiles = new ArrayList<String>();
+                                        for (PhoneAddressBookBean bookBean : phoneContacts) {
+                                            if (StringUtil.isNotEmpty(bookBean.getPhoneNumber())) {
+                                                mobiles.add(bookBean.getPhoneNumber());
+                                            }
+                                        }
+                                        L.d("手机通讯录电话------>>" + mobiles.size());
+                                        final List<String> tempMobiles = mobiles;
+                                        if (CommonUtils.listIsNotNull(tempMobiles)) {
+                                            mainHandle.post(new Runnable() {
                                                 @Override
-                                                public void onError(int i, String s) {
-                                                    error(s);
-                                                    dialogStatus(false);
-                                                    return;
+                                                public void run() {
+                                                    // 查询号码超过50个bmob会异常 所以得分次来查询 恶心。。。
+                                                    if (tempMobiles.size() > 50) {
+                                                        // 全部已经注册的用户
+                                                        double countD = tempMobiles.size() * 1.0f / 50;
+                                                        int count = (int) countD;
+                                                        if (countD != count) {
+                                                            //查多少次
+                                                            count++;
+                                                        }
+                                                        for (int i = 0; i < count; i++) {
+                                                            int startIndex = i * 50;
+                                                            int endIndex = (i + 1) * 50;
+                                                            if (endIndex > tempMobiles.size())
+                                                                endIndex = tempMobiles.size();
+                                                            // subList 包头不包尾
+                                                            List<String> partMobiles = tempMobiles.subList(startIndex, endIndex);
+                                                            L.d("部分手机通讯录:" + partMobiles.size());
+                                                            final int tempCount = count;
+                                                            final int tempI = i;
+                                                            UserEvent.getInstance().findUserByMobiles(partMobiles, new FindListener<User>() {
+                                                                @Override
+                                                                public void onSuccess(List<User> list) {
+                                                                    if (CommonUtils.listIsNotNull(list)) {
+                                                                        totalRegistUser.addAll(list);
+                                                                    }
+                                                                    if (tempI == (tempCount - 1)) {
+                                                                        // 最后一次
+                                                                        updateList(totalRegistUser);
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onError(int i, String s) {
+                                                                    error(s);
+                                                                    dialogStatus(false);
+                                                                    return;
+                                                                }
+                                                            });
+                                                        }
+                                                    } else {
+                                                        // 根据手机号集合获取已经在油补贴注册过的用户
+                                                        UserEvent.getInstance().findUserByMobiles(tempMobiles, new FindListener<User>() {
+
+                                                            @Override
+                                                            public void onSuccess(final List<User> list) {
+                                                                totalRegistUser = list;
+                                                                updateList(list);
+                                                            }
+
+                                                            @Override
+                                                            public void onError(int i, String s) {
+                                                                dialogStatus(false);
+                                                                error(s);
+                                                            }
+                                                        });
+                                                    }
                                                 }
                                             });
+                                        } else {
+                                            mainHandle.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    dialogStatus(false);
+                                                    T.showShort(context, "您的手机通讯录不存在信息");
+                                                }
+                                            });
+
                                         }
-                                    } else {
-                                        // 根据手机号集合获取已经在油补贴注册过的用户
-                                        UserEvent.getInstance().findUserByMobiles(tempMobiles, new FindListener<User>() {
-
-                                            @Override
-                                            public void onSuccess(final List<User> list) {
-                                                totalRegistUser = list;
-                                                updateList(list);
-                                            }
-
-                                            @Override
-                                            public void onError(int i, String s) {
-                                                dialogStatus(false);
-                                                error(s);
-                                            }
-                                        });
                                     }
-                                }
-                            });
-                        } else {
-                            mainHandle.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    dialogStatus(false);
-                                    T.showShort(context, "您的手机通讯录不存在信息");
-                                }
-                            });
+                                });
+                            }
 
-                        }
+                            @Override
+                            public void fail(int code, String error) {
+                                T.showShort(context, error + code);
+                                dialogStatus(false);
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        error(s);
+                        dialogStatus(false);
                     }
                 });
             }
 
             @Override
-            public void fail(int code, String error) {
-                T.showShort(context, error + code);
+            public void onError(int i, String s) {
+                error(s);
                 dialogStatus(false);
             }
         });
@@ -265,6 +304,7 @@ public class InviteMemberActivity extends BaseActivity {
                     if (user.getMobilePhoneNumber().equals(bookBean.getPhoneNumber())) {
                         // 对应上了 为user增加备注
                         bean.regist = true;
+                        bean.setObjectId(user.getObjectId());
                         alreadayRegistList.add(bean);
 
                     } else {
@@ -297,6 +337,12 @@ public class InviteMemberActivity extends BaseActivity {
 
 
     public class MyAdapter extends BaseExpandableListAdapter {
+        // 已经成为该店铺会员的用户
+        private List<Vips> vipsList;
+
+        public void setVipsList(List<Vips> vipsList) {
+            this.vipsList = vipsList;
+        }
 
         @Override
         public int getGroupCount() {
@@ -354,9 +400,55 @@ public class InviteMemberActivity extends BaseActivity {
             final InviteMemberListBean bean = childs.get(groupPosition).get(childPosition);
             String remarkName = bean.remark;
             name.setText(remarkName);
+            ViewUtils.showLayout(btnInvite);
             if (bean.regist) {
+                // 判断是否用户已经是会员了
+                if (isMerchantMember(bean.getObjectId()))
+                    ViewUtils.hideLayout(btnInvite);
                 final RequestYDHelper requestYDHelper = new RequestYDHelper();
                 requestYDHelper.setAppSecretkey(mSecretKey);
+                final String registInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_ADD_MEMBER, "");
+//                btnStatus(btnInvite, bean, registInviteNum);
+                // 已经注册
+                DisplayImageByVolleyUtils.loadImage(bean.getPhoto(), pic);
+                pic.setBackgroundDrawable(null);
+                time.setText(bean.getCreatedAt());
+                ViewUtils.showLayout(time);
+                ViewUtils.hideLayout(picText);
+                if (btnInvite.getText().toString().equals(getString(R.string.str_invite)))
+                    btnInvite.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogStatus(true);
+                            // TODO 后面需要完善推送
+                            // 消息表插入记录
+                            List<String> targets = new ArrayList<String>();
+                            targets.add(bean.getObjectId());
+                            Messages messages = new Messages();
+                            messages.setType(3);
+                            messages.setTargets(targets);
+                            messages.setSender(App.getInstance().getUser());
+                            messages.setTitle("邀请您成为我店的会员");
+                            messages.setContent("邀请您成为我店的会员");
+                            messages.save(context, new SaveListener() {
+                                @Override
+                                public void onSuccess() {
+                                    requestYDHelper.requestPush(//
+                                            new String[]{bean.getObjectId()}, "邀请成功店铺会员", "邀请您成功车店门店会员");
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s) {
+                                    error(s);
+                                    dialogStatus(false);
+                                }
+                            });
+
+                        }
+                    });
+                else
+                    btnInvite.setOnClickListener(null);
+                // 推送的监听
                 requestYDHelper.setOnYDRequestListener(new RequestYDHelper.OnYDRequestListener() {
                     @Override
                     public void onStart() {
@@ -365,13 +457,16 @@ public class InviteMemberActivity extends BaseActivity {
 
                     @Override
                     public void onSucceed(String json) {
+                        dialogStatus(false);
                         String msg = "";
                         if (AppUtils.requestIsOk(json)) {
+                            SPUtils.put(context, Constants.SP_INVITE_ADD_MEMBER, registInviteNum + bean.getMobilePhoneNumber() + ",");
+                            notifyDataSetChanged();
                             msg = "推送发送成功";
                         } else {
                             msg = "推送发送失败";
                         }
-                        T.showShort(context, "推送发送成功");
+                        T.showShort(context, msg);
                     }
 
                     @Override
@@ -384,29 +479,6 @@ public class InviteMemberActivity extends BaseActivity {
                         dialogStatus(false);
                     }
                 });
-                String registInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_ADD_MEMBER, "");
-                btnStatus(btnInvite, bean, registInviteNum);
-                // 已经注册
-                DisplayImageByVolleyUtils.loadImage(bean.getPhoto(), pic);
-                pic.setBackgroundDrawable(null);
-                time.setText(bean.getCreatedAt());
-                ViewUtils.showLayout(time);
-                ViewUtils.hideLayout(picText);
-                if (btnInvite.getText().toString().equals(getString(R.string.str_invite)))
-                    btnInvite.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // 注册了邀请操作
-                            // TODO 后面需要加入推送 用的测试用户ID
-                            // 消息表插入记录
-//                            Messages messages = new Messages();
-//                            notifyDataSetChanged();
-                            requestYDHelper.requestPush(Constants.REQUEST_ID_INVITE_MEMBER,//
-                                    new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功BMOB洗车店门店会员");
-                        }
-                    });
-                else
-                    btnInvite.setOnClickListener(null);
             } else {
                 final String unRegistInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_REGIST, "");
                 L.d("未注册已经验证过的号码:" + unRegistInviteNum);
@@ -447,6 +519,22 @@ public class InviteMemberActivity extends BaseActivity {
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return true;
+        }
+
+        /**
+         * 是否已经是该店铺会员
+         *
+         * @return
+         */
+        public boolean isMerchantMember(String userObjectId) {
+            if (vipsList != null) {
+                for (Vips vips : vipsList) {
+                    User user = vips.getUser();
+                    if (userObjectId.equals(user.getObjectId()))
+                        return true;
+                }
+            }
+            return false;
         }
     }
 

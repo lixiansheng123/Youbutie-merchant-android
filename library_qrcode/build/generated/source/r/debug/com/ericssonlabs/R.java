@@ -46,15 +46,16 @@ public final class R {
     }
     public static final class id {
         public static int auto_focus=0x7f070000;
-        public static int btn_add_qrcode=0x7f070011;
-        public static int btn_scan_barcode=0x7f07000e;
+        public static int btn_add_qrcode=0x7f070012;
+        public static int btn_scan_barcode=0x7f07000f;
         public static int decode=0x7f070001;
         public static int decode_failed=0x7f070002;
         public static int decode_succeeded=0x7f070003;
         public static int encode_failed=0x7f070004;
         public static int encode_succeeded=0x7f070005;
-        public static int et_qr_string=0x7f070010;
-        public static int iv_qr_image=0x7f070012;
+        public static int et_qr_string=0x7f070011;
+        public static int id_back=0x7f07000e;
+        public static int iv_qr_image=0x7f070013;
         public static int launch_product_query=0x7f070006;
         public static int preview_view=0x7f07000c;
         public static int quit=0x7f070007;
@@ -62,7 +63,7 @@ public final class R {
         public static int return_scan_result=0x7f070009;
         public static int search_book_contents_failed=0x7f07000a;
         public static int search_book_contents_succeeded=0x7f07000b;
-        public static int tv_scan_result=0x7f07000f;
+        public static int tv_scan_result=0x7f070010;
         public static int viewfinder_view=0x7f07000d;
     }
     public static final class layout {

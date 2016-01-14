@@ -89,7 +89,6 @@ public class Constants {
     public static final String URL_GET_SECRETKEY = YD_URL + "SecretKey/GetSecretKey";
 
     // requestId
-    public static final String REQUEST_ID_INVITE_MEMBER = "request_id_invite_member";
 }
 
 

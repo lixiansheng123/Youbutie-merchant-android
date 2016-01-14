@@ -33,7 +33,7 @@
                 style="@style/text_white_16sp"
                 android:layout_marginTop="5dp"
                 android:text="￥0"
-                android:textSize="26sp" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <View
@@ -63,7 +63,7 @@
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
 
             </LinearLayout>
@@ -94,7 +94,7 @@
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
 
             </LinearLayout>
@@ -128,7 +128,7 @@
                     style="@style/text_white_14sp"
                     android:layout_marginTop="2dp"
                     android:text="0"
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </com.zhy.android.percent.support.PercentLinearLayout>
