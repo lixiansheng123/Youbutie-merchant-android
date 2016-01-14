@@ -68,3 +68,8 @@
 -keep public class * extends com.umeng.**
 # 以下包不进行过滤
 -keep class com.umeng.** { *; }
+
+#百度推送
+-libraryjars libs/pushservice-4.6.0.66.jar
+-dontwarn com.baidu.**
+-keep class com.baidu.**{*; }

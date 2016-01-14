@@ -107,4 +107,6 @@ dependencies {
     compile project(':library_wheel')
     compile files('libs/umeng-update-v2.6.0.1.jar')
     compile files('libs/com.umeng.fb.5.4.0.jar')
+    compile files('libs/pushservice-4.6.0.66.jar')
+    compile files('src/main/jniLib/pushservice-4.6.0.66.jar')
 }

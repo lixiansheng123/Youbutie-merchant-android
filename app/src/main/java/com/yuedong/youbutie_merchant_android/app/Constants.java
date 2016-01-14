@@ -13,6 +13,8 @@ public class Constants {
     public static final String APIKEY_PUSH_YD = "android6ce073d5af79fa36986dadd3cd0e8a53";
     // 悦动推送secretKey
     public static final String SECRETKEY_PUSH_YD = "36986dadd3cd0e8a";
+    // 百度推送apikey
+    public static final String APIKEY_PUSH_BAIDU = "DmIK1PR9h4khYiO9SdUGfGdt";
 
     //------------------------------sp---------------------------
     public static final String SP_INVITE_REGIST = "sp_invite_regist";
