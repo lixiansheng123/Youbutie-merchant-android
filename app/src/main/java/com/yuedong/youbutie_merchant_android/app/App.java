@@ -42,6 +42,9 @@ public class App extends Application {
     public boolean orderInfoChange;
     // 悦动apiSecretKey
     public String ydApiSecretKey;
+    // APP已经启动 用来标识是否提交channelId 和deviceType
+    public boolean appIsStart = false;
+
 
     /**
      * 获取App secretkey

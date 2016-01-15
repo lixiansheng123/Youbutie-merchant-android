@@ -1,4 +1,4 @@
-package com.yuedong.youbutie_merchant_android.mouble.baidupush;
+package com.yuedong.youbutie_merchant_android.mouble.receive;
 
 import android.content.Context;
 import android.text.TextUtils;

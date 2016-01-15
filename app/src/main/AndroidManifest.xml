@@ -101,7 +101,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- push应用定义消息receiver声明 -->
-        <receiver android:name=".mouble.baidupush.BDPushReceiver" >
+        <receiver android:name=".mouble.receive.BDPushReceiver" >
             <intent-filter>
 
                 <!-- 接收push消息 -->

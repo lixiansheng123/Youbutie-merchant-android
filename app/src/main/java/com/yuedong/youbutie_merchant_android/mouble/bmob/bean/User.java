@@ -23,6 +23,26 @@ public class User extends BmobUser {
     private String bankCard; // 提现银行卡
     private String cardName; // 银行卡持卡人姓名
     private String bankName; // 开户行名称
+    private Integer deviceType; // 设备类型 1ios 2android
+    private String channelId; // 推送标识
+    public static final int DEVICE_IOS = 1; // ios设备
+    public static final int DEVICE_ANDROID = 2; //
+
+    public Integer getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(Integer deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
 
     public Double getCash() {
         return cash;

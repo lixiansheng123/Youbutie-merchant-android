@@ -1,5 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -16,12 +17,12 @@ import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
 import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
-import com.yuedong.youbutie_merchant_android.utils.AppUtils;
-import com.yuedong.youbutie_merchant_android.utils.T;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
+import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
 
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBottomBarClickListener {
     private HomeBarSpanView[] homeBarSpanViews = new HomeBarSpanView[4];
@@ -30,6 +31,8 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     private MerchantManagerFm merchantManagerFm;
     private CountAnalyzeFm countAnalyzeFm;
     private Bundle savedInstanceState;
+    private boolean isStartPush;
+    private BDPushReceiver bdPushBindReceive;
 
 
     @Override
@@ -37,8 +40,8 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setShowContentView(R.layout.activity_main);
-
         init();
+        registerDBPushBindReceive();
     }
 
     private void init() {
@@ -53,7 +56,6 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Constants.APIKEY_PUSH_BAIDU);
-
     }
 
 
@@ -76,6 +78,15 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             resetBottomBarBackground(homeBarSpanViews[chooseIndex]);
             onClick(homeBarSpanViews[chooseIndex]);
         }
+        if (!isStartPush && App.getInstance().isLogin()) {
+            L.d("MainActivity-startWork");
+            // 开启百度推送
+            PushManager.startWork(getApplicationContext(),
+                    PushConstants.LOGIN_TYPE_API_KEY,
+                    Constants.APIKEY_PUSH_BAIDU);
+            isStartPush = true;
+        }
+
         // 更新订单管理信息
         if (App.getInstance().orderInfoChange && (orderManagerFm != null && orderManagerFm.initFinshed)) {
             orderManagerFm.refreshTotalChildFm();
@@ -87,6 +98,26 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         }
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unRegisterDBPushBindReceive();
+    }
+
+    private void unRegisterDBPushBindReceive() {
+        unregisterReceiver(bdPushBindReceive);
+        bdPushBindReceive = null;
+    }
+
+    private void registerDBPushBindReceive() {
+        bdPushBindReceive = new BDPushReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constants.ACTION_DB_PUSH_ONBIND_NOTIFY);
+        registerReceiver(bdPushBindReceive, intentFilter);
+
+    }
+
 
     @Override
     protected void initViews() {
@@ -171,6 +202,31 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             if (bar != v)
                 bar.resetBackground();
         }
+    }
+
+
+    /**
+     * 提交推送标识符和设备类型
+     */
+    private void submitChannelIdAndDeviceType(String channelId) {
+        User curUser = App.getInstance().getUser();
+        User updateUser = new User();
+        updateUser.setDeviceType(User.DEVICE_ANDROID);
+        updateUser.setChannelId(channelId);
+        updateUser.update(context, curUser.getObjectId(), new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                L.d("submitChannelIdAndDeviceType-onSucceed");
+                App.getInstance().appIsStart = true;
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                L.d("submitChannelIdAndDeviceType-onFailure");
+                // 下次再进行提交channelId
+                App.getInstance().appIsStart = false;
+            }
+        });
     }
 
 
