@@ -109,4 +109,5 @@ dependencies {
     compile files('libs/com.umeng.fb.5.4.0.jar')
     compile files('libs/pushservice-4.6.0.66.jar')
     compile files('src/main/jniLib/pushservice-4.6.0.66.jar')
+    compile files('libs/com.umeng.message.lib_v2.6.0.jar')
 }

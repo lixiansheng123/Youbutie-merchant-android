@@ -39,6 +39,30 @@ public class RequestYDHelper {
     private static final String UTF_8 = "UTF-8";
     private char[] hex = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     private int action; // 0获取悦动Secretkey  1请求推送
+    /**
+     * 客户下单成功
+     */
+    public static final int PUSH_TYPE_DOWNORDER = 1;
+    /**
+     * 客户支付成功
+     */
+    public static final int PUSH_TYPE_CLIENT_PAY_SUCCEED = 2;
+    /**
+     * 客户拒绝成为会员
+     */
+    public static final int PUSH_TYPE_CLIENT_REJECT_BECOME_MEMBER = 3;
+    /**
+     * 商家接单
+     */
+    public static final int PUSH_TYPE_MERCHANT_RECEIVE_ORDER = 4;
+    /**
+     * 商家收款
+     */
+    public static final int PUSH_TYPE_MERCHANT_COLLECTION = 5;
+    /**
+     * 商家邀请会员
+     */
+    public static final int PUSH_TYPE_MERCHANT_INVITE_MEMBER = 6;
 
     public void setOnYDRequestListener(OnYDRequestListener onRequestPushListener) {
         this.onRequestYDListener = onRequestPushListener;
@@ -85,6 +109,69 @@ public class RequestYDHelper {
             }
         });
     }
+
+    /**
+     * 推送（single）
+     *
+     * @param title
+     * @param destUid
+     * @param message
+     */
+    public void requestPushSingle(final String title, final String message, final String destUid, final int type, final String orderId, final String userId) {
+        if (mSecretKey == null) {
+            T.showShort(App.getInstance().getAppContext(), "SecretKey为null");
+            return;
+        }
+        action = 1;
+        if (onRequestYDListener != null)
+            onRequestYDListener.onStart();
+        App.getInstance().getExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mHttpURLConnection = getHttpURLConnection(Constants.URL_PUSH_SINGLE);
+                    addHeadInfo();
+                    JSONObject client = new JSONObject();
+                    JSONObject all = new JSONObject();
+                    JSONObject data = new JSONObject();
+                    client.put("caller", Constants.CALLER);
+                    String[] keys = new String[6];
+                    data.put("title", title);
+                    keys[0] = "title";
+                    data.put("destUid", destUid);
+                    keys[1] = "destUid";
+                    data.put("message", message);
+                    keys[2] = "message";
+                    data.put("type", type);
+                    keys[3] = "type";
+                    if (StringUtil.isNotEmpty(orderId)) {
+                        data.put("orderId", orderId);
+                        keys[4] = "orderId";
+                    } else {
+                        keys[4] = "";
+                    }
+                    if (StringUtil.isNotEmpty(userId)) {
+                        data.put("userId", userId);
+                        keys[5] = "userId";
+                    } else {
+                        keys[5] = "";
+                    }
+                    all.put("data", data);
+                    all.put("client", client);
+                    all.put("v", Constants.V);
+                    all.put("sign", sign(keys, data));
+                    String result = writeAndResult(all);
+                    responseSucceed(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    responseFail(e);
+                } finally {
+                    disconnect();
+                }
+            }
+        });
+    }
+
 
     /**
      * 请求推送

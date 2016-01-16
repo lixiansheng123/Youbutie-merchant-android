@@ -1,5 +1,8 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,7 @@ import com.baidu.android.pushservice.PushSettings;
 import com.umeng.update.UmengUpdateAgent;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
+import com.yuedong.youbutie_merchant_android.bean.SerializableMap;
 import com.yuedong.youbutie_merchant_android.fragment.ClientManagetFm;
 import com.yuedong.youbutie_merchant_android.fragment.CountAnalyzeFm;
 import com.yuedong.youbutie_merchant_android.fragment.MerchantManagerFm;
@@ -18,9 +22,13 @@ import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
+
+import java.util.Map;
 
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -31,8 +39,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     private MerchantManagerFm merchantManagerFm;
     private CountAnalyzeFm countAnalyzeFm;
     private Bundle savedInstanceState;
-    private boolean isStartPush;
-    private BDPushReceiver bdPushBindReceive;
+    private BDPushBindReceive bdPushBindReceive;
 
 
     @Override
@@ -56,6 +63,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Constants.APIKEY_PUSH_BAIDU);
+
     }
 
 
@@ -77,14 +85,6 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
             homeBarSpanViews[chooseIndex].changeStyle(true);
             resetBottomBarBackground(homeBarSpanViews[chooseIndex]);
             onClick(homeBarSpanViews[chooseIndex]);
-        }
-        if (!isStartPush && App.getInstance().isLogin()) {
-            L.d("MainActivity-startWork");
-            // 开启百度推送
-            PushManager.startWork(getApplicationContext(),
-                    PushConstants.LOGIN_TYPE_API_KEY,
-                    Constants.APIKEY_PUSH_BAIDU);
-            isStartPush = true;
         }
 
         // 更新订单管理信息
@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     }
 
     private void registerDBPushBindReceive() {
-        bdPushBindReceive = new BDPushReceiver();
+        bdPushBindReceive = new BDPushBindReceive();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constants.ACTION_DB_PUSH_ONBIND_NOTIFY);
         registerReceiver(bdPushBindReceive, intentFilter);
@@ -204,6 +204,23 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         }
     }
 
+    // 注册广播接受者 App进行百度推送版定成功的时候会发广播发送到这里
+    private class BDPushBindReceive extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+                Bundle extras = intent.getExtras();
+                SerializableMap serializableMap = (SerializableMap) extras.getSerializable(Constants.KEY_BEAN);
+                Map<String, Object> map = serializableMap.getMap();
+                String channelId = (String) map.get(BDPushReceiver.CHANNEL_ID);
+                int errorCode = (int) map.get(BDPushReceiver.ERROR_CODE);
+                if (errorCode == 0)
+                    submitChannelIdAndDeviceType(channelId);
+            }
+        }
+    }
+
 
     /**
      * 提交推送标识符和设备类型
@@ -229,5 +246,12 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         });
     }
 
-
+    @Override
+    protected void notifyMsg(int msgType, Map<String, Object> data) {
+        if (msgType == RequestYDHelper.PUSH_TYPE_DOWNORDER) {
+            // 刷新订单列表
+            if (orderManagerFm != null && orderManagerFm.initFinshed)
+                orderManagerFm.refreshTotalChildFm();
+        }
+    }
 }

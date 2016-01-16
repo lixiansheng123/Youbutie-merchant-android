@@ -147,4 +147,6 @@
     <string name="str_exchange">兑换</string>
     <string name="str_get_succeed_desc" formatted="false">车主%s已领走了%s个%s</string>
     <string name="str_already_get">已领取</string>
+    <string name="str_push_receive_order_title">商家接单了</string>
+    <string name="str_push_receive_order_message">商家接单了 快来看看吧</string>
 </resources>

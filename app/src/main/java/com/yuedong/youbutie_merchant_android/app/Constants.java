@@ -80,6 +80,7 @@ public class Constants {
     public static final String DESC_GET_SUCCEED = "车主%s已领走了%s个%s";
     /* 百度推送绑定好了通知 */
     public static final String ACTION_DB_PUSH_ONBIND_NOTIFY = "action_notify_db_push_bind";
+    public static final String ACTION_NOTIFY = "action_notify";
 
     // 悦动接口版本
     public static final String V = "2.1";
@@ -91,6 +92,7 @@ public class Constants {
     private static final String YD_URL = "http://youbutie.pkball.cn/";
     public static final String URL_UMENG_PUSH = YD_URL + "UmengPush/AndroidGroupcast";
     public static final String URL_GET_SECRETKEY = YD_URL + "SecretKey/GetSecretKey";
+    public static final String URL_PUSH_SINGLE = YD_URL + "BaiduPush/pushMsgToSingle";
 
     // requestId
 }

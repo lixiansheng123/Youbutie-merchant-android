@@ -1,8 +1,11 @@
 package com.yuedong.youbutie_merchant_android.framework;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.AnimationDrawable;
@@ -22,12 +25,20 @@ import android.widget.RelativeLayout;
 
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Config;
+import com.yuedong.youbutie_merchant_android.app.Constants;
+import com.yuedong.youbutie_merchant_android.bean.SerializableMap;
+import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
 import com.yuedong.youbutie_merchant_android.utils.ActivityTaskUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
+
+import org.json.JSONObject;
+
+import java.util.Map;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected RelativeLayout mMainLayout;
@@ -59,12 +70,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TypedArray a = obtainStyledAttributes(new int[]{android.support.design.R.attr.colorPrimary});
-        final boolean has = a.hasValue(0);
-        if (a != null) {
-            a.recycle();
-        }
-        L.d("主题" + has);
         ActivityTaskUtils.getInstance().addActivity(this);
         context = this;
         activity = this;
@@ -72,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        setShowContentView(new TabLayout(this));
         initDialog();
         initSystemBar(Config.STATUSBAR_COLOR);
+        registNotifyMsgReceive();
     }
 
     protected void onCreate(Bundle savedInstanceState, boolean initSystemBar) {
@@ -83,6 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initDialog();
         if (initSystemBar)
             initSystemBar(Config.STATUSBAR_COLOR);
+        registNotifyMsgReceive();
     }
 
     @Override
@@ -190,6 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unRegistNotifyMsgRecevie();
         ActivityTaskUtils.getInstance().reomveActivity(this);
     }
 
@@ -342,6 +350,44 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void error(String s) {
         L.e("error:" + s);
         T.showLong(context, "出现错误:" + s);
+    }
+
+    private class NotifyMsgReceive extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                SerializableMap serializableMap = (SerializableMap) intent.getSerializableExtra(Constants.KEY_BEAN);
+                Map<String, Object> map = serializableMap.getMap();
+                String json = (String) map.get(BDPushReceiver.CUSTOM_CONTENT);
+                JSONObject jsonObject = new JSONObject(json);
+                int type = jsonObject.getInt("type");
+                notifyMsg(type, map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private NotifyMsgReceive notifyMsgReceive;
+
+    private void registNotifyMsgReceive() {
+        notifyMsgReceive = new NotifyMsgReceive();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constants.ACTION_NOTIFY);
+        registerReceiver(notifyMsgReceive, intentFilter);
+    }
+
+    private void unRegistNotifyMsgRecevie() {
+        if (notifyMsgReceive != null) {
+            unregisterReceiver(notifyMsgReceive);
+            notifyMsgReceive = null;
+        }
+    }
+
+    /**
+     * 接收到通知了
+     */
+    protected void notifyMsg(int msgType, Map<String, Object> data) {
     }
 
     protected abstract void initViews();

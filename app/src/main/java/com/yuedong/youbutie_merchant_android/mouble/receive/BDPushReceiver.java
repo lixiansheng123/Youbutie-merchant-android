@@ -1,16 +1,28 @@
 package com.yuedong.youbutie_merchant_android.mouble.receive;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.android.pushservice.PushMessageReceiver;
+import com.yuedong.youbutie_merchant_android.LoginActivity;
+import com.yuedong.youbutie_merchant_android.MainActivity;
+import com.yuedong.youbutie_merchant_android.app.App;
+import com.yuedong.youbutie_merchant_android.app.Constants;
+import com.yuedong.youbutie_merchant_android.bean.SerializableMap;
 import com.yuedong.youbutie_merchant_android.utils.L;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  * Push消息处理receiver。请编写您需要的回调函数， 一般来说： onBind是必须的，用来处理startWork返回值；
@@ -37,6 +49,17 @@ public class BDPushReceiver extends PushMessageReceiver {
      * TAG to Log
      */
     public static final String TAG = "BDPushReceiver";
+    private static final int TYPE_NOTIFY_ONBIND = 0x001;
+    private static final int TYPE_RECEIVE_MESSAGE = 0x002;
+    private static final int TYPE_NOTIFY_CLICK = 0x003;
+    public static final String ERROR_CODE = "errorCode";
+    public static final String APP_ID = "appid";
+    public static final String USER_ID = "userId";
+    public static final String CHANNEL_ID = "channelId";
+    public static final String REQUEST_ID = "requestId";
+    public static final String TITLE = "title";
+    public static final String DESC = "desc";
+    public static final String CUSTOM_CONTENT = "custom_content";
 
     /**
      * 调用PushManager.startWork后，sdk将对push
@@ -54,17 +77,14 @@ public class BDPushReceiver extends PushMessageReceiver {
     @Override
     public void onBind(Context context, int errorCode, String appid,
                        String userId, String channelId, String requestId) {
-        String responseString = "onBind errorCode=" + errorCode + " appid="
-                + appid + " userId=" + userId + " channelId=" + channelId
-                + " requestId=" + requestId;
-        L.d(TAG + responseString);
-
-        if (errorCode == 0) {
-            // 绑定成功
-            L.d(TAG + "绑定成功");
-        }
-        // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, responseString);
+        L.d("onBind-errorCode:" + errorCode);
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put(ERROR_CODE, errorCode);
+        data.put(USER_ID, userId);
+        data.put(APP_ID, appid);
+        data.put(CHANNEL_ID, channelId);
+        data.put(REQUEST_ID, requestId);
+        notify(context, data, TYPE_NOTIFY_ONBIND);
     }
 
     /**
@@ -97,7 +117,6 @@ public class BDPushReceiver extends PushMessageReceiver {
         }
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, messageString);
     }
 
     /**
@@ -111,27 +130,27 @@ public class BDPushReceiver extends PushMessageReceiver {
     @Override
     public void onNotificationClicked(Context context, String title,
                                       String description, String customContentString) {
-        String notifyString = "通知点击 title=\"" + title + "\" description=\""
-                + description + "\" customContent=" + customContentString;
-        L.d(TAG + notifyString);
+//        String notifyString = "通知点击 title=\"" + title + "\" description=\""
+//                + description + "\" customContent=" + customContentString;
+//        L.d(TAG + notifyString);
+//
+//        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
+//        if (!TextUtils.isEmpty(customContentString)) {
+//            JSONObject customJson = null;
+//            try {
+//                customJson = new JSONObject(customContentString);
+//                String myvalue = null;
+//                if (!customJson.isNull("mykey")) {
+//                    myvalue = customJson.getString("mykey");
+//                }
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+        Map<String, Object> data = getMap(title, description, customContentString);
+        notify(context, data, TYPE_NOTIFY_CLICK);
 
-        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
-        if (!TextUtils.isEmpty(customContentString)) {
-            JSONObject customJson = null;
-            try {
-                customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-        // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, notifyString);
     }
 
     /**
@@ -150,25 +169,10 @@ public class BDPushReceiver extends PushMessageReceiver {
         String notifyString = "onNotificationArrived  title=\"" + title
                 + "\" description=\"" + description + "\" customContent="
                 + customContentString;
-        L.d(TAG +notifyString);
+        L.d(TAG + notifyString);
 
-        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
-        if (!TextUtils.isEmpty(customContentString)) {
-            JSONObject customJson = null;
-            try {
-                customJson = new JSONObject(customContentString);
-                String myvalue = null;
-                if (!customJson.isNull("mykey")) {
-                    myvalue = customJson.getString("mykey");
-                }
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        // 你可以參考 onNotificationClicked中的提示从自定义内容获取具体值
-        updateContent(context, notifyString);
+        Map<String, Object> data = getMap(title, description, customContentString);
+        notify(context, data, TYPE_RECEIVE_MESSAGE);
     }
 
     /**
@@ -189,7 +193,6 @@ public class BDPushReceiver extends PushMessageReceiver {
         L.d(TAG + responseString);
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, responseString);
     }
 
     /**
@@ -210,7 +213,6 @@ public class BDPushReceiver extends PushMessageReceiver {
         L.d(TAG + responseString);
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, responseString);
     }
 
     /**
@@ -229,7 +231,6 @@ public class BDPushReceiver extends PushMessageReceiver {
         L.d(TAG + responseString);
 
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, responseString);
     }
 
     /**
@@ -250,26 +251,49 @@ public class BDPushReceiver extends PushMessageReceiver {
             Log.d(TAG, "解绑成功");
         }
         // Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-        updateContent(context, responseString);
     }
 
-    private void updateContent(Context context, String content) {
-//        Log.d(TAG, "updateContent");
-//        String logText = "" + Utils.logStringCache;
-//
-//        if (!logText.equals("")) {
-//            logText += "\n";
-//        }
-//
-//        SimpleDateFormat sDateFormat = new SimpleDateFormat("HH-mm-ss");
-//        logText += sDateFormat.format(new Date()) + ": ";
-//        logText += content;
-//
-//        Utils.logStringCache = logText;
-//
-//        Intent intent = new Intent();
-//        intent.setClass(context.getApplicationContext(), PushDemoActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        context.getApplicationContext().startActivity(intent);
+    private void notify(Context context, Map<String, Object> data, int type) {
+        if (type == TYPE_NOTIFY_ONBIND) {
+            // 发送广播通知提交推送标识符
+            if (!App.getInstance().appIsStart) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                SerializableMap serializableMap = new SerializableMap();
+                serializableMap.setMap(data);
+                bundle.putSerializable(Constants.KEY_BEAN, serializableMap);
+                intent.putExtras(bundle);
+                intent.setAction(Constants.ACTION_DB_PUSH_ONBIND_NOTIFY);
+                context.sendBroadcast(intent);
+            }
+        } else if (type == TYPE_RECEIVE_MESSAGE) {
+            String json = (String) data.get(CUSTOM_CONTENT);
+            SerializableMap serializableMap = new SerializableMap();
+            serializableMap.setMap(data);
+            Intent intent = new Intent();
+            intent.putExtra(Constants.KEY_BEAN, serializableMap);
+            intent.setAction(Constants.ACTION_NOTIFY);
+            context.sendBroadcast(intent);
+        } else if (type == TYPE_NOTIFY_CLICK) {
+            Class<? extends Activity> cls = null;
+            if (App.getInstance().isLogin())
+                cls = MainActivity.class;
+            else
+                cls = LoginActivity.class;
+            Intent intent = new Intent(context, cls);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            L.d(TAG + "====start activity");
+        }
+    }
+
+
+    @NonNull
+    private Map<String, Object> getMap(String title, String description, String customContentString) {
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put(TITLE, title);
+        data.put(DESC, description);
+        data.put(CUSTOM_CONTENT, customContentString);
+        return data;
     }
 }

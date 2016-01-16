@@ -27,9 +27,12 @@ import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ExchangedRecord;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.TextUtils;
@@ -212,7 +215,7 @@ public class OrderManagerFm extends BaseFragment {
     }
 
 
-    public void receiveOrder(Order order) {
+    public void receiveOrder(final Order order) {
         loadDialog.setMessage("努力提交数据..");
         dialogStatus(true);
         Order updateOrder = new Order();
@@ -220,10 +223,38 @@ public class OrderManagerFm extends BaseFragment {
         updateOrder.update(getActivity(), order.getObjectId(), new UpdateListener() {
             @Override
             public void onSuccess() {
-                dialogStatus(false);
-                T.showShort(getActivity(), "接单成功");
-                // 更新3个切换页数据
-                refreshTotalChildFm();
+                // 发送通知 通知客户端商家接单了
+                App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                    @Override
+                    public void start() {
+
+                    }
+
+                    @Override
+                    public void end() {
+
+                    }
+
+                    @Override
+                    public void succeed(String secretKey) {
+                        User orderUser = order.getUser();
+                        RequestYDHelper requestYDHelper = new RequestYDHelper();
+                        requestYDHelper.setAppSecretkey(secretKey);
+                        requestYDHelper.requestPushSingle(getString(R.string.str_push_receive_order_title), getString(R.string.str_push_receive_order_message), orderUser.getObjectId(), RequestYDHelper.PUSH_TYPE_MERCHANT_RECEIVE_ORDER, "", "");
+                        dialogStatus(false);
+                        T.showShort(getActivity(), "接单成功");
+                        // 更新3个切换页数据
+                        refreshTotalChildFm();
+                    }
+
+                    @Override
+                    public void fail(int code, String error) {
+                        dialogStatus(false);
+                        T.showShort(getActivity(), error);
+                    }
+                });
+
+
             }
 
             @Override

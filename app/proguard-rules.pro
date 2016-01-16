@@ -23,16 +23,7 @@
 -keepattributes Signature
 -keep class cn.bmob.v3.** {*;}
 # 保证继承自BmobObject、BmobUser类的JavaBean不被混淆
--keep class com.example.bmobexample.bean.BankCard{*;}
--keep class com.example.bmobexample.bean.GameScore{*;}
--keep class com.example.bmobexample.bean.MyUser{*;}
--keep class com.example.bmobexample.bean.Person{*;}
-
--keep class com.example.bmobexample.file.Movie{*;}
--keep class com.example.bmobexample.file.Song{*;}
-
--keep class com.example.bmobexample.relation.Post{*;}
--keep class com.example.bmobexample.relation.Comment{*;}
+-keep class com.yuedong.youbutie_merchant_android.mouble.bmob.bean.**{*;}
 
 # 如果你使用了okhttp、okio的包，请添加以下混淆代码
 -dontwarn com.squareup.okhttp.**
@@ -40,15 +31,16 @@
 -keep interface com.squareup.okhttp.** { *; }
 -dontwarn okio.**
 
-#umeng反馈
+#umeng反馈----------------------------------------
 -keepclassmembers class * {
     public <init>(org.json.JSONObject);
 }
-
-#把[您的应用包名] 替换成您自己的包名，如"com.example.R$*"。
 -keep public class com.yuedong.youbutie_merchant_android.R$*{
     public static final int *;
 }
+
+-keep public class com.umeng.fb.** { *;}
+-keep public class com.umeng.fb.ui.ThreadView { }
 
 -keepclassmembers enum * {
     public static **[] values();
@@ -70,6 +62,8 @@
 -keep class com.umeng.** { *; }
 
 #百度推送
--libraryjars libs/pushservice-4.6.0.66.jar
+#-libraryjars libs/pushservice-4.6.0.66.jar
 -dontwarn com.baidu.**
 -keep class com.baidu.**{*; }
+
+
