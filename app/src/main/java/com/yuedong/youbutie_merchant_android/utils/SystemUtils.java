@@ -2,6 +2,8 @@ package com.yuedong.youbutie_merchant_android.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -24,6 +26,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.*;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
 
@@ -440,6 +443,7 @@ public final class SystemUtils {
                 // 当手机号码为空的或者为空字段 跳过当前循环
                 if (android.text.TextUtils.isEmpty(phoneNumber))
                     continue;
+                phoneNumber = phoneNumber.replace(" ", "");
                 // 得到联系人名称
                 String contactName = phoneCursor
                         .getString(PHONES_DISPLAY_NAME_INDEX);
@@ -490,18 +494,43 @@ public final class SystemUtils {
                 // 当手机号码为空的或者为空字段 跳过当前循环
                 if (android.text.TextUtils.isEmpty(phoneNumber))
                     continue;
+                phoneNumber = phoneNumber.replace(" ", "");
                 // 得到联系人名称
                 String contactName = phoneCursor
                         .getString(PHONES_DISPLAY_NAME_INDEX);
                 // Sim卡中没有联系人头像
                 PhoneAddressBookBean bean = new PhoneAddressBookBean();
                 bean.setPhoneNumber(phoneNumber);
+
                 bean.setContactName(contactName);
                 simNumbers.add(bean);
             }
             phoneCursor.close();
         }
         return simNumbers;
+    }
+
+    /**
+     * 判断某个界面是否在前台
+     *
+     * @param context
+     * @param className 某个界面名称
+     */
+    private boolean activityIsForeground(Context context, String className) {
+        if (context == null || TextUtils.isEmpty(className)) {
+            return false;
+        }
+
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+        if (list != null && list.size() > 0) {
+            ComponentName cpn = list.get(0).topActivity;
+            if (className.equals(cpn.getClassName())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

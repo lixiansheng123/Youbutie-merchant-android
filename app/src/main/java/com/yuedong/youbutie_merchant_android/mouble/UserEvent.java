@@ -17,6 +17,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.RequestSMSCodeListener;
 
 /**
@@ -36,6 +37,30 @@ public class UserEvent implements BaseEvent {
             }
         }
         return INSTANCE;
+
+    }
+
+    /**
+     * 获取用户根据id
+     * @param userId
+     * @param listener
+     */
+    public void findUserById(String userId, final GetListener<User> listener) {
+        listener.onStart();
+        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
+        userBmobQuery.getObject(context, userId, new GetListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                listener.onSuccess(user);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+                listener.onFinish();
+            }
+        });
 
     }
 

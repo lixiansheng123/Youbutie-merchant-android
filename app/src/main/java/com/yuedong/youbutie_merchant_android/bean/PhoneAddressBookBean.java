@@ -71,4 +71,17 @@ public class PhoneAddressBookBean implements Serializable {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "PhoneAddressBookBean{" +
+                "phoneId='" + phoneId + '\'' +
+                ", contactName='" + contactName + '\'' +
+                ", contactid='" + contactid + '\'' +
+                ", photoid='" + photoid + '\'' +
+                ", contactPhoto=" + contactPhoto +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", sortLetters='" + sortLetters + '\'' +
+                '}';
+    }
 }

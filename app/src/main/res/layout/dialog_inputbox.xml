@@ -9,8 +9,8 @@
         android:id="@+id/id_title"
         style="@style/text_white_18sp"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/yellowf0c008"
+        android:layout_height="40dp"
+        android:background="@color/yellowFFFADA58"
         android:gravity="center"
         android:text="请输入价格" />
 
@@ -33,12 +33,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/id_btn_confirm"
-            style="@style/text_yellow_16sp"
+            style="@style/text_yellow_14sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
 
         <Button
             android:id="@+id/id_btn_cancle"
-            style="@style/text_yellow_16sp"
+            style="@style/text_yellow_14sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

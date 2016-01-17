@@ -130,24 +130,6 @@ public class BDPushReceiver extends PushMessageReceiver {
     @Override
     public void onNotificationClicked(Context context, String title,
                                       String description, String customContentString) {
-//        String notifyString = "通知点击 title=\"" + title + "\" description=\""
-//                + description + "\" customContent=" + customContentString;
-//        L.d(TAG + notifyString);
-//
-//        // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
-//        if (!TextUtils.isEmpty(customContentString)) {
-//            JSONObject customJson = null;
-//            try {
-//                customJson = new JSONObject(customContentString);
-//                String myvalue = null;
-//                if (!customJson.isNull("mykey")) {
-//                    myvalue = customJson.getString("mykey");
-//                }
-//            } catch (JSONException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
         Map<String, Object> data = getMap(title, description, customContentString);
         notify(context, data, TYPE_NOTIFY_CLICK);
 

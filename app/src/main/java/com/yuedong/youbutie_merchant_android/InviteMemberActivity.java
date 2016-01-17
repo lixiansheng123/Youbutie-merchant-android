@@ -1,6 +1,7 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -34,7 +35,6 @@ import com.yuedong.youbutie_merchant_android.utils.SPUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.SystemUtils;
 import com.yuedong.youbutie_merchant_android.utils.T;
-import com.yuedong.youbutie_merchant_android.utils.TextUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
@@ -43,9 +43,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -58,6 +59,7 @@ public class InviteMemberActivity extends BaseActivity {
     private List<PhoneAddressBookBean> phoneContacts;
     private MyAdapter myAdapter;
     private String mSecretKey;
+    private Merchant merchant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +102,7 @@ public class InviteMemberActivity extends BaseActivity {
             @Override
             public void onSuccess(List<Merchant> list) {
                 dialogStatus(true);
-                Merchant merchant = list.get(0);
+                merchant = list.get(0);
                 // 获取店铺vip用户
                 VipEvent.getInstance().findVipByMerchant(merchant.getObjectId(), new FindListener<Vips>() {
                     @Override
@@ -121,10 +123,6 @@ public class InviteMemberActivity extends BaseActivity {
                             @Override
                             public void succeed(String secretKey) {
                                 mSecretKey = secretKey;
-                                RequestYDHelper requestYDHelper = new RequestYDHelper();
-                                requestYDHelper.setAppSecretkey(mSecretKey);
-                                requestYDHelper.requestPush(//
-                                        new String[]{"5MWw666Q"}, "邀请成功店铺会员", "邀请您成功车店门店会员");
                                 // 获取手机的通讯录信息
                                 App.getInstance().getExecutor().execute(new Runnable() {
                                     @Override
@@ -138,7 +136,6 @@ public class InviteMemberActivity extends BaseActivity {
                                             if (!bookBean.getPhoneNumber().matches(Config.REGEX_TEL))
                                                 phoneAddressBookBeanIterator.remove();
                                         }
-
                                         // 获取手机通讯录信息完毕
                                         List<String> mobiles = new ArrayList<String>();
                                         for (PhoneAddressBookBean bookBean : phoneContacts) {
@@ -146,7 +143,6 @@ public class InviteMemberActivity extends BaseActivity {
                                                 mobiles.add(bookBean.getPhoneNumber());
                                             }
                                         }
-                                        L.d("手机通讯录电话------>>" + mobiles.size());
                                         final List<String> tempMobiles = mobiles;
                                         if (CommonUtils.listIsNotNull(tempMobiles)) {
                                             mainHandle.post(new Runnable() {
@@ -408,7 +404,7 @@ public class InviteMemberActivity extends BaseActivity {
                 final RequestYDHelper requestYDHelper = new RequestYDHelper();
                 requestYDHelper.setAppSecretkey(mSecretKey);
                 final String registInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_ADD_MEMBER, "");
-//                btnStatus(btnInvite, bean, registInviteNum);
+                btnStatus(btnInvite, bean, registInviteNum);
                 // 已经注册
                 DisplayImageByVolleyUtils.loadImage(bean.getPhoto(), pic);
                 pic.setBackgroundDrawable(null);
@@ -420,21 +416,24 @@ public class InviteMemberActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             dialogStatus(true);
-                            // TODO 后面需要完善推送
                             // 消息表插入记录
                             List<String> targets = new ArrayList<String>();
                             targets.add(bean.getObjectId());
                             Messages messages = new Messages();
                             messages.setType(3);
                             messages.setTargets(targets);
+                            messages.setMerchant(merchant);
                             messages.setSender(App.getInstance().getUser());
-                            messages.setTitle("邀请您成为我店的会员");
-                            messages.setContent("邀请您成为我店的会员");
+                            messages.setTitle(getString(R.string.str_push_merchant_invite_member_title));
+                            messages.setContent(String.format(getString(R.string.str_push_merchant_invite_member_content), merchant.getName()));
                             messages.save(context, new SaveListener() {
                                 @Override
                                 public void onSuccess() {
-                                    requestYDHelper.requestPush(//
-                                            new String[]{bean.getObjectId()}, "邀请成功店铺会员", "邀请您成功车店门店会员");
+                                    dialogStatus(false);
+                                    // 发送推送
+                                    requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_invite_member_title), String.format(getString(R.string.str_push_merchant_invite_member_content), merchant.getName()), bean.getObjectId(), RequestYDHelper.PUSH_TYPE_MERCHANT_INVITE_MEMBER, "", bean.getObjectId());
+                                    SPUtils.put(context, Constants.SP_INVITE_ADD_MEMBER, registInviteNum + bean.getMobilePhoneNumber() + ",");
+                                    notifyDataSetChanged();
                                 }
 
                                 @Override
@@ -448,37 +447,7 @@ public class InviteMemberActivity extends BaseActivity {
                     });
                 else
                     btnInvite.setOnClickListener(null);
-                // 推送的监听
-                requestYDHelper.setOnYDRequestListener(new RequestYDHelper.OnYDRequestListener() {
-                    @Override
-                    public void onStart() {
-                        dialogStatus(true);
-                    }
 
-                    @Override
-                    public void onSucceed(String json) {
-                        dialogStatus(false);
-                        String msg = "";
-                        if (AppUtils.requestIsOk(json)) {
-                            SPUtils.put(context, Constants.SP_INVITE_ADD_MEMBER, registInviteNum + bean.getMobilePhoneNumber() + ",");
-                            notifyDataSetChanged();
-                            msg = "推送发送成功";
-                        } else {
-                            msg = "推送发送失败";
-                        }
-                        T.showShort(context, msg);
-                    }
-
-                    @Override
-                    public void onFail(Exception e) {
-
-                    }
-
-                    @Override
-                    public void onEnd() {
-                        dialogStatus(false);
-                    }
-                });
             } else {
                 final String unRegistInviteNum = (String) SPUtils.get(context, Constants.SP_INVITE_REGIST, "");
                 L.d("未注册已经验证过的号码:" + unRegistInviteNum);
@@ -554,6 +523,16 @@ public class InviteMemberActivity extends BaseActivity {
             btnInvite.setText(getString(R.string.str_invite));
         }
     }
-
-
+    /*本想在这个页面的时候被拒绝会刷新状态 因为数据并没有发生变化所以刷新也没有用 不会有效果的*/
+//    @Override
+//    protected void notifyMsg(int msgType, Map<String, Object> data, JSONObject jsonObject) {
+//        super.notifyMsg(msgType, data, jsonObject);
+//        L.d("notifyMsg-child-start");
+//        if (msgType == RequestYDHelper.PUSH_TYPE_MERCHANT_INVITE_MEMBER) {
+//            L.d("notifyMsg-child-end");
+//            if (myAdapter != null) {
+//                myAdapter.notifyDataSetChanged();
+//            }
+//        }
+//    }
 }

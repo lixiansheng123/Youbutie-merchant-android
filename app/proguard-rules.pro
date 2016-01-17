@@ -24,6 +24,7 @@
 -keep class cn.bmob.v3.** {*;}
 # 保证继承自BmobObject、BmobUser类的JavaBean不被混淆
 -keep class com.yuedong.youbutie_merchant_android.mouble.bmob.bean.**{*;}
+-keep class com.yuedong.youbutie_merchant_android.bean.**{*;}
 
 # 如果你使用了okhttp、okio的包，请添加以下混淆代码
 -dontwarn com.squareup.okhttp.**
@@ -65,5 +66,14 @@
 #-libraryjars libs/pushservice-4.6.0.66.jar
 -dontwarn com.baidu.**
 -keep class com.baidu.**{*; }
-
-
+ -keep public class * extends android.app.Fragment
+ -keep public class * extends android.app.Activity
+ -keep public class * extends android.app.Application
+ -keep public class * extends android.app.Service
+ -keep public class * extends android.content.BroadcastReceiver
+ -keep public class * extends android.content.ContentProvider
+ -keep public class * extends android.app.backup.BackupAgentHelper
+ -keep public class * extends android.preference.Preference
+ -keep public class * extends android.support.v4.**
+ -keep public class com.android.vending.licensing.ILicensingService
+ -keep public class * extends java.lang.Exception

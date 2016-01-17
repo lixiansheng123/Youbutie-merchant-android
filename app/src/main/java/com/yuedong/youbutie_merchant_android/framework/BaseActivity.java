@@ -18,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -27,11 +28,15 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.SerializableMap;
+import com.yuedong.youbutie_merchant_android.mouble.UserEvent;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
 import com.yuedong.youbutie_merchant_android.utils.ActivityTaskUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
+import com.yuedong.youbutie_merchant_android.utils.SPUtils;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
@@ -39,6 +44,8 @@ import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
 import org.json.JSONObject;
 
 import java.util.Map;
+
+import cn.bmob.v3.listener.GetListener;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected RelativeLayout mMainLayout;
@@ -361,7 +368,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 String json = (String) map.get(BDPushReceiver.CUSTOM_CONTENT);
                 JSONObject jsonObject = new JSONObject(json);
                 int type = jsonObject.getInt("type");
-                notifyMsg(type, map);
+                notifyMsg(type, map, jsonObject);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -387,7 +394,38 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 接收到通知了
      */
-    protected void notifyMsg(int msgType, Map<String, Object> data) {
+    protected void notifyMsg(int msgType, Map<String, Object> data, JSONObject jsonObject) {
+        if (msgType == RequestYDHelper.PUSH_TYPE_MERCHANT_INVITE_MEMBER) {
+            try {
+                String userId = jsonObject.getString("userId");
+                if (StringUtil.isNotEmpty(userId)) {
+                    UserEvent.getInstance().findUserById(userId, new GetListener<User>() {
+                        @Override
+                        public void onSuccess(User user) {
+                            String mobilePhoneNumber = user.getMobilePhoneNumber();
+                            if (!TextUtils.isEmpty(mobilePhoneNumber)) {
+                                String sendMobile = (String) SPUtils.get(context, Constants.SP_INVITE_ADD_MEMBER, "");
+                                if (sendMobile.contains(mobilePhoneNumber)) {
+                                    L.d("sendMobile:start" + sendMobile);
+                                    sendMobile = sendMobile.replace(mobilePhoneNumber, "");
+                                    L.d("sendMobile:end" + sendMobile);
+                                    SPUtils.put(context, Constants.SP_INVITE_ADD_MEMBER, sendMobile);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            L.d("findUserById-onFailure:" + s);
+                        }
+                    });
+
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
     }
 
     protected abstract void initViews();

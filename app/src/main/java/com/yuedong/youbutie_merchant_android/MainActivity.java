@@ -22,11 +22,12 @@ import com.yuedong.youbutie_merchant_android.fragment.OrderManagerFm;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -247,7 +248,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     }
 
     @Override
-    protected void notifyMsg(int msgType, Map<String, Object> data) {
+    protected void notifyMsg(int msgType, Map<String, Object> data, JSONObject jsonObject) {
         if (msgType == RequestYDHelper.PUSH_TYPE_DOWNORDER) {
             // 刷新订单列表
             if (orderManagerFm != null && orderManagerFm.initFinshed)

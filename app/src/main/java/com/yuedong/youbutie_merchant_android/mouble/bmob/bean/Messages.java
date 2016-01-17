@@ -16,6 +16,15 @@ public class Messages extends BmobObject {
     private User sender; // 用户（商家）
     private List<String> targets; //用户（客户）
     private Integer state = 0;
+    private Merchant merchant; // 门店
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
 
     public Integer getState() {
         return state;

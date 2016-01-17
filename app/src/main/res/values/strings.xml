@@ -149,4 +149,8 @@
     <string name="str_already_get">已领取</string>
     <string name="str_push_receive_order_title">商家接单了</string>
     <string name="str_push_receive_order_message">商家接单了 快来看看吧</string>
+    <string name="str_push_merchant_collect_title">商家收款</string>
+    <string name="str_push_merchant_collect_msg">商家收款拉</string>
+    <string name="str_push_merchant_invite_member_title">门店邀请会员</string>
+    <string name="str_push_merchant_invite_member_content" formatted="false">%s邀请您成为该门店会员</string>
 </resources>

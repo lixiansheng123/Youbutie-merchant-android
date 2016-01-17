@@ -173,59 +173,6 @@ public class RequestYDHelper {
     }
 
 
-    /**
-     * 请求推送
-     *
-     * @param uids
-     * @param title
-     * @param content
-     */
-    public void requestPush(final String[] uids, final String title, final String content) {
-
-        if (mSecretKey == null) {
-            T.showShort(App.getInstance().getAppContext(), "SecretKey为null");
-            return;
-        }
-        action = 1;
-        if (onRequestYDListener != null)
-            onRequestYDListener.onStart();
-        StringBuilder sb = new StringBuilder();
-        for (String uid : uids) {
-            sb.append(uid + ",");
-        }
-        if (sb.length() > 0)
-            sb.deleteCharAt(sb.length() - 1);
-        final String uidsStr = sb.toString();
-        App.getInstance().getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    mHttpURLConnection = getHttpURLConnection(Constants.URL_UMENG_PUSH);
-                    addHeadInfo();
-                    JSONObject client = new JSONObject();
-                    JSONObject all = new JSONObject();
-                    JSONObject data = new JSONObject();
-                    client.put("caller", Constants.CALLER);
-                    data.put("uids", uidsStr);
-                    data.put("title", title);
-                    data.put("content", content);
-                    all.put("data", data);
-                    all.put("client", client);
-                    all.put("v", Constants.V);
-                    String[] keys = new String[]{"uids", "title", "content"};
-                    all.put("sign", sign(keys, data));
-                    L.d("requestPush:请求参数:" + all.toString());
-                    String result = writeAndResult(all);
-                    responseSucceed(result);
-                } catch (final Exception e) {
-                    e.printStackTrace();
-                    responseFail(e);
-                } finally {
-                    disconnect();
-                }
-            }
-        });
-    }
 
     private void disconnect() {
         if (mHttpURLConnection != null)

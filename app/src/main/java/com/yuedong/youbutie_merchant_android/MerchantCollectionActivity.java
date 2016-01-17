@@ -1,6 +1,5 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.youbutie_merchant_android.adapter.CollectionMerchantServiceAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -22,11 +20,12 @@ import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
-import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.TextUtils;
 
 import java.util.List;
@@ -109,6 +108,33 @@ public class MerchantCollectionActivity extends BaseActivity {
                                                                 App.getInstance().orderInfoChange = true;
 //                                                                defaultFinished();
                                                                 LaunchWithExitUtils.startActivity(activity, MainActivity.class);
+                                                                App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                                                                    @Override
+                                                                    public void start() {
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void end() {
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void succeed(String secretKey) {
+                                                                        // 通知客户端收款
+                                                                        RequestYDHelper requestYDHelper = new RequestYDHelper();
+                                                                        requestYDHelper.setAppSecretkey(secretKey);
+                                                                        requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_collect_title)//
+                                                                                , getString(R.string.str_push_merchant_collect_msg),//
+                                                                                order.getUser().getObjectId(), RequestYDHelper.PUSH_TYPE_MERCHANT_COLLECTION, order.getObjectId(), "");
+                                                                    }
+
+                                                                    @Override
+                                                                    public void fail(int code, String error) {
+
+                                                                    }
+                                                                });
+
                                                             }
 
 
