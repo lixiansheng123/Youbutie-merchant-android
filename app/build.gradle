@@ -19,7 +19,7 @@ android {
         }
         relealse {
             //这样写就得把demo.jk文件放在项目目录
-            storeFile file("apk.keystore")
+            storeFile file("E:/android/studioworkspace/apk.keystore")
             storePassword "123456"
             keyAlias "leo"
             keyPassword "123456"
@@ -39,7 +39,7 @@ android {
 
         release {
             // 不显示Log
-            buildConfigField "boolean", "LOG_DEBUG", "false"
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
             //Zipalign优化
             zipAlignEnabled true
             // 移除无用的resource文件

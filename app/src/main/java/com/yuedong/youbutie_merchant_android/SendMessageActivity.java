@@ -3,6 +3,7 @@ package com.yuedong.youbutie_merchant_android;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.Callback;
+import com.yuedong.youbutie_merchant_android.mouble.MessageEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.VipEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
@@ -24,11 +26,13 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.mouble.db.CarDao;
+import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DataUtils;
 import com.yuedong.youbutie_merchant_android.utils.DateUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
@@ -39,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -197,10 +202,17 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 public void onSuccess(List<Vips> list) {
                     if (CommonUtils.listIsNotNull(list)) {
                         List<String> userObjects = new ArrayList<String>();
+                        final StringBuilder sb = new StringBuilder();
                         for (Vips vips : list) {
                             userObjects.add(vips.getUser().getObjectId());
+                            User user = vips.getUser();
+                            if (user != null) {
+                                sb.append(user.getObjectId() + ",");
+                            }
                         }
-                        L.d("推送的objectid数组:" + userObjects.toString());
+                        if (sb.length() > 0)
+                            sb.deleteCharAt(sb.length() - 1);
+                        L.d("推送的objectids:" + sb.toString());
                         Messages messages = new Messages();
                         messages.setType(2);
                         messages.setContent(inputBox.getText().toString().trim());
@@ -212,6 +224,49 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                         messages.save(context, new SaveListener() {
                             @Override
                             public void onSuccess() {
+                                MessageEvent.getInstance().countCurMonthSendMessageNumber(new CountListener() {
+                                    @Override
+                                    public void onSuccess(int i) {
+                                        L.d("countCurMonthSendMessageNumber-succeed:" + i);
+//                                        if (i < 2) {
+                                            App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                                                @Override
+                                                public void start() {
+
+                                                }
+
+                                                @Override
+                                                public void end() {
+
+                                                }
+
+                                                @Override
+                                                public void succeed(String secretKey) {
+                                                    L.d("getYdApiSecretKey-succeed"+secretKey);
+                                                    RequestYDHelper requestYDHelper = new RequestYDHelper();
+                                                    requestYDHelper.setAppSecretkey(secretKey);
+                                                    requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_ad_title),//
+                                                            String.format(getString(R.string.str_push_merchant_ad_content), myMerchant.getName()), //
+                                                            sb.toString(), RequestYDHelper.PUSH_TYPE_MERCHANT_AD, "", "");
+                                                }
+
+                                                @Override
+                                                public void fail(int code, String error) {
+
+                                                }
+                                            });
+
+//                                        } else {
+//                                            T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
+//                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(int i, String s) {
+                                        error(s);
+                                    }
+                                });
+
                                 dialogStatus(false);
                                 T.showShort(context, "发布成功");
                                 setResult(Constants.RESULT_ADD_AD);

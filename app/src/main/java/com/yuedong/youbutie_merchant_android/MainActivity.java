@@ -255,4 +255,17 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
                 orderManagerFm.refreshTotalChildFm();
         }
     }
+
+    private long firstBackClickTime;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - firstBackClickTime <= 1500) {
+            ActivityTaskUtils.getInstance().exit();
+        } else {
+            firstBackClickTime = System.currentTimeMillis();
+            T.showShort(context, "您真的想退出吗 再次回退退出应用");
+        }
+    }
+
 }

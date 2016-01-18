@@ -114,7 +114,7 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
             }
         });
         final BaseDialog.Builder inputDialogBuilder = new BaseDialog.Builder(mCon);
-        final BaseDialog inputDialog = inputDialogBuilder.createInputDialog();
+        final BaseDialog inputDialog = inputDialogBuilder.createAppInputDialog();
         viewHolder.getIdByView(R.id.id_service_price_setting_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

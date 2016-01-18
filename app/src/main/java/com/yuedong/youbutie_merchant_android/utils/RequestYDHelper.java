@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 public class RequestYDHelper {
+    private static final String TAG = "RequestYDHelper";
     private android.os.Handler mainHandler;
     private OnYDRequestListener onRequestYDListener;
     private HttpURLConnection mHttpURLConnection;
@@ -63,6 +64,10 @@ public class RequestYDHelper {
      * 商家邀请会员
      */
     public static final int PUSH_TYPE_MERCHANT_INVITE_MEMBER = 6;
+    /**
+     * 商家推送广告
+     */
+    public static final int PUSH_TYPE_MERCHANT_AD = 7;
 
     public void setOnYDRequestListener(OnYDRequestListener onRequestPushListener) {
         this.onRequestYDListener = onRequestPushListener;
@@ -173,7 +178,6 @@ public class RequestYDHelper {
     }
 
 
-
     private void disconnect() {
         if (mHttpURLConnection != null)
             mHttpURLConnection.disconnect();
@@ -205,6 +209,7 @@ public class RequestYDHelper {
 
 
     private String writeAndResult(JSONObject all) throws IOException {
+        L.d(TAG + "请求参数:" + all.toString());
         mHttpURLConnection.connect();
         OutputStream outputStream = mHttpURLConnection.getOutputStream();
         outputStream.write(encodeBodyData(all));
@@ -234,9 +239,9 @@ public class RequestYDHelper {
             builder.append(l);
         }
         String result = builder.toString();
-        L.d("writeAndResult-服务器返回结果：" + result);
+        L.d(TAG + "writeAndResult-服务器返回结果：" + result);
         result = decodeData(result);
-        L.d("writeAndResult-服务器返回解密结果：" + result);
+        L.d(TAG + "writeAndResult-服务器返回解密结果：" + result);
         IoUtils.closeIo(inputStream);
         return result;
     }
@@ -434,6 +439,7 @@ public class RequestYDHelper {
     }
 
     private HttpURLConnection getHttpURLConnection(String url) throws Exception {
+        L.d(TAG + "请求URL:" + url);
         HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);

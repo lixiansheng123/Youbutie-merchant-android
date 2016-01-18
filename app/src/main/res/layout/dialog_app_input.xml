@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginRight="47dp"
+        android:background="@drawable/shape_round_white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/id_tv_title"
+            style="@style/text_black_14sp"
+            android:layout_marginTop="18dp"
+            android:text="提示"
+            android:textColor="@color/greycbc0bf" />
+
+        <EditText
+            android:id="@+id/id_input_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/str_please_input"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:textColor="@color/black81706e"
+            android:textColorHint="@color/greycbc0bf"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/line_grey_1px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/id_tips_cancle"
+                style="@style/text_black_14sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:text="@string/str_cancle"
+                android:textColor="@color/greycbc0bf" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/greyeae9e4" />
+
+            <Button
+                android:id="@+id/id_tips_confirm"
+                style="@style/text_black_14sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:text="@string/str_cancle"
+                android:textColor="@color/yellowf0c008" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

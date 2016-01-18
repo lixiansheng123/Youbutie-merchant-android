@@ -144,6 +144,24 @@ public class BaseDialog extends Dialog {
             phoneWh = WindowUtils.getPhoneWH(context);
         }
 
+        public BaseDialog createAppInputDialog() {
+            LayoutInflater layoutinflater = LayoutInflater.from(getContext());
+            dialog = new BaseDialog(mContext);
+            View view = layoutinflater.inflate(R.layout.dialog_app_input, null);
+            dialog.mTitleView = (TextView) view.findViewById(R.id.id_tv_title);
+            mBtnPositive = (Button) view.findViewById(R.id.id_tips_confirm);
+            dialog.mBtnNegative = (Button) view.findViewById(R.id.id_tips_cancle);
+            inputBox = (EditText) view.findViewById(R.id.id_input_box);
+            dialog.setContentView(view);
+            dialog.setCanCanceledOnTouchOutSide(false);
+            dialog.setCancelable(false);
+            mDialog = dialog;
+            Window window = dialog.getWindow();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawableResource(R.drawable.transparentpic);
+            return dialog;
+        }
+
         /**
          * @return 创建带两个按钮的提示对话框
          */
@@ -201,21 +219,6 @@ public class BaseDialog extends Dialog {
             return dialog;
         }
 
-//        /**
-//         * @return 创建下载对话框
-//         */
-//        public BaseDialog createDownloadingDialog() {
-//            LayoutInflater layoutinflater = LayoutInflater.from(getContext());
-//            dialog = new BaseDialog(mContext);
-//            View view = layoutinflater.inflate(R.layout.layout_dialog_upgrading, null);
-//            dialog.mTitleView = (TextView) view.findViewById(R.id.upgrading_dialog_title);
-//            dialog.mBtnNegative = (Button) view.findViewById(R.id.btn_ugrade_cancel);
-//            progressBar = (ProgressBar) view.findViewById(R.id.progressBar1);
-//            dialog.setContentView(view);
-//            dialog.setCanCanceledOnTouchOutSide(false);
-//            mDialog = dialog;
-//            return dialog;
-//        }
 
         /**
          * @return 创建网络加载对话框

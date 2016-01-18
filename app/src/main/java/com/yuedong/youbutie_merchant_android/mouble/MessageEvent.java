@@ -1,8 +1,13 @@
 package com.yuedong.youbutie_merchant_android.mouble;
 
+import android.os.Message;
+
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +71,38 @@ public class MessageEvent implements BaseEvent {
         userBmobQuery.addWhereEqualTo(OBJECT_ID, userId);
         bmobQuery.addWhereMatchesQuery("sender", "_User", userBmobQuery);
         bmobQuery.count(context, Messages.class, listener);
+    }
+
+    /**
+     * 统计这个月发出的广告数目
+     */
+    public void countCurMonthSendMessageNumber(final CountListener listener) {
+        listener.onStart();
+        BmobQuery<Messages> messagesBmobQuery = new BmobQuery<Messages>();
+        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
+        userBmobQuery.addWhereEqualTo(OBJECT_ID, App.getInstance().getUser().getObjectId());
+        messagesBmobQuery.addWhereMatchesQuery("sender", "_User", userBmobQuery);
+        List<BmobQuery<Messages>> ands = new ArrayList<BmobQuery<Messages>>();
+        BmobQuery<Messages> q1 = new BmobQuery<Messages>();
+        q1.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(new Date(DateUtils.getCurMonthStartTime())));
+        ands.add(q1);
+        BmobQuery<Messages> q2 = new BmobQuery<Messages>();
+        q2.addWhereLessThanOrEqualTo("createdAt", new BmobDate(new Date(DateUtils.getCurMonthEndTime())));
+        ands.add(q2);
+        q2.and(ands);
+        messagesBmobQuery.count(context, Messages.class, new CountListener() {
+            @Override
+            public void onSuccess(int i) {
+                listener.onSuccess(i);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+                listener.onFinish();
+            }
+        });
     }
 
 
