@@ -23,8 +23,10 @@ import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.receive.BDPushReceiver;
+import com.yuedong.youbutie_merchant_android.utils.ActivityTaskUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
+import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.view.HomeBarSpanView;
 
 import org.json.JSONObject;
