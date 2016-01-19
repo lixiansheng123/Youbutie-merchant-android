@@ -58,6 +58,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="@drawable/selector_bg_white_item"
         android:id="@+id/id_mileage_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp">
@@ -84,7 +85,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="6dp"
             android:layout_toLeftOf="@+id/if_flag_edit"
-            android:text="LL21231" />
+     />
 
     </RelativeLayout>
 

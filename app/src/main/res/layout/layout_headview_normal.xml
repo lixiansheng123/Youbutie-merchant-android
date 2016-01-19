@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:background="@color/greyf0eeeb"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="12dp"
         android:paddingRight="12dp">
 
 
-        <LinearLayout
+    <LinearLayout
             android:id="@+id/ll_left_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -24,11 +21,14 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <ImageButton
+                android:clickable="false"
+                android:focusable="false"
                 android:id="@+id/id_likeBack_headView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true" />
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                />
         </LinearLayout>
 
 
@@ -73,5 +73,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/bg_shadow" />
-</LinearLayout>
+</RelativeLayout>

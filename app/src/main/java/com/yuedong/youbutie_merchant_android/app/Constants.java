@@ -44,6 +44,8 @@ public class Constants {
     public static final int REQUESTCODE_MERCHANT_LOCATION = 0x118;
     public static final int REQUESTCODE_MERCHANT_TEL = 0x119;
     public static final int RREQUESTCODE_CUSTOM_MERCHANT_SERVICE = 0x120;
+    public static final int REQUESTCODE_SWIP_CODE = 0x121;
+    public static final int REQUESTCODE_INPUT_MILEAGE = 0x122;
 
     public static final int RESULT_ORDER_EVALUATE = 0x209;
     public static final int RESULT_COLLECTION = 0x210;
@@ -57,6 +59,7 @@ public class Constants {
     public static final int RESULT_MERCHANT_LOCATION = 0x218;
     public static final int RESULT_MERCHANT_TEL = 0x219;
     public static final int RESULT_CUSTOM_MERCHANT_SERVICE = 0x220;
+    public static final int RESULT_INPUT_MILEAGE = 0x221;
 
 
     // 属性动画的propertyName

@@ -113,6 +113,7 @@ public class OrderEvent implements BaseEvent {
         ands.add(eq2);
         mainQurey.and(ands);
         mainQurey.order("-createdAt");
+        mainQurey.addWhereEqualTo("state", 4);
         mainQurey.setSkip(skip);
         mainQurey.setLimit(limit);
         mainQurey.findObjects(context, new FindListener<Order>() {

@@ -27,6 +27,9 @@ import java.util.List;
 
 import cn.bmob.v3.listener.UpdateListener;
 
+/**
+ * 服务列表
+ */
 public class ServiceListActivity extends BaseActivity implements View.OnClickListener {
     // 已经上架的服务
     private List<ServiceInfoDetailBean> alreadyAddServiceInfoDetailBeans;

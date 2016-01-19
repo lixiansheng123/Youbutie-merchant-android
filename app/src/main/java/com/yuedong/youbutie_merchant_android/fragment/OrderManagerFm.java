@@ -9,23 +9,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yuedong.youbutie_merchant_android.GiftDetailActivity;
-import com.yuedong.youbutie_merchant_android.MainActivity;
 import com.yuedong.youbutie_merchant_android.OrderDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
-import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
 import com.yuedong.youbutie_merchant_android.mouble.ExchangeRecordEvent;
-import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ExchangedRecord;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
@@ -35,7 +30,6 @@ import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
-import com.yuedong.youbutie_merchant_android.utils.TextUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.zxing.activity.CaptureActivity;
 
@@ -69,7 +63,7 @@ public class OrderManagerFm extends BaseFragment {
             public void onClick(View v) {
                 // 打开扫描界面扫描条形码或二维码
                 Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(openCameraIntent, 0);
+                startActivityForResult(openCameraIntent, Constants.REQUESTCODE_SWIP_CODE);
             }
         }));
         return ViewUtils.inflaterView(getActivity(), R.layout.fragment_order_manager, container);
@@ -164,15 +158,14 @@ public class OrderManagerFm extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        L.d("onActivityResult------------->>");
         if (requestCode == Constants.REQUESTCODE_RECEIVE_ORDER && resultCode == Constants.RESULT_RECEIVE_ORDER && data != null) {
             Order order = (Order) data.getSerializableExtra(Constants.KEY_BEAN);
             receiveOrder(order);
-        } else if (requestCode == 0 && resultCode == getActivity().RESULT_OK && data != null) {
+        } else if (requestCode == Constants.REQUESTCODE_SWIP_CODE && resultCode == getActivity().RESULT_OK && data != null) {
             Bundle bundle = data.getExtras();
             final String scanResult = bundle.getString("result");
             if (StringUtil.isNotEmpty(scanResult)) {
-                ExchangeRecordEvent.getInstance().findExchangeRecordByExchangeNumberAndMerchantObjectId(scanResult.trim(), new FindListener<ExchangedRecord>() {
+                ExchangeRecordEvent.getInstance().findExchangeRecordByExchangeNumber(scanResult.trim(), new FindListener<ExchangedRecord>() {
 
                     @Override
                     public void onStart() {
@@ -191,7 +184,7 @@ public class OrderManagerFm extends BaseFragment {
                                 T.showShort(getContext(), "该礼品已经被领取");
                             }
                         } else {
-                            T.showShort(getContext(), "请检查是否是本店的兑换礼品");
+                            T.showShort(getContext(), "未制订单");
                         }
                     }
 
@@ -208,10 +201,7 @@ public class OrderManagerFm extends BaseFragment {
 
             }
 
-        } else {
-            T.showShort(getContext(), "扫描不到什么喔");
         }
-
     }
 
 

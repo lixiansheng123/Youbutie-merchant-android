@@ -104,15 +104,9 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                 return items.length;
             }
 
-//            @Override
-//            public CharSequence getPageTitle(int position) {
-//                return titles[position];
-//            }
         });
         viewPager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(this);
-//        tabLayout.setupWithViewPager(viewPager);
-
 
         ui();
         initLineWidth();

@@ -48,7 +48,7 @@ public class UserListAdapter extends BaseAdapter<Order> {
         TextView downOrderTime = viewHolder.getIdByView(R.id.id_down_order_time);
         //-----------------------设值------------------------
         userName.setText(user.getNickname());
-        DisplayImageByVolleyUtils.loadImage(user.getPhoto(), userPic);
+        DisplayImageByVolleyUtils.loadUserHead(user.getPhoto(), userPic);
         money.setText("￥" + StringUtil.setDoubleValueCastE(o.getPrice()));
         if (o.buyNum != null) {
             if (o.buyNum == 1) {

@@ -92,12 +92,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //bmob-sdk ：Bmob的android sdk包
     //okhttp（选填）：为解决弱网情况下SDK请求失败及响应慢的问题，自`V3.4.3版本`开始使用`okhttp`优化SDK的网络框架。
-    compile files('libs/volley.jar')
-    // 手机状态栏
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'cn.bmob.android:bmob-sdk:3.4.5'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.4.0'
+    compile files('libs/volley.jar')
+    // 手机状态栏
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.zhy:percent-support-extends:1.1.1'
     compile project(':library_refresh')

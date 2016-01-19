@@ -13,7 +13,7 @@ public class User extends BmobUser {
     private String carNumber;//车牌号
     private String idnumber;//识别号（后6位）
     private String VIN;//车架号（后4位）
-    private String strokelength;//车行程（单位km）
+    private String strokeLength;//车行程（单位km）
     private Integer totalMoney;//总油点
     private Integer type;//用户类型（用户＝1，商家＝2）
     private String carString; // 车型描述
@@ -186,12 +186,12 @@ public class User extends BmobUser {
         this.VIN = VIN;
     }
 
-    public String getStrokelength() {
-        return strokelength;
+    public String getStrokeLength() {
+        return strokeLength;
     }
 
-    public void setStrokelength(String strokelength) {
-        this.strokelength = strokelength;
+    public void setStrokeLength(String strokeLength) {
+        this.strokeLength = strokeLength;
     }
 
 
@@ -214,7 +214,7 @@ public class User extends BmobUser {
                 ", carNumber='" + carNumber + '\'' +
                 ", idnumber='" + idnumber + '\'' +
                 ", VIN='" + VIN + '\'' +
-                ", strokelength='" + strokelength + '\'' +
+                ", strokeLength='" + strokeLength + '\'' +
                 ", totalMoney=" + totalMoney +
                 ", type=" + type +
                 ", carString='" + carString + '\'' +

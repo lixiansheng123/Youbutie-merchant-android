@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class TitleViewHelper {
 
     public TitleViewHelper() {
         cache = new SparseArray<View>();
-        backIcon = R.drawable.icon_left_black_arrows;
+        backIcon = R.drawable.selector_back;
         titleColor = Color.parseColor("#f0c010");
     }
 
@@ -36,7 +37,7 @@ public class TitleViewHelper {
     private SparseArray<View> cache;
     private WeakReference<View> normalTitleViewCache;
     private View titleView;
-    private ImageView backImage;
+    private ImageButton backImage;
     private LinearLayout leftLl;
     private TextView titleText;
     private LinearLayout rightLl;
@@ -66,7 +67,7 @@ public class TitleViewHelper {
         backImage.setVisibility(View.VISIBLE);
         titleText.setVisibility(View.VISIBLE);
         moreImage.setVisibility(View.VISIBLE);
-        backImage.setImageResource(icon);
+        backImage.setBackgroundResource(icon);
         titleText.setTextColor(titleColor);
         titleText.setText(title);
         moreImage.setImageResource(moreIcon);
@@ -124,11 +125,13 @@ public class TitleViewHelper {
         titleText.setVisibility(View.VISIBLE);
         titleText.setText(title);
         if (leftListener != null) {
+            backImage.performClick();
             leftLl.setOnClickListener(leftListener);
         } else {
             leftLl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    backImage.performClick();
                     back();
                 }
             });
@@ -136,18 +139,35 @@ public class TitleViewHelper {
         return titleView;
     }
 
-
+    /**
+     * 含有标题回退icon右边的文字
+     *
+     * @param title
+     * @param rightText
+     * @param rightClickListener
+     * @return
+     */
     public View createDefaultTitleView4(CharSequence title, CharSequence rightText, final View.OnClickListener rightClickListener) {
+        return createDefaultTitleView4_2(title, rightText, null, rightClickListener);
+    }
+
+    public View createDefaultTitleView4_2(CharSequence title, CharSequence rightText, final View.OnClickListener leftClickListener, final View.OnClickListener rightClickListener) {
         initDefaultTitleView();
         backImage.setVisibility(View.VISIBLE);
         titleText.setVisibility(View.VISIBLE);
         rightTextView.setVisibility(View.VISIBLE);
         rightTextView.setText(rightText);
         titleText.setText(title);
+
         leftLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back();
+                backImage.performClick();
+                if (leftClickListener != null) {
+                    leftClickListener.onClick(v);
+                } else {
+                    back();
+                }
             }
         });
         rightLl.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +196,7 @@ public class TitleViewHelper {
         leftLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                backImage.performClick();
                 back();
             }
         });
@@ -192,23 +213,14 @@ public class TitleViewHelper {
 
     public View createDefaultTitleView6(CharSequence title, CharSequence rightText, int rightTextColor, int moreIcon, final View.OnClickListener rightClickListener) {
         initDefaultTitleView();
-//        backImage.setVisibility(View.VISIBLE);
         titleText.setVisibility(View.VISIBLE);
         rightTextView.setVisibility(View.VISIBLE);
         moreImage.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams lp = moreImage.getLayoutParams();
-//        lp.width = ViewUtils.getViewDisplaySize(52, ViewUtils.ViewEnum.W);
-//        lp.height = ViewUtils.getViewDisplaySize(52, ViewUtils.ViewEnum.W);
         titleText.setText(title);
         rightTextView.setTextColor(rightTextColor);
         rightTextView.setText(rightText);
         moreImage.setImageResource(moreIcon);
-//        leftLl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                back();
-//            }
-//        });
         rightLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +229,32 @@ public class TitleViewHelper {
             }
         });
         return titleView;
+    }
+
+    /**
+     * 含有标题右边icon
+     *
+     * @param charSequence
+     * @param moreIcon
+     * @param rightClickListener
+     * @return
+     */
+    public View createDefaultTitleView7(CharSequence charSequence, int moreIcon, final View.OnClickListener rightClickListener) {
+        initDefaultTitleView();
+        titleText.setVisibility(View.VISIBLE);
+        moreImage.setVisibility(View.VISIBLE);
+        moreImage.setImageResource(moreIcon);
+        titleText.setText(charSequence);
+        rightLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moreImage.performClick();
+                if (rightClickListener != null)
+                    rightClickListener.onClick(v);
+            }
+        });
+        return titleView;
+
     }
 
 
@@ -234,7 +272,7 @@ public class TitleViewHelper {
         rightLl = getIdByView(R.id.ll_right_layout, titleView);
         moreImage = getIdByView(R.id.iv_more_headview, titleView);
         rightTextView = getIdByView(R.id.tv_right_text, titleView);
-        backImage.setImageResource(backIcon);
+        backImage.setBackgroundResource(backIcon);
         titleText.setTextColor(titleColor);
     }
 

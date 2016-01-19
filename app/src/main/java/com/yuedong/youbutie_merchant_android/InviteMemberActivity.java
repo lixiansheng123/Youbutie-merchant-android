@@ -27,6 +27,7 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
+import com.yuedong.youbutie_merchant_android.utils.DimenUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
@@ -407,6 +408,8 @@ public class InviteMemberActivity extends BaseActivity {
                 btnStatus(btnInvite, bean, registInviteNum);
                 // 已经注册
                 DisplayImageByVolleyUtils.loadImage(bean.getPhoto(), pic);
+                pic.setType(RoundImageView.TYPE_ROUND);
+                pic.setRaduisAngle(DimenUtils.dip2px(context,3));
                 pic.setBackgroundDrawable(null);
                 time.setText(bean.getCreatedAt());
                 ViewUtils.showLayout(time);

@@ -3,6 +3,7 @@ package com.yuedong.youbutie_merchant_android;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,6 +15,8 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 
+import cn.bmob.v3.AsyncCustomEndpoints;
+import cn.bmob.v3.listener.CloudCodeListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class InfoEditActivity extends BaseActivity {
@@ -23,6 +26,7 @@ public class InfoEditActivity extends BaseActivity {
     public static final int ACTION_INPUT_MEMBER_NAME = 0x003;
     public static final int ACTION_INPUT_MEMBER_LOCATION = 0x004;
     public static final int ACTION_INPUT_MEMBER_TEL = 0x005;
+    public static final int ACTION_INPUT_MILEAGE = 0x006;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,15 @@ public class InfoEditActivity extends BaseActivity {
             public void onClick(View v) {
                 String inputText = inputbox.getText().toString();
                 if (StringUtil.isNotEmpty(inputText)) {
-                    if (action == ACTION_INPUT_AD_TITLE) {
+                    if (action == ACTION_INPUT_AD_TITLE || action == ACTION_INPUT_MILEAGE) {
                         Intent it = new Intent();
                         it.putExtra(Constants.KEY_TEXT, inputText);
-                        setResult(Constants.RESULT_INPUT_AD_TITLE, it);
+                        int resultCode = 0;
+                        if (action == ACTION_INPUT_AD_TITLE)
+                            resultCode = Constants.RESULT_INPUT_AD_TITLE;
+                        else
+                            resultCode = Constants.RESULT_INPUT_MILEAGE;
+                        setResult(resultCode, it);
                         defaultFinished();
                     } else if (action == ACTION_INPUT_MEMBER_AD) {
                         Merchant updateMerchant = new Merchant();
@@ -79,6 +88,12 @@ public class InfoEditActivity extends BaseActivity {
             }
 
         }));
+
+        // 增加限制
+        if (action == ACTION_INPUT_MILEAGE) {
+            inputbox.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }
+
     }
 
     private void updateMerchantInfo(Merchant updateMerchant, final String modifyText, final int resultCode) {

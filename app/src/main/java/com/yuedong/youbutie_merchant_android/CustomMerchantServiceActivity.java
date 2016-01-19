@@ -27,6 +27,9 @@ public class CustomMerchantServiceActivity extends BaseActivity {
                 if (StringUtil.isNotEmpty(serviceName) && StringUtil.isNotEmpty(servicePrice)) {
                     ServiceInfoDetailBean newBean = new ServiceInfoDetailBean();
                     newBean.name = serviceName;
+                    newBean.icon = "service_default";
+                    newBean.objectId = "";
+                    newBean.state = 0;
                     newBean.price = Double.parseDouble(servicePrice);
                     Intent it = new Intent();
                     it.putExtra(Constants.KEY_BEAN, newBean);

@@ -28,14 +28,14 @@ public class ExchangeRecordEvent implements BaseEvent {
     }
 
     /**
-     * 查找兑换记录根据兑换号和门店id
+     * 查找兑换记录根据兑换号
      *
-     * @param exchangeNumber
+     * @param exchangeId
      */
-    public void findExchangeRecordByExchangeNumberAndMerchantObjectId(String exchangeNumber, final FindListener<ExchangedRecord> listener) {
+    public void findExchangeRecordByExchangeNumber(String exchangeId, final FindListener<ExchangedRecord> listener) {
         listener.onStart();
         BmobQuery<ExchangedRecord> mainQuery = new BmobQuery<ExchangedRecord>();
-        mainQuery.addWhereEqualTo("recordNumber", exchangeNumber);
+        mainQuery.addWhereEqualTo(OBJECT_ID, exchangeId);
         mainQuery.include("goods,user");
         mainQuery.findObjects(context, new FindListener<ExchangedRecord>() {
             @Override

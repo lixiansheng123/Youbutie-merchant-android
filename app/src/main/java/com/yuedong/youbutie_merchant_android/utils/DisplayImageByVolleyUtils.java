@@ -46,6 +46,13 @@ public class DisplayImageByVolleyUtils {
         niv.setImageUrl(url, IMAGELOADER);
     }
 
+    public static void loadUserHead(String url, ImageView imageView) {
+        SimplePicConfig simplePicConfig = new SimplePicConfig();
+        simplePicConfig.setErrorPic(R.drawable.bg_picture_user_default);
+        simplePicConfig.setLoadPic(R.drawable.bg_picture_user_default);
+        loadImage(url, imageView, simplePicConfig);
+    }
+
 
     static final class BitmapCache implements ImageLoader.ImageCache {
         private LruCache<String, Bitmap> mCache;

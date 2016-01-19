@@ -1,5 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,6 +53,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     public static final int ACTION_MEMBER_USER = 0x002;
     private PullToRefreshListView refreshListView;
     private RefreshHelper<Order> refreshHelper;
+    private Object filterBean;
     // 内部行为
     public int actionIn = ACTION_IN_NORMAL;
     private static final int ACTION_IN_NORMAL = 0x101;
@@ -73,7 +75,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
             titleView = new TitleViewHelper().createDefaultTitleView4(title, "邀请会员", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LaunchWithExitUtils.startActivity(activity,InviteMemberActivity.class);
+                    LaunchWithExitUtils.startActivity(activity, InviteMemberActivity.class);
                 }
             });
         initTitleView(titleView);
@@ -102,12 +104,15 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                 Order order = (Order) parent.getAdapter().getItem(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.KEY_BEAN, order);
-                LaunchWithExitUtils.startActivity(activity, ClientDetailActivity.class, bundle);
+                Intent intent = new Intent(activity, ClientDetailActivity.class);
+                intent.putExtras(bundle);
+                LaunchWithExitUtils.startActivityForResult(activity, intent, 0x021);
             }
         });
         selectItemPop.setSelectItemCallback(new SelectItemPop.ISelectItemCallback() {
             @Override
             public void selectItem(int pos, Object bean, View item) {
+                filterBean = bean;
                 selectItemPop.dismiss();
                 switch (selectAdapter.getMode()) {
                     case SelectAdapter.MODE_SERVICE:
@@ -119,7 +124,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                             actionIn = ACTION_IN_FILTER_CAR;
                         break;
                 }
-                setProxy(bean);
+                setProxy(filterBean);
             }
         });
         fvById(R.id.id_filter_service_layout).setOnClickListener(this);
@@ -218,7 +223,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
 
     private void buildDataToPop(List<BmobObject> data, int mode) {
-        L.i("buildDataToPop-->data" + data.size());
         selectAdapter.setMode(mode);
         selectAdapter.setData(data);
         selectAdapter.notifyDataSetChanged();
@@ -237,6 +241,14 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
             case R.id.id_filter_car_layout:
                 buildDataToPop(carInfos, SelectAdapter.MODE_CAR);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0x021 && resultCode == 0x225) {
+            setProxy(filterBean);
         }
     }
 }

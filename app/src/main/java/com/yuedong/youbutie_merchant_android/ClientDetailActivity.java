@@ -1,8 +1,10 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,14 +20,21 @@ import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
+import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.AsyncCustomEndpoints;
+import cn.bmob.v3.listener.CloudCodeListener;
 import cn.bmob.v3.listener.FindListener;
 
 /**
@@ -42,12 +51,20 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
     private List<View> views;
     private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
     private Order order;
+    private User orderUser;
+    // 更新上一页数据
+    private boolean updatePreviousPagerDate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         order = (Order) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
-        initTitleView(new TitleViewHelper().createDefaultTitleView4("客户详情", "邀请会员", new View.OnClickListener() {
+        initTitleView(new TitleViewHelper().createDefaultTitleView4_2("客户详情", "邀请会员", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBack();
+            }
+        }, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LaunchWithExitUtils.startActivity(activity, InviteMemberActivity.class);
@@ -106,20 +123,76 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void ui() {
-        User orderUser = order.getUser();
+        orderUser = order.getUser();
         DisplayImageByVolleyUtils.loadImage(orderUser.getPhoto(), userHead);
         userName.setText(orderUser.getNickname());
         userMobile.setText(orderUser.getMobilePhoneNumber());
         carNum.setText(orderUser.getCarNumber());
         carDesc.setText(orderUser.getCarString());
+        carMileageNum.setText(orderUser.getStrokeLength());
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.id_member_num_layout:
+            case R.id.id_mileage_layout:
+                Intent intent = new Intent(activity, InfoEditActivity.class);
+                intent.putExtra(Constants.KEY_TEXT, "行驶公里数");
+                intent.putExtra(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MILEAGE);
+                LaunchWithExitUtils.startActivityForResult(activity, intent, Constants.REQUESTCODE_INPUT_MILEAGE);
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUESTCODE_INPUT_MILEAGE && resultCode == Constants.RESULT_INPUT_MILEAGE && data != null) {
+            final String stringExtra = data.getStringExtra(Constants.KEY_TEXT);
+            if (!TextUtils.isEmpty(stringExtra)) {
+                try {
+                    dialogStatus(true);
+                    JSONObject params = new JSONObject();
+                    params.put("userId", orderUser.getObjectId());
+                    params.put("strokeLength", stringExtra);
+                    // 使用云端代码更新别的用户行驶公里数
+                    AsyncCustomEndpoints ace = new AsyncCustomEndpoints();
+                    //第一个参数是上下文对象，第二个参数是云端代码的方法名称，第三个参数是上传到云端代码的参数列表（JSONObject cloudCodeParams），第四个参数是回调类
+                    ace.callEndpoint(context, "updateUser", params,
+                            new CloudCodeListener() {
+                                @Override
+                                public void onSuccess(Object object) {
+                                    dialogStatus(false);
+                                    carMileageNum.setText(stringExtra);
+                                    updatePreviousPagerDate = true;
+
+                                }
+
+                                @Override
+                                public void onFailure(int code, String msg) {
+                                    dialogStatus(false);
+                                    T.showShort(context, msg);
+                                }
+                            });
+                } catch (JSONException e) {
+                    dialogStatus(false);
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onBack();
+    }
+
+    private void onBack() {
+        if (updatePreviousPagerDate) {
+            setResult(0x225);
+        }
+        defaultFinished();
+    }
+
 }
