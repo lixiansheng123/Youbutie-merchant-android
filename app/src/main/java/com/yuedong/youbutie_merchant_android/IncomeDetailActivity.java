@@ -41,6 +41,7 @@ import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.FindStatisticsListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class IncomeDetailActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "IncomeDetailActivity";
@@ -64,6 +65,86 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         setShowContentView(R.layout.activity_income_detail);
     }
 
+    private void changeUi() {
+        dialogStatus(true);
+        // 同步用户信息 因为可能有用户支付了提现金额就增加了
+        User updateUser = new User();
+        updateUser.update(context, App.getInstance().getUser().getObjectId(), new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                dialogStatus(false);
+                User user = App.getInstance().getUser();
+                curMonthTotalMoney.setText("￥" + totalMoney);
+                if (user.getCash() != null)
+                    canWithdrawMoney.setText("￥" + user.getCash());
+                if (user.getDrawCount() != null)
+                    alreadyWithdrawNum.setText(user.getDrawCount() + "次");
+                if (user.getDrawTotalCash() != null)
+                    alreadyWithdrawMoney.setText("￥" + user.getDrawTotalCash());
+
+                refreshHelper.setPulltoRefreshRefreshProxy(IncomeDetailActivity.this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
+                    @Override
+                    public BaseAdapter<IncomeDetailListBean> getAdapter(List<IncomeDetailListBean> data) {
+                        return adapter = new IncomeDetailListAdapter(context, data);
+                    }
+
+                    @Override
+                    public void executeTask(int skip, int limit, final FindListener<IncomeDetailListBean> listener) {
+                        OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                try {
+                                    JSONArray jsonArray = (JSONArray) o;
+                                    if (jsonArray != null) {
+                                        int len = jsonArray.length();
+                                        String[] times = new String[len];
+                                        List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
+                                        for (int i = 0; i < len; i++) {
+                                            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                                            int totalPrice = jsonObject.getInt("_sumPrice");
+                                            String dayDes = jsonObject.getString("sumMonth");
+                                            int count = jsonObject.getInt("_count");
+                                            IncomeDetailListBean bean = new IncomeDetailListBean();
+                                            bean.setDayDes(dayDes);
+                                            bean.setTotalMoney(totalPrice);
+                                            bean.setOrderNumber(count);
+                                            datas.add(bean);
+                                            times[i] = dayDes;
+                                        }
+                                        sort(times, datas);
+                                        listener.onSuccess(datas);
+                                        listener.onFinish();
+                                    } else {
+                                        listener.onError(-2, "查询成功但无数据");
+                                        listener.onFinish();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    listener.onError(-1, e.getMessage());
+                                    listener.onFinish();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                                listener.onError(i, s);
+                                listener.onFinish();
+                            }
+                        });
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                error(s);
+                dialogStatus(false);
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,58 +166,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         canWithdrawMoney = (TextView) headView.findViewById(R.id.id_can_withdraw_money);
         requestWithdrawBtn = (Button) headView.findViewById(R.id.id_btn_request_withdraw);
         listView.addHeaderView(headView, null, false);
-        refreshHelper.setPulltoRefreshRefreshProxy(this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
-            @Override
-            public BaseAdapter<IncomeDetailListBean> getAdapter(List<IncomeDetailListBean> data) {
-                return adapter = new IncomeDetailListAdapter(context, data);
-            }
-
-            @Override
-            public void executeTask(int skip, int limit, final FindListener<IncomeDetailListBean> listener) {
-                OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        try {
-                            JSONArray jsonArray = (JSONArray) o;
-                            if (jsonArray != null) {
-                                int len = jsonArray.length();
-                                String[] times = new String[len];
-                                List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
-                                for (int i = 0; i < len; i++) {
-                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                    int totalPrice = jsonObject.getInt("_sumPrice");
-                                    String dayDes = jsonObject.getString("sumMonth");
-                                    int count = jsonObject.getInt("_count");
-                                    IncomeDetailListBean bean = new IncomeDetailListBean();
-                                    bean.setDayDes(dayDes);
-                                    bean.setTotalMoney(totalPrice);
-                                    bean.setOrderNumber(count);
-                                    datas.add(bean);
-                                    times[i] = dayDes;
-                                }
-                                sort(times, datas);
-                                listener.onSuccess(datas);
-                                listener.onFinish();
-                            } else {
-                                listener.onError(-2, "查询成功但无数据");
-                                listener.onFinish();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            listener.onError(-1, e.getMessage());
-                            listener.onFinish();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        listener.onError(i, s);
-                        listener.onFinish();
-                    }
-                });
-            }
-        });
+        changeUi();
 
     }
 
@@ -184,15 +214,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void ui() {
-        User user = App.getInstance().getUser();
-        L.d("User:" + user.toString());
-        curMonthTotalMoney.setText("￥" + totalMoney);
-        if (user.getCash() != null)
-            canWithdrawMoney.setText("￥" + user.getCash());
-        if (user.getDrawCount() != null)
-            alreadyWithdrawNum.setText(user.getDrawCount() + "次");
-        if (user.getDrawTotalCash() != null)
-            alreadyWithdrawMoney.setText("￥" + user.getDrawTotalCash());
+
     }
 
     @Override
