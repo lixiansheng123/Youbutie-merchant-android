@@ -10,8 +10,8 @@ public class SimplePicConfig {
     private int errorPic;
 
     public SimplePicConfig() {
-        loadPic = R.mipmap.ic_launcher;
-        errorPic = R.mipmap.ic_launcher;
+        loadPic = R.drawable.bg_picture_other_default;
+        errorPic = R.drawable.bg_picture_other_default;
     }
 
     public int getLoadPic() {

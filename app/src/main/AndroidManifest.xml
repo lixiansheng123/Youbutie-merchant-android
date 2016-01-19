@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yuedong.youbutie_merchant_android">
-    <uses-permission android:name="android.permission.GET_TASKS"/>
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -71,6 +72,9 @@
         <activity android:name=".MonthOrderDetailActivity" />
         <activity android:name=".ForgetPsdActivity" />
         <activity android:name=".MerchantSettingActivity" />
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".GiftDetailActivity" />
+        <activity android:name=".GetSucceedActivity"></activity>
         <activity android:name="com.umeng.fb.ConversationActivity" />
 
         <meta-data
@@ -88,20 +92,16 @@
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".GiftDetailActivity" />
-        <activity android:name=".GetSucceedActivity"></activity>
+
 
         <!--百度推送-->
-
-
         <!-- 4.6.0版本增加一个可选的Activity声明 -->
         <activity
             android:name="com.baidu.android.pushservice.PushKeepAlive"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- push应用定义消息receiver声明 -->
-        <receiver android:name=".mouble.receive.BDPushReceiver" >
+        <receiver android:name=".mouble.receive.BDPushReceiver">
             <intent-filter>
 
                 <!-- 接收push消息 -->
@@ -115,7 +115,7 @@
         <!-- push必须的receviver和service声明 -->
         <receiver
             android:name="com.baidu.android.pushservice.PushServiceReceiver"
-            android:process=":bdservice_v1" >
+            android:process=":bdservice_v1">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -130,7 +130,7 @@
         </receiver>
         <receiver
             android:name="com.baidu.android.pushservice.RegistrationReceiver"
-            android:process=":bdservice_v1" >
+            android:process=":bdservice_v1">
             <intent-filter>
                 <action android:name="com.baidu.android.pushservice.action.METHOD" />
                 <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
@@ -145,7 +145,7 @@
         <service
             android:name="com.baidu.android.pushservice.PushService"
             android:exported="true"
-            android:process=":bdservice_v1" >
+            android:process=":bdservice_v1">
             <intent-filter>
                 <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
             </intent-filter>

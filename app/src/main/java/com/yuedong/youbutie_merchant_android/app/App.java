@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.DownloadManager;
 import android.content.Context;
 
+import com.yuedong.youbutie_merchant_android.crash.CustomCrashHandler;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
@@ -164,6 +165,7 @@ public class App extends Application {
     private void init() {
         executor = Executors.newCachedThreadPool();
         SPUtils.FILE_NAME = Config.SP_NAME_USER;
+        CustomCrashHandler.getInstance().setCustomCrashHanler(context);
     }
 
     /**

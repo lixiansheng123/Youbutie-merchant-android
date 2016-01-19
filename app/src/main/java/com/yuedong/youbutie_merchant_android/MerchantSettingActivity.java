@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
@@ -65,12 +68,10 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
 
             case R.id.id_checkout_app_update_layout:
                 UmengUpdateAgent.forceUpdate(context);
+
                 break;
 
             case R.id.id_idea_feedback_layout:
-//                FeedbackAgent agent = new FeedbackAgent(context);
-//                agent.startFeedbackActivity();
-//                UmengFeedbackAgent.getInstance(context).startFeedbackActivity();
                 LaunchWithExitUtils.startActivity(activity, FeedbackActivity.class);
                 break;
 

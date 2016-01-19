@@ -51,7 +51,6 @@ public class RefreshHelper<T> {
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                L.i("---------------------------onPullDownToRefresh------------");
                 datas.clear();
                 adapter.notifyDataSetChanged();
                 executeNetworkTask(activity, 1, proxyRefreshListener);
@@ -59,7 +58,6 @@ public class RefreshHelper<T> {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                L.d("proxyRefreshListener-onPullUpToRefresh");
                 executeNetworkTask(activity, 2, proxyRefreshListener);
 
             }
@@ -107,7 +105,7 @@ public class RefreshHelper<T> {
             @Override
             public void onError(int i, String s) {
                 L.i("executeTask-onError");
-                com.yuedong.youbutie_merchant_android.utils.T.showShort(context, "error:" + s);
+                com.yuedong.youbutie_merchant_android.utils.T.showShort(context, s);
             }
         });
     }

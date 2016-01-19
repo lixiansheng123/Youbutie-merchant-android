@@ -224,7 +224,7 @@ public class TitleViewHelper {
         if (normalTitleViewCache != null) {
             titleView = normalTitleViewCache.get();
         } else {
-            titleView = ViewUtils.inflaterView(App.getInstance().getAppContext(),R.layout.layout_headview_normal);
+            titleView = ViewUtils.inflaterView(App.getInstance().getAppContext(), R.layout.layout_headview_normal);
             normalTitleViewCache = new WeakReference<View>(titleView);
         }
         hideTotalView((ViewGroup) titleView);

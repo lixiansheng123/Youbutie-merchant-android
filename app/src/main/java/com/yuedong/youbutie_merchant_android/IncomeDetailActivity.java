@@ -96,7 +96,6 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
                 OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
-                        L.d(TAG, o.toString());
                         try {
                             JSONArray jsonArray = (JSONArray) o;
                             if (jsonArray != null) {

@@ -48,15 +48,12 @@ public class Config {
     public static final String BASE_CACHE_DIR = FileUtils.getDiskCacheDir(App.getInstance().getAppContext()) + File.separator + "cache" + File.separator;
     public static final String DIR_CROP_PIC = BASE_CACHE_DIR + "cropPic";
     public static final String DIR_UPLOAD_PIC = BASE_CACHE_DIR + "uploadPic";
-
-
-    // pic
-    public static final int load_default_pic = R.mipmap.ic_launcher;
-    public static final int load_error_pic = R.mipmap.ic_launcher;
+    public static final String DIR_ERROR_LOG = BASE_CACHE_DIR + "log";
 
     static {
         createDir(DIR_CROP_PIC);
         createDir(DIR_UPLOAD_PIC);
+        createDir(DIR_ERROR_LOG);
     }
 
     public static void createDir(String dir) {

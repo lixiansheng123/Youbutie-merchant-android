@@ -14,7 +14,7 @@
 
         <ImageView
             style="@style/w_h_ww"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/icon_logo" />
 
 
     </LinearLayout>

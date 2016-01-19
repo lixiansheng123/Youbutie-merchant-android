@@ -7,18 +7,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <!--<item name="android:windowAnimationStyle">@style/ActivityAnimation</item>-->
     </style>
     <!--当我们从 A1 启动 A2 时，A1 从屏幕上消失，这个动画叫做 android:activityOpenExitAnimation-->
     <!--当我们从 A1 启动 A2 时，A2 出现在屏幕上，这个动画叫做 android:activityOpenEnterAnimation-->
     <!--当我们从 A2 退出回到 A1 时，A2 从屏幕上消失，这个叫做 android:activityCloseExitAnimation-->
     <!--当我们从 A2 退出回到 A1 时，A1 出现在屏幕上，这个叫做 android:activityCloseEnterAnimation-->
-    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
-    </style>
+    <!--<style name="ActivityAnimation" parent="@android:style/Animation.Activity">-->
+        <!--<item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>-->
+        <!--<item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>-->
+        <!--<item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>-->
+    <!--</style>-->
 
 
     <style name="style_my_dialog">
@@ -160,7 +160,7 @@
     <style name="style_refreshview" parent="@style/w_h_mm">
         <item name="ptrHeaderTextColor">@color/grey938381</item>
         <item name="ptrDrawableEnd">@color/transparent</item>
-        <item name="ptrDrawableStart">@mipmap/ic_launcher</item>
+        <!--<item name="ptrDrawableStart">@mipmap/ic_launcher</item>-->
         <item name="ptrAnimationStyle">rotate</item>
         <item name="ptrHeaderBackground">@color/greyede9e4</item>
         <!--<item name="ptrDrawable">@drawable/icon_desk_logn</item>-->

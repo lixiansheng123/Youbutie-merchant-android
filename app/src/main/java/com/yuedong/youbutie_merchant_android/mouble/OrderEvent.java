@@ -195,7 +195,7 @@ public class OrderEvent implements BaseEvent {
      */
     public void getMemberFinishedOrderAndCountBuyNum(int skip, int limit, final String merchantObjectId, String serviceId, String carObjectId, final FindListener<Order> listener) {
         succeedCount = 0;
-        L.i("getMemberFinishedOrderAndCountBuyNum->skip;" + skip + "-limit:" + limit + "-merchantObjectId:" + merchantObjectId + "-serviceId:" + serviceId + "-carObjectId:" + carObjectId);
+        L.d("getMemberFinishedOrderAndCountBuyNum->skip;" + skip + "-limit:" + limit + "-merchantObjectId:" + merchantObjectId + "-serviceId:" + serviceId + "-carObjectId:" + carObjectId);
         listener.onStart();
         BmobQuery<Order> bmobQuery = new BmobQuery<Order>();
         BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();

@@ -18,7 +18,7 @@ public class LaunchWithExitUtils {
 
     public static void startActivity(Activity context, Intent intent) {
         context.startActivity(intent);
-        pagerAnimation(context);
+//        pagerAnimation(context);
     }
 
     public static void startActivity(Activity context, Class<? extends Activity> cls) {
@@ -31,19 +31,19 @@ public class LaunchWithExitUtils {
         if (data != null)
             intent.putExtras(data);
         context.startActivity(intent);
-        pagerAnimation(context);
+//        pagerAnimation(context);
     }
 
     public static void startActivityForResult(Fragment fragment, Intent intent, int requestCode) {
         fragment.startActivityForResult(intent, requestCode);
-        pagerAnimation(fragment.getActivity());
+//        pagerAnimation(fragment.getActivity());
     }
 
 
     public static void startActivityForResult(Fragment fragment, Class<? extends Activity> cls, int requestCode) {
         Intent intent = new Intent(fragment.getActivity(), cls);
         fragment.startActivityForResult(intent, requestCode);
-        pagerAnimation(fragment.getActivity());
+//        pagerAnimation(fragment.getActivity());
     }
 
     public static void startActivityForResult(Activity activity, Class<? extends Activity> cls, int requestCode) {
@@ -53,7 +53,7 @@ public class LaunchWithExitUtils {
 
     public static void startActivityForResult(Activity activity, Intent intent, int requestCode) {
         activity.startActivityForResult(intent, requestCode);
-        pagerAnimation(activity);
+//        pagerAnimation(activity);
     }
 
 
@@ -64,7 +64,7 @@ public class LaunchWithExitUtils {
             context.startActivityForResult(intent, requestCode, data);
         else
             context.startActivityForResult(intent, requestCode);
-        pagerAnimation(context);
+//        pagerAnimation(context);
     }
 
     public static void back(FragmentActivity act) {
@@ -73,16 +73,16 @@ public class LaunchWithExitUtils {
         } else {
             act.getSupportFragmentManager().popBackStack();
         }
-        pagerAnimation2(act);
+//        pagerAnimation2(act);
     }
 
-    private static void pagerAnimation2(Activity activity) {
+//    private static void pagerAnimation2(Activity activity) {
+//
+//    }
 
-    }
 
-
-    private static void pagerAnimation(Activity activity) {
+//    private static void pagerAnimation(Activity activity) {
 //        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
+//    }
 
 }

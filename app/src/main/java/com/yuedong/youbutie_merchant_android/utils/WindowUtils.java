@@ -130,7 +130,6 @@ public class WindowUtils {
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static void systemBarTransparent(Activity activity) {
-
         Window window = activity.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                 | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);

@@ -18,10 +18,15 @@ public class DisplayImageByVolleyUtils {
     private static SimplePicConfig config = new SimplePicConfig();
     private static ImageLoader imageloader = new ImageLoader(Volley.newRequestQueue(App.getInstance().getAppContext()), new BitmapCache());
 
+
     public static final ImageLoader IMAGELOADER = new ImageLoader(Volley.newRequestQueue(App.getInstance().getAppContext()),
             new BitmapCache());
 
     public static void loadImage(String url, ImageView imageView) {
+        loadImage(url, imageView, config);
+    }
+
+    public static void loadImage(String url, ImageView imageView, SimplePicConfig config) {
         if (url == null)
             url = "";
         ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, config.getLoadPic(), config.getErrorPic());
@@ -29,6 +34,11 @@ public class DisplayImageByVolleyUtils {
     }
 
     public static void loadImage(NetworkImageView niv, String url) {
+        loadImage(niv, url, config);
+    }
+
+
+    public static void loadImage(NetworkImageView niv, String url, SimplePicConfig config) {
         if (url == null)
             url = "";
         niv.setErrorImageResId(config.getErrorPic());
@@ -36,21 +46,6 @@ public class DisplayImageByVolleyUtils {
         niv.setImageUrl(url, IMAGELOADER);
     }
 
-    public static void loadImage(NetworkImageView niv, String url, int defaultImage) {
-        if (url == null)
-            url = "";
-        niv.setErrorImageResId(config.getErrorPic());
-        niv.setDefaultImageResId(config.getLoadPic());
-        niv.setImageUrl(url, IMAGELOADER);
-    }
-
-    public static void loadImage(NetworkImageView niv, String url, int defaultImage, int errorImage) {
-        if (url == null)
-            url = "";
-        niv.setErrorImageResId(config.getErrorPic());
-        niv.setDefaultImageResId(config.getLoadPic());
-        niv.setImageUrl(url, IMAGELOADER);
-    }
 
     static final class BitmapCache implements ImageLoader.ImageCache {
         private LruCache<String, Bitmap> mCache;

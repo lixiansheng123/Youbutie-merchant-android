@@ -7,11 +7,15 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.Toast;
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.baidu.android.pushservice.PushSettings;
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.SerializableMap;
@@ -66,6 +70,27 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Constants.APIKEY_PUSH_BAIDU);
+
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                switch (updateStatus) {
+                    case UpdateStatus.Yes: // has update
+                        UmengUpdateAgent.showUpdateDialog(context, updateInfo);
+                        break;
+                    case UpdateStatus.No: // has no update
+                        T.showShort(context, "当前已经最新版本");
+                        break;
+                    case UpdateStatus.NoneWifi: // none wifi
+                        T.showShort(context, "没有wifi连接， 只在wifi下更新");
+                        break;
+                    case UpdateStatus.Timeout: // time out
+                        T.showShort(context, "网络超时");
+                        break;
+                }
+            }
+        });
 
     }
 

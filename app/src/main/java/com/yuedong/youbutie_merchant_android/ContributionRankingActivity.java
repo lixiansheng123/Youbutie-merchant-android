@@ -31,6 +31,9 @@ import java.util.List;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.FindStatisticsListener;
 
+/**
+ * 贡献榜
+ */
 public class ContributionRankingActivity extends BaseActivity {
     private Merchant merchant;
     private int oliContributionNum;
@@ -68,7 +71,7 @@ public class ContributionRankingActivity extends BaseActivity {
 
             @Override
             public void executeTask(int skip, int limit, final FindListener<MoneyContributionBean> listener) {
-                MoneyContributionEvent.getInstance().getMoneyContributionRanking(skip,limit,merchant.getObjectId(), new FindStatisticsListener() {
+                MoneyContributionEvent.getInstance().getMoneyContributionRanking(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
                         List<MoneyContributionBean> datas = new ArrayList<MoneyContributionBean>();
