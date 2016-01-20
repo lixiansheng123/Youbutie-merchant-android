@@ -70,8 +70,11 @@ public class UserListAdapter extends BaseAdapter<Order> {
         downOrderTime.setText(o.getOrderTime().getDate());
         if (curUserIsVip(user)) {
             ViewUtils.showLayout(iconVip);
+            //定义是否为vip后面会用到
+            viewHolder.getConvertView().setTag(R.string.str_tag_is_vip, true);
         } else {
             ViewUtils.hideLayout(iconVip);
+            viewHolder.getConvertView().setTag(R.string.str_tag_is_vip, false);
         }
 
     }

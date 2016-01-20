@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -45,12 +46,14 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
     private ViewPager viewPager;
     private RoundImageView userHead;
     private TextView userName, userMobile, carNum, carDesc, carMileageNum;
+    private ImageView iconVip;
     private View editMileageLayout;
     private PullToRefreshListView refreshListView;
     private String[] tabTitles = new String[]{"车辆信息", "消费记录"};
     private List<View> views;
     private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
     private Order order;
+    private boolean isVip;
     private User orderUser;
     // 更新上一页数据
     private boolean updatePreviousPagerDate = false;
@@ -58,7 +61,9 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        order = (Order) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
+        Bundle bundle = getIntent().getExtras();
+        order = (Order) bundle.getSerializable(Constants.KEY_BEAN);
+        isVip = bundle.getBoolean(Constants.KEY_BOO);
         initTitleView(new TitleViewHelper().createDefaultTitleView4_2("客户详情", "邀请会员", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +80,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initViews() {
+        iconVip = fvById(R.id.id_icon_vip);
         views = new ArrayList<View>();
         tabLayout = fvById(R.id.id_tab_client_detail);
         viewPager = fvById(R.id.id_vp_client_detail);
@@ -130,6 +136,8 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         carNum.setText(orderUser.getCarNumber());
         carDesc.setText(orderUser.getCarString());
         carMileageNum.setText(orderUser.getStrokeLength());
+        if (isVip)
+            ViewUtils.showLayout(iconVip);
     }
 
 

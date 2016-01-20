@@ -6,12 +6,10 @@
     android:background="@color/greyecebe4"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/yellowf0c92b"
-        android:gravity="center"
-        android:orientation="vertical"
         android:paddingBottom="16dp"
         android:paddingTop="16dp">
 
@@ -19,21 +17,32 @@
             android:id="@+id/id_user_pic"
             android:layout_width="83dp"
             android:layout_height="83dp"
+            android:layout_centerHorizontal="true"
             app:radius="3dp"
             app:type="round" />
+
+        <ImageView
+            android:id="@+id/id_icon_vip"
+            style="@style/w_h_ww"
+            android:layout_marginLeft="28dp"
+            android:layout_toRightOf="@+id/id_user_pic"
+            android:src="@drawable/icon_white_user_vip"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/id_user_name"
             style="@style/text_white_16sp"
-            android:layout_marginTop="8dp"
-            android:text="@string/str_test_nick" />
+            android:layout_below="@+id/id_user_pic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:id="@+id/id_user_mobile"
             style="@style/text_white_14sp"
-            android:layout_marginTop="4dp"
-            android:text="1231231" />
-    </LinearLayout>
+            android:layout_below="@+id/id_user_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp" />
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/id_tab_client_detail"

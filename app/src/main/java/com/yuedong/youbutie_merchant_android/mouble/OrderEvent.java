@@ -234,7 +234,7 @@ public class OrderEvent implements BaseEvent {
         bmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         bmobQuery.addWhereEqualTo("state", 4);
         bmobQuery.include("user");
-        bmobQuery.order("createdAt");
+        bmobQuery.order("-createdAt");
         bmobQuery.setSkip(skip);
         bmobQuery.setLimit(limit);
 

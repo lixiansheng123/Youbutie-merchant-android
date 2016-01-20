@@ -156,4 +156,5 @@
     <string name="str_push_merchant_ad_title">门店活动</string>
     <string name="str_push_merchant_ad_content">%s发出新的优惠活动，快来看看吧</string>
     <string name="str_please_input">请输入</string>
+    <string name="str_tag_is_vip">is_vip</string>
 </resources>

@@ -111,6 +111,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.KEY_BEAN, order);
                 Intent intent = new Intent(activity, ClientDetailActivity.class);
+                boolean isVip = (boolean) view.getTag(R.string.str_tag_is_vip);
+                bundle.putBoolean(Constants.KEY_BOO, isVip);
                 intent.putExtras(bundle);
                 LaunchWithExitUtils.startActivityForResult(activity, intent, 0x021);
             }
