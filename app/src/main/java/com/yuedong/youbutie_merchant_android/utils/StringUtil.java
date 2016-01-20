@@ -144,13 +144,15 @@ public final class StringUtil {
     }
 
     /**
-     * double值去掉E
+     * double值保留两位小数
      *
      * @param value
      * @return
      */
-    public static String setDoubleValueCastE(double value) {
-        return new BigDecimal(value).toString();
+    public static String setDoubleRetain2Decimal(double value) {
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+        return bd.toString();
     }
 
     /**

@@ -276,7 +276,8 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
 
     @Override
     protected void notifyMsg(int msgType, Map<String, Object> data, JSONObject jsonObject) {
-        if (msgType == RequestYDHelper.PUSH_TYPE_DOWNORDER) {
+        if (msgType == RequestYDHelper.PUSH_TYPE_DOWNORDER ||//
+                msgType == RequestYDHelper.PUSH_TYPE_CLIENT_PAY_SUCCEED) {
             // 刷新订单列表
             if (orderManagerFm != null && orderManagerFm.initFinshed)
                 orderManagerFm.refreshTotalChildFm();

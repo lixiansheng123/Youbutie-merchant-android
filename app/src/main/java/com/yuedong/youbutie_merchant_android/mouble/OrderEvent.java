@@ -69,7 +69,7 @@ public class OrderEvent implements BaseEvent {
                     orderBmobQuery.setLimit(limit);
                     orderBmobQuery.setSkip(skip);
                     orderBmobQuery.addWhereContainedIn("state", Arrays.asList(orderStatus));
-                    orderBmobQuery.order("-updatedAt");
+                    orderBmobQuery.order("-createdAt");
                     orderBmobQuery.findObjects(context, new FindListener<Order>() {
                         @Override
                         public void onSuccess(List<Order> list) {
@@ -159,6 +159,36 @@ public class OrderEvent implements BaseEvent {
     }
 
     /**
+     * 获取门店评价
+     */
+    public void getMerchantEvaluate(int skip, int limit, String merchantObjectId, final FindListener<Order> listener) {
+        listener.onStart();
+        BmobQuery<Order> bmobQuery = new BmobQuery<Order>();
+        bmobQuery.order("-createdAt");
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        bmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        bmobQuery.setSkip(skip);
+        bmobQuery.include("user");
+        bmobQuery.setLimit(limit);
+        // 存在评价内容
+        bmobQuery.addWhereExists("content");
+        bmobQuery.findObjects(context, new FindListener<Order>() {
+            @Override
+            public void onSuccess(List<Order> list) {
+                listener.onSuccess(list);
+                listener.onFinish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
      * 获取门店对应服务订单个数
      */
     public void getOrderTypeNumberByMerchant(String merchantObjectId, String serviceObjectId, final CountListener listener) {
@@ -223,6 +253,7 @@ public class OrderEvent implements BaseEvent {
         bmobQuery.findObjects(context, new FindListener<Order>() {
             @Override
             public void onSuccess(final List<Order> list) {
+                L.d("findObjects list:" + list.toString());
                 if (CommonUtils.listIsNotNull(list)) {
                     // 统计来店次数
                     for (int i = 0; i < list.size(); i++) {

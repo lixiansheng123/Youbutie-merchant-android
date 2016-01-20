@@ -11,6 +11,7 @@
         android:background="@color/whiteffffff"
         android:orientation="vertical"
         android:paddingLeft="24dp"
+        android:paddingBottom="8dp"
         android:paddingRight="24dp">
 
         <RelativeLayout
@@ -47,9 +48,7 @@
             android:layout_height="56dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:ellipsize="end"
             android:gravity="center_vertical"
-            android:singleLine="true"
             android:text="@string/str_not_evaluate"
             android:textColor="@color/grey8d7c7a" />
 

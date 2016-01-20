@@ -62,16 +62,17 @@
         <TextView
             android:id="@+id/id_pay_money"
             style="@style/text_black_16sp"
-            android:layout_alignParentRight="true"
-            android:text="￥120.00"
+            android:layout_alignRight="@+id/id_wait_pay_name"
+            android:text="￥0"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/greyff8b3e"
-            android:visibility="gone" />
+           />
 
         <TextView
             android:id="@+id/id_wait_pay_name"
             android:layout_width="72dp"
             android:layout_height="28dp"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/id_pay_money"
             android:layout_marginTop="12dp"
             android:background="@drawable/red_frame"
@@ -79,13 +80,14 @@
             android:text="@string/str_wait_pay"
             android:textColor="@color/greyff8b3e"
             android:textSize="14sp"
-            android:visibility="gone" />
+             />
 
         <Button
             android:id="@+id/id_btn_receive_order"
             style="@style/btn_round_yellow"
             android:layout_width="72dp"
             android:layout_height="33dp"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:text="@string/str_receive_order" />
 

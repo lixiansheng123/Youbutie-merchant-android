@@ -28,6 +28,7 @@ import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.TextUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
@@ -92,6 +93,10 @@ public class MerchantCollectionActivity extends BaseActivity {
         confirmCollectionBtn.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) {
+                                                        List<String> ids = new ArrayList<String>();
+                                                        for (ServiceInfoDetailBean bean : selectService) {
+                                                            ids.add(bean.objectId);
+                                                        }
                                                         String price = TextUtils.getText(inputServiceTotalMoney);
                                                         Double priceI = Double.parseDouble(price.replace("￥", "").trim());
                                                         //1更改订单状态
@@ -100,6 +105,7 @@ public class MerchantCollectionActivity extends BaseActivity {
                                                         updateOrder.setState(3);
                                                         updateOrder.setServices(selectService);
                                                         updateOrder.setPrice(priceI);
+                                                        updateOrder.setServiceIds(ids);
                                                         updateOrder.update(activity, order.getObjectId(), new UpdateListener() {
                                                             @Override
                                                             public void onSuccess() {

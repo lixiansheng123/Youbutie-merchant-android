@@ -88,7 +88,13 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         selectItemPop = new SelectItemPop(context, selectAdapter);
         List<ServiceInfo> serviceData = ServiceInfoDao.getInstance().findAll();
         List<Car> carData = CarDao.getInstance().findAll();
+        ServiceInfo serviceInfo = new ServiceInfo();
+        serviceInfo.setName("全部服务");
+        serviceInfos.add(serviceInfo);
         serviceInfos.addAll(serviceData);
+        Car car = new Car();
+        car.setName("全部车型");
+        carInfos.add(car);
         carInfos.addAll(carData);
         filterLayout = fvById(R.id.id_filter_layout);
         refreshHelper = new RefreshHelper<Order>();
@@ -189,6 +195,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
                 @Override
                 public void onSuccess(List<Order> list) {
+                    L.d("getMemberFinishedOrderAndCountBuyNum-onSuccess;" + list.toString());
                     if (CommonUtils.listIsNotNull(list)) {
                         List<Order> vipOrder = new ArrayList<Order>();
                         for (Order order : list) {

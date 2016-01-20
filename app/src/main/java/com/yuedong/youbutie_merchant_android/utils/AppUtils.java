@@ -139,9 +139,12 @@ public class AppUtils {
      * @return
      */
     public static boolean curUserIsVip(User user, List<Vips> merchantVipsList) {
+        L.d("比较的user:" + user.toString());
         if (CommonUtils.listIsNotNull(merchantVipsList)) {
             for (Vips vips : merchantVipsList) {
-                if (user.getObjectId().equals(vips.getUser().getObjectId()))
+                User vipUser = vips.getUser();
+                L.d("被比较的vipuser:" + vipUser.toString());
+                if (user.getObjectId().equals(vipUser.getObjectId()))
                     return true;
             }
         }
@@ -329,4 +332,5 @@ public class AppUtils {
         }
         return apiKey;
     }
+
 }

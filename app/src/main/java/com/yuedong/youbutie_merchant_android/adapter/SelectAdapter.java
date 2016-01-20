@@ -37,7 +37,6 @@ public class SelectAdapter extends BaseAdapter<BmobObject> {
 
     @Override
     public void convert(ViewHolder viewHolder, BmobObject bmobObject, int position, View convertView) {
-        L.i(TAG + "getView----------------------------");
         TextView text = viewHolder.getIdByView(R.id.id_text);
         switch (mode) {
             case MODE_SERVICE:

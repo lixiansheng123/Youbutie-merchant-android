@@ -16,7 +16,6 @@ import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
-import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DimenUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
@@ -49,7 +48,7 @@ public class UserListAdapter extends BaseAdapter<Order> {
         //-----------------------设值------------------------
         userName.setText(user.getNickname());
         DisplayImageByVolleyUtils.loadUserHead(user.getPhoto(), userPic);
-        money.setText("￥" + StringUtil.setDoubleValueCastE(o.getPrice()));
+        money.setText("￥" + StringUtil.setDoubleRetain2Decimal(o.getPrice()));
         if (o.buyNum != null) {
             if (o.buyNum == 1) {
                 buyNum.setText("首次来店");

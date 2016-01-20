@@ -79,6 +79,7 @@ public class VipEvent implements BaseEvent {
         BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
         merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
         vipsBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        vipsBmobQuery.include("user");
         vipsBmobQuery.findObjects(context, new FindListener<Vips>() {
             @Override
             public void onSuccess(List<Vips> list) {

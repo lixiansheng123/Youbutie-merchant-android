@@ -1,17 +1,14 @@
 package com.yuedong.youbutie_merchant_android.adapter;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.youbutie_merchant_android.MerchantCollectionActivity;
 import com.yuedong.youbutie_merchant_android.OrderDetailActivity;
 import com.yuedong.youbutie_merchant_android.R;
@@ -24,7 +21,6 @@ import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
-import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
@@ -32,8 +28,6 @@ import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
 import java.util.List;
-
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * 订单管理adapter
@@ -53,11 +47,9 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
         TextView money = viewHolder.getIdByView(R.id.id_pay_money);
         TextView waitPayName = viewHolder.getIdByView(R.id.id_wait_pay_name);
         User orderUser = order.getUser();
-        DisplayImageByVolleyUtils.loadImage(orderUser.getPhoto(), networkImageView);
+        DisplayImageByVolleyUtils.loadUserHead(orderUser.getPhoto(), networkImageView);
         name.setText(orderUser.getNickname());
         time.setText(order.getOrderTime().getDate());
-
-
         ViewUtils.hideLayouts(money, waitPayName, receiveOrder);
         service.setTextColor(Color.parseColor("#eeb600"));
         money.setTextColor(Color.parseColor("#ff8b3e"));
@@ -86,7 +78,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                     receiveOrder.setText(mCon.getString(R.string.str_receive_order));
                 } else if (orderState == 3) {
                     ViewUtils.showLayouts(money, waitPayName);
-                    money.setText("￥" + StringUtil.setDoubleValueCastE(order.getPrice()));
+                    money.setText("￥" + StringUtil.setDoubleRetain2Decimal(order.getPrice()));
                 }
                 break;
 
@@ -98,8 +90,12 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                 waitPayName.setBackgroundDrawable(mCon.getResources().getDrawable(R.drawable.green_frame));
                 waitPayName.setText(mCon.getString(R.string.str_already_collection));
                 service.setTextColor(Color.parseColor("#938381"));
-                service.setText("客户暂未评价");
-                money.setText("￥" + StringUtil.setDoubleValueCastE(order.getPrice()));
+                String content = order.getContent();
+                if (TextUtils.isEmpty(content))
+                    service.setText("客户暂未评价");
+                else
+                    service.setText(content);
+                money.setText("￥" + StringUtil.setDoubleRetain2Decimal(order.getPrice()));
                 break;
         }
 

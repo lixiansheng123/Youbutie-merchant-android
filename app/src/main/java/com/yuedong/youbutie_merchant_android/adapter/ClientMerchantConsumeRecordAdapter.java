@@ -30,7 +30,7 @@ public class ClientMerchantConsumeRecordAdapter extends BaseAdapter<Order> {
         List<ServiceInfoDetailBean> list = order.getServices();
         service.setText(AppUtils.setMerchantService(list));
         time.setText(order.getOrderTime().getDate());
-        money.setText("￥" + StringUtil.setDoubleValueCastE(order.getPrice()));
+        money.setText("￥" + StringUtil.setDoubleRetain2Decimal(order.getPrice()));
         if (position == getCount() - 1) {
             ViewUtils.hideLayout(line);
         } else {

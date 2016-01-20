@@ -20,6 +20,33 @@ public class Order extends BmobObject {
     private List<String> serviceIds;// 服务的Id
     private String sumMonth;
     public Integer buyNum; // 来店次数
+    private Float star; //评价星级
+    private String content; // 评价内容
+    private BmobDate appraiseTime;// 评价时间
+
+    public BmobDate getAppraiseTime() {
+        return appraiseTime;
+    }
+
+    public void setAppraiseTime(BmobDate appraiseTime) {
+        this.appraiseTime = appraiseTime;
+    }
+
+    public Float getStar() {
+        return star;
+    }
+
+    public void setStar(Float star) {
+        this.star = star;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getSumMonth() {
         return sumMonth;
