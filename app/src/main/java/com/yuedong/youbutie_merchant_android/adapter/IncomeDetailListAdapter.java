@@ -7,6 +7,7 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.bean.IncomeDetailListBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 
 import java.util.List;
 
@@ -22,6 +23,6 @@ public class IncomeDetailListAdapter extends BaseAdapter<IncomeDetailListBean> {
     public void convert(ViewHolder viewHolder, IncomeDetailListBean incomeDetailListBean, int position, View convertView) {
         viewHolder.setText(R.id.id_time_des, incomeDetailListBean.getDayDes())//
                 .setText(R.id.id_order_num, incomeDetailListBean.getOrderNumber() + "单")//
-                .setText(R.id.id_order_total_money, "￥" + incomeDetailListBean.getTotalMoney());
+                .setText(R.id.id_order_total_money, "￥" + StringUtil.setDoubleValue(incomeDetailListBean.getTotalMoney()));
     }
 }

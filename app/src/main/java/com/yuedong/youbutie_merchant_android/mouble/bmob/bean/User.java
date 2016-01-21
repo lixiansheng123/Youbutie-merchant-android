@@ -9,17 +9,16 @@ public class User extends BmobUser {
     private Integer age;// 年龄
     private BmobGeoPoint location;// 坐标
     private String address;//所在地址
-    //    private Car car;//车型
     private String carNumber;//车牌号
     private String idnumber;//识别号（后6位）
     private String VIN;//车架号（后4位）
-    private String strokeLength;//车行程（单位km）
+    private Integer strokeLength;//车行程（单位km）
     private Integer totalMoney;//总油点
     private Integer type;//用户类型（用户＝1，商家＝2）
     private String carString; // 车型描述
-    private Double cash = 0.0; // 可提现金额
-    private Double drawTotalCash = 0.0; // 提现总金额
-    private Integer drawCount = 0; // 提现次数
+    private Double cash; // 可提现金额
+    private Double drawTotalCash; // 提现总金额
+    private Integer drawCount; // 提现次数
     private String bankCard; // 提现银行卡
     private String cardName; // 银行卡持卡人姓名
     private String bankName; // 开户行名称
@@ -161,14 +160,6 @@ public class User extends BmobUser {
         this.address = address;
     }
 
-//    public Car getCar() {
-//        return car;
-//    }
-//
-//    public void setCar(Car car) {
-//        this.car = car;
-//    }
-
 
     public String getIdnumber() {
         return idnumber;
@@ -186,14 +177,13 @@ public class User extends BmobUser {
         this.VIN = VIN;
     }
 
-    public String getStrokeLength() {
+    public Integer getStrokeLength() {
         return strokeLength;
     }
 
-    public void setStrokeLength(String strokeLength) {
+    public void setStrokeLength(Integer strokeLength) {
         this.strokeLength = strokeLength;
     }
-
 
     public Integer getType() {
         return type;

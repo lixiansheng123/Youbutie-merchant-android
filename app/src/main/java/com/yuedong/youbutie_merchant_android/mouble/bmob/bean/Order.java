@@ -15,7 +15,7 @@ public class Order extends BmobObject {
     private List<ServiceInfoDetailBean> services;// 需要的服务
     private BmobDate orderTime; // 订单时间
     private Double price; // 单价
-    private Integer state; // 状态  1下单 2商家接单 3服务完成 4已取车(收款成功) 5收款失败
+    private Integer state; // 状态  1下单 2商家接单 3服务完成 4已取车(收款成功) 5收款失败 6收款中
     private Integer payWay; // 支付类型（1=支付宝，2=微信）
     private List<String> serviceIds;// 服务的Id
     private String sumMonth;

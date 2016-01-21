@@ -9,6 +9,7 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.DrawMoneyRecord;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class WithdrawRecordListAdapter extends BaseAdapter<DrawMoneyRecord> {
             ViewUtils.showLayout(line);
 
         time.setText(drawMoneyRecord.getCreatedAt());
-        withdrawMonet.setText("￥" + drawMoneyRecord.getMoney());
+        withdrawMonet.setText("￥" + StringUtil.setDoubleValue(drawMoneyRecord.getMoney()));
         int state = drawMoneyRecord.getState();
         if (state == 0) {
             status.setText(mCon.getString(R.string.str_progress));

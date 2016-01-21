@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 
 import com.yuedong.youbutie_merchant_android.R;
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
@@ -19,6 +20,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.RequestSMSCodeListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Administrator on 2015/12/31.
@@ -42,6 +44,7 @@ public class UserEvent implements BaseEvent {
 
     /**
      * 获取用户根据id
+     *
      * @param userId
      * @param listener
      */
@@ -53,6 +56,57 @@ public class UserEvent implements BaseEvent {
             public void onSuccess(User user) {
                 listener.onSuccess(user);
                 listener.onFinish();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onFailure(i, s);
+                listener.onFinish();
+            }
+        });
+    }
+
+    /**
+     * 同步user根据idl
+     */
+    public void pullUserById(final String userId, final UpdateListener listener) {
+        listener.onStart();
+        findUserById(userId, new GetListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                User updateUser = new User();
+                updateUser.setCash(user.getCash());
+                updateUser.setNickname(user.getNickname());
+                updateUser.setDrawCount(user.getDrawCount());
+                updateUser.setPhoto(user.getPhoto());
+                updateUser.setMobilePhoneNumber(user.getMobilePhoneNumber());
+                updateUser.setAddress(user.getAddress());
+                updateUser.setDrawTotalCash(user.getDrawTotalCash());
+                updateUser.setAge(user.getAge());
+                updateUser.setBankCard(user.getBankCard());
+                updateUser.setCarNumber(user.getCarNumber());
+                updateUser.setCarString(user.getCarString());
+                updateUser.setChannelId(user.getChannelId());
+                updateUser.setIdnumber(user.getIdnumber());
+                updateUser.setDeviceType(user.getDeviceType());
+                updateUser.setLocation(user.getLocation());
+                updateUser.setStrokeLength(user.getStrokeLength());
+                updateUser.setType(user.getType());
+                updateUser.setVIN(user.getVIN());
+                updateUser.setTotalMoney(user.getTotalMoney());
+                updateUser.update(context, userId, new UpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        listener.onSuccess();
+                        listener.onFinish();
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        listener.onFailure(i, s);
+                        listener.onFinish();
+                    }
+                });
             }
 
             @Override

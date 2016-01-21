@@ -157,4 +157,6 @@
     <string name="str_push_merchant_ad_content">%s发出新的优惠活动，快来看看吧</string>
     <string name="str_please_input">请输入</string>
     <string name="str_tag_is_vip">is_vip</string>
+    <string name="str_push_service_finshed_title">服务完成</string>
+    <string name="str_push_service_finshed_content">亲爱的车主，您的爱车服务完成，请前来取车</string>
 </resources>

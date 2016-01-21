@@ -130,9 +130,9 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                                                         App.getInstance().userInfoChange = true;
                                                         dialogStatus(false);
                                                         Bundle bundle = new Bundle();
-                                                        bundle.putDouble(Constants.KEY_INT,inputMoneyD);
+                                                        bundle.putDouble(Constants.KEY_INT, inputMoneyD);
                                                         bundle.putString(Constants.KEY_TEXT, bankcardInfoTv.getText().toString());
-                                                        LaunchWithExitUtils.startActivity(activity,ApplySucceedActivity.class,bundle);
+                                                        LaunchWithExitUtils.startActivity(activity, ApplySucceedActivity.class, bundle);
                                                     }
 
                                                     @Override

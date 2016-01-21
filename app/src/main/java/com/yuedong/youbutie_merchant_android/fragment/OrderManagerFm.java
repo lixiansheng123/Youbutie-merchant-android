@@ -160,7 +160,7 @@ public class OrderManagerFm extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUESTCODE_RECEIVE_ORDER && resultCode == Constants.RESULT_RECEIVE_ORDER && data != null) {
             Order order = (Order) data.getSerializableExtra(Constants.KEY_BEAN);
-            receiveOrder(order);
+            receiveOrderAndOrderServiceFinished(order);
         } else if (requestCode == Constants.REQUESTCODE_SWIP_CODE && resultCode == getActivity().RESULT_OK && data != null) {
             Bundle bundle = data.getExtras();
             final String scanResult = bundle.getString("result");
@@ -204,12 +204,19 @@ public class OrderManagerFm extends BaseFragment {
         }
     }
 
-
-    public void receiveOrder(final Order order) {
+    /**
+     * 接单和订单服务完成
+     *
+     * @param order
+     */
+    public void receiveOrderAndOrderServiceFinished(final Order order) {
         loadDialog.setMessage("努力提交数据..");
         dialogStatus(true);
         Order updateOrder = new Order();
-        updateOrder.setState(2);
+        if (order.getState() == 1)
+            updateOrder.setState(2);
+        else if (order.getState() == 2)
+            updateOrder.setState(3);
         updateOrder.update(getActivity(), order.getObjectId(), new UpdateListener() {
             @Override
             public void onSuccess() {
@@ -227,12 +234,26 @@ public class OrderManagerFm extends BaseFragment {
 
                     @Override
                     public void succeed(String secretKey) {
+                        dialogStatus(false);
                         User orderUser = order.getUser();
                         RequestYDHelper requestYDHelper = new RequestYDHelper();
                         requestYDHelper.setAppSecretkey(secretKey);
-                        requestYDHelper.requestPushSingle(getString(R.string.str_push_receive_order_title), getString(R.string.str_push_receive_order_message), orderUser.getObjectId(), RequestYDHelper.PUSH_TYPE_MERCHANT_RECEIVE_ORDER, "", "");
-                        dialogStatus(false);
-                        T.showShort(getActivity(), "接单成功");
+                        String pushTitle = "";
+                        String pushContent = "";
+                        String tips = "";
+                        int pushType = RequestYDHelper.PUSH_TYPE_MERCHANT_RECEIVE_ORDER;
+                        if (order.getState() == 1) {
+                            pushTitle = getString(R.string.str_push_receive_order_title);
+                            pushContent = getString(R.string.str_push_receive_order_message);
+                            tips = "接单成功";
+                        } else if (order.getState() == 2) {
+                            pushTitle = getString(R.string.str_push_service_finshed_title);
+                            pushContent = getString(R.string.str_push_service_finshed_content);
+                            tips = "搞掂晒拉";
+                            pushType = RequestYDHelper.PUSH_TYPE_SERVICE_FINISHED;
+                        }
+                        requestYDHelper.requestPushSingle(pushTitle, pushContent, orderUser.getObjectId(), pushType, "", "");
+                        T.showShort(getActivity(), tips);
                         // 更新3个切换页数据
                         refreshTotalChildFm();
                     }

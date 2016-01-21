@@ -61,6 +61,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
             case 1:
             case 2:
             case 3:
+            case 6:
                 List<ServiceInfoDetailBean> services = order.getServices();
                 StringBuilder sb = new StringBuilder();
                 for (ServiceInfoDetailBean serviceInfoDetailBean : services) {
@@ -72,13 +73,16 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                 service.setText(sb.toString());
                 if (orderState == 2) {
                     ViewUtils.showLayout(receiveOrder);
-                    receiveOrder.setText(mCon.getString(R.string.str_collection));
+                    receiveOrder.setText(mCon.getString(R.string.str_service_finish));
                 } else if (orderState == 1) {
                     ViewUtils.showLayout(receiveOrder);
                     receiveOrder.setText(mCon.getString(R.string.str_receive_order));
                 } else if (orderState == 3) {
+                    ViewUtils.showLayout(receiveOrder);
+                    receiveOrder.setText(mCon.getString(R.string.str_collection));
+                } else if (orderState == 6) {
                     ViewUtils.showLayouts(money, waitPayName);
-                    money.setText("￥" + StringUtil.setDoubleRetain2Decimal(order.getPrice()));
+                    money.setText("￥" + StringUtil.setDoubleValue(order.getPrice()));
                 }
                 break;
 
@@ -95,7 +99,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                     service.setText("客户暂未评价");
                 else
                     service.setText(content);
-                money.setText("￥" + StringUtil.setDoubleRetain2Decimal(order.getPrice()));
+                money.setText("￥" + StringUtil.setDoubleValue(order.getPrice()));
                 break;
         }
 
@@ -123,12 +127,15 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                     final BaseActivity attachAct = (BaseActivity) mCon;
                     final OrderManagerFm orderManagerFm = (OrderManagerFm) attachAct.getSupportFragmentManager().findFragmentByTag(Constants.ORDERMANAGER_FM_TAG);
                     if (mCon.getString(R.string.str_receive_order).equals(clickBtn.getText().toString())) {
-                        orderManagerFm.receiveOrder(order);
+                        orderManagerFm.receiveOrderAndOrderServiceFinished(order);
 
                     } else if (mCon.getString(R.string.str_collection).equals(clickBtn.getText().toString())) {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(Constants.KEY_BEAN, order);
                         LaunchWithExitUtils.startActivity(attachAct, MerchantCollectionActivity.class, bundle);
+                    } else if (mCon.getString(R.string.str_service_finish).equals(clickBtn.getText().toString())) {
+                        // 服务完成
+                        orderManagerFm.receiveOrderAndOrderServiceFinished(order);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

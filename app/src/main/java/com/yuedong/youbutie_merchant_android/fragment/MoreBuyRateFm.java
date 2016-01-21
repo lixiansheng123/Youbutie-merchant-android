@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
@@ -13,6 +14,7 @@ import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.utils.DateUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
@@ -36,6 +39,7 @@ public class MoreBuyRateFm extends BaseFragment {
     private User user;
     private Merchant merchant;
     private LineChatView lineChatView;
+    private TextView descTv;
 
     @Override
     public View getContentView(ViewGroup container) {
@@ -47,6 +51,7 @@ public class MoreBuyRateFm extends BaseFragment {
     @Override
     public void initViews(View contentView, Bundle savedInstanceState) {
         lineChatView = (LineChatView) contentView.findViewById(R.id.id_line_chart);
+        descTv = (TextView) contentView.findViewById(R.id.id_desc);
         ui();
     }
 
@@ -61,6 +66,8 @@ public class MoreBuyRateFm extends BaseFragment {
     int count = 0;
 
     private void ui() {
+        String yearString = DateUtils.getYearString(new Date());
+        descTv.setText(yearString + "年返店率");
         user = App.getInstance().getUser();
         MerchantEvent.getInstance().findMeMetchant(user.getObjectId(), new FindListener<Merchant>() {
             @Override

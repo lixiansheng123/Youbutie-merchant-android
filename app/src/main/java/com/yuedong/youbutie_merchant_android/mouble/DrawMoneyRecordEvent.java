@@ -85,7 +85,7 @@ public class DrawMoneyRecordEvent implements BaseEvent {
         mainQuery.addWhereMatchesQuery("user", "_User", userBmobQuery);
         mainQuery.setSkip(skip);
         mainQuery.setLimit(limit);
-        mainQuery.order("createdAt");
+        mainQuery.order("-createdAt");
         mainQuery.findObjects(context, new FindListener<DrawMoneyRecord>() {
             @Override
             public void onSuccess(List<DrawMoneyRecord> list) {

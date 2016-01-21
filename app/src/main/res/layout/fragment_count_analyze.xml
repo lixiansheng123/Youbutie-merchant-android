@@ -241,7 +241,7 @@
         <View
             android:id="@+id/id_line"
             android:layout_width="100dp"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_alignParentBottom="true"
             android:background="@color/yellowf0c008" />
     </RelativeLayout>

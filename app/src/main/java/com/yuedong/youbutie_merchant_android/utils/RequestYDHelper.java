@@ -68,6 +68,10 @@ public class RequestYDHelper {
      * 商家推送广告
      */
     public static final int PUSH_TYPE_MERCHANT_AD = 7;
+    /**
+     * 商家服务完成
+     */
+    public static final int PUSH_TYPE_SERVICE_FINISHED = 8;
 
     public void setOnYDRequestListener(OnYDRequestListener onRequestPushListener) {
         this.onRequestYDListener = onRequestPushListener;

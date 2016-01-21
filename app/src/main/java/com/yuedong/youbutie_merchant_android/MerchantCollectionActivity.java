@@ -102,7 +102,7 @@ public class MerchantCollectionActivity extends BaseActivity {
                                                         //1更改订单状态
                                                         dialogStatus(true);
                                                         Order updateOrder = new Order();
-                                                        updateOrder.setState(3);
+                                                        updateOrder.setState(6);
                                                         updateOrder.setServices(selectService);
                                                         updateOrder.setPrice(priceI);
                                                         updateOrder.setServiceIds(ids);

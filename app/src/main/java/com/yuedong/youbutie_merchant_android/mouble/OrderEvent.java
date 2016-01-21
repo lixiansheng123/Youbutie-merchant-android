@@ -69,7 +69,7 @@ public class OrderEvent implements BaseEvent {
                     orderBmobQuery.setLimit(limit);
                     orderBmobQuery.setSkip(skip);
                     orderBmobQuery.addWhereContainedIn("state", Arrays.asList(orderStatus));
-                    orderBmobQuery.order("-createdAt");
+                    orderBmobQuery.order("-updatedAt");
                     orderBmobQuery.findObjects(context, new FindListener<Order>() {
                         @Override
                         public void onSuccess(List<Order> list) {

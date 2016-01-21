@@ -74,7 +74,7 @@ public class OrderFm extends Fragment {
                 if ("新订单".equals(flag)) {
                     orderState = new Integer[]{1};
                 } else if ("已接单".equals(flag)) {
-                    orderState = new Integer[]{2, 3};
+                    orderState = new Integer[]{2, 3, 6};
                 } else if ("已完结".equals(flag)) {
                     orderState = new Integer[]{4};
                 }

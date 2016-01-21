@@ -144,15 +144,22 @@ public final class StringUtil {
     }
 
     /**
-     * double值保留两位小数
+     * double是16.0情况的去16 带精度保留两位小数
      *
      * @param value
      * @return
      */
-    public static String setDoubleRetain2Decimal(double value) {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
-        return bd.toString();
+    public static String setDoubleValue(double value) {
+        String valueStr = "";
+        int intValue = (int) value;
+        if (intValue == value) {
+            valueStr = intValue + "";
+        } else {
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+            valueStr = bd.toString();
+        }
+        return valueStr;
     }
 
     /**

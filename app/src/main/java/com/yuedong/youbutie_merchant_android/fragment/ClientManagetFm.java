@@ -20,9 +20,11 @@ import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
 import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
 import com.yuedong.youbutie_merchant_android.mouble.MessageEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.mouble.VipEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
@@ -31,6 +33,7 @@ import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.listener.CountListener;
@@ -42,7 +45,7 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class ClientManagetFm extends BaseFragment implements View.OnClickListener {
     private TextView totalClientNum, memberNum, adNum;
-    private List<Vips> mVipsLists;
+    private ArrayList<Vips> mVipsLists;
     private List<Order> mMercantClients;
     private PullToRefreshListView refreshListView;
     private RefreshHelper<Messages> refreshHelper;
@@ -96,7 +99,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                         mMercantClients = downOrderUserList;
                         L.d("getMerchantOrderUser-succeed:" + downOrderUserList.toString());
                         // 获取门店会员人数
-                        MerchantEvent.getInstance().getMerchantVipUser(meMerchant.getObjectId(), new FindListener<Vips>() {
+                        VipEvent.getInstance().findVipByMerchant(meMerchant.getObjectId(), new FindListener<Vips>() {
 
                             @Override
                             public void onStart() {
@@ -106,7 +109,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                             @Override
                             public void onSuccess(final List<Vips> vipsList) {
                                 L.d("getMerchantVipUser-succeed:" + vipsList.toString());
-                                mVipsLists = vipsList;
+                                mVipsLists = (ArrayList<Vips>) vipsList;
                                 // 获取广告数量
                                 MessageEvent.getInstance().countMessaeByUserId(App.getInstance().getUser().getObjectId(), new CountListener() {
                                     @Override
@@ -114,8 +117,24 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                                         dialogStatus(false);
                                         int merchantDownOrderUserNum = AppUtils.countMerchantUser(mMercantClients);
                                         totalClientNum.setText(merchantDownOrderUserNum + "");
-                                        if (CommonUtils.listIsNotNull(mVipsLists))
-                                            memberNum.setText(mVipsLists.size() + "");
+                                        // 门店会员人数
+                                        if (CommonUtils.listIsNotNull(mVipsLists)) {
+                                            // 对重复的user去除掉
+                                            List<String> userIds = new ArrayList<String>();
+                                            for (Vips vip : mVipsLists) {
+                                                User vipUser = vip.getUser();
+                                                L.d("vipUser:" + vipUser.toString());
+                                                String objectId = vipUser.getObjectId();
+                                                boolean isHas = false;
+                                                for (String userId : userIds) {
+                                                    if (objectId.equals(userId))
+                                                        isHas = true;
+                                                }
+                                                if (!isHas)
+                                                    userIds.add(objectId);
+                                            }
+                                            memberNum.setText(userIds.size() + "");
+                                        }
                                         adNum.setText(count + "");
                                         refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshHelper.ProxyRefreshListener<Messages>() {
                                             @Override
@@ -171,6 +190,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.KEY_TEXT, "用户消费记录");
                     bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
+                    bundle.putSerializable(Constants.KEY_LIST, mVipsLists);
                     LaunchWithExitUtils.startActivity(getActivity(), UserListActivity.class, bundle);
                 }
                 break;
@@ -182,6 +202,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                     bundle.putString(Constants.KEY_TEXT, "会员消费记录");
                     bundle.putInt(Constants.KEY_ACTION, UserListActivity.ACTION_MEMBER_USER);
                     bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
+                    bundle.putSerializable(Constants.KEY_LIST, mVipsLists);
                     LaunchWithExitUtils.startActivity(getActivity(), UserListActivity.class, bundle);
                 }
                 break;

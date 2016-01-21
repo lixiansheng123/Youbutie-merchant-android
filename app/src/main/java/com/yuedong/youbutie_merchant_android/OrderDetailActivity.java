@@ -78,6 +78,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailFlow
             case 2:
             case 3:
             case 5:
+            case 6:
                 flow1Fm = new OrderDetailFlow1();
                 flow1Fm.setArguments(bundle);
                 addFragment(flow1Fm, R.id.container, false, null);
@@ -125,6 +126,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailFlow
                 progress2(yellowColor);
                 break;
             case 3:
+            case 6:
                 progress1(yellowColor);
                 progress2(yellowColor);
                 progress3(yellowColor);
@@ -179,8 +181,8 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailFlow
 //        setResult(Constants.RESULT_COLLECTION, intent);
 //        defaultFinished();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.KEY_BEAN,orderBean);
-        LaunchWithExitUtils.startActivity(activity, MerchantCollectionActivity.class,bundle);
+        bundle.putSerializable(Constants.KEY_BEAN, orderBean);
+        LaunchWithExitUtils.startActivity(activity, MerchantCollectionActivity.class, bundle);
     }
 
     @Override

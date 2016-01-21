@@ -49,6 +49,7 @@ public class InfoEditActivity extends BaseActivity {
         final Bundle paramsBundle = getIntent().getExtras();
         String title = paramsBundle.getString(Constants.KEY_TEXT);
         final int action = paramsBundle.getInt(Constants.KEY_ACTION);
+        String tips = paramsBundle.getString(Constants.KEY_TEXT2);
         initTitleView(new TitleViewHelper().createDefaultTitleView4(title, "保存", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +89,9 @@ public class InfoEditActivity extends BaseActivity {
             }
 
         }));
-
+        if (StringUtil.isNotEmpty(tips)) {
+            inputbox.setHint("提示:" + tips);
+        }
         // 增加限制
         if (action == ACTION_INPUT_MILEAGE) {
             inputbox.setInputType(InputType.TYPE_CLASS_NUMBER);

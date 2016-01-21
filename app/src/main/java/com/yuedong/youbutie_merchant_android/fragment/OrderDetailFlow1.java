@@ -80,6 +80,7 @@ public class OrderDetailFlow1 extends BaseFragment {
 
             case 3:
             case 5:
+            case 6:
                 status.setText("等待付款");
                 break;
 

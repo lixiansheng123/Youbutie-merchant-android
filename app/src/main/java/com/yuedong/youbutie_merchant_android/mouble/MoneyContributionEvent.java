@@ -38,6 +38,9 @@ public class MoneyContributionEvent implements BaseEvent {
      */
     public void getMoneyContributionRanking(int skip, int limit, String merchantObjectId, final FindStatisticsListener listener) {
         BmobQuery<MoneyContribute> moneyContributeBmobQuery = new BmobQuery<MoneyContribute>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        moneyContributeBmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         moneyContributeBmobQuery.sum(new String[]{"money"});
         moneyContributeBmobQuery.groupby(new String[]{"user"});
         moneyContributeBmobQuery.order("-createdAt");//降序排列

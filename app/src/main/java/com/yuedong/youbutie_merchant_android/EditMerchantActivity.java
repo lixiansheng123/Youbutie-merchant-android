@@ -255,29 +255,29 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
                 break;
 
             case R.id.id_edit_merchant_name_layout:
-                editMerchantInfo("门店名字", InfoEditActivity.ACTION_INPUT_MEMBER_NAME, Constants.REQUESTCODE_MERCHANT_NAME);
+                editMerchantInfo("门店名字", InfoEditActivity.ACTION_INPUT_MEMBER_NAME, Constants.REQUESTCODE_MERCHANT_NAME, merchantName.getText().toString());
 
                 break;
 
             case R.id.id_edit_merchant_location_layout:
-                editMerchantInfo("门店位置", InfoEditActivity.ACTION_INPUT_MEMBER_LOCATION, Constants.REQUESTCODE_MERCHANT_LOCATION);
-
+                editMerchantInfo("门店位置", InfoEditActivity.ACTION_INPUT_MEMBER_LOCATION, Constants.REQUESTCODE_MERCHANT_LOCATION, locationText.getText().toString());
                 break;
 
             case R.id.id_edit_merchant_tel_layout:
-                editMerchantInfo("门店电话", InfoEditActivity.ACTION_INPUT_MEMBER_TEL, Constants.REQUESTCODE_MERCHANT_TEL);
+                editMerchantInfo("门店电话", InfoEditActivity.ACTION_INPUT_MEMBER_TEL, Constants.REQUESTCODE_MERCHANT_TEL, telText.getText().toString());
                 break;
 
 
         }
     }
 
-    private void editMerchantInfo(String title, int action, int requestCode) {
+    private void editMerchantInfo(String title, int action, int requestCode, String content) {
         Intent intent = new Intent(activity, InfoEditActivity.class);
         Bundle params = new Bundle();
         params.putString(Constants.KEY_TEXT, title);
         params.putInt(Constants.KEY_ACTION, action);
         params.putSerializable(Constants.KEY_BEAN, merchant);
+        params.putString(Constants.KEY_TEXT2, content);
         intent.putExtras(params);
         LaunchWithExitUtils.startActivityForResult(activity, intent, requestCode);
 

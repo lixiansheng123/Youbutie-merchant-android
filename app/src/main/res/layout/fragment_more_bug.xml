@@ -15,6 +15,7 @@
         android:layout_height="208dp" />
 
     <TextView
+        android:id="@+id/id_desc"
         style="@style/text_deep_grey_14sp"
         android:layout_marginTop="13dp"
         android:text="2015年返店率"

@@ -26,6 +26,9 @@ import java.util.List;
 import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 消费类目
+ */
 public class ConsumeTypeFm extends BaseFragment {
     private ListView listView;
     private CountConsumeAdapter adapter;

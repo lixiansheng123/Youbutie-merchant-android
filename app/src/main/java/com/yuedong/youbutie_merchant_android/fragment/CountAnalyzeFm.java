@@ -54,7 +54,6 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
     private String[] titles = new String[]{"消费类目", "返店率", "客户评价"};
     //    private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ListView item1ListView;
     private View line;
     private CountConsumeAdapter item1Adapter;
     private CheckBox[] cbs = new CheckBox[3];

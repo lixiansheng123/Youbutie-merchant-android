@@ -228,7 +228,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                                     @Override
                                     public void onSuccess(int i) {
                                         L.d("countCurMonthSendMessageNumber-succeed:" + i);
-//                                        if (i < 2) {
+                                        if (i < 2) {
                                             App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
                                                 @Override
                                                 public void start() {
@@ -255,10 +255,9 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                                                 }
                                             });
-
-//                                        } else {
-//                                            T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
-//                                        }
+                                        } else {
+                                            T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
+                                        }
                                     }
 
                                     @Override

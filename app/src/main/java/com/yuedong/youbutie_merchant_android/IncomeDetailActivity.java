@@ -1,14 +1,10 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.annotation.TargetApi;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -20,22 +16,20 @@ import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
 import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.mouble.UserEvent;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
-import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,82 +59,91 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         setShowContentView(R.layout.activity_income_detail);
     }
 
-    private void changeUi() {
-        dialogStatus(true);
-        // 同步用户信息 因为可能有用户支付了提现金额就增加了
-        User updateUser = new User();
-        updateUser.update(context, App.getInstance().getUser().getObjectId(), new UpdateListener() {
+    private void userInfoUpdate() {
+        UserEvent.getInstance().pullUserById(App.getInstance().getUser().getObjectId(), new UpdateListener() {
+            @Override
+            public void onStart() {
+                dialogStatus(true);
+            }
+
+            @Override
+            public void onFinish() {
+                dialogStatus(false);
+            }
+
             @Override
             public void onSuccess() {
-                dialogStatus(false);
+                App.getInstance().userInfoChange = true;
                 User user = App.getInstance().getUser();
+                App.getInstance().userInfoChange = false;
                 curMonthTotalMoney.setText("￥" + totalMoney);
                 if (user.getCash() != null)
-                    canWithdrawMoney.setText("￥" + user.getCash());
+                    canWithdrawMoney.setText("￥" + StringUtil.setDoubleValue(user.getCash()));
                 if (user.getDrawCount() != null)
                     alreadyWithdrawNum.setText(user.getDrawCount() + "次");
                 if (user.getDrawTotalCash() != null)
-                    alreadyWithdrawMoney.setText("￥" + user.getDrawTotalCash());
-
-                refreshHelper.setPulltoRefreshRefreshProxy(IncomeDetailActivity.this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
-                    @Override
-                    public BaseAdapter<IncomeDetailListBean> getAdapter(List<IncomeDetailListBean> data) {
-                        return adapter = new IncomeDetailListAdapter(context, data);
-                    }
-
-                    @Override
-                    public void executeTask(int skip, int limit, final FindListener<IncomeDetailListBean> listener) {
-                        OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
-                            @Override
-                            public void onSuccess(Object o) {
-                                try {
-                                    JSONArray jsonArray = (JSONArray) o;
-                                    if (jsonArray != null) {
-                                        int len = jsonArray.length();
-                                        String[] times = new String[len];
-                                        List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
-                                        for (int i = 0; i < len; i++) {
-                                            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                                            int totalPrice = jsonObject.getInt("_sumPrice");
-                                            String dayDes = jsonObject.getString("sumMonth");
-                                            int count = jsonObject.getInt("_count");
-                                            IncomeDetailListBean bean = new IncomeDetailListBean();
-                                            bean.setDayDes(dayDes);
-                                            bean.setTotalMoney(totalPrice);
-                                            bean.setOrderNumber(count);
-                                            datas.add(bean);
-                                            times[i] = dayDes;
-                                        }
-                                        sort(times, datas);
-                                        listener.onSuccess(datas);
-                                        listener.onFinish();
-                                    } else {
-                                        listener.onError(-2, "查询成功但无数据");
-                                        listener.onFinish();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    listener.onError(-1, e.getMessage());
-                                    listener.onFinish();
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(int i, String s) {
-                                listener.onError(i, s);
-                                listener.onFinish();
-                            }
-                        });
-                    }
-                });
-
+                    alreadyWithdrawMoney.setText("￥" + StringUtil.setDoubleValue(user.getDrawTotalCash()));
             }
 
             @Override
             public void onFailure(int i, String s) {
-                error(s);
                 dialogStatus(false);
+                error(s);
+            }
+        });
+    }
+
+    private void listProxy() {
+        refreshHelper.setPulltoRefreshRefreshProxy(IncomeDetailActivity.this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
+            @Override
+            public BaseAdapter<IncomeDetailListBean> getAdapter(List<IncomeDetailListBean> data) {
+                return adapter = new IncomeDetailListAdapter(context, data);
+            }
+
+            @Override
+            public void executeTask(int skip, int limit, final FindListener<IncomeDetailListBean> listener) {
+                OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        try {
+                            JSONArray jsonArray = (JSONArray) o;
+                            if (jsonArray != null) {
+                                int len = jsonArray.length();
+                                String[] times = new String[len];
+                                List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
+                                for (int i = 0; i < len; i++) {
+                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                                    int totalPrice = jsonObject.getInt("_sumPrice");
+                                    String dayDes = jsonObject.getString("sumMonth");
+                                    int count = jsonObject.getInt("_count");
+                                    IncomeDetailListBean bean = new IncomeDetailListBean();
+                                    bean.setDayDes(dayDes);
+                                    bean.setTotalMoney(totalPrice);
+                                    bean.setOrderNumber(count);
+                                    datas.add(bean);
+                                    times[i] = dayDes;
+                                }
+                                sort(times, datas);
+                                listener.onSuccess(datas);
+                                listener.onFinish();
+                            } else {
+                                listener.onError(-2, "查询成功但无数据");
+                                listener.onFinish();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            listener.onError(-1, e.getMessage());
+                            listener.onFinish();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        listener.onError(i, s);
+                        listener.onFinish();
+                    }
+                });
             }
         });
     }
@@ -166,7 +169,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         canWithdrawMoney = (TextView) headView.findViewById(R.id.id_can_withdraw_money);
         requestWithdrawBtn = (Button) headView.findViewById(R.id.id_btn_request_withdraw);
         listView.addHeaderView(headView, null, false);
-        changeUi();
+        listProxy();
 
     }
 
@@ -214,7 +217,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void ui() {
-
+        userInfoUpdate();
     }
 
     @Override

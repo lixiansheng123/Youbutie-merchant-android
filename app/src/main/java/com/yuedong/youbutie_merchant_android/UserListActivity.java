@@ -29,6 +29,7 @@ import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.view.SelectItemPop;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,10 +44,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private SelectItemPop selectItemPop;
     private SelectAdapter selectAdapter;
     private View filterLayout;
-    // vip订单列表
-    private List<Vips> vipOrderList;
-    // 获取门店vip信息
-    private boolean getMerchantVipInfo = true;
     // 外部行为 用来标识入口
     private int action = ACTION_TOTAL_USER;
     public static final int ACTION_TOTAL_USER = 0x001;
@@ -59,6 +56,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private static final int ACTION_IN_NORMAL = 0x101;
     private static final int ACTION_IN_FILTER_SERVICE = 0x102; //通过服务赛选
     private static final int ACTION_IN_FILTER_CAR = 0x103; // 通过车型筛选
+    // 门店vip用户
+    private List<Vips> vipsList;
 
 
     @Override
@@ -68,6 +67,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         meMerchant = (Merchant) params.getSerializable(Constants.KEY_BEAN);
         String title = params.getString(Constants.KEY_TEXT);
         action = params.getInt(Constants.KEY_ACTION, ACTION_TOTAL_USER);
+        vipsList = (List<Vips>) params.getSerializable(Constants.KEY_LIST);
         View titleView = null;
         if (action != ACTION_MEMBER_USER)
             titleView = new TitleViewHelper().createDefaultTitleView3(title);
@@ -152,31 +152,14 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
-                return adapter = new UserListAdapter(context, data);
+                adapter = new UserListAdapter(context, data);
+                adapter.setMerchantVipUser(vipsList);
+                return adapter;
             }
 
             @Override
             public void executeTask(final int skip, final int limit, final FindListener<Order> listener) {
-                if (getMerchantVipInfo) {
-                    getMerchantVipInfo = false;
-                    VipEvent.getInstance().findVipByMerchant(meMerchant.getObjectId(), new FindListener<Vips>() {
-                        @Override
-                        public void onSuccess(final List<Vips> vipsList) {
-                            vipOrderList = vipsList;
-                            if (CommonUtils.listIsNotNull(vipsList))
-                                adapter.setMerchantVipUser(vipsList);
-                            userMayFilter(object, skip, limit, listener);
-                        }
-
-                        @Override
-                        public void onError(int i, String s) {
-                            listener.onError(i, s);
-                            listener.onFinish();
-                        }
-                    });
-                } else {
-                    userMayFilter(object, skip, limit, listener);
-                }
+                userMayFilter(object, skip, limit, listener);
             }
         });
     }
@@ -201,7 +184,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                     if (CommonUtils.listIsNotNull(list)) {
                         List<Order> vipOrder = new ArrayList<Order>();
                         for (Order order : list) {
-                            if (AppUtils.curUserIsVip(order.getUser(), vipOrderList)) {
+                            if (AppUtils.curUserIsVip(order.getUser(), vipsList)) {
                                 vipOrder.add(order);
                             }
                         }
