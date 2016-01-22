@@ -42,13 +42,13 @@
 
 
                 <TextView
-                    android:singleLine="true"
-                    android:layout_margin="16dp"
                     style="@style/text_deep_grey_14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:drawableLeft="@drawable/icon_grey_mobile"
                     android:gravity="center_vertical"
+                    android:singleLine="true"
                     android:text="  手机号" />
 
             </LinearLayout>
@@ -66,9 +66,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:inputType="number"
                 android:gravity="center_vertical"
                 android:hint="@string/str_please_input_you_mobile"
+                android:inputType="number"
                 android:paddingLeft="28dp" />
         </LinearLayout>
 
@@ -91,10 +91,10 @@
 
 
                 <TextView
-                    android:layout_margin="16dp"
                     style="@style/text_deep_grey_14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="16dp"
                     android:drawableLeft="@drawable/icon_grey_password"
                     android:gravity="center_vertical"
                     android:text="  密码" />
@@ -109,7 +109,6 @@
                 android:background="@color/greye3e2d9" />
 
             <EditText
-                android:password="true"
                 android:id="@+id/id_password_input"
                 style="@style/login_input_box"
                 android:layout_width="0dp"
@@ -117,7 +116,8 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:hint="@string/str_please_inpit_psd"
-                android:paddingLeft="28dp" />
+                android:paddingLeft="28dp"
+                android:password="true" />
         </LinearLayout>
     </LinearLayout>
 
@@ -126,8 +126,8 @@
         style="@style/btn_round_grey"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textSize="16sp"
         android:text="@string/str_login"
+        android:textSize="16sp"
         app:layout_heightPercent="7.86%h"
         app:layout_marginLeftPercent="4.81%w"
         app:layout_marginRightPercent="4.81%w"

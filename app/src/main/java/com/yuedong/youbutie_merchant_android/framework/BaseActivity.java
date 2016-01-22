@@ -214,13 +214,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initUi() {
         mMainLayout = new RelativeLayout(this);
         mTitleLayout = new LinearLayout(this);
-//        mContentLayout = new LinearLayout(this);
         mMultiStateView = new MultiStateView(this);
-//        mContentMask = new LinearLayout(this);
         // 统一设一个id
         mTitleLayout.setId(ID_TITLE);
         mMultiStateView.setId(ID_CONTENT);
-//        mContentMask.setId(ID_CONTENT_MASK);
         RelativeLayout.LayoutParams titleLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         titleLp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -229,10 +226,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         contentLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
         mMainLayout.addView(mMultiStateView, contentLp);
-//        RelativeLayout.LayoutParams contentMaskLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT);
-//        contentMaskLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
-//        mMainLayout.addView(mContentMask, contentMaskLp);
         setContentView(mMainLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mMainLayout.setClipToPadding(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
