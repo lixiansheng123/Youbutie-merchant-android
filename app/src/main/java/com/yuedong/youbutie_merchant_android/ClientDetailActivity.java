@@ -135,7 +135,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         userMobile.setText(orderUser.getMobilePhoneNumber());
         carNum.setText(orderUser.getCarNumber());
         carDesc.setText(orderUser.getCarString());
-        carMileageNum.setText(orderUser.getStrokeLength());
+        carMileageNum.setText(orderUser.getStrokeLength()+"");
         if (isVip)
             ViewUtils.showLayout(iconVip);
     }

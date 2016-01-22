@@ -117,19 +117,20 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 endDay = day;
                 String startTimeStr = startTime.getText().toString();
                 String[] times = startTimeStr.split("\\.");
-                L.d("startTimeStr" + startTimeStr + "--length:" + times.length);
                 if (times.length != 3) return;
                 String startYear = times[0];
                 String startMonth = times[1];
                 String startDay = times[2];
                 String startFull = startYear + "-" + startMonth + "-" + startDay + " 00:00:00";
                 String endFull = year + "-" + month + "-" + day + " 00:00:00";
-                L.d("startTimeFull" + startFull + "---endTimeFull:" + endFull);
-                if (DateUtils.isBefore(startFull, endFull)) {
+                long startL = DateUtils.strTimeToLongTime(startFull);
+                long endL = DateUtils.strTimeToLongTime(endFull);
+                if (DateUtils.isBefore(startFull, endFull) && startL != endL) {
                     endTime.setTextColor(Color.parseColor("#81726f"));
                     endTime.setText(year + "." + month + "." + day + "  ");
                 } else {
                     T.showShort(context, "结束时间必须要大于开始时间");
+                    endYear = null;
                 }
             }
         });
@@ -184,112 +185,127 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     private void sendNewAd() {
         if (checkoutParams()) {
             dialogStatus(true);
-            if (!CommonUtils.listIsNotNull(selectCars)) {
-                selectCars = (ArrayList) CarDao.getInstance().findAll();
-            }
-            VipEvent.getInstance().findMerchantVipByCar(myMerchant.getObjectId(), selectCars, new FindListener<Vips>() {
+            if (CommonUtils.listIsNotNull(selectCars)) {
+                VipEvent.getInstance().findMerchantVipByCar(myMerchant.getObjectId(), selectCars, new FindListener<Vips>() {
 
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onFinish() {
-                }
-
-                @Override
-                public void onSuccess(List<Vips> list) {
-                    if (CommonUtils.listIsNotNull(list)) {
-                        List<String> userObjects = new ArrayList<String>();
-                        final StringBuilder sb = new StringBuilder();
-                        for (Vips vips : list) {
-                            userObjects.add(vips.getUser().getObjectId());
-                            User user = vips.getUser();
-                            if (user != null) {
-                                sb.append(user.getObjectId() + ",");
-                            }
-                        }
-                        if (sb.length() > 0)
-                            sb.deleteCharAt(sb.length() - 1);
-                        L.d("推送的objectids:" + sb.toString());
-                        Messages messages = new Messages();
-                        messages.setType(2);
-                        messages.setContent(inputBox.getText().toString().trim());
-                        messages.setTitle(adTitle.getText().toString().trim());
-                        messages.setStartTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(startYear + "-" + startMonth + "-" + startDay + " 00:00:00"))));
-                        messages.setEndTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(endYear + "-" + endMonth + "-" + endDay + " 00:00:00"))));
-                        messages.setSender(App.getInstance().getUser());
-                        messages.setTargets(userObjects);
-                        messages.save(context, new SaveListener() {
-                            @Override
-                            public void onSuccess() {
-                                MessageEvent.getInstance().countCurMonthSendMessageNumber(new CountListener() {
-                                    @Override
-                                    public void onSuccess(int i) {
-                                        L.d("countCurMonthSendMessageNumber-succeed:" + i);
-                                        if (i < 2) {
-                                            App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
-                                                @Override
-                                                public void start() {
-
-                                                }
-
-                                                @Override
-                                                public void end() {
-
-                                                }
-
-                                                @Override
-                                                public void succeed(String secretKey) {
-                                                    L.d("getYdApiSecretKey-succeed"+secretKey);
-                                                    RequestYDHelper requestYDHelper = new RequestYDHelper();
-                                                    requestYDHelper.setAppSecretkey(secretKey);
-                                                    requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_ad_title),//
-                                                            String.format(getString(R.string.str_push_merchant_ad_content), myMerchant.getName()), //
-                                                            sb.toString(), RequestYDHelper.PUSH_TYPE_MERCHANT_AD, "", "");
-                                                }
-
-                                                @Override
-                                                public void fail(int code, String error) {
-
-                                                }
-                                            });
-                                        } else {
-                                            T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(int i, String s) {
-                                        error(s);
-                                    }
-                                });
-
-                                dialogStatus(false);
-                                T.showShort(context, "发布成功");
-                                setResult(Constants.RESULT_ADD_AD);
-                                defaultFinished();
-                            }
-
-                            @Override
-                            public void onFailure(int i, String s) {
-                                error(s);
-                                dialogStatus(false);
-                            }
-                        });
-                    } else {
-                        T.showLong(context, "该车型未能找到本店会员，请重新选择车型");
+                    @Override
+                    public void onStart() {
                     }
 
+                    @Override
+                    public void onFinish() {
+                    }
+
+                    @Override
+                    public void onSuccess(List<Vips> list) {
+                        sendMessageByVips(list);
+
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        error(s);
+                        dialogStatus(false);
+                    }
+                });
+            } else {
+                // 全部车型的话就是推送給他门店的所有vip
+                VipEvent.getInstance().findVipByMerchant(myMerchant.getObjectId(), new FindListener<Vips>() {
+                    @Override
+                    public void onSuccess(List<Vips> list) {
+                        sendMessageByVips(list);
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        error(s);
+                        dialogStatus(false);
+                    }
+                });
+            }
+        }
+    }
+
+    private void sendMessageByVips(List<Vips> list) {
+        if (CommonUtils.listIsNotNull(list)) {
+            List<String> userObjects = new ArrayList<String>();
+            final StringBuilder sb = new StringBuilder();
+            for (Vips vips : list) {
+                userObjects.add(vips.getUser().getObjectId());
+                User user = vips.getUser();
+                if (user != null) {
+                    sb.append(user.getObjectId() + ",");
+                }
+            }
+            if (sb.length() > 0)
+                sb.deleteCharAt(sb.length() - 1);
+            L.d("推送的objectids:" + sb.toString());
+            Messages messages = new Messages();
+            messages.setType(2);
+            messages.setContent(inputBox.getText().toString().trim());
+            messages.setTitle(adTitle.getText().toString().trim());
+            messages.setStartTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(startYear + "-" + startMonth + "-" + startDay + " 00:00:00"))));
+            messages.setEndTime(new BmobDate(new Date(DateUtils.strTimeToLongTime(endYear + "-" + endMonth + "-" + endDay + " 00:00:00"))));
+            messages.setSender(App.getInstance().getUser());
+            messages.setTargets(userObjects);
+            messages.save(context, new SaveListener() {
+                @Override
+                public void onSuccess() {
+                    MessageEvent.getInstance().countCurMonthSendMessageNumber(new CountListener() {
+                        @Override
+                        public void onSuccess(int i) {
+                            dialogStatus(false);
+                            L.d("countCurMonthSendMessageNumber-succeed:" + i);
+                            if (i < 2) {
+                                App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                                    @Override
+                                    public void start() {
+
+                                    }
+
+                                    @Override
+                                    public void end() {
+
+                                    }
+
+                                    @Override
+                                    public void succeed(String secretKey) {
+                                        L.d("getYdApiSecretKey-succeed" + secretKey);
+                                        RequestYDHelper requestYDHelper = new RequestYDHelper();
+                                        requestYDHelper.setAppSecretkey(secretKey);
+                                        requestYDHelper.requestPushGroup(getString(R.string.str_push_merchant_ad_title),//
+                                                String.format(getString(R.string.str_push_merchant_ad_content), myMerchant.getName()), //
+                                                sb.toString() /*"9b09e9af35,009a84e9fb"*/, RequestYDHelper.PUSH_TYPE_MERCHANT_AD, "", "");
+                                    }
+
+                                    @Override
+                                    public void fail(int code, String error) {
+
+                                    }
+                                });
+                            } else {
+                                T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            error(s);
+                        }
+                    });
+                    T.showShort(context, "发布成功");
+                    setResult(Constants.RESULT_ADD_AD);
+                    defaultFinished();
                 }
 
                 @Override
-                public void onError(int i, String s) {
+                public void onFailure(int i, String s) {
                     error(s);
                     dialogStatus(false);
                 }
             });
+        } else {
+            T.showLong(context, "该车型未能找到本店会员，请重新选择车型");
         }
     }
 

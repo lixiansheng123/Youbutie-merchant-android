@@ -96,6 +96,7 @@ public class Constants {
     public static final String URL_UMENG_PUSH = YD_URL + "UmengPush/AndroidGroupcast";
     public static final String URL_GET_SECRETKEY = YD_URL + "SecretKey/GetSecretKey";
     public static final String URL_PUSH_SINGLE = YD_URL + "BaiduPush/pushMsgToSingle";
+    public static final String URL_PUSH_GROUP = YD_URL + "BaiduPush/PushBatchUniMsg";
 
     // requestId
 }

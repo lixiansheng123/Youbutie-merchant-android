@@ -409,7 +409,7 @@ public class InviteMemberActivity extends BaseActivity {
                 // 已经注册
                 DisplayImageByVolleyUtils.loadImage(bean.getPhoto(), pic);
                 pic.setType(RoundImageView.TYPE_ROUND);
-                pic.setRaduisAngle(DimenUtils.dip2px(context,3));
+                pic.setRaduisAngle(DimenUtils.dip2px(context, 3));
                 pic.setBackgroundDrawable(null);
                 time.setText(bean.getCreatedAt());
                 ViewUtils.showLayout(time);
@@ -434,7 +434,10 @@ public class InviteMemberActivity extends BaseActivity {
                                 public void onSuccess() {
                                     dialogStatus(false);
                                     // 发送推送
-                                    requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_invite_member_title), String.format(getString(R.string.str_push_merchant_invite_member_content), merchant.getName()), bean.getObjectId(), RequestYDHelper.PUSH_TYPE_MERCHANT_INVITE_MEMBER, "", bean.getObjectId());
+                                    requestYDHelper.requestPushSingle(getString(R.string.str_push_merchant_invite_member_title),//
+                                            String.format(getString(R.string.str_push_merchant_invite_member_content),//
+                                                    merchant.getName()), bean.getObjectId(), //
+                                            RequestYDHelper.PUSH_TYPE_MERCHANT_INVITE_MEMBER, "", bean.getObjectId());
                                     SPUtils.put(context, Constants.SP_INVITE_ADD_MEMBER, registInviteNum + bean.getMobilePhoneNumber() + ",");
                                     notifyDataSetChanged();
                                 }
@@ -462,8 +465,7 @@ public class InviteMemberActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             // 未注册邀请操作
-                            // TODO 发送机短信 内容模版暂定
-                            SystemUtils.sms(context, unRegistUserMobile, String.format(getString(R.string.str_sms_moudle), App.getInstance().getUser().getObjectId()));
+                            SystemUtils.sms(context, unRegistUserMobile, getString(R.string.str_sms_moudle));
                             SPUtils.put(context, Constants.SP_INVITE_REGIST, unRegistInviteNum + unRegistUserMobile + ",");
                             notifyDataSetChanged();
                         }

@@ -4,6 +4,7 @@ package com.yuedong.youbutie_merchant_android.utils;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.android.volley.toolbox.HttpStack;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 
@@ -181,6 +182,66 @@ public class RequestYDHelper {
         });
     }
 
+    /**
+     * 推送（group）
+     *
+     * @param destUids 多个用户id以逗号分隔
+     */
+    public void requestPushGroup(final String title, final String message, final String destUids, final int type, final String orderId, final String userId) {
+        if (mSecretKey == null) {
+            T.showShort(App.getInstance().getAppContext(), "SecretKey为null");
+            return;
+        }
+        action = 1;
+        if (onRequestYDListener != null)
+            onRequestYDListener.onStart();
+        App.getInstance().getExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mHttpURLConnection = getHttpURLConnection(Constants.URL_PUSH_GROUP);
+                    addHeadInfo();
+                    JSONObject client = new JSONObject();
+                    JSONObject all = new JSONObject();
+                    JSONObject data = new JSONObject();
+                    client.put("caller", Constants.CALLER);
+                    String[] keys = new String[6];
+                    data.put("title", title);
+                    keys[0] = "title";
+                    data.put("destUids", destUids);
+                    keys[1] = "destUids";
+                    data.put("message", message);
+                    keys[2] = "message";
+                    data.put("type", type);
+                    keys[3] = "type";
+                    if (StringUtil.isNotEmpty(orderId)) {
+                        data.put("orderId", orderId);
+                        keys[4] = "orderId";
+                    } else {
+                        keys[4] = "";
+                    }
+                    if (StringUtil.isNotEmpty(userId)) {
+                        data.put("userId", userId);
+                        keys[5] = "userId";
+                    } else {
+                        keys[5] = "";
+                    }
+                    all.put("data", data);
+                    all.put("client", client);
+                    all.put("v", Constants.V);
+                    all.put("sign", sign(keys, data));
+                    String result = writeAndResult(all);
+                    responseSucceed(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    responseFail(e);
+                } finally {
+                    disconnect();
+                }
+            }
+        });
+    }
+
 
     private void disconnect() {
         if (mHttpURLConnection != null)
@@ -219,6 +280,8 @@ public class RequestYDHelper {
         outputStream.write(encodeBodyData(all));
         outputStream.flush();
         outputStream.close();
+        int responseCode = mHttpURLConnection.getResponseCode();
+        if (responseCode != 200) return "连接错误 响应码:" + responseCode;
         InputStream inputStream = mHttpURLConnection.getInputStream();
         byte[] buffer = new byte[8192];
         int len = 0;

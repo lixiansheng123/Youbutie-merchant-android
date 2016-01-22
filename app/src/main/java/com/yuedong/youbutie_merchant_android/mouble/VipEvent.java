@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android.mouble;
 
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
 
 import java.util.ArrayList;
@@ -38,9 +39,11 @@ public class VipEvent implements BaseEvent {
         List<BmobQuery<Vips>> ands = new ArrayList<BmobQuery<Vips>>();
         for (Car car : cars) {
             BmobQuery<Vips> vipsBmobQuery = new BmobQuery<Vips>();
+            BmobQuery<User> userBmobQuery = new BmobQuery<User>();
             BmobQuery<Car> carBmobQuery = new BmobQuery<Car>();
             carBmobQuery.addWhereEqualTo(OBJECT_ID, car.getObjectId());
-            vipsBmobQuery.addWhereMatchesQuery("car", "Car", carBmobQuery);
+            userBmobQuery.addWhereMatchesQuery("car", "Car", carBmobQuery);
+            vipsBmobQuery.addWhereMatchesQuery("user", "_User", userBmobQuery);
             ors.add(vipsBmobQuery);
         }
         BmobQuery<Vips> vipsBmobQuery = new BmobQuery<Vips>();
