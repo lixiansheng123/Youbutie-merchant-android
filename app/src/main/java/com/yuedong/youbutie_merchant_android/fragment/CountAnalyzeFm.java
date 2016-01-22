@@ -67,14 +67,10 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
     private double mScreenWidth;
     private double mTabs = 3;
 
-    @Override
-    public View getContentView(ViewGroup container) {
-        initTitleView(new TitleViewHelper().createDefaultTitleView2("统计分析"));
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_count_analyze, container);
-    }
 
     @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(new TitleViewHelper().createDefaultTitleView2("统计分析"), false, false, false, R.layout.fragment_count_analyze);
         line = fvById(R.id.id_line);
         curMoneySales = fvById(R.id.id_cur_month_sales);
         curMoneyUser = fvById(R.id.id_cur_month_user);

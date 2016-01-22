@@ -31,7 +31,7 @@ public class InfoEditActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setShowContentView(R.layout.activity_info_edit);
+        buildUi(null,false,false,false,R.layout.activity_info_edit);
     }
 
     @Override

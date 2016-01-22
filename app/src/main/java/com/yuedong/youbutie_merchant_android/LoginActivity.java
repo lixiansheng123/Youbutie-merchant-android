@@ -18,8 +18,10 @@ import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.List;
+import java.util.Random;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -36,8 +38,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView2(getString(R.string.str_login)));
-        setShowContentView(R.layout.activity_login);
+        buildUi(new TitleViewHelper().createDefaultTitleView2(getString(R.string.str_login)), false, false, false, R.layout.activity_login);
     }
 
     private void login() {

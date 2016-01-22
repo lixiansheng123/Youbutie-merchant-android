@@ -36,8 +36,7 @@ public class SearchAddressBookFriendActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addressBookBeans = (ArrayList<PhoneAddressBookBean>) getIntent().getExtras().getSerializable(Constants.KEY_LIST);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("搜索通讯录"));
-        setShowContentView(R.layout.activity_search_address_book_friend);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("搜索通讯录"),false,false,false,R.layout.activity_search_address_book_friend);
         initData();
     }
 

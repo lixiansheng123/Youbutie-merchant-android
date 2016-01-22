@@ -32,8 +32,7 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3(getString(R.string.str_setting)));
-        setShowContentView(R.layout.activity_merchant_setting);
+        buildUi(new TitleViewHelper().createDefaultTitleView3(getString(R.string.str_setting)), false, false, false, R.layout.activity_merchant_setting);
     }
 
     @Override

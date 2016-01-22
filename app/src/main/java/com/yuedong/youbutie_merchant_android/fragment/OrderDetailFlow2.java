@@ -30,18 +30,10 @@ public class OrderDetailFlow2 extends BaseFragment {
     private SupportScrollConflictGridView gridView;
     private Order order;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
-    public View getContentView(ViewGroup container) {
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_order_detail_flow2, container);
-    }
-
-    @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, false, false, false, R.layout.fragment_order_detail_flow2);
         evaluateContent = fvById(R.id.id_evaluate_cotent);
         orderNumber = fvById(R.id.id_order_number);
         downOrderTime = fvById(R.id.id_down_order_time);

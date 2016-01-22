@@ -40,6 +40,7 @@ import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import org.json.JSONObject;
 
@@ -50,11 +51,12 @@ import cn.bmob.v3.listener.GetListener;
 public abstract class BaseActivity extends AppCompatActivity {
     protected RelativeLayout mMainLayout;
     protected LinearLayout mTitleLayout;
-    protected LinearLayout mContentLayout;
+    //    protected LinearLayout mContentLayout;
+    protected MultiStateView mMultiStateView;
     /**
      * 給内容区域填充一个遮罩 具体内容由子类设定
      */
-    protected LinearLayout mContentMask;
+//    protected LinearLayout mContentMask;
     protected Handler mainHandle = new Handler(Looper.getMainLooper());
     private static final int ID_TITLE = 1;
     private static final int ID_CONTENT = 2;
@@ -212,56 +214,57 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initUi() {
         mMainLayout = new RelativeLayout(this);
         mTitleLayout = new LinearLayout(this);
-        mContentLayout = new LinearLayout(this);
-        mContentMask = new LinearLayout(this);
+//        mContentLayout = new LinearLayout(this);
+        mMultiStateView = new MultiStateView(this);
+//        mContentMask = new LinearLayout(this);
         // 统一设一个id
         mTitleLayout.setId(ID_TITLE);
-        mContentLayout.setId(ID_CONTENT);
-        mContentMask.setId(ID_CONTENT_MASK);
+        mMultiStateView.setId(ID_CONTENT);
+//        mContentMask.setId(ID_CONTENT_MASK);
         RelativeLayout.LayoutParams titleLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         titleLp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         mMainLayout.addView(mTitleLayout, titleLp);
-        RelativeLayout.LayoutParams contentLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                ViewGroup.LayoutParams.FILL_PARENT);
+        RelativeLayout.LayoutParams contentLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         contentLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
-        mMainLayout.addView(mContentLayout, contentLp);
-        RelativeLayout.LayoutParams contentMaskLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        contentMaskLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
-        mMainLayout.addView(mContentMask, contentMaskLp);
+        mMainLayout.addView(mMultiStateView, contentLp);
+//        RelativeLayout.LayoutParams contentMaskLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT);
+//        contentMaskLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
+//        mMainLayout.addView(mContentMask, contentMaskLp);
         setContentView(mMainLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mMainLayout.setClipToPadding(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
             mMainLayout.setFitsSystemWindows(true);
     }
 
-    /**
-     * 增加内容填充区域
-     *
-     * @param view
-     */
-    public void setContentMaskView(View view) {
-        mContentMask.removeAllViews();
-        mContentMask.addView(view, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    protected void buildUi(View titleView, boolean enableDefaultEmptyView, boolean enbleDefaultLoadView, boolean enbleDfaultErrorView, int contentResId) {
+        if (titleView != null)
+            initTitleView(titleView);
+        if (enableDefaultEmptyView)
+            mMultiStateView.setViewForState(R.layout.empty_view, MultiStateView.VIEW_STATE_EMPTY);
+        if (enbleDefaultLoadView)
+            mMultiStateView.setViewForState(R.layout.loading_view, MultiStateView.VIEW_STATE_LOADING);
+        if (enbleDfaultErrorView)
+            mMultiStateView.setViewForState(R.layout.error_view, MultiStateView.VIEW_STATE_ERROR);
+        if (contentResId != -1)
+            mMultiStateView.setViewForState(contentResId, MultiStateView.VIEW_STATE_CONTENT);
     }
 
-    /**
-     * 设置显示的内容
-     *
-     * @param resId
-     */
-    public void setShowContentView(int resId) {
-        if (resId < 0)
-            return;
-        setShowContentView(ViewUtils.inflaterView(context, resId, mContentLayout));
+    protected void buildUi(View titleView, int emptyView, int loadView, int errorView, View contentView) {
+        if (titleView != null)
+            initTitleView(titleView);
+        if (emptyView > 0)
+            mMultiStateView.setViewForState(emptyView, MultiStateView.VIEW_STATE_EMPTY);
+        if (loadView > 0)
+            mMultiStateView.setViewForState(loadView, MultiStateView.VIEW_STATE_LOADING);
+        if (errorView > 0)
+            mMultiStateView.setViewForState(errorView, MultiStateView.VIEW_STATE_ERROR);
+        if (contentView != null)
+            mMultiStateView.setViewForState(contentView, MultiStateView.VIEW_STATE_CONTENT);
     }
 
-    public void setShowContentView(View view) {
-        mContentLayout.removeAllViews();
-        mContentLayout.addView(view,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
 
     /**
      * 初始化title布局

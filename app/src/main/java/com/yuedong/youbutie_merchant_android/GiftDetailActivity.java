@@ -34,9 +34,8 @@ public class GiftDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("礼品详情"));
         exchangedRecord = (ExchangedRecord) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
-        setShowContentView(R.layout.activity_gift_detail);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("礼品详情"), false, false, false, R.layout.activity_gift_detail);
     }
 
     @Override

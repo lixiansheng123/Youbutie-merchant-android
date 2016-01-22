@@ -19,6 +19,7 @@ import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 /**
  * Created by Administrator on 2015/11/27.
@@ -29,8 +30,9 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
     private static final String TAG = "BaseFragment";
     protected RelativeLayout mMainLayout;
     protected LinearLayout mTitleLayout;
-    protected LinearLayout mContentLayout;
-    protected LinearLayout mContentMask;
+    protected MultiStateView mMultiStateView;
+    //    protected LinearLayout mContentLayout;
+//    protected LinearLayout mContentMask;
     private static final int ID_TITLE = 1;
     private static final int ID_CONTENT = 2;
     private static final int ID_CONTENT_MASK = 3;
@@ -44,7 +46,7 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
     public boolean initFinshed;
 
     public <T extends View> T fvById(int resId) {
-        return ViewUtils.fvById(resId, mContentLayout);
+        return ViewUtils.fvById(resId, mMainLayout);
     }
 
     @Override
@@ -165,9 +167,9 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         L.i(TAG, "onCreateView");
         initUi();
-        setShowContentView(getContentView(container));
-        ViewUtils.adapterUiText(mMainLayout);
-        initViews(mMainLayout, savedInstanceState);
+//        mMultiStateView.setViewForState(getContentView(container), MultiStateView.VIEW_STATE_CONTENT);
+//        ViewUtils.adapterUiText(mMainLayout);
+        initViews(savedInstanceState);
         initEvents();
         initFinshed = true;
         return mMainLayout;
@@ -177,12 +179,12 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
     private void initUi() {
         mMainLayout = new RelativeLayout(getActivity());
         mTitleLayout = new LinearLayout(getActivity());
-        mContentLayout = new LinearLayout(getActivity());
-        mContentMask = new LinearLayout(getActivity());
+        mMultiStateView = new MultiStateView(getActivity());
+//        mContentMask = new LinearLayout(getActivity());
         // 统一设一个id
         mTitleLayout.setId(ID_TITLE);
-        mContentLayout.setId(ID_CONTENT);
-        mContentMask.setId(ID_CONTENT_MASK);
+        mMultiStateView.setId(ID_CONTENT);
+//        mContentMask.setId(ID_CONTENT_MASK);
         RelativeLayout.LayoutParams titleLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         titleLp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -190,7 +192,7 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         RelativeLayout.LayoutParams contentLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         contentLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
-        mMainLayout.addView(mContentLayout, contentLp);
+        mMainLayout.addView(mMultiStateView, contentLp);
         mMainLayout.setClipToPadding(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
             mMainLayout.setFitsSystemWindows(true);
@@ -198,41 +200,38 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
 
 
     /**
-     * 增加内容填充区域
-     *
-     * @param view
-     */
-    public void setContentMaskView(View view) {
-        RelativeLayout.LayoutParams contentMaskLp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        contentMaskLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
-        mMainLayout.addView(mContentMask, contentMaskLp);
-        mContentMask.addView(view, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
-
-    /**
-     * 设置显示的内容
-     *
-     * @param resId
-     */
-    private void setShowContentView(int resId) {
-        if (resId < 0)
-            return;
-        setShowContentView(ViewUtils.inflaterView(getContext(), resId, mMainLayout));
-    }
-
-    private void setShowContentView(View view) {
-        mContentLayout.removeAllViews();
-        mContentLayout.addView(view,
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
-
-    /**
      * 初始化title布局
      */
-    protected void initTitleView(View titleView) {
+    private void initTitleView(View titleView) {
         mTitleLayout.addView(titleView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Config.TITLE_HEIGHT));
     }
+
+    protected void buildUi(View titleView, boolean enableDefaultEmptyView, boolean enbleDefaultLoadView, boolean enbleDfaultErrorView, int contentResId) {
+        if (titleView != null)
+            initTitleView(titleView);
+        if (enableDefaultEmptyView)
+            mMultiStateView.setViewForState(R.layout.empty_view, MultiStateView.VIEW_STATE_EMPTY);
+        if (enbleDefaultLoadView)
+            mMultiStateView.setViewForState(R.layout.loading_view, MultiStateView.VIEW_STATE_LOADING);
+        if (enbleDfaultErrorView)
+            mMultiStateView.setViewForState(R.layout.error_view, MultiStateView.VIEW_STATE_ERROR);
+        if (contentResId != -1)
+            mMultiStateView.setViewForState(contentResId, MultiStateView.VIEW_STATE_CONTENT);
+    }
+
+    protected void buildUi(View titleView, int emptyView, int loadView, int errorView, View contentView) {
+        if (titleView != null)
+            initTitleView(titleView);
+        if (emptyView > 0)
+            mMultiStateView.setViewForState(emptyView, MultiStateView.VIEW_STATE_EMPTY);
+        if (loadView > 0)
+            mMultiStateView.setViewForState(loadView, MultiStateView.VIEW_STATE_LOADING);
+        if (errorView > 0)
+            mMultiStateView.setViewForState(errorView, MultiStateView.VIEW_STATE_ERROR);
+        if (contentView != null)
+            mMultiStateView.setViewForState(contentView, MultiStateView.VIEW_STATE_CONTENT);
+    }
+
 
     public void error(String s, boolean dialogStatus) {
         L.e("error:" + s);
@@ -249,9 +248,8 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         return View.inflate(getActivity(), resId, mMainLayout);
     }
 
-    public abstract View getContentView(ViewGroup container);
 
-    public abstract void initViews(View contentView, Bundle savedInstanceState);
+    public abstract void initViews(Bundle savedInstanceState);
 
     public abstract void initEvents();
 

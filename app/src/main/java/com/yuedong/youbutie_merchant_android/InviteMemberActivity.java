@@ -65,8 +65,7 @@ public class InviteMemberActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("邀请加入会员"));
-        setShowContentView(R.layout.activity_invite_member);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("邀请加入会员"), false, false, false, R.layout.activity_invite_member);
 
     }
 

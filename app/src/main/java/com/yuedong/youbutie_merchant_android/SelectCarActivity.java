@@ -35,7 +35,7 @@ public class SelectCarActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView4("全部车型", "保存", new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView4("全部车型", "保存", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Car> select = selectCarAdapter.getSelect();
@@ -47,8 +47,7 @@ public class SelectCarActivity extends BaseActivity {
                 } else
                     T.showShort(context, "请选择车型");
             }
-        }));
-        setShowContentView(R.layout.activity_select_car);
+        }),false,false,false,R.layout.activity_select_car);
     }
 
     @Override

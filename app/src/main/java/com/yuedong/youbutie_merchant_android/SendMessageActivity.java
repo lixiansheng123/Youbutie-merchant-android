@@ -70,8 +70,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myMerchant = (Merchant) getIntent().getSerializableExtra(Constants.KEY_BEAN);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("发广告"));
-        setShowContentView(R.layout.activity_send_message);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("发广告"),false,false,false,R.layout.activity_send_message);
     }
 
     @Override

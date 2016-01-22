@@ -54,18 +54,13 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
 
 
     @Override
-    public View getContentView(ViewGroup container) {
-        initTitleView(new TitleViewHelper().createDefaultTitleView7("门店管理", R.drawable.icon_grey_setting, new View.OnClickListener() {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(new TitleViewHelper().createDefaultTitleView7("门店管理", R.drawable.icon_grey_setting, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LaunchWithExitUtils.startActivity(getActivity(), MerchantSettingActivity.class);
             }
-        }));
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_merchant_manager, container);
-    }
-
-    @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+        }), false, false, false, R.layout.fragment_merchant_manager);
         adapter = new MerchantServiceListAdapter(getActivity());
         merchantAd = fvById(R.id.id_merchant_ad);
         merchantPic = fvById(R.id.id_merchant_pic);

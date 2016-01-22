@@ -40,8 +40,7 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         merchant = (Merchant) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("申请提现"));
-        setShowContentView(R.layout.activity_apply_withdraw);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("申请提现"), false, false, false, R.layout.activity_apply_withdraw);
     }
 
     @Override

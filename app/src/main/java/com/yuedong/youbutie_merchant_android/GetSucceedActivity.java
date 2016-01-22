@@ -27,8 +27,7 @@ public class GetSucceedActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("领取成功"));
-        setShowContentView(R.layout.activity_get_succeed);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("领取成功"), false, false, false, R.layout.activity_get_succeed);
     }
 
     @Override

@@ -25,8 +25,7 @@ public class ForgetPsdActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("找回密码"));
-        setShowContentView(R.layout.activity_forget_psd);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("找回密码"),false,false,false,R.layout.activity_forget_psd);
     }
 
     @Override

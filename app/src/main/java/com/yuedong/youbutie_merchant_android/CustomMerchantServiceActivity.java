@@ -19,7 +19,7 @@ public class CustomMerchantServiceActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView4("添加服务", "完成", new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView4("添加服务", "完成", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String serviceName = inputServiceContent.getText().toString();
@@ -39,8 +39,7 @@ public class CustomMerchantServiceActivity extends BaseActivity {
                     T.showShort(context, "请填写完整信息");
                 }
             }
-        }));
-        setShowContentView(R.layout.activity_custom_merchant_service);
+        }), false, false, false, R.layout.activity_custom_merchant_service);
     }
 
     @Override

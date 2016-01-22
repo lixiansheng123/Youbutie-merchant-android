@@ -35,13 +35,10 @@ public class ConsumeTypeFm extends BaseFragment {
     private Merchant meMerchant;
     private List<CountConsumeBean> datas = new ArrayList<CountConsumeBean>();
 
-    @Override
-    public View getContentView(ViewGroup container) {
-        return ViewUtils.inflaterView(getActivity(), R.layout.item_vp_count_consume, container);
-    }
 
     @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, false, false, false, R.layout.item_vp_count_consume);
         listView = fvById(R.id.id_list);
         adapter = new CountConsumeAdapter(getActivity());
         listView.setAdapter(adapter);

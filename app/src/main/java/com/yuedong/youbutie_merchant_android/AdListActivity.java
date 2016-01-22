@@ -29,15 +29,14 @@ public class AdListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView("广告", R.drawable.icon_black_add, new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView("广告", R.drawable.icon_black_add, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, SendMessageActivity.class);
                 intent.putExtra(Constants.KEY_BEAN, meMerchant);
                 LaunchWithExitUtils.startActivityForResult(activity, intent, Constants.REQUESTCODE_ADD_AD);
             }
-        }));
-        setShowContentView(R.layout.activity_ad_list);
+        }), false, false, false, R.layout.activity_ad_list);
     }
 
     @Override

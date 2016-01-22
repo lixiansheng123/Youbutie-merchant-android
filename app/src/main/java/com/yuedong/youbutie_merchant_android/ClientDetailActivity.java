@@ -64,7 +64,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         Bundle bundle = getIntent().getExtras();
         order = (Order) bundle.getSerializable(Constants.KEY_BEAN);
         isVip = bundle.getBoolean(Constants.KEY_BOO);
-        initTitleView(new TitleViewHelper().createDefaultTitleView4_2("客户详情", "邀请会员", new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView4_2("客户详情", "邀请会员", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBack();
@@ -74,8 +74,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
             public void onClick(View v) {
                 LaunchWithExitUtils.startActivity(activity, InviteMemberActivity.class);
             }
-        }));
-        setShowContentView(R.layout.activity_client_detail);
+        }), false, false, false, R.layout.activity_client_detail);
     }
 
     @Override
@@ -135,7 +134,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         userMobile.setText(orderUser.getMobilePhoneNumber());
         carNum.setText(orderUser.getCarNumber());
         carDesc.setText(orderUser.getCarString());
-        carMileageNum.setText(orderUser.getStrokeLength()+"");
+        carMileageNum.setText(orderUser.getStrokeLength() + "");
         if (isVip)
             ViewUtils.showLayout(iconVip);
     }

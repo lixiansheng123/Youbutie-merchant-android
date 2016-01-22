@@ -38,18 +38,10 @@ public class OrderDetailFlow1 extends BaseFragment {
         }
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
-    public View getContentView(ViewGroup container) {
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_order_detail_flow1, container);
-    }
-
-    @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, false, false, false, R.layout.fragment_order_detail_flow1);
         pic = fvById(R.id.id_main_pic);
         name = fvById(R.id.id_name);
         time = fvById(R.id.id_time);

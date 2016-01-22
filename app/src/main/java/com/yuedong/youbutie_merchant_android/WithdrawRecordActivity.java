@@ -31,8 +31,7 @@ public class WithdrawRecordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("提现记录"));
-        setShowContentView(R.layout.activity_withdraw_record);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("提现记录"), false, false, false, R.layout.activity_withdraw_record);
     }
 
     @Override

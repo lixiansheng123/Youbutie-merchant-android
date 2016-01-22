@@ -47,8 +47,7 @@ public class MerchantCollectionActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("收款"));
-        setShowContentView(R.layout.activity_merchant_collection);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("收款"),false,false,false,R.layout.activity_merchant_collection);
     }
 
     @Override

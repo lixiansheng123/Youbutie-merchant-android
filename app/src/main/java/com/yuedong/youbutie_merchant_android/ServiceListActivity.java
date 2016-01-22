@@ -45,13 +45,12 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         meMechant = (Merchant) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
         alreadyAddServiceInfoDetailBeans = meMechant.getServiceInfo();
-        initTitleView(new TitleViewHelper().createDefaultTitleView4("服务列表", "添加", new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView4("服务列表", "添加", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LaunchWithExitUtils.startActivityForResult(activity, CustomMerchantServiceActivity.class, Constants.RREQUESTCODE_CUSTOM_MERCHANT_SERVICE);
             }
-        }));
-        setShowContentView(R.layout.activity_service_list);
+        }), false, false, false, R.layout.activity_service_list);
     }
 
     @Override

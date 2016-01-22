@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.MonthOrderDetailAdapter;
@@ -33,8 +34,7 @@ public class MonthOrderDetailActivity extends BaseActivity {
         String title = null;
         if (StringUtil.isNotEmpty(dayDesc))
             title = dayDesc.substring(dayDesc.length() - 2);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3(title + "清单明细"));
-        setShowContentView(R.layout.activity_month_order_detail);
+        buildUi(new TitleViewHelper().createDefaultTitleView3(title + "清单明细"), false, false, false, R.layout.activity_month_order_detail);
     }
 
     @Override

@@ -23,8 +23,7 @@ public class ApplySucceedActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         applyWithdrawMoney = extras.getDouble(Constants.KEY_INT, 0);
         cardInfo = extras.getString(Constants.KEY_TEXT);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("申请成功"));
-        setShowContentView(R.layout.activity_appley_succeed);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("申请成功"), false, false, false, R.layout.activity_appley_succeed);
     }
 
     @Override

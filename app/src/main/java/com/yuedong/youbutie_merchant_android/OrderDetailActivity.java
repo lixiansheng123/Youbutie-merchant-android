@@ -35,13 +35,12 @@ public class OrderDetailActivity extends BaseActivity implements OrderDetailFlow
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("订单详情", new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView3("订单详情", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBack();
             }
-        }));
-        setShowContentView(R.layout.activity_order_detail);
+        }),false,false,false,R.layout.activity_order_detail);
         initDl();
     }
 

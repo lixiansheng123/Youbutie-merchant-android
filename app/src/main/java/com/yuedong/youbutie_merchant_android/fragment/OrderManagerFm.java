@@ -57,22 +57,17 @@ public class OrderManagerFm extends BaseFragment {
 
 
     @Override
-    public View getContentView(ViewGroup container) {
-        initTitleView(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"), R.drawable.icon_grey_swip, new View.OnClickListener() {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"), R.drawable.icon_grey_swip, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 打开扫描界面扫描条形码或二维码
                 Intent openCameraIntent = new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(openCameraIntent, Constants.REQUESTCODE_SWIP_CODE);
             }
-        }));
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_order_manager, container);
-    }
-
-    @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
-        tabLayout = (TabLayout) contentView.findViewById(R.id.id_tab_order_manager);
-        viewPager = (ViewPager) contentView.findViewById(R.id.id_vp_order_manager);
+        }), false, false, false, R.layout.fragment_order_manager);
+        tabLayout = fvById(R.id.id_tab_order_manager);
+        viewPager = fvById(R.id.id_vp_order_manager);
         vpAdapter = new OrderManagerVpAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(vpAdapter);
         // 保留3个在缓存里

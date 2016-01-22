@@ -42,16 +42,10 @@ public class MoreBuyRateFm extends BaseFragment {
     private TextView descTv;
 
     @Override
-    public View getContentView(ViewGroup container) {
-        View contentView = ViewUtils.inflaterView(getActivity(), R.layout.fragment_more_bug, container);
-
-        return contentView;
-    }
-
-    @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
-        lineChatView = (LineChatView) contentView.findViewById(R.id.id_line_chart);
-        descTv = (TextView) contentView.findViewById(R.id.id_desc);
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, false, false, false, R.layout.fragment_more_bug);
+        lineChatView = fvById(R.id.id_line_chart);
+        descTv = fvById(R.id.id_desc);
         ui();
     }
 

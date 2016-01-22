@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/yuedong/youbutie_merchant_android/view/MultiStateView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/empty_view.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/error_view.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/loading_view.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

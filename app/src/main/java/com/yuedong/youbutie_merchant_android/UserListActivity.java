@@ -78,8 +78,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                     LaunchWithExitUtils.startActivity(activity, InviteMemberActivity.class);
                 }
             });
-        initTitleView(titleView);
-        setShowContentView(R.layout.activity_user_list);
+        buildUi(titleView, false, false, false, R.layout.activity_user_list);
     }
 
     @Override

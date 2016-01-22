@@ -57,9 +57,8 @@ public class FeedbackActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("反馈"));
-        setShowContentView(R.layout.activity_feedback);
         mContext = this;
+        buildUi(new TitleViewHelper().createDefaultTitleView3("反馈"),false,false,false,R.layout.activity_feedback);
     }
 
     @Override

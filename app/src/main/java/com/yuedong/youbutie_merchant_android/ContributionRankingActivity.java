@@ -49,8 +49,7 @@ public class ContributionRankingActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         oliContributionNum = extras.getInt(Constants.KEY_INT, 0);
-        initTitleView(new TitleViewHelper().createDefaultTitleView3("贡献榜"));
-        setShowContentView(R.layout.activity_contribution_ranking);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("贡献榜"),false,false,false,R.layout.activity_contribution_ranking);
     }
 
     @Override

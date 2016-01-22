@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
-        setShowContentView(R.layout.activity_main);
+        buildUi(null, false, false, false, R.layout.activity_main);
         init();
         registerDBPushBindReceive();
     }

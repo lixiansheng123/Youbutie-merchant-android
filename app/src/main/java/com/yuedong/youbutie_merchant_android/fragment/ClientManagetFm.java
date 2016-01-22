@@ -52,14 +52,10 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     private ClientManagerMessageListAdapter adapter;
     private Merchant meMerchant;
 
-    @Override
-    public View getContentView(ViewGroup container) {
-        initTitleView(new TitleViewHelper().createDefaultTitleView2("客户管理"));
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_client_manager, container);
-    }
 
     @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(new TitleViewHelper().createDefaultTitleView2("客户管理"), false, false, false, R.layout.fragment_client_manager);
         refreshHelper = new RefreshHelper<Messages>();
         totalClientNum = fvById(R.id.id_total_client_num);
         memberNum = fvById(R.id.id_member_num);

@@ -30,13 +30,10 @@ public class CountUserEvaluateFm extends BaseFragment {
     private PullToRefreshListView refreshListView;
     private Merchant merchant;
 
-    @Override
-    public View getContentView(ViewGroup container) {
-        return ViewUtils.inflaterView(getActivity(), R.layout.fragment_user_evaluate);
-    }
 
     @Override
-    public void initViews(View contentView, Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, false, false, false, R.layout.fragment_user_evaluate);
         refreshListView = fvById(R.id.id_refresh_view);
         refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
