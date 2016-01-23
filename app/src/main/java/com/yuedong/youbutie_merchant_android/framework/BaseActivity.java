@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -80,9 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         context = this;
         activity = this;
         initUi();
-//        setShowContentView(new TabLayout(this));
         initDialog();
-        initSystemBar(Config.STATUSBAR_COLOR);
         registNotifyMsgReceive();
     }
 
@@ -93,8 +92,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         activity = this;
         initUi();
         initDialog();
-        if (initSystemBar)
-            initSystemBar(Config.STATUSBAR_COLOR);
         registNotifyMsgReceive();
     }
 
@@ -106,20 +103,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             initViews();
             initEvents();
             ui();
-        }
-    }
-
-    // 当前状态栏背景
-    private int currentStatusBarColor;
-
-    public void initSystemBar() {
-        initSystemBar(Config.STATUSBAR_COLOR);
-    }
-
-    public void initSystemBar(int statusBarBg) {
-        if (currentStatusBarColor != statusBarBg) {
-            currentStatusBarColor = statusBarBg;
-            WindowUtils.setStatusBarColor(this, statusBarBg);
         }
     }
 
@@ -224,9 +207,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         contentLp.addRule(RelativeLayout.BELOW, mTitleLayout.getId());
         mMainLayout.addView(mMultiStateView, contentLp);
         setContentView(mMainLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mMainLayout.setClipToPadding(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            mMainLayout.setFitsSystemWindows(true);
+        // 实现沉浸式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            paddingStatusBarSpan(true);
+        }
+    }
+
+    /**
+     * padding状态栏的空间
+     */
+    public void paddingStatusBarSpan(boolean paddingStatusBarSpan) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mMainLayout.setClipToPadding(paddingStatusBarSpan);
+            mMainLayout.setFitsSystemWindows(paddingStatusBarSpan);
+        }
     }
 
     protected void buildUi(View titleView, boolean enableDefaultEmptyView, boolean enbleDefaultLoadView, boolean enbleDfaultErrorView, int contentResId) {

@@ -12,9 +12,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.yuedong.youbutie_merchant_android.R;
-
 public class WindowUtils {
     /**
      * 获取手机的宽高
@@ -93,54 +90,5 @@ public class WindowUtils {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-    /**
-     * 給状态设置背景 对于5.0以上的手机效果较好· 4.4以上有渐变  4.4以下不支持
-     *
-     * @param activity
-     * @param statusBarBg
-     */
-    public static void setStatusBarColor(Activity activity, int statusBarBg) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(activity, true);
-//        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-//            // statusBar
-//            tintManager.setStatusBarTintEnabled(true);
-//            tintManager.setStatusBarTintResource(statusBarBg);
-            systemBarTransparent(activity);
-        }
-    }
-
-    private static void setTranslucentStatus(Activity activity, boolean on) {
-        Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-
-        win.setAttributes(winParams);
-    }
-
-//    /**
-//     * 让状态栏透明
-//     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private static void systemBarTransparent(Activity activity) {
-        Window window = activity.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//        window.setStatusBarColor(Color.TRANSPARENT);
-        window.setStatusBarColor(Color.parseColor("#f0eeeb"));
-//            window.setNavigationBarColor(Color.TRANSPARENT);
-
-    }
 
 }
