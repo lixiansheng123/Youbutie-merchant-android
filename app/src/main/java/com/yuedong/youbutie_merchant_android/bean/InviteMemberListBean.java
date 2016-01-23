@@ -1,6 +1,6 @@
 package com.yuedong.youbutie_merchant_android.bean;
 
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 
 public class InviteMemberListBean extends User {
     public String remark;// 备注

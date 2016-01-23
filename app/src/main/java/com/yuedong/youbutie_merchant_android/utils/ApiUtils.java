@@ -1,19 +1,15 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 import com.yuedong.youbutie_merchant_android.app.Config;
 
 import java.io.File;
-import java.util.Map;
 
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -93,7 +89,7 @@ public class ApiUtils {
      * @param filePath
      * @param listener
      */
-    public static void uplodaFile(Context context, String filePath, final com.yuedong.youbutie_merchant_android.mouble.bmob.listener.UploadListener listener) {
+    public static void uplodaFile(Context context, String filePath, final com.yuedong.youbutie_merchant_android.model.bmob.listener.UploadListener listener) {
         if (StringUtil.isNotEmpty(filePath) && new File(filePath).exists()) {
             listener.onStart();
             String compressFile = ImageZoomUtils.compressImageToFile(filePath, Config.DIR_UPLOAD_PIC, 100);

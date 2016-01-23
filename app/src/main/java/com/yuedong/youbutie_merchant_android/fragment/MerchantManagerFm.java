@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -16,23 +15,20 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.ServiceListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.MerchantServiceListAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
-import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.MerchantEvent;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
-import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.SupportScrollConflictListView;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,7 +8,7 @@ import android.widget.EditText;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 

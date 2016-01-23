@@ -1,7 +1,5 @@
 package com.yuedong.youbutie_merchant_android.bean;
 
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
-
 public class IncomeDetailListBean {
     private String dayDes;
     private int orderNumber;

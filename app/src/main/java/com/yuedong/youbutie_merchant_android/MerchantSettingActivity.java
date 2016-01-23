@@ -1,22 +1,15 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.app.ActivityManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateResponse;
-import com.umeng.update.UpdateStatus;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.UmengFeedbackAgent;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.ActivityTaskUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 

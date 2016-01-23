@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 
 /**

@@ -7,13 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.R;
-import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
-import com.yuedong.youbutie_merchant_android.utils.AppUtils;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.utils.DateUtils;
-import com.yuedong.youbutie_merchant_android.utils.SystemUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
 import java.util.Date;

@@ -1,23 +1,18 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.DrawMoneyRecordEvent;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.DrawMoneyRecord;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.DrawMoneyRecordEvent;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.DrawMoneyRecord;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
@@ -89,6 +84,8 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                 if (StringUtil.isNotEmpty(inputContent)) {
                     final double inputMoneyD = Double.parseDouble(inputContent);
                     Double cash = user.getCash();
+                    if (cash == null)
+                        cash = 0.0;
                     if (inputMoneyD <= cash) {
                         if (inputMoneyD <= 1000) {
                             // 查询当天提现次数

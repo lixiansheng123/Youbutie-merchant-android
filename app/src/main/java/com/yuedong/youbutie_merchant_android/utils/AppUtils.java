@@ -17,9 +17,9 @@ import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Vips;
 
 import org.json.JSONException;
 import org.json.JSONObject;

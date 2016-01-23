@@ -14,9 +14,8 @@ import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
-import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
-import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.model.OrderEvent;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 
 import java.util.List;

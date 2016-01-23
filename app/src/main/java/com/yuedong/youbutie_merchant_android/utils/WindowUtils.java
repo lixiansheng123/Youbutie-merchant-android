@@ -104,10 +104,10 @@ public class WindowUtils {
 //            setTranslucentStatus(activity, true);
 //        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-            // statusBar
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintResource(statusBarBg);
+//            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+//            // statusBar
+//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintResource(statusBarBg);
             systemBarTransparent(activity);
         }
     }
@@ -125,9 +125,9 @@ public class WindowUtils {
         win.setAttributes(winParams);
     }
 
-    /**
-     * 让状态栏透明
-     */
+//    /**
+//     * 让状态栏透明
+//     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static void systemBarTransparent(Activity activity) {
         Window window = activity.getWindow();
@@ -137,8 +137,9 @@ public class WindowUtils {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.TRANSPARENT);
-//        window.setNavigationBarColor(Color.TRANSPARENT);
+//        window.setStatusBarColor(Color.TRANSPARENT);
+        window.setStatusBarColor(Color.parseColor("#f0eeeb"));
+//            window.setNavigationBarColor(Color.TRANSPARENT);
 
     }
 

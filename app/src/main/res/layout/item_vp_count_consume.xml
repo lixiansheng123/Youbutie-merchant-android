@@ -7,5 +7,4 @@
     android:divider="@color/whiteffffff"
     android:listSelector="@color/transparent"
     android:dividerHeight="8dp"
-    android:paddingBottom="13dp"
-    android:paddingTop="13dp" />
+   />

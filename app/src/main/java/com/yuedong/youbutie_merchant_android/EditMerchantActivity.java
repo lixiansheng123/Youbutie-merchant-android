@@ -12,10 +12,10 @@ import android.widget.TextView;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BasePhotoCropActivity;
-import com.yuedong.youbutie_merchant_android.mouble.Callback;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.listener.UploadListener;
+import com.yuedong.youbutie_merchant_android.model.Callback;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.bmob.listener.UploadListener;
 import com.yuedong.youbutie_merchant_android.utils.ApiUtils;
 import com.yuedong.youbutie_merchant_android.utils.CropHelper;
 import com.yuedong.youbutie_merchant_android.utils.CropParams;
@@ -31,7 +31,6 @@ import com.yuedong.youbutie_merchant_android.view.TimeSelectPop;
 
 import java.util.Date;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UpdateListener;

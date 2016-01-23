@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,7 +22,7 @@ import com.umeng.fb.SyncListener;
 import com.umeng.fb.model.Conversation;
 import com.umeng.fb.model.Reply;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

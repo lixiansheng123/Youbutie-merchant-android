@@ -1,7 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -16,15 +15,15 @@ import com.yuedong.youbutie_merchant_android.bean.InviteMemberListBean;
 import com.yuedong.youbutie_merchant_android.bean.PhoneAddressBookBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.UserEvent;
-import com.yuedong.youbutie_merchant_android.mouble.VipEvent;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Messages;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Vips;
-import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
+import com.yuedong.youbutie_merchant_android.model.MerchantEvent;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.UserEvent;
+import com.yuedong.youbutie_merchant_android.model.VipEvent;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Messages;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Vips;
+import com.yuedong.youbutie_merchant_android.model.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DimenUtils;
@@ -39,15 +38,11 @@ import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**

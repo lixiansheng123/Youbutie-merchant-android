@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.DrawMoneyRecord;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.DrawMoneyRecord;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 

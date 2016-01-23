@@ -1,14 +1,12 @@
 package com.yuedong.youbutie_merchant_android.app;
 
 import android.app.Application;
-import android.app.DownloadManager;
 import android.content.Context;
 
 import com.yuedong.youbutie_merchant_android.crash.CustomCrashHandler;
-import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.mouble.listener.ObtainSecretKeyListener;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.listener.ObtainSecretKeyListener;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RequestYDHelper;
 import com.yuedong.youbutie_merchant_android.utils.SPUtils;

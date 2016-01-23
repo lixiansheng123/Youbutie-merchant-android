@@ -9,8 +9,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 
 import java.util.List;

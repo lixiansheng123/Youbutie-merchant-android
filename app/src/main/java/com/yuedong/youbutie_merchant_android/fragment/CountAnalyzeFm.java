@@ -2,16 +2,11 @@ package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,20 +16,17 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.CountConsumeAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
-import com.yuedong.youbutie_merchant_android.bean.IncomeDetailListBean;
-import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
-import com.yuedong.youbutie_merchant_android.mouble.MerchantEvent;
-import com.yuedong.youbutie_merchant_android.mouble.MoneyContributionEvent;
-import com.yuedong.youbutie_merchant_android.mouble.OrderEvent;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Merchant;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.model.MerchantEvent;
+import com.yuedong.youbutie_merchant_android.model.MoneyContributionEvent;
+import com.yuedong.youbutie_merchant_android.model.OrderEvent;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.T;
-import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
 
 import org.json.JSONArray;
@@ -167,17 +159,17 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                                             try {
                                                 JSONObject obj = ary.getJSONObject(0);
                                                 oliContributionNum = obj.getInt("_sumMoney");//_(关键字)+首字母大写的列名
-                                                L.d("油点贡献度:" + oliContributionNum);
-                                                curMoneySales.setText("￥" + finalTotalSales);
-                                                curMoneyUser.setText(userObjectIds.size() + "");
-                                                avgConsume.setText((int) (finalTotalSales * 1.0f / userObjectIds.size()) + "");
-                                                oliContribution.setText(oliContributionNum + "");
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
                                         } else {
                                             T.showShort(getActivity(), "查询油点贡献成功，无数据");
                                         }
+                                        L.d("油点贡献度:" + oliContributionNum);
+                                        curMoneySales.setText("￥" + finalTotalSales);
+                                        curMoneyUser.setText(userObjectIds.size() + "");
+                                        avgConsume.setText((int) (finalTotalSales * 1.0f / userObjectIds.size()) + "");
+                                        oliContribution.setText(oliContributionNum + "");
                                     }
 
                                     @Override

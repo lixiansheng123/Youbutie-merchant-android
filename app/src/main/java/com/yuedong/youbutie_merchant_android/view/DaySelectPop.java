@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.WheelOnlyTextAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.mouble.Callback;
+import com.yuedong.youbutie_merchant_android.model.Callback;
 import com.yuedong.youbutie_merchant_android.utils.DataUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 

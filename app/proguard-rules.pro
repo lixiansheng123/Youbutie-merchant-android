@@ -23,7 +23,7 @@
 -keepattributes Signature
 -keep class cn.bmob.v3.** {*;}
 # 保证继承自BmobObject、BmobUser类的JavaBean不被混淆
--keep class com.yuedong.youbutie_merchant_android.mouble.bmob.bean.**{*;}
+-keep class com.yuedong.youbutie_merchant_android.model.bmob.bean.**{*;}
 -keep class com.yuedong.youbutie_merchant_android.bean.**{*;}
 
 # 如果你使用了okhttp、okio的包，请添加以下混淆代码

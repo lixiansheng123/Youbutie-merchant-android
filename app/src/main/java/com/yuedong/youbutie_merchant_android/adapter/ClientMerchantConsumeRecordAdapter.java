@@ -8,7 +8,7 @@ import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;

@@ -1,15 +1,12 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
-import android.content.Context;
 import android.widget.ListView;
 
-import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
 
 import java.util.ArrayList;
 import java.util.List;

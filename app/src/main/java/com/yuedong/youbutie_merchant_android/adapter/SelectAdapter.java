@@ -8,9 +8,8 @@ import android.widget.TextView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ServiceInfo;
-import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Car;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.ServiceInfo;
 
 import cn.bmob.v3.BmobObject;
 

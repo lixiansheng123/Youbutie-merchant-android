@@ -9,7 +9,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.mouble.SimplePicConfig;
+import com.yuedong.youbutie_merchant_android.model.SimplePicConfig;
 
 /**
  * 图片下载工具类

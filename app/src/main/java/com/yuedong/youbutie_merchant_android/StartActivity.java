@@ -1,17 +1,15 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
-import com.yuedong.youbutie_merchant_android.mouble.CarEvent;
-import com.yuedong.youbutie_merchant_android.mouble.ServiceInfoEvent;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.ServiceInfo;
-import com.yuedong.youbutie_merchant_android.mouble.db.CarDao;
-import com.yuedong.youbutie_merchant_android.mouble.db.ServiceInfoDao;
+import com.yuedong.youbutie_merchant_android.model.CarEvent;
+import com.yuedong.youbutie_merchant_android.model.ServiceInfoEvent;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Car;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.ServiceInfo;
+import com.yuedong.youbutie_merchant_android.model.db.CarDao;
+import com.yuedong.youbutie_merchant_android.model.db.ServiceInfoDao;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;

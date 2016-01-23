@@ -11,9 +11,8 @@ import android.widget.TextView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Car;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Car;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
-import com.zxing.decoding.Intents;
 
 import java.util.ArrayList;
 import java.util.List;

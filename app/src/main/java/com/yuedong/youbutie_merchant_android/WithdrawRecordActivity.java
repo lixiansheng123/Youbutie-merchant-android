@@ -1,6 +1,5 @@
 package com.yuedong.youbutie_merchant_android;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -9,13 +8,12 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.WithdrawRecordListAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
-import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
-import com.yuedong.youbutie_merchant_android.mouble.DrawMoneyRecordEvent;
-import com.yuedong.youbutie_merchant_android.mouble.TitleViewHelper;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.DrawMoneyRecord;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.model.DrawMoneyRecordEvent;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.DrawMoneyRecord;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
@@ -52,9 +50,12 @@ public class WithdrawRecordActivity extends BaseActivity {
     @Override
     protected void ui() {
         final User user = App.getInstance().getUser();
-        double alreadyWithdrawMoney = user.getDrawTotalCash();
-        alreadyWithdrawMoneyTv.setText("￥" + alreadyWithdrawMoney);
-        withdrawCountTv.setText(user.getDrawCount() + "");
+        if (user.getDrawTotalCash() != null) {
+            double alreadyWithdrawMoney = user.getDrawTotalCash();
+            alreadyWithdrawMoneyTv.setText("￥" + alreadyWithdrawMoney);
+        }
+        if (user.getDrawCount() != null)
+            withdrawCountTv.setText(user.getDrawCount() + "");
         refreshHelper.setEmptyUi();
         refreshHelper.setEmpty();
         refreshHelper.setPulltoRefreshRefreshProxy(this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<DrawMoneyRecord>() {

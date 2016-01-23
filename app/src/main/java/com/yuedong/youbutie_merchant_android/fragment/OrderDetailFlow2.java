@@ -1,10 +1,7 @@
 package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -14,7 +11,7 @@ import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
-import com.yuedong.youbutie_merchant_android.mouble.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.SupportScrollConflictGridView;

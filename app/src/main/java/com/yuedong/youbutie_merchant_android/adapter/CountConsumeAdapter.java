@@ -20,6 +20,9 @@ import java.util.List;
 
 public class CountConsumeAdapter extends BaseAdapter<CountConsumeBean> {
     private static final int PROGRESS_MIN_WIDTH = 50;
+    private int progressLayoutMaxWidth;
+    // 已经获取到了进度最大的宽度
+    private boolean obtainProgressLayoutMaxWitch = false;
 
     public CountConsumeAdapter(Context context) {
         super(context, R.layout.item_count_consume);
@@ -51,9 +54,11 @@ public class CountConsumeAdapter extends BaseAdapter<CountConsumeBean> {
         progressLayout.post(new Runnable() {
             @Override
             public void run() {
-                // 进度最大宽度
-                int progressLayoutMaxWidth = progressLayout.getWidth();
-                L.d("progressLayoutMaxWidth:" + progressLayoutMaxWidth);
+                if (!obtainProgressLayoutMaxWitch) {
+                    // 进度最大宽度
+                    progressLayoutMaxWidth = progressLayout.getWidth();
+                    obtainProgressLayoutMaxWitch = true;
+                }
                 // 增量
                 int increment = (int) ((progressLayoutMaxWidth - PROGRESS_MIN_WIDTH) * 1.0f / 100 + 0.5f);
                 int shouldWidth = countConsumeBean.getTypeRatio() * increment + PROGRESS_MIN_WIDTH;

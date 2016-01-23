@@ -74,7 +74,7 @@
     <string name="str_search_address_book_friend">搜索通讯录好友</string>
     <string name="str_invite">邀请</string>
     <string name="str_already_invite">已邀请</string>
-    <string name="str_sms_moudle">【未加入油补贴】尊贵的车主，我在油补贴享受“看广告，赚油费”福利，你敢来，我敢送，快来加入吧！</string>
+    <string name="str_sms_moudle">尊贵的车主，我在油补贴享受“看广告，赚油费”福利，你敢来，我敢送，快来加入吧！</string>
     <string name="str_car_wash">洗车</string>
     <string name="str_wax">抛光打蜡</string>
     <string name="str_pad_pasting">贴膜</string>
@@ -152,7 +152,7 @@
     <string name="str_push_merchant_collect_title">商家收款</string>
     <string name="str_push_merchant_collect_msg">商家收款拉</string>
     <string name="str_push_merchant_invite_member_title">门店邀请会员</string>
-    <string name="str_push_merchant_invite_member_content" formatted="false">【已加入油补贴】尊贵的车主，%s诚邀您成为本店会员，享受VIP服务。</string>
+    <string name="str_push_merchant_invite_member_content" formatted="false">尊贵的车主，%s诚邀您成为本店会员，享受VIP服务。</string>
     <string name="str_push_merchant_ad_title">门店活动</string>
     <string name="str_push_merchant_ad_content">%s发出新的优惠活动，快来看看吧</string>
     <string name="str_please_input">请输入</string>
