@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
@@ -32,6 +33,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getInstance().setMeMerchant(null);
         buildUi(new TitleViewHelper().createDefaultTitleView2(getString(R.string.str_login)), false, false, false, R.layout.activity_login);
     }
 
