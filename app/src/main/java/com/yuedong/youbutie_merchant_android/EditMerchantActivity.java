@@ -43,6 +43,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
     private SelectPicPop selectPicPop;
     private CropParams mCropParams = new CropParams();
     private TimeSelectPop startTimeSelectPop, endTimeSelectPop;
+//    private String startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
         startTimeSelectPop.setOnCallbcak(new Callback() {
             @Override
             public void callbackHM(final String hour, final String minute) {
+//                startTime = hour + ":" + minute;
                 String fullStartTime = DateUtils.getCurYMD();
                 // yyyy-MM-dd HH:mm:ss
                 fullStartTime = fullStartTime + " " + hour + ":" + minute + ":00";
@@ -102,6 +104,10 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
         endTimeSelectPop.setOnCallbcak(new Callback() {
             @Override
             public void callbackHM(final String hour, final String minute) {
+//                if (startTime == null) {
+//                    T.showShort(context, "请先选择营业开始时间!");
+//                    return;
+//                }
                 String fullEndTime = DateUtils.getCurYMD();
                 fullEndTime = fullEndTime + " " + hour + ":" + minute + ":00";
                 dialogStatus(true);
@@ -209,6 +215,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
             String startTimeStr = DateUtils.formatDate(new Date(startTimeL), "HH:mm");
             businessStartTime.setTextColor(textColor);
             businessStartTime.setText(startTimeStr);
+//            this.startTime = startTimeStr;
         }
 
         // 营业结束时间

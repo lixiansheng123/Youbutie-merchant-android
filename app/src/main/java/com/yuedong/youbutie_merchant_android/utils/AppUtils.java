@@ -79,7 +79,7 @@ public class AppUtils {
             if (merchantPhoto.matches(Config.REGEX_NUM)) {
                 SystemUtils.call(context, merchantPhoto);
             } else {
-                T.showShort(context, "商家预留电话不合法");
+                T.showShort(context, "无法提供商家电话");
             }
         } else {
             T.showShort(context, "商家暂无电话");

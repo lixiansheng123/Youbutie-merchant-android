@@ -69,6 +69,7 @@ public class MessageEvent implements BaseEvent {
         BmobQuery<User> userBmobQuery = new BmobQuery<User>();
         userBmobQuery.addWhereEqualTo(OBJECT_ID, userId);
         bmobQuery.addWhereMatchesQuery("sender", "_User", userBmobQuery);
+        bmobQuery.addWhereEqualTo("type", 2);
         bmobQuery.count(context, Messages.class, listener);
     }
 

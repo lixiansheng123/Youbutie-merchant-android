@@ -15,6 +15,7 @@ import com.yuedong.youbutie_merchant_android.model.MoneyContributionEvent;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
+import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RankingComparator;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.T;
@@ -49,7 +50,7 @@ public class ContributionRankingActivity extends BaseActivity {
         Bundle extras = getIntent().getExtras();
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         oliContributionNum = extras.getInt(Constants.KEY_INT, 0);
-        buildUi(new TitleViewHelper().createDefaultTitleView3("贡献榜"),false,false,false,R.layout.activity_contribution_ranking);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("贡献榜"), false, false, false, R.layout.activity_contribution_ranking);
     }
 
     @Override
@@ -73,6 +74,7 @@ public class ContributionRankingActivity extends BaseActivity {
                 MoneyContributionEvent.getInstance().getMoneyContributionRanking(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
+                        L.d("getMoneyContributionRanking:" + o.toString());
                         List<MoneyContributionBean> datas = new ArrayList<MoneyContributionBean>();
                         dialogStatus(false);
                         JSONArray ary = (JSONArray) o;
@@ -86,7 +88,10 @@ public class ContributionRankingActivity extends BaseActivity {
                                     User user = new User();
                                     user.setObjectId(userObj.getString("objectId"));
                                     user.setNickname(userObj.getString("nickname"));
-                                    user.setPhoto(userObj.getString("photo"));
+                                    try {
+                                        user.setPhoto(userObj.getString("photo"));
+                                    } catch (Exception e) {
+                                    }
                                     MoneyContributionBean bean = new MoneyContributionBean();
                                     bean.setTotalContributionMoney(totalMoney);
                                     bean.setUser(user);

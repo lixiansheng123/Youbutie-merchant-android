@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class InfoEditActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buildUi(null,false,false,false,R.layout.activity_info_edit);
+        buildUi(null, false, false, false, R.layout.activity_info_edit);
     }
 
     @Override
@@ -90,9 +91,14 @@ public class InfoEditActivity extends BaseActivity {
             inputbox.setHint("提示:" + tips);
         }
         // 增加限制
+        int maxLength = 999999999;
         if (action == ACTION_INPUT_MILEAGE) {
             inputbox.setInputType(InputType.TYPE_CLASS_NUMBER);
-        }
+        } else if (action == ACTION_INPUT_MEMBER_NAME || action == ACTION_INPUT_AD_TITLE || action == ACTION_INPUT_MEMBER_LOCATION || action == ACTION_INPUT_AD_TITLE) {
+            maxLength = 20;
+        } else if (action == ACTION_INPUT_MEMBER_TEL)
+            maxLength = 15;
+        inputbox.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
 
     }
 

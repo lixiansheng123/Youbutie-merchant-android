@@ -111,6 +111,11 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                                                 Double userCash = user.getCash();
                                                 Double drawTotalCash = user.getDrawTotalCash();
                                                 Integer drawCount = user.getDrawCount();
+                                                if (drawTotalCash == null) {
+                                                    drawTotalCash = 0.0;
+                                                }
+                                                if (drawCount == null)
+                                                    drawCount = 0;
                                                 userCash = userCash - inputMoneyD;
                                                 drawTotalCash = drawTotalCash + inputMoneyD;
                                                 drawCount++;

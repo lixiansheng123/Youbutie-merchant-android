@@ -229,6 +229,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="15dp"
+                android:maxLength="40"
                 android:background="@drawable/bg_round_tint_grey"
                 android:gravity="center_horizontal|top"
                 android:hint="@string/str_send_ad_des"

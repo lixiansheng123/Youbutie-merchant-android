@@ -188,6 +188,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         unRegistNotifyMsgRecevie();
         ActivityTaskUtils.getInstance().reomveActivity(this);
+        dialogStatus(false);
     }
 
     @SuppressWarnings("ResourceType")

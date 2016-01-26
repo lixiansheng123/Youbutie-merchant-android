@@ -55,7 +55,6 @@
 
                 <TextView
                     style="@style/text_white_14sp"
-                    android:drawableRight="@drawable/icon_white_point_triangle"
                     android:text="本月用户(人) " />
 
                 <TextView
@@ -86,7 +85,6 @@
 
                 <TextView
                     style="@style/text_white_14sp"
-                    android:drawableRight="@drawable/icon_white_point_triangle"
                     android:text="人均消费(元) " />
 
                 <TextView

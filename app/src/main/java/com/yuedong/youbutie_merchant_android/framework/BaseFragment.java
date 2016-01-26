@@ -73,6 +73,7 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         super.onDestroy();
         L.i(TAG, "onDestroy");
         initFinshed = false;
+        dialogStatus(false);
     }
 
     protected void initDialog() {
