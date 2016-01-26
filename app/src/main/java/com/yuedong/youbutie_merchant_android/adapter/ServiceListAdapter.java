@@ -14,6 +14,7 @@ import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseDialog;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
+import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
@@ -82,7 +83,7 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
 
         }
         if (serviceInfo.price != 0) {
-            servicePrice.setText(serviceInfo.price + "元/次");
+            servicePrice.setText(StringUtil.setDoubleValue(serviceInfo.price) + "元/次");
             ViewUtils.showLayout(servicePrice);
             ViewUtils.hideLayout(settingPriceText);
 

@@ -43,7 +43,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
     private SelectPicPop selectPicPop;
     private CropParams mCropParams = new CropParams();
     private TimeSelectPop startTimeSelectPop, endTimeSelectPop;
-//    private String startTime;
+    private String startTime, endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +75,30 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
         startTimeSelectPop.setOnCallbcak(new Callback() {
             @Override
             public void callbackHM(final String hour, final String minute) {
-//                startTime = hour + ":" + minute;
+                final String tempStartTime = hour + ":" + minute;
                 String fullStartTime = DateUtils.getCurYMD();
+                String finalFullStartTime = fullStartTime + " " + hour + ":" + minute + ":00";
+                if (endTime != null) {
+                    String fullEndTime = fullStartTime + " " + endTime + ":00";
+                    L.d("营业开始时间:" + finalFullStartTime + "====营业结束时间:" + fullEndTime);
+                    long startTimeL = BmobDate.getTimeStamp(finalFullStartTime);
+                    long endTimeL = BmobDate.getTimeStamp(fullEndTime);
+                    L.d("startTimeL:" + startTimeL + "=endTimeL:" + endTimeL);
+                    if (startTimeL >= endTimeL) {
+                        T.showShort(context, "营业开始时间必须小于结束时间");
+                        return;
+                    }
+                }
                 // yyyy-MM-dd HH:mm:ss
-                fullStartTime = fullStartTime + " " + hour + ":" + minute + ":00";
                 L.d("fullStartTime" + fullStartTime);
-
                 // 更新门店开始时间
                 dialogStatus(true);
                 Merchant updateMerchant = new Merchant();
-                updateMerchant.setStartTime(new BmobDate(new Date(BmobDate.getTimeStamp(fullStartTime))));
+                updateMerchant.setStartTime(new BmobDate(new Date(BmobDate.getTimeStamp(finalFullStartTime))));
                 updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
+                        startTime = tempStartTime;
                         dialogStatus(false);
                         App.getInstance().meMerchantInfoChange = true;
                         startTimeText.setText(hour + ":" + minute);
@@ -104,20 +115,29 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
         endTimeSelectPop.setOnCallbcak(new Callback() {
             @Override
             public void callbackHM(final String hour, final String minute) {
-//                if (startTime == null) {
-//                    T.showShort(context, "请先选择营业开始时间!");
-//                    return;
-//                }
+                if (startTime == null) {
+                    T.showShort(context, "请先选择营业开始时间!");
+                    return;
+                }
+                final String tempEndTime = hour + ":" + minute;
                 String fullEndTime = DateUtils.getCurYMD();
-                fullEndTime = fullEndTime + " " + hour + ":" + minute + ":00";
+                String fullStratTime = fullEndTime + " " + startTime + ":00";
+                fullEndTime = fullEndTime + " " + tempEndTime + ":00";
+                L.d("营业开始时间:" + fullStratTime + "====营业结束时间:" + fullEndTime);
+                long startTimeL = BmobDate.getTimeStamp(fullStratTime);
+                long endTimeL = BmobDate.getTimeStamp(fullEndTime);
+                if (endTimeL <= startTimeL) {
+                    T.showShort(context, "营业结束时间必须大于开始时间");
+                    return;
+                }
                 dialogStatus(true);
-
                 // 更新门店结束时间
                 Merchant updateMerchant = new Merchant();
-                updateMerchant.setEndTime(new BmobDate(new Date(BmobDate.getTimeStamp(fullEndTime))));
+                updateMerchant.setEndTime(new BmobDate(new Date(endTimeL)));
                 updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
+                        endTime = tempEndTime;
                         dialogStatus(false);
                         App.getInstance().meMerchantInfoChange = true;
                         endTimeText.setText(hour + ":" + minute);
@@ -215,7 +235,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
             String startTimeStr = DateUtils.formatDate(new Date(startTimeL), "HH:mm");
             businessStartTime.setTextColor(textColor);
             businessStartTime.setText(startTimeStr);
-//            this.startTime = startTimeStr;
+            this.startTime = startTimeStr;
         }
 
         // 营业结束时间
@@ -225,6 +245,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
             String endTimeStr = DateUtils.formatDate(new Date(endTimeL), "HH:mm");
             businessEndTime.setTextColor(textColor);
             businessEndTime.setText(endTimeStr);
+            this.endTime = endTimeStr;
         }
         setInfo(merchantName, textColor, merchant.getName());
         setInfo(locationText, textColor, merchant.getAddress());
