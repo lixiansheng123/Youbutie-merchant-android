@@ -20,8 +20,8 @@ public class Merchant extends BmobObject {
     private String photo; //店面图片
     private String bankCard; //店收款卡号
     private User user;//门店属于哪个用户的
-    private BmobDate startTime;//开始营业时间
-    private BmobDate endTime;//结束营业时间
+    private String startTime;//开始营业时间
+    private String endTime;//结束营业时间
     private String address;//地址
     private Float star;//门店星级评价
     private BmobGeoPoint location;//坐标
@@ -81,19 +81,19 @@ public class Merchant extends BmobObject {
         this.address = address;
     }
 
-    public BmobDate getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(BmobDate startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public BmobDate getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(BmobDate endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

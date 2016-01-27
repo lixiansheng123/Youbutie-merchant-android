@@ -6,9 +6,9 @@ package com.yuedong.youbutie_merchant_android.app;
 public class Constants {
     //第三方开发key
     // bmob测试版key
-    public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
+//    public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
     // bmob数据版key
-//    public static final String APIKEY_BMOB = "269a4fea6f2998b31cf6815f4e692eb9";
+    public static final String APIKEY_BMOB = "d8cda36c4f3eae00e078f027e0264999";
     // 悦动推送apikey
     public static final String APIKEY_PUSH_YD = "android6ce073d5af79fa36986dadd3cd0e8a53";
     // 悦动推送secretKey

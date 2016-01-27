@@ -14,7 +14,6 @@ import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.BaseDialog;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
-import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
@@ -119,23 +118,22 @@ public class ServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
         viewHolder.getIdByView(R.id.id_service_price_setting_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputDialog.show();
+                    inputDialog.show();
             }
         });
-        EditText inputBox = inputDialogBuilder.getInputBox();
+        EditText inputBox = inputDialog.getInputBox();
         inputBox.setInputType(InputType.TYPE_CLASS_NUMBER);
-        inputDialogBuilder
-                .setTitle("请输入价格")
+        inputDialog
                 .setNegativeButton(R.string.str_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         inputDialog.dismiss();
                     }
                 });
-        inputDialogBuilder.setPositiveButton(R.string.str_confirm, new DialogInterface.OnClickListener() {
+        inputDialog.setPositiveButton(R.string.str_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText inputBox = inputDialogBuilder.getInputBox();
+                EditText inputBox = inputDialog.getInputBox();
                 if (!StringUtil.isNotEmpty(inputBox.getText().toString())) {
                     T.showShort(mCon, "请输入价格!");
                     return;

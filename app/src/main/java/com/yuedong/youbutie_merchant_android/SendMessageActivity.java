@@ -196,7 +196,6 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(List<Vips> list) {
                         sendMessageByVips(list);
-
                     }
 
                     @Override
@@ -253,36 +252,35 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                         public void onSuccess(int i) {
                             dialogStatus(false);
                             L.d("countCurMonthSendMessageNumber-succeed:" + i);
-//                            if (i < 2) {
-                            App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
-                                @Override
-                                public void start() {
+                            if (i < 2) {
+                                App.getInstance().getYdApiSecretKey(new ObtainSecretKeyListener() {
+                                    @Override
+                                    public void start() {
 
-                                }
+                                    }
 
-                                @Override
-                                public void end() {
+                                    @Override
+                                    public void end() {
 
-                                }
+                                    }
 
-                                @Override
-                                public void succeed(String secretKey) {
-                                    L.d("getYdApiSecretKey-succeed" + secretKey);
-                                    RequestYDHelper requestYDHelper = new RequestYDHelper();
-                                    requestYDHelper.setAppSecretkey(secretKey);
-                                    requestYDHelper.requestPushGroup(getString(R.string.str_push_merchant_ad_title),//
-                                            String.format(getString(R.string.str_push_merchant_ad_content), myMerchant.getName()), //
-                                            sb.toString() /*"9b09e9af35,009a84e9fb"*/, RequestYDHelper.PUSH_TYPE_MERCHANT_AD, "", "");
-                                }
+                                    @Override
+                                    public void succeed(String secretKey) {
+                                        RequestYDHelper requestYDHelper = new RequestYDHelper();
+                                        requestYDHelper.setAppSecretkey(secretKey);
+                                        requestYDHelper.requestPushGroup(getString(R.string.str_push_merchant_ad_title),//
+                                                String.format(getString(R.string.str_push_merchant_ad_content), myMerchant.getName()), //
+                                                sb.toString() /*"9b09e9af35,009a84e9fb"*/, RequestYDHelper.PUSH_TYPE_MERCHANT_AD, "", "");
+                                    }
 
-                                @Override
-                                public void fail(int code, String error) {
+                                    @Override
+                                    public void fail(int code, String error) {
 
-                                }
-                            });
-//                            } else {
-//                                T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
-//                            }
+                                    }
+                                });
+                            } else {
+                                T.showShort(context, "发出的广告不会提醒用户，当月只能提醒用户两次");
+                            }
                         }
 
                         @Override

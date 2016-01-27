@@ -44,7 +44,6 @@ import cn.bmob.v3.listener.FindStatisticsListener;
  */
 public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private String[] titles = new String[]{"消费类目", "返店率", "客户评价"};
-    //    private TabLayout tabLayout;
     private ViewPager viewPager;
     private View line;
     private CountConsumeAdapter item1Adapter;
@@ -202,7 +201,7 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
             @Override
             public void onError(int i, String s) {
                 error(s);
-                dialogStatus(true);
+                dialogStatus(false);
             }
         });
 

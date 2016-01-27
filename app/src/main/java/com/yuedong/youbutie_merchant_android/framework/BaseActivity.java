@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -104,6 +105,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             initEvents();
             ui();
         }
+    }
+
+
+    long lastClickTime;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            long time = System.currentTimeMillis();
+            long timeD = time - lastClickTime;
+            lastClickTime = time;
+            if (timeD <= 1000)
+                return true;
+        }
+
+        return super.dispatchTouchEvent(ev);
     }
 
 

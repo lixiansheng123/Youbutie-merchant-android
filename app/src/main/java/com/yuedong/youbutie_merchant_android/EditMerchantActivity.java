@@ -94,7 +94,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
                 // 更新门店开始时间
                 dialogStatus(true);
                 Merchant updateMerchant = new Merchant();
-                updateMerchant.setStartTime(new BmobDate(new Date(BmobDate.getTimeStamp(finalFullStartTime))));
+                updateMerchant.setStartTime(tempStartTime);
                 updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -133,7 +133,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
                 dialogStatus(true);
                 // 更新门店结束时间
                 Merchant updateMerchant = new Merchant();
-                updateMerchant.setEndTime(new BmobDate(new Date(endTimeL)));
+                updateMerchant.setEndTime(tempEndTime);
                 updateMerchant.update(context, merchant.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -229,23 +229,19 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
         }
 
         //  营业开始时间
-        BmobDate startTime = merchant.getStartTime();
+        String startTime = merchant.getStartTime();
         if (startTime != null) {
-            long startTimeL = BmobDate.getTimeStamp(startTime.getDate());
-            String startTimeStr = DateUtils.formatDate(new Date(startTimeL), "HH:mm");
             businessStartTime.setTextColor(textColor);
-            businessStartTime.setText(startTimeStr);
-            this.startTime = startTimeStr;
+            businessStartTime.setText(startTime);
+            this.startTime = startTime;
         }
 
         // 营业结束时间
-        BmobDate endTime = merchant.getEndTime();
+        String endTime = merchant.getEndTime();
         if (endTime != null) {
-            long endTimeL = BmobDate.getTimeStamp(endTime.getDate());
-            String endTimeStr = DateUtils.formatDate(new Date(endTimeL), "HH:mm");
             businessEndTime.setTextColor(textColor);
-            businessEndTime.setText(endTimeStr);
-            this.endTime = endTimeStr;
+            businessEndTime.setText(endTime);
+            this.endTime = endTime;
         }
         setInfo(merchantName, textColor, merchant.getName());
         setInfo(locationText, textColor, merchant.getAddress());

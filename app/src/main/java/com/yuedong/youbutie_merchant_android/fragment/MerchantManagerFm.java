@@ -90,14 +90,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                     merchantAddress.setText("    " + merchant.getAddress());
                     merchantPhone.setText("    " + merchant.getTelephone());
                     DisplayImageByVolleyUtils.loadImage(merchantPic, merchant.getPhoto());
-                    long startTime = BmobDate.getTimeStamp(merchant.getStartTime().getDate());
-                    long endTIme = BmobDate.getTimeStamp(merchant.getEndTime().getDate());
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(startTime);
-                    String startTimeStr = calendar.get(Calendar.HOUR_OF_DAY) + ":" + parseMinutes(calendar);
-                    calendar.setTimeInMillis(endTIme);
-                    String endTimeStr = calendar.get(Calendar.HOUR_OF_DAY) + ":" + parseMinutes(calendar);
-                    merchantTime.setText("    " + "早" + startTimeStr + "-晚" + endTimeStr);
+                    merchantTime.setText("    " + "早" + merchant.getStartTime() + "-晚" + merchant.getEndTime());
                     String mercantAdText = merchant.getIntroduced();
                     if (StringUtil.isNotEmpty(mercantAdText)) {
                         merchantAd.setGravity(Gravity.CENTER);

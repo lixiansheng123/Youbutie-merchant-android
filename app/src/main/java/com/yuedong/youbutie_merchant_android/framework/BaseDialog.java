@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,7 +39,8 @@ public class BaseDialog extends Dialog {
     // 加载图标
     public ImageView mLoaderPic = null;
     private Button mBtnNegative;
-
+    private Button mBtnPositive;
+    private EditText inputBox;
     private static BaseDialog mDialog;
 
     public BaseDialog(Context context) {
@@ -126,18 +126,41 @@ public class BaseDialog extends Dialog {
         return mMessageView.getText().toString();
     }
 
+    public EditText getInputBox() {
+        return inputBox;
+    }
+
+    public void setNegativeButton(int text, OnClickListener onclicklistener) {
+        mBtnNegative.setText(text);
+        final OnClickListener listener = onclicklistener;
+        mBtnNegative.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                listener.onClick(BaseDialog.this, DialogInterface.BUTTON_NEGATIVE);
+            }
+        });
+    }
+
+    public void setPositiveButton(int text, OnClickListener onclicklistener) {
+        mBtnPositive.setText(text);
+        final OnClickListener listener = onclicklistener;
+        mBtnPositive.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                listener.onClick(BaseDialog.this, DialogInterface.BUTTON_POSITIVE);
+            }
+        });
+    }
+
+
     public static class Builder {
         BaseDialog dialog;
-        // private Button mBtnNegative;
-        private Button mBtnPositive;
         private ImageView mImgViewIcon;
         private Context mContext;
         private String mMessage;
         private String mTitle;
         private ProgressBar progressBar;
         private Integer[] phoneWh;
-        private EditText inputBox;
-
 
         public Builder(Context context) {
             mContext = context;
@@ -149,9 +172,9 @@ public class BaseDialog extends Dialog {
             dialog = new BaseDialog(mContext);
             View view = layoutinflater.inflate(R.layout.dialog_app_input, null);
             dialog.mTitleView = (TextView) view.findViewById(R.id.id_tv_title);
-            mBtnPositive = (Button) view.findViewById(R.id.id_tips_confirm);
+            dialog.mBtnPositive = (Button) view.findViewById(R.id.id_tips_confirm);
             dialog.mBtnNegative = (Button) view.findViewById(R.id.id_tips_cancle);
-            inputBox = (EditText) view.findViewById(R.id.id_input_box);
+            dialog.inputBox = (EditText) view.findViewById(R.id.id_input_box);
             dialog.setContentView(view);
             dialog.setCanCanceledOnTouchOutSide(false);
             dialog.setCancelable(false);
@@ -172,7 +195,7 @@ public class BaseDialog extends Dialog {
             dialog.mTitleView = (TextView) view.findViewById(R.id.tv_dialog_title);
             dialog.mMessageView = (TextView) view.findViewById(R.id.tv_dialog_content);
             dialog.mBtnNegative = (Button) view.findViewById(R.id.btn_left_id);
-            mBtnPositive = (Button) view.findViewById(R.id.btn_right_id);
+            dialog.mBtnPositive = (Button) view.findViewById(R.id.btn_right_id);
             dialog.setContentView(view);
             Window window = dialog.getWindow();
             window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -188,7 +211,7 @@ public class BaseDialog extends Dialog {
             view.findViewById(R.id.btn_left_id).setVisibility(View.GONE);
             view.findViewById(R.id.tv_dialog_title).setVisibility(View.GONE);
             dialog.mMessageView = (TextView) view.findViewById(R.id.tv_dialog_content);
-            mBtnPositive = (Button) view.findViewById(R.id.btn_right_id);
+            dialog.mBtnPositive = (Button) view.findViewById(R.id.btn_right_id);
             dialog.setContentView(view);
             Window window = dialog.getWindow();
             window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -202,16 +225,6 @@ public class BaseDialog extends Dialog {
          */
         public BaseDialog createTitleBindBank2BtnDialog(View view) {
             dialog = new BaseDialog(mContext);
-            // View view =
-            // layoutinflater.inflate(R.layout.layout_dialog_title_message_2btn,
-            // null);
-            // dialog.mTitleView = (TextView)
-            // view.findViewById(R.id.tv_dialog_title);
-            // dialog.mMessageView = (TextView)
-            // view.findViewById(R.id.tv_dialog_content);
-            // dialog.mBtnNegative = (Button)
-            // view.findViewById(R.id.btn_left_id);
-            // mBtnPositive = (Button) view.findViewById(R.id.btn_right_id);
             dialog.setContentView(view);
             Window window = dialog.getWindow();
             window.setBackgroundDrawableResource(R.drawable.transparentpic);
@@ -268,9 +281,9 @@ public class BaseDialog extends Dialog {
             dialog = new BaseDialog(mContext);
             View view = layoutInflater.inflate(R.layout.dialog_inputbox, null);
             dialog.mTitleView = (TextView) view.findViewById(R.id.id_title);
-            mBtnPositive = (Button) view.findViewById(R.id.id_btn_confirm);
+            dialog.mBtnPositive = (Button) view.findViewById(R.id.id_btn_confirm);
             dialog.mBtnNegative = (Button) view.findViewById(R.id.id_btn_cancle);
-            inputBox = (EditText) view.findViewById(R.id.id_input_box);
+            dialog.inputBox = (EditText) view.findViewById(R.id.id_input_box);
             dialog.setContentView(view);
             dialog.setCanCanceledOnTouchOutSide(false);
             dialog.setCancelable(false);
@@ -287,7 +300,7 @@ public class BaseDialog extends Dialog {
         }
 
         public EditText getInputBox() {
-            return inputBox;
+            return dialog.inputBox;
         }
 
         public Builder setMessage(String s) {
@@ -304,26 +317,20 @@ public class BaseDialog extends Dialog {
         }
 
         public Builder setNegativeButton(int text, OnClickListener onclicklistener) {
-            dialog.mBtnNegative.setText(text);
-            final OnClickListener listener = onclicklistener;
-            dialog.mBtnNegative.setOnClickListener(new View.OnClickListener() {
-
-                public void onClick(View view) {
-                    listener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
-                }
-            });
+//            dialog.mBtnNegative.setText(text);
+//            final OnClickListener listener = onclicklistener;
+//            dialog.mBtnNegative.setOnClickListener(new View.OnClickListener() {
+//
+//                public void onClick(View view) {
+//                    listener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
+//                }
+//            });
+            dialog.setNegativeButton(text, onclicklistener);
             return this;
         }
 
         public Builder setPositiveButton(int text, OnClickListener onclicklistener) {
-            mBtnPositive.setText(text);
-            final OnClickListener listener = onclicklistener;
-            mBtnPositive.setOnClickListener(new View.OnClickListener() {
-
-                public void onClick(View view) {
-                    listener.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
-                }
-            });
+            dialog.setPositiveButton(text, onclicklistener);
             return this;
         }
 
