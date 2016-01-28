@@ -55,7 +55,7 @@ public class GuideActivity extends BaseActivity {
                     go.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            LaunchWithExitUtils.startActivity(activity, MainActivity.class);
+                            LaunchWithExitUtils.startActivity(activity, LoginActivity.class);
                             defaultFinished();
                         }
                     });
