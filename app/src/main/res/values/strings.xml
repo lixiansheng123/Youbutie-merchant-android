@@ -159,4 +159,5 @@
     <string name="str_tag_is_vip">is_vip</string>
     <string name="str_push_service_finshed_title">服务完成</string>
     <string name="str_push_service_finshed_content">亲爱的车主，您的爱车服务完成，请前来取车</string>
+    <string name="str_go_experience">立即体验</string>
 </resources>

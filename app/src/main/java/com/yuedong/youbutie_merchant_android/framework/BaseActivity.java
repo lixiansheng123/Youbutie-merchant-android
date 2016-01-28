@@ -116,7 +116,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             long time = System.currentTimeMillis();
             long timeD = time - lastClickTime;
             lastClickTime = time;
-            if (timeD <= 1000)
+            if (timeD <= 200)
                 return true;
         }
 

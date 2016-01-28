@@ -34,13 +34,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/not_anim_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GuideActivity"
+            android:theme="@style/not_anim_theme" />
         <activity android:name=".OrderDetailActivity" />
         <activity android:name=".MerchantCollectionActivity" />
         <activity android:name=".SendMessageActivity" />
@@ -50,7 +55,8 @@
         <activity android:name=".UserListActivity" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/not_anim_theme" />
         <activity android:name=".ClientDetailActivity" />
         <activity android:name=".InviteMemberActivity" />
         <activity android:name=".SearchAddressBookFriendActivity" />

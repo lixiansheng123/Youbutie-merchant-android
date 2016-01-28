@@ -32,6 +32,9 @@ public class Constants {
     //-----tag
     public static final String ORDERMANAGER_FM_TAG = "tag_orderMnager_fm";
 
+    //----------sp
+    public static final String SP_GUIDE = "sp_guide";
+
     public static final int REQUESTCODE_ORDER_EVALUATE = 0x109;
     public static final int REQUESTCODE_COLLECTION = 0x110;
     public static final int REQUESTCODE_RECEIVE_ORDER = 0x111;

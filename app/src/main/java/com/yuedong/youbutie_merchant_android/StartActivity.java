@@ -1,8 +1,14 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 
 import com.yuedong.youbutie_merchant_android.app.App;
+import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.model.CarEvent;
 import com.yuedong.youbutie_merchant_android.model.ServiceInfoEvent;
@@ -13,24 +19,26 @@ import com.yuedong.youbutie_merchant_android.model.db.ServiceInfoDao;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
+import com.yuedong.youbutie_merchant_android.utils.SPUtils;
+import com.yuedong.youbutie_merchant_android.utils.WindowUtils;
 
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 
 public class StartActivity extends BaseActivity {
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        WindowUtils.hideSystemBar(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-
-
+        buildUi(null, false, false, false, R.layout.activity_start);
     }
 
     @Override
     protected void initViews() {
-
+        rootView = fvById(R.id.id_root);
     }
 
     @Override
@@ -112,13 +120,41 @@ public class StartActivity extends BaseActivity {
         mainHandle.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Class cls = null;
-                if (App.getInstance().isLogin())
-                    cls = MainActivity.class;
-                else
-                    cls = LoginActivity.class;
-                LaunchWithExitUtils.startActivity(activity, cls);
-                defaultFinished();
+                // 启动动画
+                AnimationSet animationSet = new AnimationSet(true);
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+                scaleAnimation.setDuration(1000);
+                animationSet.addAnimation(scaleAnimation);
+                animationSet.setFillAfter(true);
+                rootView.startAnimation(animationSet);
+                animationSet.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        boolean guide = (boolean) SPUtils.get(context, Constants.SP_GUIDE, false);
+                        Class<? extends Activity> cls = null;
+                        if (guide) {
+                            if (App.getInstance().isLogin())
+                                cls = MainActivity.class;
+                            else
+                                cls = LoginActivity.class;
+                        } else
+                            cls = GuideActivity.class;
+                        LaunchWithExitUtils.startActivity(activity, cls);
+                        defaultFinished();
+                        overridePendingTransition(0, 0);
+                        defaultFinished();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
             }
         }, delay);
     }
