@@ -5,9 +5,14 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
+import com.yuedong.youbutie_merchant_android.utils.DataUtils;
 import com.yuedong.youbutie_merchant_android.utils.DateUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.T;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -262,45 +267,7 @@ public class OrderEvent implements BaseEvent {
                 if (CommonUtils.listIsNotNull(list)) {
                     // 统计来店次数
                     for (int i = 0; i < list.size(); i++) {
-                        final Order order = list.get(i);
-                        User user = order.getUser();
-                        if (user == null) continue;
-                        BmobQuery<Order> countQuery = new BmobQuery<Order>();
-                        // 统计的是对应用户的
-                        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
-                        userBmobQuery.addWhereEqualTo(OBJECT_ID, user.getObjectId());
-                        //  统计还得是自己店的信息
-                        BmobQuery<Merchant> merchantBmobQuerCount = new BmobQuery<Merchant>();
-                        merchantBmobQuerCount.addWhereEqualTo(OBJECT_ID, merchantObjectId);
-                        // 统计的是已经完成交易的订单
-                        countQuery.addWhereEqualTo("state", 4);
-                        //---使用复合查询同时匹配两个外键(and)
-                        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
-                        BmobQuery<Order> addWhereMatchesQuery1 = new BmobQuery<Order>();
-                        BmobQuery<Order> addWhereMatchesQuery2 = new BmobQuery<Order>();
-                        addWhereMatchesQuery1.addWhereMatchesQuery("user", "_User", userBmobQuery);
-                        addWhereMatchesQuery2.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuerCount);
-                        ands.add(addWhereMatchesQuery1);
-                        ands.add(addWhereMatchesQuery2);
-                        countQuery.and(ands);
-                        countQuery.count(context, Order.class, new CountListener() {
-                            @Override
-                            public void onSuccess(int count) {
-                                order.buyNum = count;
-                                succeedCount++;
-                                if (succeedCount == list.size()) {
-                                    listener.onSuccess(list);
-                                    listener.onFinish();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int i, String s) {
-                                listener.onError(i, s);
-                                listener.onFinish();
-                                return;
-                            }
-                        });
+                        countBuyNum(list, i, merchantObjectId, listener);
                     }
                 } else {
                     listener.onSuccess(list);
@@ -320,7 +287,8 @@ public class OrderEvent implements BaseEvent {
     /**
      * 同上差不多 但是使用复合查询用户不重复
      */
-    public void getMemberFinishedOrder(int skip, int limit, final String merchantObjectId, String serviceId, String carObjectId, FindStatisticsListener listener) {
+    public void getMemberFinishedOrderAndCountBuy(int skip, int limit, final Merchant merchant, String serviceId, String carObjectId, final FindListener<Order> listener) {
+        succeedCount = 0;
         BmobQuery<Order> mainQuery = new BmobQuery<Order>();
         mainQuery.addWhereEqualTo("state", 4);
         mainQuery.setSkip(skip);
@@ -336,7 +304,7 @@ public class OrderEvent implements BaseEvent {
         List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
         BmobQuery<Order> q1 = new BmobQuery<Order>();
         BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
-        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchant.getObjectId());
         q1.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         ands.add(q1);
         if (carObjectId != null) {
@@ -347,8 +315,88 @@ public class OrderEvent implements BaseEvent {
             ands.add(q2);
         }
         mainQuery.and(ands);
-        mainQuery.findStatistics(context, Order.class, listener);
+        mainQuery.findStatistics(context, Order.class, new FindStatisticsListener() {
+            @Override
+            public void onSuccess(Object o) {
+                final List<Order> orderList = new ArrayList<Order>();
+                JSONArray ary = (JSONArray) o;
+                if (ary != null) {
+                    int len = ary.length();
+                    try {
+                        for (int i = 0; i < len; i++) {
+                            JSONObject job = (JSONObject) ary.get(i);
+                            JSONObject userJob = job.getJSONObject("user");
+                            L.d("job=======" + job.toString());
+                            Order order = new Order();
+                            User user = DataUtils.parseUser(userJob);
+                            order.setUser(user);
+                            order.setMerchant(merchant);
+                            orderList.add(order);
+                        }
+                        // 获取来店次数
+                        for (int i = 0; i < orderList.size(); i++) {
+                            countBuyNum(orderList, i, merchant.getObjectId(), listener);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        listener.onError(-1, e.getMessage());
+                        listener.onFinish();
+                    }
+                } else {
+                    listener.onSuccess(orderList);
+                    listener.onFinish();
+                }
+            }
 
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+
+    }
+
+    private void countBuyNum(final List<Order> orderList, int i, String merchantObject, final FindListener<Order> listener) {
+        // 统计来店次数
+        final Order order = orderList.get(i);
+        User user = order.getUser();
+        if (user == null) return;
+        BmobQuery<Order> countQuery = new BmobQuery<Order>();
+        // 统计的是对应用户的
+        BmobQuery<User> userBmobQuery = new BmobQuery<User>();
+        userBmobQuery.addWhereEqualTo(OBJECT_ID, user.getObjectId());
+        //  统计还得是自己店的信息
+        BmobQuery<Merchant> merchantBmobQuerCount = new BmobQuery<Merchant>();
+        merchantBmobQuerCount.addWhereEqualTo(OBJECT_ID, merchantObject);
+        // 统计的是已经完成交易的订单
+        countQuery.addWhereEqualTo("state", 4);
+        //---使用复合查询同时匹配两个外键(and)
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        BmobQuery<Order> addWhereMatchesQuery1 = new BmobQuery<Order>();
+        BmobQuery<Order> addWhereMatchesQuery2 = new BmobQuery<Order>();
+        addWhereMatchesQuery1.addWhereMatchesQuery("user", "_User", userBmobQuery);
+        addWhereMatchesQuery2.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuerCount);
+        ands.add(addWhereMatchesQuery1);
+        ands.add(addWhereMatchesQuery2);
+        countQuery.and(ands);
+        countQuery.count(context, Order.class, new CountListener() {
+            @Override
+            public void onSuccess(int count) {
+                order.buyNum = count;
+                succeedCount++;
+                if (succeedCount == orderList.size()) {
+                    listener.onSuccess(orderList);
+                    listener.onFinish();
+                }
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                listener.onError(i, s);
+                listener.onFinish();
+                return;
+            }
+        });
     }
 
     /**

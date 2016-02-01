@@ -1,8 +1,9 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.SelectAdapter;
@@ -64,6 +65,7 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         Bundle params = getIntent().getExtras();
         merchant = (Merchant) params.getSerializable(Constants.KEY_BEAN);
         vipsList = (List<Vips>) params.getSerializable(Constants.KEY_LIST);
+        refreshHelper.showEmptyView = false;
     }
 
     @Override
@@ -88,6 +90,18 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initEvents() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Order order = (Order) parent.getAdapter().getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(Constants.KEY_BEAN, order);
+                Intent intent = new Intent(activity, ClientDetailActivity.class);
+                bundle.putBoolean(Constants.KEY_BOO, true);
+                intent.putExtras(bundle);
+                LaunchWithExitUtils.startActivityForResult(activity, intent, 0x021);
+            }
+        });
         selectItemPop.setSelectItemCallback(new SelectItemPop.ISelectItemCallback() {
             @Override
             public void selectItem(int pos, Object bean, View item) {
@@ -125,7 +139,7 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         refreshHelper.setPulltoRefreshRefreshProxy(this, listView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
-                return null;
+                return new VipUserListAdater(context, data);
             }
 
             @Override
@@ -138,25 +152,7 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
                 } else if (actionIn == ACTION_IN_FILTER_CAR) {
                     carObjectId = ((Car) filterBean).getObjectId();
                 }
-                OrderEvent.getInstance().getMemberFinishedOrder(skip, limit, merchant.getObjectId(), serviceId, carObjectId, new FindStatisticsListener() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        JSONArray ary = (JSONArray) o;
-                        if (ary != null) {//
-//                            try {
-//
-//                            } catch (JSONException e) {
-//
-//                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        listener.onError(i, s);
-                        listener.onFinish();
-                    }
-                });
+                OrderEvent.getInstance().getMemberFinishedOrderAndCountBuy(skip, limit, merchant, serviceId, carObjectId, listener);
             }
 
             @Override

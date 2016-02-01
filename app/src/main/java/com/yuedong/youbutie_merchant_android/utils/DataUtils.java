@@ -1,6 +1,10 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
 import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
+import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -120,5 +124,60 @@ public class DataUtils {
         serviceInfoDetailBean4.icon = "亲爱的车主,...";
         data.add(serviceInfoDetailBean4);
         return data;
+    }
+
+    /**
+     * 解析user
+     *
+     * @param job
+     * @return
+     * @throws JSONException
+     */
+    public static User parseUser(JSONObject job) throws JSONException {
+        User user = new User();
+        boolean nicknameHas = job.has("nickname");
+        if (nicknameHas)
+            user.setNickname(job.getString("nickname"));
+        boolean photoHas = job.has("photo");
+        if (photoHas)
+            user.setPhoto(job.getString("photo"));
+        boolean mobilePhoneNumberHas = job.has("mobilePhoneNumber");
+        if (mobilePhoneNumberHas)
+            user.setMobilePhoneNumber(job.getString("mobilePhoneNumber"));
+        boolean carNumberHas = job.has("carNumber");
+        if (carNumberHas)
+            user.setCarNumber(job.getString("carNumber"));
+        boolean carStringHas = job.has("carString");
+        if (carStringHas)
+            user.setCarString(job.getString("carString"));
+        user.setObjectId(job.getString("objectId"));
+        boolean strokeLengthHas = job.has("strokeLength");
+        if (strokeLengthHas)
+            user.setStrokeLength(job.getInt("strokeLength"));
+        boolean totalMoneyHas = job.has("totalMoney");
+        if (totalMoneyHas)
+            user.setTotalMoney(job.getInt("totalMoney"));
+        boolean vinHas = job.has("vin");
+        if (vinHas)
+            user.setVIN(job.getString("vin"));
+        boolean typeHas = job.has("type");
+        if (typeHas)
+            user.setType(job.getInt("type"));
+        boolean addressHas = job.has("address");
+        if (addressHas)
+            user.setAddress(job.getString("address"));
+        boolean ageHas = job.has("age");
+        if (ageHas)
+            user.setAge(job.getInt("age"));
+        boolean bankNameHas = job.has("bankName");
+        if (bankNameHas)
+            user.setBankName(job.getString("bankName"));
+        boolean cardNameHas = job.has("cardName");
+        if (cardNameHas)
+            user.setCardName(job.getString("cardName"));
+        boolean bankCardHas = job.has("bankCard");
+        if (bankCardHas)
+            user.setBankCard(job.getString("bankCard"));
+        return user;
     }
 }
