@@ -31,10 +31,12 @@ public class SelectCarActivity extends BaseActivity {
     private GridView alreadySelectCar;
     private SelectCarAdapter selectCarAdapter;
     private AlreadySelectCarAdapter alreadySelectCarAdapter;
+    private List<Car> alreadySelectCarDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        alreadySelectCarDatas = (List<Car>) getIntent().getSerializableExtra(Constants.KEY_LIST);
         buildUi(new TitleViewHelper().createDefaultTitleView4("全部车型", "保存", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +49,7 @@ public class SelectCarActivity extends BaseActivity {
                 } else
                     T.showShort(context, "请选择车型");
             }
-        }),false,false,false,R.layout.activity_select_car);
+        }), false, false, false, R.layout.activity_select_car);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class SelectCarActivity extends BaseActivity {
         View listHeadView = ViewUtils.inflaterView(context, R.layout.head_car_select);
         alreadySelectCar = (GridView) listHeadView.findViewById(R.id.id_gv_already_select_car);
         carList.addHeaderView(listHeadView, null, false);
-        alreadySelectCarAdapter = new AlreadySelectCarAdapter(context, new ArrayList<Car>());
+        alreadySelectCarAdapter = new AlreadySelectCarAdapter(context, alreadySelectCarDatas);
         alreadySelectCar.setAdapter(alreadySelectCarAdapter);
     }
 
@@ -113,13 +115,14 @@ public class SelectCarActivity extends BaseActivity {
             @Override
             public void onError(int i, String s) {
                 dialogStatus(false);
-                error(s, false);
+                error(i);
             }
         });
     }
 
     public void updateCarList(final List<Car> cars) {
         selectCarAdapter = new SelectCarAdapter(context, cars);
+        selectCarAdapter.getSelect().addAll(alreadySelectCarDatas);
         carList.setAdapter(selectCarAdapter);
         selectCarAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

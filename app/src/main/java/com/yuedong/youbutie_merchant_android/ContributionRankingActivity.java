@@ -74,7 +74,6 @@ public class ContributionRankingActivity extends BaseActivity {
                 MoneyContributionEvent.getInstance().getMoneyContributionRanking(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
-                        L.d("getMoneyContributionRanking:" + o.toString());
                         List<MoneyContributionBean> datas = new ArrayList<MoneyContributionBean>();
                         dialogStatus(false);
                         JSONArray ary = (JSONArray) o;
@@ -118,6 +117,11 @@ public class ContributionRankingActivity extends BaseActivity {
                         listener.onFinish();
                     }
                 });
+            }
+
+            @Override
+            public void networkSucceed(List<MoneyContributionBean> datas) {
+
             }
         });
 

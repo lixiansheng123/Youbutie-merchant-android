@@ -176,7 +176,7 @@ public class InviteMemberActivity extends BaseActivity {
 
                                                                 @Override
                                                                 public void onError(int i, String s) {
-                                                                    error(s);
+                                                                    error(i);
                                                                     dialogStatus(false);
                                                                     return;
                                                                 }
@@ -195,7 +195,7 @@ public class InviteMemberActivity extends BaseActivity {
                                                             @Override
                                                             public void onError(int i, String s) {
                                                                 dialogStatus(false);
-                                                                error(s);
+                                                                error(i);
                                                             }
                                                         });
                                                     }
@@ -227,7 +227,7 @@ public class InviteMemberActivity extends BaseActivity {
 
                     @Override
                     public void onError(int i, String s) {
-                        error(s);
+                        error(i);
                         dialogStatus(false);
                     }
                 });
@@ -235,7 +235,7 @@ public class InviteMemberActivity extends BaseActivity {
 
             @Override
             public void onError(int i, String s) {
-                error(s);
+                error(i);
                 dialogStatus(false);
             }
         });
@@ -438,7 +438,7 @@ public class InviteMemberActivity extends BaseActivity {
 
                                 @Override
                                 public void onFailure(int i, String s) {
-                                    error(s);
+                                    error(i);
                                     dialogStatus(false);
                                 }
                             });

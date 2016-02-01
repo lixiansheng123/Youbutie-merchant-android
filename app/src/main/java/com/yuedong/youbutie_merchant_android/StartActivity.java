@@ -78,7 +78,7 @@ public class StartActivity extends BaseActivity {
 
                 @Override
                 public void onError(int i, String s) {
-                    error(s);
+                    error(i);
                     defaultFinished();
                 }
             });
@@ -107,7 +107,7 @@ public class StartActivity extends BaseActivity {
 
                 @Override
                 public void onError(int i, String s) {
-                    error(s);
+                    error(i);
                     defaultFinished();
                 }
             });
@@ -147,7 +147,6 @@ public class StartActivity extends BaseActivity {
                         LaunchWithExitUtils.startActivity(activity, cls);
                         defaultFinished();
                         overridePendingTransition(0, 0);
-                        defaultFinished();
                     }
 
                     @Override

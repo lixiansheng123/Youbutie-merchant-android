@@ -171,7 +171,7 @@
         <item name="ptrDrawableEnd">@color/transparent</item>
         <!--<item name="ptrDrawableStart">@mipmap/ic_launcher</item>-->
         <item name="ptrAnimationStyle">rotate</item>
-        <item name="ptrHeaderBackground">@color/greyede9e4</item>
+        <item name="ptrHeaderBackground">@color/transparent</item>
         <!--<item name="ptrDrawable">@drawable/icon_desk_logn</item>-->
         <!--<item name="ptrMode">both</item>-->
     </style>

@@ -68,6 +68,11 @@ public class WithdrawRecordActivity extends BaseActivity {
             public void executeTask(int skip, int limit, FindListener<DrawMoneyRecord> listener) {
                 DrawMoneyRecordEvent.getInstance().findMeWithdrawRecord(skip, limit, user.getObjectId(), listener);
             }
+
+            @Override
+            public void networkSucceed(List<DrawMoneyRecord> datas) {
+
+            }
         });
     }
 }

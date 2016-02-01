@@ -47,6 +47,11 @@ public class MonthOrderDetailActivity extends BaseActivity {
             public void executeTask(int skip, int limit, FindListener<Order> listener) {
                 OrderEvent.getInstance().getMonthOrderDetail(skip, limit, merchant.getObjectId(), dayDesc, listener);
             }
+
+            @Override
+            public void networkSucceed(List<Order> datas) {
+
+            }
         });
     }
 

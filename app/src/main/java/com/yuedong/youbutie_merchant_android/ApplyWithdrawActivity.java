@@ -139,7 +139,7 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                                                     @Override
                                                     public void onFailure(int i, String s) {
                                                         dialogStatus(false);
-                                                        error(s);
+                                                        error(i);
                                                     }
                                                 });
 
@@ -148,7 +148,7 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                                             @Override
                                             public void onFailure(int i, String s) {
                                                 dialogStatus(false);
-                                                error(s);
+                                                error(i);
                                             }
                                         });
                                     } else {
@@ -160,7 +160,7 @@ public class ApplyWithdrawActivity extends BaseActivity implements View.OnClickL
                                 @Override
                                 public void onFailure(int i, String s) {
                                     dialogStatus(false);
-                                    error(s);
+                                    error(i);
                                 }
                             });
 

@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.CountListener;
@@ -226,12 +227,8 @@ public class OrderEvent implements BaseEvent {
      */
     public void getMemberFinishedOrderAndCountBuyNum(int skip, int limit, final String merchantObjectId, String serviceId, String carObjectId, final FindListener<Order> listener) {
         succeedCount = 0;
-        L.d("getMemberFinishedOrderAndCountBuyNum->skip;" + skip + "-limit:" + limit + "-merchantObjectId:" + merchantObjectId + "-serviceId:" + serviceId + "-carObjectId:" + carObjectId);
         listener.onStart();
         BmobQuery<Order> bmobQuery = new BmobQuery<Order>();
-        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
-        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
-        bmobQuery.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         bmobQuery.addWhereEqualTo("state", 4);
         bmobQuery.include("user");
         bmobQuery.order("-createdAt");
@@ -244,16 +241,24 @@ public class OrderEvent implements BaseEvent {
             bmobQuery.addWhereContainsAll("serviceIds", services);
         }
 
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        BmobQuery<Order> q1 = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        q1.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        ands.add(q1);
+
         if (carObjectId != null) {
+            BmobQuery<Order> q2 = new BmobQuery<Order>();
             BmobQuery<Car> carBmobQuery = new BmobQuery<Car>();
             carBmobQuery.addWhereEqualTo(OBJECT_ID, carObjectId);
-            bmobQuery.addWhereMatchesQuery("car", "Car", carBmobQuery);
+            q2.addWhereMatchesQuery("car", "Car", carBmobQuery);
+            ands.add(q2);
         }
-
+        bmobQuery.and(ands);
         bmobQuery.findObjects(context, new FindListener<Order>() {
             @Override
             public void onSuccess(final List<Order> list) {
-                L.d("findObjects list:" + list.toString());
                 if (CommonUtils.listIsNotNull(list)) {
                     // 统计来店次数
                     for (int i = 0; i < list.size(); i++) {
@@ -298,6 +303,7 @@ public class OrderEvent implements BaseEvent {
                         });
                     }
                 } else {
+                    listener.onSuccess(list);
                     listener.onFinish();
                 }
             }
@@ -308,6 +314,40 @@ public class OrderEvent implements BaseEvent {
                 listener.onFinish();
             }
         });
+
+    }
+
+    /**
+     * 同上差不多 但是使用复合查询用户不重复
+     */
+    public void getMemberFinishedOrder(int skip, int limit, final String merchantObjectId, String serviceId, String carObjectId, FindStatisticsListener listener) {
+        BmobQuery<Order> mainQuery = new BmobQuery<Order>();
+        mainQuery.addWhereEqualTo("state", 4);
+        mainQuery.setSkip(skip);
+        mainQuery.setLimit(limit);
+        mainQuery.groupby(new String[]{"user"});
+        mainQuery.order("createdAt");
+        mainQuery.include("user");
+        if (serviceId != null) {
+            List<String> services = new ArrayList<String>();
+            services.add(serviceId);
+            mainQuery.addWhereContainsAll("serviceIds", services);
+        }
+        List<BmobQuery<Order>> ands = new ArrayList<BmobQuery<Order>>();
+        BmobQuery<Order> q1 = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        q1.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
+        ands.add(q1);
+        if (carObjectId != null) {
+            BmobQuery<Order> q2 = new BmobQuery<Order>();
+            BmobQuery<Car> carBmobQuery = new BmobQuery<Car>();
+            carBmobQuery.addWhereEqualTo(OBJECT_ID, carObjectId);
+            q2.addWhereMatchesQuery("car", "Car", carBmobQuery);
+            ands.add(q2);
+        }
+        mainQuery.and(ands);
+        mainQuery.findStatistics(context, Order.class, listener);
 
     }
 

@@ -13,6 +13,7 @@ import com.yuedong.youbutie_merchant_android.bean.ServiceInfoDetailBean;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
 import com.yuedong.youbutie_merchant_android.framework.ViewHolder;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
+import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 public class MerchantServiceListAdapter extends BaseAdapter<ServiceInfoDetailBean> {
     private OnButtonSwitchListener onButtonSwitchListener;
+    private boolean oneselfChangeXicheStatus = false;
 
     public void setOnButtonSwitchListener(OnButtonSwitchListener onButtonSwitchListener) {
         this.onButtonSwitchListener = onButtonSwitchListener;
@@ -36,7 +38,7 @@ public class MerchantServiceListAdapter extends BaseAdapter<ServiceInfoDetailBea
         ImageView imageView = viewHolder.getIdByView(R.id.id_service_pic);
         TextView name = viewHolder.getIdByView(R.id.id_service_name);
         final TextView timeDesc = viewHolder.getIdByView(R.id.id_service_time_desc);
-        final ToggleButton toggleButton = viewHolder.getIdByView(R.id.id_togglebtn);
+        final ImageView toggleButton = viewHolder.getIdByView(R.id.id_togglebtn);
         CardView cardView = viewHolder.getIdByView(R.id.id_carview_pic);
 
         //----------------------------赋值------------------------
@@ -49,29 +51,38 @@ public class MerchantServiceListAdapter extends BaseAdapter<ServiceInfoDetailBea
             ViewUtils.showLayouts(toggleButton, timeDesc);
             Integer state = serviceInfoDetailBean.state;
             if (state == 0) {
-                toggleButton.setChecked(false);
+                toggleButton.setImageResource(R.drawable.button_off);
+                timeDesc.setText(mCon.getString(R.string.str_idle_time));
             } else {
-                toggleButton.setChecked(true);
+                toggleButton.setImageResource(R.drawable.button_on);
+                timeDesc.setText(mCon.getString(R.string.str_busy_time));
             }
         } else {
             ViewUtils.hideLayouts(toggleButton, timeDesc);
         }
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (toggleButton.isChecked()) {
+            public void onClick(View v) {
+                int state = 0;
+                String text = timeDesc.getText().toString();
+                if (text.equals(mCon.getString(R.string.str_idle_time))) {
+                    toggleButton.setImageResource(R.drawable.button_on);
                     timeDesc.setText(mCon.getString(R.string.str_busy_time));
+                    state = 1;
                 } else {
+                    toggleButton.setImageResource(R.drawable.button_off);
                     timeDesc.setText(mCon.getString(R.string.str_idle_time));
                 }
-
                 if (onButtonSwitchListener != null)
-                    onButtonSwitchListener.bottonSwitch(toggleButton.isChecked());
+                    onButtonSwitchListener.bottonSwitch(state);
             }
         });
+
+//
     }
 
     public interface OnButtonSwitchListener {
-        void bottonSwitch(boolean buttonStatus);
+        void bottonSwitch(int state);
     }
 }

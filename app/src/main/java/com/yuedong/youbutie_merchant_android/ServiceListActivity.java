@@ -134,7 +134,7 @@ public class ServiceListActivity extends BaseActivity implements View.OnClickLis
 
                         @Override
                         public void onFailure(int i, String s) {
-                            error(s);
+                            error(i);
                             dialogStatus(false);
                         }
                     });

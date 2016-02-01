@@ -1,5 +1,6 @@
 package com.yuedong.youbutie_merchant_android;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         buildUi(null, false, false, false, R.layout.activity_main);
+        ActivityTaskUtils.getInstance().delExceptAssign(MainActivity.class);
         init();
         registerDBPushBindReceive();
     }

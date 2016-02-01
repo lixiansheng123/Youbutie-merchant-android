@@ -15,6 +15,7 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.DimenUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ConsumeTypeFm extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        buildUi(null, false, false, false, R.layout.item_vp_count_consume);
+        buildUi(null, true, false, false, R.layout.item_vp_count_consume);
         listView = fvById(R.id.id_list);
         adapter = new CountConsumeAdapter(getActivity());
         listView.setAdapter(adapter);
@@ -49,12 +50,10 @@ public class ConsumeTypeFm extends BaseFragment {
         MerchantEvent.getInstance().findMeMetchant(userId, new FindListener<Merchant>() {
             @Override
             public void onStart() {
-                dialogStatus(true);
             }
 
             @Override
             public void onFinish() {
-                dialogStatus(false);
             }
 
             @Override
@@ -65,7 +64,6 @@ public class ConsumeTypeFm extends BaseFragment {
                     OrderEvent.getInstance().getMerchantOrderNum(meMerchant.getObjectId(), new CountListener() {
                         @Override
                         public void onSuccess(final int totalOrderNumber) {
-                            L.d("门店订单数目:" + totalOrderNumber);
                             if (totalOrderNumber != 0) {
                                 for (int index = 0; index < serviceInfos.size(); index++) {
                                     final ServiceInfoDetailBean serviceInfoDetailBean = serviceInfos.get(index);
@@ -95,22 +93,21 @@ public class ConsumeTypeFm extends BaseFragment {
 
                                         @Override
                                         public void onFinish() {
-                                            dialogStatus(false);
                                         }
                                     });
                                 }
+                            } else {
+                                mMultiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
                             }
                         }
 
                         @Override
                         public void onFailure(int i, String s) {
                             error(s);
-                            dialogStatus(false);
                         }
 
                         @Override
                         public void onStart() {
-                            dialogStatus(true);
                         }
 
                         @Override

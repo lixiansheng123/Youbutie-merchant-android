@@ -142,9 +142,11 @@ public class AppUtils {
         L.d("比较的user:" + user.toString());
         if (CommonUtils.listIsNotNull(merchantVipsList)) {
             for (Vips vips : merchantVipsList) {
+                if (vips == null) continue;
                 User vipUser = vips.getUser();
                 L.d("被比较的vipuser:" + vipUser.toString());
-                if (user.getObjectId().equals(vipUser.getObjectId()))
+                String objectId = user.getObjectId();
+                if (objectId.equals(vipUser.getObjectId()))
                     return true;
             }
         }

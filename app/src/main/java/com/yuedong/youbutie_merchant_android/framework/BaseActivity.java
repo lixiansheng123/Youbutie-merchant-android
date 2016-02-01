@@ -45,13 +45,14 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.GetListener;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected RelativeLayout mMainLayout;
     protected LinearLayout mTitleLayout;
     //    protected LinearLayout mContentLayout;
-    protected MultiStateView mMultiStateView;
+    public MultiStateView mMultiStateView;
     /**
      * 給内容区域填充一个遮罩 具体内容由子类设定
      */
@@ -189,7 +190,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isShow) {
             if (loadDialog != null && !loadDialog.isShowing()) {
                 animationDrawable.start();
-                loadDialog.show();
+                if (!isFinishing())
+                    loadDialog.show();
             }
         } else {
             if (loadDialog != null && loadDialog.isShowing()) {
@@ -357,15 +359,79 @@ public abstract class BaseActivity extends AppCompatActivity {
         return ViewUtils.fvById(resId, mMainLayout);
     }
 
-    public void error(String s, boolean dialogStatus) {
-        L.e("error:" + s);
-        T.showLong(context, "出现错误" + s);
-        dialogStatus(dialogStatus);
+    public void error(int errorCode) {
+        L.d("errorCode:" + errorCode);
+        String errorMessage = "出错拉!!";
+        switch (errorCode) {
+            case 101:
+                errorMessage = "登录接口的用户名或密码不正确";
+                break;
+
+            case 207:
+                errorMessage = "验证码错误";
+                break;
+            case 9002:
+                errorMessage = "解析返回数据出错";
+                break;
+            case 9003:
+                errorMessage = "上传文件出错";
+                break;
+            case 9004:
+                errorMessage = "文件上传失败";
+                break;
+            case 9005:
+                errorMessage = "批量操作只支持最多50条";
+                break;
+            case 9006:
+                errorMessage = "objectId为空";
+                break;
+            case 9007:
+                errorMessage = "文件大小超过10M";
+                break;
+            case 9008:
+                errorMessage = "上传文件不存在";
+                break;
+            case 9009:
+                errorMessage = "没有缓存数据";
+                break;
+            case 9010:
+                errorMessage = "网络超时";
+                break;
+            case 9011:
+                errorMessage = "BmobUser类不支持批量操作";
+                break;
+            case 9012:
+                errorMessage = "上下文为空";
+                break;
+            case 9013:
+                errorMessage = "BmobObject（数据表名称）格式不正确";
+                break;
+            case 9014:
+                errorMessage = "第三方账号授权失败";
+                break;
+            case 9015:
+                errorMessage = "其他出错";
+                break;
+            case 9016:
+                errorMessage = "无网络连接，请检查您的手机网络";
+                break;
+            case 9017:
+                errorMessage = "与第三方登录有关的错误，具体请看对应的错误描述";
+                break;
+            case 9018:
+                errorMessage = "参数不能为空";
+                break;
+            case 9019:
+                errorMessage = "格式不正确：手机号码、邮箱地址、验证码";
+                break;
+
+        }
+        com.yuedong.youbutie_merchant_android.utils.T.showLong(context, errorMessage);
     }
 
-    public void error(String s) {
-        L.e("error:" + s);
-        T.showLong(context, "出现错误:" + s);
+    public void error(BmobException e) {
+        if (e == null) return;
+        error(e.getErrorCode());
     }
 
     private class NotifyMsgReceive extends BroadcastReceiver {

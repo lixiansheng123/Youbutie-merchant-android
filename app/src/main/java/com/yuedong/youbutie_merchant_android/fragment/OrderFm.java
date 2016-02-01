@@ -2,10 +2,6 @@ package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
@@ -14,9 +10,12 @@ import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
+import com.yuedong.youbutie_merchant_android.framework.BaseFragment;
 import com.yuedong.youbutie_merchant_android.model.OrderEvent;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ import cn.bmob.v3.listener.FindListener;
 /**
  * Created by Administrator on 2015/12/23.
  */
-public class OrderFm extends Fragment {
+public class OrderFm extends BaseFragment {
     private static final String TAG = "OrderFm--";
     String flag;
     private RefreshHelper<Order> refreshHelper;
@@ -37,15 +36,20 @@ public class OrderFm extends Fragment {
         super.onCreate(savedInstanceState);
         flag = getArguments().getString(Constants.KEY_ACTION);
         refreshHelper = new RefreshHelper<Order>();
-
+        refreshHelper.showEmptyView = false;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_order_fm, container, false);
-        initViews(contentView);
-        return contentView;
+    public void initViews(Bundle savedInstanceState) {
+        buildUi(null, true, false, false, R.layout.fragment_order_fm);
+        refreshView = fvById(R.id.id_refresh_view);
+        updateData();
+    }
+
+
+    @Override
+    public void initEvents() {
+
     }
 
     @Override
@@ -54,13 +58,9 @@ public class OrderFm extends Fragment {
         inintFinished = true;
     }
 
-    private void initViews(View contentView) {
-        refreshView = (PullToRefreshListView) contentView.findViewById(R.id.id_refresh_view);
-        updateData();
-        refreshView.getRefreshableView().setDivider(getResources().getDrawable(R.color.greyd6d1ca));
-    }
-
     private void proxy() {
+        if (mMultiStateView.getViewState() != MultiStateView.VIEW_STATE_CONTENT)
+            mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
@@ -78,6 +78,14 @@ public class OrderFm extends Fragment {
                     orderState = new Integer[]{4};
                 }
                 OrderEvent.getInstance().findMyMerchantOrderInfo(skip, limit, orderState, App.getInstance().getUser().getObjectId(), listener);
+            }
+
+            @Override
+            public void networkSucceed(List<Order> datas) {
+                if (!refreshHelper.refresh) {
+                    if (!CommonUtils.listIsNotNull(datas))
+                        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                }
             }
         });
     }

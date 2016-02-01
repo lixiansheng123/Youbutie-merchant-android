@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android.utils;
 
 import android.app.Activity;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -43,6 +44,23 @@ public class ActivityTaskUtils {
     public void delActivity(Activity activity) {
         if (reomveActivity(activity))
             activity.finish();
+    }
+
+    /**
+     * 删除除了指定class之外的activity
+     */
+    public void delExceptAssign(Class cls) {
+        Iterator<Activity> iterator = activities.iterator();
+        while (iterator.hasNext()) {
+            Activity next = iterator.next();
+            if (next != null) {
+                if (next.getClass().equals(cls))
+                    continue;
+                iterator.remove();
+                next.finish();
+                next = null;
+            }
+        }
     }
 
     public boolean delLasActivity() {

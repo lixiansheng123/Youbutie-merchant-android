@@ -106,7 +106,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
 
                     @Override
                     public void onFailure(int i, String s) {
-                        error(s);
+                        error(i);
                         dialogStatus(false);
                     }
                 });
@@ -146,7 +146,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
                     @Override
                     public void onFailure(int i, String s) {
                         dialogStatus(false);
-                        error(s);
+                        error(i);
                     }
                 });
 
@@ -206,7 +206,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
 
                     @Override
                     public void onFailure(int i, String s) {
-                        error(s);
+                        error(i);
                         dialogStatus(false);
                     }
                 });
@@ -214,7 +214,7 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
 
             @Override
             public void onError(int i, String s) {
-                error(s);
+                error(i);
                 dialogStatus(false);
 
             }

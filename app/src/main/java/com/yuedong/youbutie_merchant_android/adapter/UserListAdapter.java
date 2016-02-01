@@ -48,7 +48,7 @@ public class UserListAdapter extends BaseAdapter<Order> {
         //-----------------------设值------------------------
         userName.setText(user.getNickname());
         DisplayImageByVolleyUtils.loadUserHead(user.getPhoto(), userPic);
-        money.setText("￥" + StringUtil.setDoubleValue(o.getPrice()));
+        money.setText("￥" + StringUtil.setDoubleValue(o.getPrice() != null ? o.getPrice() : 0.0));
         if (o.buyNum != null) {
             if (o.buyNum == 1) {
                 buyNum.setText("首次来店");

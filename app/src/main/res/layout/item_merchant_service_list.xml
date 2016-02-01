@@ -39,17 +39,15 @@
         android:text="洗车"
         android:textSize="16sp" />
 
-    <ToggleButton
+    <ImageView
         android:id="@+id/id_togglebtn"
         android:layout_width="56dp"
         android:layout_height="28dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/selector_service_switch"
         android:checked="true"
-        android:textOff=""
-        android:textOn="" />
+        android:src="@drawable/button_off" />
 
     <TextView
         android:id="@+id/id_service_time_desc"

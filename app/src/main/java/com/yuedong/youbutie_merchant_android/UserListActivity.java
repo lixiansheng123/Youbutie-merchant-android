@@ -22,9 +22,9 @@ import com.yuedong.youbutie_merchant_android.model.db.CarDao;
 import com.yuedong.youbutie_merchant_android.model.db.ServiceInfoDao;
 import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
-import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 import com.yuedong.youbutie_merchant_android.view.SelectItemPop;
 
 import java.util.ArrayList;
@@ -55,6 +55,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private static final int ACTION_IN_FILTER_CAR = 0x103; // 通过车型筛选
     // 门店vip用户
     private List<Vips> vipsList;
+    private MultiStateView multiStateView;
+    private String title;
 
 
     @Override
@@ -62,9 +64,15 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         Bundle params = getIntent().getExtras();
         meMerchant = (Merchant) params.getSerializable(Constants.KEY_BEAN);
-        String title = params.getString(Constants.KEY_TEXT);
+        title = params.getString(Constants.KEY_TEXT);
         action = params.getInt(Constants.KEY_ACTION, ACTION_TOTAL_USER);
         vipsList = (List<Vips>) params.getSerializable(Constants.KEY_LIST);
+
+
+    }
+
+    @Override
+    protected void initViews() {
         View titleView = null;
         if (action != ACTION_MEMBER_USER)
             titleView = new TitleViewHelper().createDefaultTitleView3(title);
@@ -76,10 +84,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                 }
             });
         buildUi(titleView, false, false, false, R.layout.activity_user_list);
-    }
-
-    @Override
-    protected void initViews() {
         selectAdapter = new SelectAdapter(context);
         selectItemPop = new SelectItemPop(context, selectAdapter);
         List<ServiceInfo> serviceData = ServiceInfoDao.getInstance().findAll();
@@ -94,6 +98,9 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         carInfos.addAll(carData);
         filterLayout = fvById(R.id.id_filter_layout);
         refreshHelper = new RefreshHelper<Order>();
+        refreshHelper.showEmptyView = false;
+        multiStateView = fvById(R.id.id_multistateview);
+        multiStateView.setViewForState(R.layout.content_user_list, MultiStateView.VIEW_STATE_CONTENT, true);
         refreshListView = fvById(R.id.id_refresh_view);
 
     }
@@ -143,6 +150,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setProxy(final Object object) {
+        refreshHelper.refresh = false;
+        multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setEmptyUi();
         refreshHelper.setEmpty();
         refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
@@ -156,6 +165,15 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void executeTask(final int skip, final int limit, final FindListener<Order> listener) {
                 userMayFilter(object, skip, limit, listener);
+            }
+
+            @Override
+            public void networkSucceed(List<Order> datas) {
+                if (!refreshHelper.refresh) {
+                    if (!CommonUtils.listIsNotNull(datas)) {
+                        multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                    }
+                }
             }
         });
     }
@@ -176,7 +194,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
                 @Override
                 public void onSuccess(List<Order> list) {
-                    L.d("getMemberFinishedOrderAndCountBuyNum-onSuccess;" + list.toString());
                     if (CommonUtils.listIsNotNull(list)) {
                         List<Order> vipOrder = new ArrayList<Order>();
                         for (Order order : list) {
@@ -185,7 +202,11 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                             }
                         }
                         listener.onSuccess(vipOrder);
+                    } else {
+                        listener.onSuccess(list);
                     }
+
+
                 }
 
                 @Override

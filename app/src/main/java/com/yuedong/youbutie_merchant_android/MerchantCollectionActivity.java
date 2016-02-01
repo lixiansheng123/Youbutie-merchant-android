@@ -146,7 +146,7 @@ public class MerchantCollectionActivity extends BaseActivity {
                                                             @Override
                                                             public void onFailure(int i, String s) {
                                                                 dialogStatus(false);
-                                                                error(s);
+                                                                error(i);
                                                             }
                                                         });
 
@@ -192,7 +192,7 @@ public class MerchantCollectionActivity extends BaseActivity {
 
             @Override
             public void onError(int i, String s) {
-                error(s);
+                error(i);
             }
         });
     }

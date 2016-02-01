@@ -87,7 +87,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onFailure(int i, String s) {
                 dialogStatus(false);
-                error(s);
+                error(i);
             }
         });
     }
@@ -143,6 +143,11 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
                         listener.onFinish();
                     }
                 });
+            }
+
+            @Override
+            public void networkSucceed(List<IncomeDetailListBean> datas) {
+
             }
         });
     }

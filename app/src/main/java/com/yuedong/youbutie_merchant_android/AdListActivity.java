@@ -16,6 +16,7 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Messages;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class AdListActivity extends BaseActivity {
 
     @Override
     protected void ui() {
+        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper = new RefreshHelper<Messages>();
         meMerchant = (Merchant) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
         refreshHelper.setPulltoRefreshRefreshProxy(this, (PullToRefreshListView) fvById(R.id.id_refresh_view), new RefreshHelper.ProxyRefreshListener<Messages>() {
@@ -61,6 +63,11 @@ public class AdListActivity extends BaseActivity {
             @Override
             public void executeTask(int skip, int limit, FindListener<Messages> listener) {
                 MessageEvent.getInstance().findMessageByUserId(skip, limit, App.getInstance().getUser().getObjectId(), false, listener);
+            }
+
+            @Override
+            public void networkSucceed(List<Messages> datas) {
+
             }
         });
     }

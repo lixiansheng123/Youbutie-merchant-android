@@ -104,6 +104,11 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
             public void executeTask(int skip, int limit, FindListener<Order> listener) {
                 OrderEvent.getInstance().getUserOrderByMerchant(skip, limit, order.getUser().getObjectId(), order.getMerchant().getObjectId(), listener);
             }
+
+            @Override
+            public void networkSucceed(List<Order> datas) {
+
+            }
         });
         viewPager.setAdapter(new AbstractPagerAdapter(views.size()) {
             @Override

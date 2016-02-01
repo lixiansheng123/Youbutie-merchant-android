@@ -10,6 +10,7 @@ import com.yuedong.youbutie_merchant_android.AdListActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.SendMessageActivity;
 import com.yuedong.youbutie_merchant_android.UserListActivity;
+import com.yuedong.youbutie_merchant_android.VipUserListActivity;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Constants;
@@ -30,6 +31,7 @@ import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +51,17 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     private RefreshHelper<Messages> refreshHelper;
     private ClientManagerMessageListAdapter adapter;
     private Merchant meMerchant;
+    private MultiStateView multiStateView;
 
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        buildUi(new TitleViewHelper().createDefaultTitleView2("客户管理"), false, false, false, R.layout.fragment_client_manager);
+        buildUi(new TitleViewHelper().createDefaultTitleView2("客户管理"),//
+                false, false, false, R.layout.fragment_client_manager);
         refreshHelper = new RefreshHelper<Messages>();
+        refreshHelper.showEmptyView = false;
+        multiStateView = fvById(R.id.id_multistateview);
+        multiStateView.setViewForState(R.layout.content_client_namager, MultiStateView.VIEW_STATE_CONTENT, true);
         totalClientNum = fvById(R.id.id_total_client_num);
         memberNum = fvById(R.id.id_member_num);
         adNum = fvById(R.id.id_ad_num);
@@ -71,6 +78,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     }
 
     private void ui() {
+        multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         MerchantEvent.getInstance().findMeMetchant(App.getInstance().getUser().getObjectId(), new FindListener<Merchant>() {
             @Override
             public void onStart() {
@@ -140,6 +148,14 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                                             public void executeTask(int skip, int limit, FindListener<Messages> listener) {
                                                 MessageEvent.getInstance().findMessageByUserId(skip, limit, App.getInstance().getUser().getObjectId(), true, listener);
                                             }
+
+                                            @Override
+                                            public void networkSucceed(List<Messages> datas) {
+                                                if (!refreshHelper.refresh) {
+                                                    if (!CommonUtils.listIsNotNull(datas))
+                                                        multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                                                }
+                                            }
                                         });
                                     }
 
@@ -193,11 +209,9 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
             case R.id.id_member_num_layout:
                 if (meMerchant != null) {
                     Bundle bundle = new Bundle();
-                    bundle.putString(Constants.KEY_TEXT, "会员消费记录");
-                    bundle.putInt(Constants.KEY_ACTION, UserListActivity.ACTION_MEMBER_USER);
                     bundle.putSerializable(Constants.KEY_BEAN, meMerchant);
                     bundle.putSerializable(Constants.KEY_LIST, mVipsLists);
-                    LaunchWithExitUtils.startActivity(getActivity(), UserListActivity.class, bundle);
+                    LaunchWithExitUtils.startActivity(getActivity(), VipUserListActivity.class, bundle);
                 }
                 break;
 

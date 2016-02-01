@@ -55,7 +55,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     private TextView startTime, endTime, adTitle;
     private GridView gvSelectCar, gvService;
     private AlreadySelectCarAdapter alreadySelectCarAdapter;
-    private ArrayList<Car> selectCars;
+    private ArrayList<Car> selectCars = new ArrayList<Car>();
     private SendAdSmsTemplateAdapter adapter;
     private List<ServiceInfoDetailBean> smsTemplateDatas;
     private EditText inputBox;
@@ -160,17 +160,19 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.id_select_car_layout:
-                LaunchWithExitUtils.startActivityForResult(activity, SelectCarActivity.class, Constants.REQUESTCODE_SELECT_CAR);
+                Intent it = new Intent(activity, SelectCarActivity.class);
+                it.putExtra(Constants.KEY_LIST, selectCars);
+                LaunchWithExitUtils.startActivityForResult(activity, it, Constants.REQUESTCODE_SELECT_CAR);
 
                 break;
 
             case R.id.id_ad_title_layout:
-                Intent it = new Intent(activity, InfoEditActivity.class);
+                Intent it2 = new Intent(activity, InfoEditActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.KEY_TEXT, "填写广告标题");
                 bundle.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_AD_TITLE);
-                it.putExtras(bundle);
-                LaunchWithExitUtils.startActivityForResult(activity, it, Constants.REQUESTCODE_INPUT_AD_TITLE);
+                it2.putExtras(bundle);
+                LaunchWithExitUtils.startActivityForResult(activity, it2, Constants.REQUESTCODE_INPUT_AD_TITLE);
                 break;
 
         }
@@ -200,7 +202,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                     @Override
                     public void onError(int i, String s) {
-                        error(s);
+                        error(i);
                         dialogStatus(false);
                     }
                 });
@@ -214,7 +216,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                     @Override
                     public void onError(int i, String s) {
-                        error(s);
+                        error(i);
                         dialogStatus(false);
                     }
                 });
@@ -285,7 +287,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                         @Override
                         public void onFailure(int i, String s) {
-                            error(s);
+                            error(i);
                         }
                     });
                     T.showShort(context, "发布成功");
@@ -295,7 +297,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
                 @Override
                 public void onFailure(int i, String s) {
-                    error(s);
+                    error(i);
                     dialogStatus(false);
                 }
             });

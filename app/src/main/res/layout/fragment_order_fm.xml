@@ -1,4 +1,6 @@
 <com.handmark.pulltorefresh.library.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/id_refresh_view"
+    android:divider="@color/greyd6d1ca"
+    android:dividerHeight="1px"
     style="@style/style_refreshview"></com.handmark.pulltorefresh.library.PullToRefreshListView>
 

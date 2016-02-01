@@ -85,7 +85,7 @@ public class GiftDetailActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onFailure(int i, String s) {
                         dialogStatus(false);
-                        error(s);
+                        error(i);
                     }
                 });
                 break;

@@ -13,7 +13,9 @@ import com.yuedong.youbutie_merchant_android.model.MerchantEvent;
 import com.yuedong.youbutie_merchant_android.model.OrderEvent;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
+import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class CountUserEvaluateFm extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        buildUi(null, false, false, false, R.layout.fragment_user_evaluate);
+        refreshHelper.showEmptyView = false;
+        buildUi(null, true, false, false, R.layout.fragment_user_evaluate);
         refreshListView = fvById(R.id.id_refresh_view);
         refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
@@ -45,12 +48,10 @@ public class CountUserEvaluateFm extends BaseFragment {
 
                         @Override
                         public void onStart() {
-                            dialogStatus(true);
                         }
 
                         @Override
                         public void onFinish() {
-                            dialogStatus(false);
                         }
 
                         @Override
@@ -68,6 +69,13 @@ public class CountUserEvaluateFm extends BaseFragment {
                     OrderEvent.getInstance().getMerchantEvaluate(skip, limit, merchant.getObjectId(), listener);
                 }
 
+            }
+
+            @Override
+            public void networkSucceed(List<Order> datas) {
+                if (!refreshHelper.refresh)
+                    if (!CommonUtils.listIsNotNull(datas))
+                        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
             }
         });
     }

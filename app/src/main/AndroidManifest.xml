@@ -81,6 +81,7 @@
         <activity android:name=".GiftDetailActivity" />
         <activity android:name=".GetSucceedActivity"></activity>
         <activity android:name="com.umeng.fb.ConversationActivity" />
+        <activity android:name=".VipUserListActivity" />
 
         <meta-data
             android:name="UMENG_CHANNEL"

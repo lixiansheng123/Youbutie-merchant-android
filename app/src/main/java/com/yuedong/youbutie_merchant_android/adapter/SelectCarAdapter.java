@@ -27,25 +27,30 @@ public class SelectCarAdapter extends BaseAdapter<Car> implements SectionIndexer
      * @param selectCar
      */
     public void delSelect(Car selectCar) {
-//        Integer index = -1;
-//        for (int i = 0; i < mDatas.size(); i++) {
-//            if (mDatas.get(i).getObjectId().equals(selectCar.getObjectId()))
-//                index = i;
-//        }
-//        if (index != -1) {
-        if (selectPosition.contains(selectCar)) {
+        if (isHas(selectCar)) {
             selectPosition.remove(selectCar);
             notifyDataSetChanged();
         }
-//        }
     }
 
-    public void addSelect(Car car) {
-        if (!selectPosition.contains(car))
-//            selectPosition.remove(position);
-//        else
+    public boolean addSelect(Car car) {
+        boolean isH = isHas(car);
+        if (!isH)
             selectPosition.add(car);
+        return isH;
 
+    }
+
+    private boolean isHas(Car car) {
+        if (car != null) {
+            for (Car sCar : selectPosition) {
+                if (sCar != null) {
+                    if (sCar.getName().equals(car.getName()))
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 
     public List<Car> getSelect() {
@@ -113,14 +118,15 @@ public class SelectCarAdapter extends BaseAdapter<Car> implements SectionIndexer
         viewHolder.getIdByView(R.id.id_click_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onItemClickListener != null)
-                    onItemClickListener.onItemClick(null, viewHolder.getConvertView(), position, -1);
-                addSelect(t);
+                boolean b = addSelect(t);
                 notifyDataSetChanged();
+                if (!b)
+                    if (onItemClickListener != null)
+                        onItemClickListener.onItemClick(null, viewHolder.getConvertView(), position, -1);
             }
         });
 
-        if (selectPosition.contains(t))
+        if (isHas(t))
             ViewUtils.showLayout(gougou);
         else
             ViewUtils.hideLayout(gougou);

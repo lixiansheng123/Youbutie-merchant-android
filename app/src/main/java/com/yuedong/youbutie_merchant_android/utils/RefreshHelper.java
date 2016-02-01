@@ -1,12 +1,15 @@
 package com.yuedong.youbutie_merchant_android.utils;
 
+import android.view.View;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.framework.BaseAdapter;
+import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +26,15 @@ public class RefreshHelper<T> {
     public List<T> datas = new ArrayList<T>();
     public PullToRefreshListView refreshListView;
     public int currentPager;
+    // 是否代理了emptyview
+    public boolean showEmptyView = true;
+    private android.os.Handler handler = new android.os.Handler();
 
     public BaseAdapter<T> getAdapter() {
         return adapter;
     }
+
+    public boolean refresh = false;
 
     public PullToRefreshListView getRefreshListView() {
         return refreshListView;
@@ -48,15 +56,26 @@ public class RefreshHelper<T> {
         refreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                if (!refresh) refresh = true;
                 datas.clear();
                 adapter.notifyDataSetChanged();
-                executeNetworkTask(activity, 1, proxyRefreshListener);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        executeNetworkTask(activity, 1, proxyRefreshListener);
+                    }
+                }, 500);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                executeNetworkTask(activity, 2, proxyRefreshListener);
-
+                if (!refresh) refresh = true;
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        executeNetworkTask(activity, 2, proxyRefreshListener);
+                    }
+                }, 500);
             }
         });
         activity.dialogStatus(true);
@@ -69,7 +88,8 @@ public class RefreshHelper<T> {
      * @param mode                 1正常的刷新和下拉刷新 2上拉更多
      * @param proxyRefreshListener
      */
-    protected void executeNetworkTask(final BaseActivity context, final int mode, ProxyRefreshListener<T> proxyRefreshListener) {
+    protected void executeNetworkTask(final BaseActivity context, final int mode, final ProxyRefreshListener<T> proxyRefreshListener) {
+        context.mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         L.d("executeTask-onStart");
         int skip = 0;
         final int limit = Config.PAGER_SIZE;
@@ -89,20 +109,33 @@ public class RefreshHelper<T> {
 
             @Override
             public void onSuccess(List<T> list) {
+                proxyRefreshListener.networkSucceed(list);
                 L.d("executeTask-> succeed:" + list.toString());
                 if (CommonUtils.listIsNotNull(list)) {
                     updateData(list, mode);
                 } else {
                     refreshListView.onRefreshComplete();
                     refreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                    com.yuedong.youbutie_merchant_android.utils.T.showShort(context, "暂无数据");
+                    if (!refresh) {
+                        if (!showEmptyView) return;
+                        try {
+                            View emptyView = context.mMultiStateView.getView(MultiStateView.VIEW_STATE_EMPTY);
+                            if (emptyView == null)
+                                context.mMultiStateView.setViewForState(R.layout.empty_view, MultiStateView.VIEW_STATE_EMPTY);
+                            context.mMultiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+
+                    }
                 }
             }
 
             @Override
             public void onError(int i, String s) {
                 L.i("executeTask-onError");
-                com.yuedong.youbutie_merchant_android.utils.T.showShort(context, s);
+                context.error(i);
             }
         });
     }
@@ -143,8 +176,19 @@ public class RefreshHelper<T> {
 
 
     public interface ProxyRefreshListener<T> {
+        /**
+         * 获取适配器
+         */
         BaseAdapter<T> getAdapter(List<T> data);
 
+        /**
+         * 执行网络方法
+         */
         void executeTask(int skip, int limit, FindListener<T> listener);
+
+        /**
+         * 成功回调
+         */
+        void networkSucceed(List<T> datas);
     }
 }

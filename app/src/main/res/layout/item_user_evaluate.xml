@@ -5,18 +5,18 @@
     android:layout_height="wrap_content"
     android:background="@color/whiteffffff"
     android:orientation="vertical"
-    android:paddingTop="13dp"
     android:paddingBottom="13dp"
     android:paddingLeft="22dp"
     android:paddingRight="22dp"
-    >
+    android:paddingTop="13dp">
 
     <RelativeLayout style="@style/w_h_mw">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/id_user_photo"
             android:layout_width="45dp"
-            android:layout_height="45dp" />
+            android:layout_height="45dp"
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,8 +36,9 @@
                 android:id="@+id/id_time"
                 style="@style/text_black_14sp"
                 android:layout_below="@+id/id_user_name"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/str_test_time"
+                android:textSize="12sp"
                 android:textColor="@color/greycbc0bf" />
 
             <View

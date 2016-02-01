@@ -45,9 +45,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (e == null) {
                     dialogStatus(false);
                     LaunchWithExitUtils.startActivity(activity, MainActivity.class);
-                    defaultFinished();
                 } else {
-                    error(e.getMessage());
+                    error(e);
                 }
 
             }
@@ -137,7 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onError(int i, String s) {
                         dialogStatus(false);
-                        error(s);
+                        error(i);
                     }
                 });
                 break;

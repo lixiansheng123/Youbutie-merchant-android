@@ -125,12 +125,13 @@
 
     </RelativeLayout>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/id_refresh_view"
-        style="@style/style_refreshview"
-        android:layout_height="match_parent"
+    <com.yuedong.youbutie_merchant_android.view.MultiStateView
+        android:id="@+id/id_multistateview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:divider="@color/greyecebe4"
-        android:dividerHeight="5dp" />
+        android:layout_weight="1"
+        app:msv_emptyView="@layout/empty_view"></com.yuedong.youbutie_merchant_android.view.MultiStateView>
+
 
 </com.zhy.android.percent.support.PercentLinearLayout>

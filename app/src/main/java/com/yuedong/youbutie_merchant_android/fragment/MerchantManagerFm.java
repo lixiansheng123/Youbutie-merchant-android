@@ -120,10 +120,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
         fvById(R.id.id_edit_service_list_layout).setOnClickListener(this);
         adapter.setOnButtonSwitchListener(new MerchantServiceListAdapter.OnButtonSwitchListener() {
             @Override
-            public void bottonSwitch(boolean buttonStatus) {
-                int state = 0;
-                if (buttonStatus)
-                    state = 1;
+            public void bottonSwitch(int state) {
                 // 更新洗车状态
                 List<ServiceInfoDetailBean> serviceInfo = merchant.getServiceInfo();
                 for (ServiceInfoDetailBean bean : serviceInfo) {

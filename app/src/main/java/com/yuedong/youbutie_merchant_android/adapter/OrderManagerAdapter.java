@@ -99,7 +99,7 @@ public class OrderManagerAdapter extends BaseAdapter<Order> {
                     service.setText("客户暂未评价");
                 else
                     service.setText(content);
-                money.setText("￥" + StringUtil.setDoubleValue(order.getPrice()));
+                money.setText("￥" + StringUtil.setDoubleValue(order.getPrice() != null ? order.getPrice() : 0.00));
                 break;
         }
 

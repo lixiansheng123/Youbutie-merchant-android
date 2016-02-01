@@ -19,6 +19,7 @@
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/id_merchant_pic"
                 android:layout_width="66dp"
+                android:scaleType="centerCrop"
                 android:layout_height="66dp" />
 
             <TextView

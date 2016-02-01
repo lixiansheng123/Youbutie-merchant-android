@@ -153,7 +153,8 @@ public abstract class BaseFragment extends Fragment /*implements BmobQueryResLis
         if (isShow) {
             if (loadDialog != null && !loadDialog.isShowing()) {
                 animationDrawable.start();
-                loadDialog.show();
+                if (!getActivity().isFinishing())
+                    loadDialog.show();
             }
         } else {
             if (loadDialog != null && loadDialog.isShowing()) {

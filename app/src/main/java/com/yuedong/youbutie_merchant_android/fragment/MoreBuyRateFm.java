@@ -59,14 +59,11 @@ public class MoreBuyRateFm extends BaseFragment {
         MerchantEvent.getInstance().findMeMetchant(user.getObjectId(), new FindListener<Merchant>() {
             @Override
             public void onStart() {
-                dialogStatus(true);
             }
 
             @Override
             public void onSuccess(List<Merchant> list) {
                 merchant = list.get(0);
-                if (!getLoginDialogIsShowing())
-                    dialogStatus(true);
                 final int curMonth = Calendar.getInstance().get(Calendar.MONTH);
                 final String[] data = new String[curMonth + 1];
                 moreBuyUser = 0;
@@ -99,7 +96,6 @@ public class MoreBuyRateFm extends BaseFragment {
                                 }
                                 data[finalI] = rato + "";
                                 if (count == curMonth) {
-                                    dialogStatus(false);
                                     L.d(Arrays.asList(data).toString());
                                     lineChatView.SetInfo(
                                             new String[]{"0", "2", "4", "6", "8", "10", "12"},   //X轴刻度
@@ -111,7 +107,6 @@ public class MoreBuyRateFm extends BaseFragment {
                                 count++;
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                dialogStatus(false);
                                 return;
                             }
                         }
@@ -119,7 +114,6 @@ public class MoreBuyRateFm extends BaseFragment {
                         @Override
                         public void onFailure(int i, String s) {
                             error(s);
-                            dialogStatus(false);
                             return;
                         }
                     });
@@ -129,7 +123,6 @@ public class MoreBuyRateFm extends BaseFragment {
             @Override
             public void onError(int i, String s) {
                 error(s);
-                dialogStatus(false);
             }
         });
     }
