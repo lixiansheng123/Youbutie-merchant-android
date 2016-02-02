@@ -20,12 +20,13 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/id_filter_service_tv"
                 style="@style/text_black_14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/icon_tint_grey_down_arrows"
                 android:gravity="center_vertical"
-                android:text="服务 "
+                android:text="全部服务 "
                 android:textColor="@color/black81706e" />
         </LinearLayout>
 
@@ -38,12 +39,13 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/id_filter_car_tv"
                 style="@style/text_black_14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/icon_tint_grey_down_arrows"
                 android:gravity="center_vertical"
-                android:text="车型 "
+                android:text="全部车型 "
                 android:textColor="@color/black81706e" />
         </LinearLayout>
     </LinearLayout>

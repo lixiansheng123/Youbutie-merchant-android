@@ -2,6 +2,7 @@ package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
@@ -43,6 +44,7 @@ public class OrderFm extends BaseFragment {
     public void initViews(Bundle savedInstanceState) {
         buildUi(null, true, false, false, R.layout.fragment_order_fm);
         refreshView = fvById(R.id.id_refresh_view);
+        ((TextView) fvById(R.id.id_empty_text)).setText("还没有订单信息哦~");
         updateData();
     }
 
@@ -59,8 +61,7 @@ public class OrderFm extends BaseFragment {
     }
 
     private void proxy() {
-        if (mMultiStateView.getViewState() != MultiStateView.VIEW_STATE_CONTENT)
-            mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
+        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshView, new RefreshHelper.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {

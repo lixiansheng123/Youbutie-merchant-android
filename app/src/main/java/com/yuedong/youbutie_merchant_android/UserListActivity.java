@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.SelectAdapter;
@@ -41,13 +42,15 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private SelectItemPop selectItemPop;
     private SelectAdapter selectAdapter;
     private View filterLayout;
+    private TextView filterServiceTv, filterCarTv;
     // 外部行为 用来标识入口
     private int action = ACTION_TOTAL_USER;
     public static final int ACTION_TOTAL_USER = 0x001;
     public static final int ACTION_MEMBER_USER = 0x002;
     private PullToRefreshListView refreshListView;
     private RefreshHelper<Order> refreshHelper;
-    private Object filterBean;
+    private ServiceInfo filterServiceBean;
+    private Car filterCarBean;
     // 内部行为
     public int actionIn = ACTION_IN_NORMAL;
     private static final int ACTION_IN_NORMAL = 0x101;
@@ -86,6 +89,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         buildUi(titleView, false, false, false, R.layout.activity_user_list);
         selectAdapter = new SelectAdapter(context);
         selectItemPop = new SelectItemPop(context, selectAdapter);
+        filterServiceTv = fvById(R.id.id_filter_service_tv);
+        filterCarTv = fvById(R.id.id_filter_car_tv);
         List<ServiceInfo> serviceData = ServiceInfoDao.getInstance().findAll();
         List<Car> carData = CarDao.getInstance().findAll();
         ServiceInfo serviceInfo = new ServiceInfo();
@@ -123,19 +128,28 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         selectItemPop.setSelectItemCallback(new SelectItemPop.ISelectItemCallback() {
             @Override
             public void selectItem(int pos, Object bean, View item) {
-                filterBean = bean;
                 selectItemPop.dismiss();
                 switch (selectAdapter.getMode()) {
                     case SelectAdapter.MODE_SERVICE:
                         if (actionIn != ACTION_IN_FILTER_SERVICE)
                             actionIn = ACTION_IN_FILTER_SERVICE;
+                        filterServiceBean = (ServiceInfo) bean;
+                        String serviceName = filterServiceBean.getName();
+                        filterServiceTv.setText(serviceName);
+                        if (serviceName.equals("全部服务"))
+                            filterServiceBean = null;
                         break;
                     case SelectAdapter.MODE_CAR:
                         if (actionIn != ACTION_IN_FILTER_CAR)
                             actionIn = ACTION_IN_FILTER_CAR;
+                        filterCarBean = (Car) bean;
+                        String carName = filterCarBean.getName();
+                        filterCarTv.setText(carName);
+                        if (carName.equals("全部车型"))
+                            filterCarBean = null;
                         break;
                 }
-                setProxy(filterBean);
+                setProxy();
             }
         });
         fvById(R.id.id_filter_service_layout).setOnClickListener(this);
@@ -145,11 +159,11 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void ui() {
-        setProxy(null);
+        setProxy();
 
     }
 
-    private void setProxy(final Object object) {
+    private void setProxy() {
         refreshHelper.refresh = false;
         multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setEmptyUi();
@@ -164,7 +178,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void executeTask(final int skip, final int limit, final FindListener<Order> listener) {
-                userMayFilter(object, skip, limit, listener);
+                userMayFilter(skip, limit, listener);
             }
 
             @Override
@@ -181,11 +195,11 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     /**
      * 用户数据可能需要筛选 会员列表的就需要自己在编码把非会员信息剔除
      */
-    public void userMayFilter(Object object, int skip, int limit, final FindListener<Order> listener) {
+    public void userMayFilter(int skip, int limit, final FindListener<Order> listener) {
         if (action == ACTION_TOTAL_USER) {
-            netRequest(object, skip, limit, listener);
+            netRequest(skip, limit, listener);
         } else if (action == ACTION_MEMBER_USER) {
-            netRequest(object, skip, limit, new FindListener<Order>() {
+            netRequest(skip, limit, new FindListener<Order>() {
 
                 @Override
                 public void onFinish() {
@@ -205,8 +219,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                     } else {
                         listener.onSuccess(list);
                     }
-
-
                 }
 
                 @Override
@@ -219,13 +231,14 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-    private void netRequest(Object object, int skip, int limit, FindListener<Order> listener) {
+    private void netRequest(int skip, int limit, FindListener<Order> listener) {
         String serviceId = null;
         String carObjectId = null;
-        if (actionIn == ACTION_IN_FILTER_SERVICE) {
-            serviceId = ((ServiceInfo) object).getObjectId();
-        } else if (actionIn == ACTION_IN_FILTER_CAR) {
-            carObjectId = ((Car) object).getObjectId();
+        if (filterServiceBean != null) {
+            serviceId = filterServiceBean.getObjectId();
+        }
+        if (filterCarBean != null) {
+            carObjectId = filterCarBean.getObjectId();
         }
         OrderEvent.getInstance().getMemberFinishedOrderAndCountBuyNum(skip, limit, meMerchant.getObjectId(), serviceId, carObjectId, listener);
     }
@@ -257,7 +270,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0x021 && resultCode == 0x225) {
-            setProxy(filterBean);
+            setProxy();
         }
     }
 }

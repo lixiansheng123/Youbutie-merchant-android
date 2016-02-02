@@ -177,7 +177,7 @@ public class OrderManagerFm extends BaseFragment {
                                 T.showShort(getContext(), "该礼品已经被领取");
                             }
                         } else {
-                            T.showShort(getContext(), "未制订单");
+                            T.showShort(getContext(), "未知订单");
                         }
                     }
 

@@ -56,6 +56,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         totalMoney = extras.getInt(Constants.KEY_INT, 0);
         buildUi(new TitleViewHelper().createDefaultTitleView3("收入详情"), false, false, false, R.layout.activity_income_detail);
+        refreshHelper.showEmptyView = false;
     }
 
     private void userInfoUpdate() {
@@ -104,12 +105,12 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
                 OrderEvent.getInstance().getMonthOrder(skip, limit, merchant.getObjectId(), new FindStatisticsListener() {
                     @Override
                     public void onSuccess(Object o) {
+                        List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
                         try {
                             JSONArray jsonArray = (JSONArray) o;
                             if (jsonArray != null) {
                                 int len = jsonArray.length();
                                 String[] times = new String[len];
-                                List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
                                 for (int i = 0; i < len; i++) {
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                                     int totalPrice = jsonObject.getInt("_sumPrice");
@@ -123,12 +124,9 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
                                     times[i] = dayDes;
                                 }
                                 sort(times, datas);
-                                listener.onSuccess(datas);
-                                listener.onFinish();
-                            } else {
-                                listener.onError(-2, "查询成功但无数据");
-                                listener.onFinish();
                             }
+                            listener.onSuccess(datas);
+                            listener.onFinish();
                         } catch (Exception e) {
                             e.printStackTrace();
                             listener.onError(-1, e.getMessage());

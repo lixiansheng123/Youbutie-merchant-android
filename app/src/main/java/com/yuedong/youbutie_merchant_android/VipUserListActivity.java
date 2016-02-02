@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.SelectAdapter;
@@ -19,22 +20,18 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.ServiceInfo;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Vips;
 import com.yuedong.youbutie_merchant_android.model.db.CarDao;
 import com.yuedong.youbutie_merchant_android.model.db.ServiceInfoDao;
-import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.AppUtils;
+import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 import com.yuedong.youbutie_merchant_android.view.SelectItemPop;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.FindStatisticsListener;
 
 public class VipUserListActivity extends BaseActivity implements View.OnClickListener {
     private MultiStateView multiStateView;
@@ -47,7 +44,10 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
     private List<BmobObject> serviceInfos = new ArrayList<BmobObject>();
     private List<BmobObject> carInfos = new ArrayList<BmobObject>();
     private View filterLayout;
-    private Object filterBean; // 内部行为
+    private ServiceInfo filterServiceBean;
+    private Car filterCarBean;
+    private TextView filterServiceTv, filterCarTv;
+    // 内部行为
     public int actionIn = ACTION_IN_NORMAL;
     private static final int ACTION_IN_NORMAL = 0x101;
     private static final int ACTION_IN_FILTER_SERVICE = 0x102; //通过服务赛选
@@ -72,6 +72,8 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
     protected void initViews() {
         selectAdapter = new SelectAdapter(context);
         selectItemPop = new SelectItemPop(context, selectAdapter);
+        filterServiceTv = fvById(R.id.id_filter_service_tv);
+        filterCarTv = fvById(R.id.id_filter_car_tv);
         filterLayout = fvById(R.id.id_filter_layout);
         multiStateView = fvById(R.id.id_multistateview);
         multiStateView.setViewForState(R.layout.content_user_list, MultiStateView.VIEW_STATE_CONTENT, true);
@@ -105,19 +107,29 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         selectItemPop.setSelectItemCallback(new SelectItemPop.ISelectItemCallback() {
             @Override
             public void selectItem(int pos, Object bean, View item) {
-                filterBean = bean;
                 selectItemPop.dismiss();
+                refreshHelper.refresh = false;
                 switch (selectAdapter.getMode()) {
                     case SelectAdapter.MODE_SERVICE:
                         if (actionIn != ACTION_IN_FILTER_SERVICE)
                             actionIn = ACTION_IN_FILTER_SERVICE;
+                        filterServiceBean = (ServiceInfo) bean;
+                        String serviceName = filterServiceBean.getName();
+                        filterServiceTv.setText(serviceName);
+                        if (serviceName.equals("全部服务"))
+                            filterServiceBean = null;
                         break;
                     case SelectAdapter.MODE_CAR:
                         if (actionIn != ACTION_IN_FILTER_CAR)
                             actionIn = ACTION_IN_FILTER_CAR;
+                        filterCarBean = (Car) bean;
+                        String carName = filterCarBean.getName();
+                        filterCarTv.setText(carName);
+                        if (carName.equals("全部车型"))
+                            filterCarBean = null;
                         break;
                 }
-                setProxy(filterBean);
+                setProxy();
             }
         });
         fvById(R.id.id_filter_service_layout).setOnClickListener(this);
@@ -127,11 +139,11 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void ui() {
-        setProxy(null);
+        setProxy();
     }
 
 
-    private void setProxy(final Object filterBean) {
+    private void setProxy() {
         refreshHelper.refresh = false;
         multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setEmptyUi();
@@ -147,17 +159,47 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
                 listener.onStart();
                 String serviceId = null;
                 String carObjectId = null;
-                if (actionIn == ACTION_IN_FILTER_SERVICE) {
-                    serviceId = ((ServiceInfo) filterBean).getObjectId();
-                } else if (actionIn == ACTION_IN_FILTER_CAR) {
-                    carObjectId = ((Car) filterBean).getObjectId();
+                if (filterServiceBean != null) {
+                    serviceId = filterServiceBean.getObjectId();
                 }
-                OrderEvent.getInstance().getMemberFinishedOrderAndCountBuy(skip, limit, merchant, serviceId, carObjectId, listener);
+                if (filterCarBean != null) {
+                    carObjectId = filterCarBean.getObjectId();
+                }
+                OrderEvent.getInstance().getMemberFinishedOrderAndCountBuy(skip, limit, merchant, serviceId, carObjectId, new FindListener<Order>() {
+                    @Override
+                    public void onFinish() {
+                        listener.onFinish();
+                    }
+
+                    @Override
+                    public void onSuccess(List<Order> list) {
+                        if (CommonUtils.listIsNotNull(list)) {
+                            List<Order> vipOrder = new ArrayList<Order>();
+                            for (Order order : list) {
+                                if (AppUtils.curUserIsVip(order.getUser(), vipsList)) {
+                                    vipOrder.add(order);
+                                }
+                            }
+                            listener.onSuccess(vipOrder);
+                        } else {
+                            listener.onSuccess(list);
+                        }
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        listener.onError(i, s);
+                    }
+                });
             }
 
             @Override
             public void networkSucceed(List<Order> datas) {
-
+                if (!refreshHelper.refresh) {
+                    if (!CommonUtils.listIsNotNull(datas)) {
+                        multiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                    }
+                }
             }
         });
     }

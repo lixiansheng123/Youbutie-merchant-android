@@ -106,7 +106,6 @@ public class ContributionRankingActivity extends BaseActivity {
                                 listener.onFinish();
                             }
                         } else {
-                            T.showShort(context, "查询成功，但无贡献榜数据");
                             listener.onFinish();
                         }
                     }

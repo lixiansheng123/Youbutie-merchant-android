@@ -3,6 +3,7 @@ package com.yuedong.youbutie_merchant_android;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.ClientManagerMessageListAdapter;
@@ -14,6 +15,7 @@ import com.yuedong.youbutie_merchant_android.model.MessageEvent;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Messages;
+import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
@@ -23,7 +25,7 @@ import java.util.List;
 import cn.bmob.v3.listener.FindListener;
 
 public class AdListActivity extends BaseActivity {
-    private RefreshHelper<Messages> refreshHelper;
+    private RefreshHelper<Messages> refreshHelper = new RefreshHelper<Messages>();
     private Merchant meMerchant;
 
     @Override
@@ -36,12 +38,13 @@ public class AdListActivity extends BaseActivity {
                 intent.putExtra(Constants.KEY_BEAN, meMerchant);
                 LaunchWithExitUtils.startActivityForResult(activity, intent, Constants.REQUESTCODE_ADD_AD);
             }
-        }), false, false, false, R.layout.activity_ad_list);
+        }), true, false, false, R.layout.activity_ad_list);
+        refreshHelper.showEmptyView = false;
     }
 
     @Override
     protected void initViews() {
-
+        ((TextView) findViewById(R.id.id_empty_text)).setText("还没有广告哦~~");
     }
 
     @Override
@@ -52,7 +55,6 @@ public class AdListActivity extends BaseActivity {
     @Override
     protected void ui() {
         mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-        refreshHelper = new RefreshHelper<Messages>();
         meMerchant = (Merchant) getIntent().getExtras().getSerializable(Constants.KEY_BEAN);
         refreshHelper.setPulltoRefreshRefreshProxy(this, (PullToRefreshListView) fvById(R.id.id_refresh_view), new RefreshHelper.ProxyRefreshListener<Messages>() {
             @Override
@@ -67,7 +69,11 @@ public class AdListActivity extends BaseActivity {
 
             @Override
             public void networkSucceed(List<Messages> datas) {
-
+                if (!refreshHelper.refresh) {
+                    if (!CommonUtils.listIsNotNull(datas)) {
+                        mMultiStateView.setViewState(MultiStateView.VIEW_STATE_EMPTY);
+                    }
+                }
             }
         });
     }

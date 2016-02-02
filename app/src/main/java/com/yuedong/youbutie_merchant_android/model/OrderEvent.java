@@ -326,7 +326,6 @@ public class OrderEvent implements BaseEvent {
                         for (int i = 0; i < len; i++) {
                             JSONObject job = (JSONObject) ary.get(i);
                             JSONObject userJob = job.getJSONObject("user");
-                            L.d("job=======" + job.toString());
                             Order order = new Order();
                             User user = DataUtils.parseUser(userJob);
                             order.setUser(user);
@@ -445,6 +444,9 @@ public class OrderEvent implements BaseEvent {
     public void getCurMonthUser(String merchantObjectId, final FindListener<Order> listener) {
         listener.onStart();
         BmobQuery<Order> mainQurey = new BmobQuery<Order>();
+        BmobQuery<Merchant> merchantBmobQuery = new BmobQuery<Merchant>();
+        merchantBmobQuery.addWhereEqualTo(OBJECT_ID, merchantObjectId);
+        mainQurey.addWhereMatchesQuery("merchant", "Merchant", merchantBmobQuery);
         List<BmobQuery<Order>> and = new ArrayList<BmobQuery<Order>>();
         BmobQuery<Order> q1 = new BmobQuery<Order>();
         Date startDate = new Date(DateUtils.getCurMonthStartTime());

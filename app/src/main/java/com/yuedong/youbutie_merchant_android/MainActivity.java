@@ -73,25 +73,7 @@ public class MainActivity extends BaseActivity implements HomeBarSpanView.OnBott
                 Constants.APIKEY_PUSH_BAIDU);
 
         UmengUpdateAgent.setUpdateAutoPopup(false);
-        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-            @Override
-            public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
-                switch (updateStatus) {
-                    case UpdateStatus.Yes: // has update
-                        UmengUpdateAgent.showUpdateDialog(context, updateInfo);
-                        break;
-                    case UpdateStatus.No: // has no update
-                        T.showShort(context, "当前已经最新版本");
-                        break;
-                    case UpdateStatus.NoneWifi: // none wifi
-                        T.showShort(context, "没有wifi连接， 只在wifi下更新");
-                        break;
-                    case UpdateStatus.Timeout: // time out
-                        T.showShort(context, "网络超时");
-                        break;
-                }
-            }
-        });
+
 
     }
 

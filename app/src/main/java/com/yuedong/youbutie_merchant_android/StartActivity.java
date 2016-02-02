@@ -120,40 +120,18 @@ public class StartActivity extends BaseActivity {
         mainHandle.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // 启动动画
-                AnimationSet animationSet = new AnimationSet(true);
-                ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
-                scaleAnimation.setDuration(1000);
-                animationSet.addAnimation(scaleAnimation);
-                animationSet.setFillAfter(true);
-                rootView.startAnimation(animationSet);
-                animationSet.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        boolean guide = (boolean) SPUtils.get(context, Constants.SP_GUIDE, false);
-                        Class<? extends Activity> cls = null;
-                        if (guide) {
-                            if (App.getInstance().isLogin())
-                                cls = MainActivity.class;
-                            else
-                                cls = LoginActivity.class;
-                        } else
-                            cls = GuideActivity.class;
-                        LaunchWithExitUtils.startActivity(activity, cls);
-                        defaultFinished();
-                        overridePendingTransition(0, 0);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
+                boolean guide = (boolean) SPUtils.get(context, Constants.SP_GUIDE, false);
+                Class<? extends Activity> cls = null;
+                if (guide) {
+                    if (App.getInstance().isLogin())
+                        cls = MainActivity.class;
+                    else
+                        cls = LoginActivity.class;
+                } else
+                    cls = GuideActivity.class;
+                LaunchWithExitUtils.startActivity(activity, cls);
+                defaultFinished();
+                overridePendingTransition(0, 0);
             }
         }, delay);
     }
