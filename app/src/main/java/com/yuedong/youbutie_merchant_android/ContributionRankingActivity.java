@@ -18,8 +18,10 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RankingComparator;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,15 +40,15 @@ import cn.bmob.v3.listener.FindStatisticsListener;
 public class ContributionRankingActivity extends BaseActivity {
     private Merchant merchant;
     private int oliContributionNum;
-    private PullToRefreshListView refreshListView;
+    private PulltoRefreshListView refreshListView;
     private MoneyContributionAdapter adapter;
     private TextView totalOli;
-    private RefreshHelper<MoneyContributionBean> refreshHelper;
+    private RefreshProxy<MoneyContributionBean> refreshHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        refreshHelper = new RefreshHelper<MoneyContributionBean>();
+        refreshHelper = new RefreshProxy<MoneyContributionBean>();
         Bundle extras = getIntent().getExtras();
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         oliContributionNum = extras.getInt(Constants.KEY_INT, 0);
@@ -56,14 +58,11 @@ public class ContributionRankingActivity extends BaseActivity {
     @Override
     protected void initViews() {
         refreshListView = fvById(R.id.id_refresh_view);
-        ListView listView = refreshListView.getRefreshableView();
-        View headView = ViewUtils.inflaterView(context, R.layout.head_money_contribution_list, listView);
+        View headView = ViewUtils.inflaterView(context, R.layout.head_money_contribution_list, refreshListView);
         totalOli = (TextView) headView.findViewById(R.id.id_total_oli);
-        listView.addHeaderView(headView, null, false);
-
-        listView.setAdapter(adapter);
-
-        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<MoneyContributionBean>() {
+        refreshListView.addHeaderView(headView, null, false);
+        refreshListView.setAdapter(adapter);
+        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshProxy.ProxyRefreshListener<MoneyContributionBean>() {
             @Override
             public BaseAdapter<MoneyContributionBean> getAdapter(List<MoneyContributionBean> data) {
                 return adapter = new MoneyContributionAdapter(context, data);

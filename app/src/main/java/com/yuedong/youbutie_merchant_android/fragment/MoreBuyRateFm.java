@@ -17,10 +17,12 @@ import com.yuedong.youbutie_merchant_android.view.LineChatView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.FindStatisticsListener;
@@ -47,8 +49,6 @@ public class MoreBuyRateFm extends BaseFragment {
 
     }
 
-    // 本月多次购买的用户数
-    int moreBuyUser = 0;
     // 成功统计的次数
     int count = 0;
 
@@ -66,10 +66,10 @@ public class MoreBuyRateFm extends BaseFragment {
                 merchant = list.get(0);
                 final int curMonth = Calendar.getInstance().get(Calendar.MONTH);
                 final String[] data = new String[curMonth + 1];
-                moreBuyUser = 0;
                 count = 0;
                 for (int i = 0; i <= curMonth; i++) {
                     final int finalI = i;
+                    final List<Objects> tempObjs = new ArrayList<Objects>();
                     OrderEvent.getInstance().countAssignMonthClientDownOrderCase(merchant.getObjectId(), (i + 1), new FindStatisticsListener() {
                         @Override
                         public void onSuccess(Object o) {
@@ -86,11 +86,13 @@ public class MoreBuyRateFm extends BaseFragment {
                                             int buyCount = jsonObject.getInt("_count");
                                             if (buyCount >= 2) {
                                                 // 购买两次以上的用户累加
-                                                moreBuyUser++;
+                                                tempObjs.add(null);
                                             }
                                         }
                                         // 计算购买两次以上的用户和总用户的比率
-                                        rato = (int) Math.round(moreBuyUser * 1.0 / length * 100);
+                                        rato = (int) Math.round(tempObjs.size() * 1.0 / length * 100);
+                                        L.d("info:总人数:" + length + "==购买两次以上的人数:" + tempObjs.size() + "==比率:" + rato);
+
                                     }
                                     L.d("countAssignMonthClientDownOrderCase-iiiiiiiiiiiiiiiiii->" + finalI + "-JSON->" + o.toString());
                                 }

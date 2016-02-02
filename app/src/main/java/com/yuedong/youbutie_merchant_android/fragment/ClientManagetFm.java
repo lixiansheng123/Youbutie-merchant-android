@@ -31,7 +31,9 @@ import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,8 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     private TextView totalClientNum, memberNum, adNum;
     private ArrayList<Vips> mVipsLists;
     private List<Order> mMercantClients;
-    private PullToRefreshListView refreshListView;
-    private RefreshHelper<Messages> refreshHelper;
+    private PulltoRefreshListView refreshListView;
+    private RefreshProxy<Messages> refreshHelper;
     private ClientManagerMessageListAdapter adapter;
     private Merchant meMerchant;
     private MultiStateView multiStateView;
@@ -58,7 +60,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
     public void initViews(Bundle savedInstanceState) {
         buildUi(new TitleViewHelper().createDefaultTitleView2("客户管理"),//
                 false, false, false, R.layout.fragment_client_manager);
-        refreshHelper = new RefreshHelper<Messages>();
+        refreshHelper = new RefreshProxy<Messages>();
         refreshHelper.showEmptyView = false;
         multiStateView = fvById(R.id.id_multistateview);
         multiStateView.setViewForState(R.layout.content_client_namager, MultiStateView.VIEW_STATE_CONTENT, true);
@@ -138,7 +140,7 @@ public class ClientManagetFm extends BaseFragment implements View.OnClickListene
                                             memberNum.setText(userIds.size() + "");
                                         }
                                         adNum.setText(count + "");
-                                        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshHelper.ProxyRefreshListener<Messages>() {
+                                        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshProxy.ProxyRefreshListener<Messages>() {
                                             @Override
                                             public BaseAdapter<Messages> getAdapter(List<Messages> data) {
                                                 return adapter = new ClientManagerMessageListAdapter(getActivity(), data);

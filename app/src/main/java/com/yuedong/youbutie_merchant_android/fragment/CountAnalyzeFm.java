@@ -131,7 +131,6 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                                 e.printStackTrace();
                             }
                         } else {
-//                            T.showShort(getActivity(), "查询当月总销售额成功，无数据");
                         }
 
                         final int finalTotalSales = totalSalesNum;
@@ -161,7 +160,6 @@ public class CountAnalyzeFm extends BaseFragment implements View.OnClickListener
                                                 e.printStackTrace();
                                             }
                                         } else {
-//                                            T.showShort(getActivity(), "查询油点贡献成功，无数据");
                                         }
                                         L.d("油点贡献度:" + oliContributionNum);
                                         curMoneySales.setText("￥" + finalTotalSales);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/whiteffffff"
-    android:layout_height="89dp">
+    android:layout_height="89dp"
+    android:background="@color/whiteffffff">
 
     <ImageView
         android:id="@+id/id_ranking_icon"
@@ -26,8 +26,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="48dp"
- />
+        android:layout_marginLeft="48dp" />
 
     <TextView
         android:id="@+id/id_user_name"
@@ -35,8 +34,11 @@
         android:layout_alignBottom="@+id/id_user_pic"
         android:layout_alignTop="@+id/id_user_pic"
         android:layout_marginLeft="29dp"
+        android:layout_toLeftOf="@+id/id_total_oli"
         android:layout_toRightOf="@+id/id_user_pic"
+        android:ellipsize="end"
         android:gravity="center_vertical"
+        android:singleLine="true"
         android:text="@string/str_test_nick"
         android:textColor="@color/black81706e" />
 

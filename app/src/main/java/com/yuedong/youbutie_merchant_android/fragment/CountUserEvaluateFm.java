@@ -15,7 +15,9 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import java.util.List;
 
@@ -25,8 +27,8 @@ import cn.bmob.v3.listener.FindListener;
  * Created by Administrator on 2016/1/7.
  */
 public class CountUserEvaluateFm extends BaseFragment {
-    private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
-    private PullToRefreshListView refreshListView;
+    private RefreshProxy<Order> refreshHelper = new RefreshProxy<Order>();
+    private PulltoRefreshListView refreshListView;
     private Merchant merchant;
 
 
@@ -35,7 +37,7 @@ public class CountUserEvaluateFm extends BaseFragment {
         refreshHelper.showEmptyView = false;
         buildUi(null, true, false, false, R.layout.fragment_user_evaluate);
         refreshListView = fvById(R.id.id_refresh_view);
-        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshListView, new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 return new UserEvaluateAdapter(getActivity(), data);

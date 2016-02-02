@@ -16,7 +16,9 @@ import com.yuedong.youbutie_merchant_android.model.OrderEvent;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import java.util.List;
 
@@ -28,15 +30,15 @@ import cn.bmob.v3.listener.FindListener;
 public class OrderFm extends BaseFragment {
     private static final String TAG = "OrderFm--";
     String flag;
-    private RefreshHelper<Order> refreshHelper;
-    private PullToRefreshListView refreshView;
+    private RefreshProxy<Order> refreshHelper;
+    private PulltoRefreshListView refreshView;
     public boolean inintFinished = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         flag = getArguments().getString(Constants.KEY_ACTION);
-        refreshHelper = new RefreshHelper<Order>();
+        refreshHelper = new RefreshProxy<Order>();
         refreshHelper.showEmptyView = false;
     }
 
@@ -62,7 +64,7 @@ public class OrderFm extends BaseFragment {
 
     private void proxy() {
         mMultiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
-        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshView, new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy((BaseActivity) getActivity(), refreshView, new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 return new OrderManagerAdapter(getActivity(), data);

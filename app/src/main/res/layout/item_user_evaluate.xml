@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/whiteffffff"
-    android:orientation="vertical"
-    android:paddingBottom="13dp"
-    android:paddingLeft="22dp"
-    android:paddingRight="22dp"
-    android:paddingTop="13dp">
+    android:orientation="vertical">
 
-    <RelativeLayout style="@style/w_h_mw">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical"
+        android:paddingBottom="13dp"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:paddingTop="13dp">
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/id_user_photo"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:scaleType="centerCrop" />
+        <RelativeLayout style="@style/w_h_mw">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/id_user_photo"
-            android:layout_alignTop="@+id/id_user_photo"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/id_user_photo">
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/id_user_photo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/id_user_name"
-                style="@style/text_black_16sp"
-                android:text="@string/str_test_nick"
-                android:textColor="@color/black877876" />
-
-            <TextView
-                android:id="@+id/id_time"
-                style="@style/text_black_14sp"
-                android:layout_below="@+id/id_user_name"
-                android:layout_marginTop="2dp"
-                android:text="@string/str_test_time"
-                android:textSize="12sp"
-                android:textColor="@color/greycbc0bf" />
-
-            <View
-                style="@style/line_grey_1dp"
-                android:layout_alignParentBottom="true" />
-
-            <RatingBar
-                android:id="@+id/id_star_evaluate"
-                style="@style/ratingBar_star"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:rating="4" />
+                android:layout_alignBottom="@+id/id_user_photo"
+                android:layout_alignTop="@+id/id_user_photo"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/id_user_photo">
+
+                <TextView
+                    android:id="@+id/id_user_name"
+                    style="@style/text_black_16sp"
+                    android:text="@string/str_test_nick"
+                    android:textColor="@color/black877876" />
+
+                <TextView
+                    android:id="@+id/id_time"
+                    style="@style/text_black_14sp"
+                    android:layout_below="@+id/id_user_name"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/str_test_time"
+                    android:textColor="@color/greycbc0bf"
+                    android:textSize="12sp" />
+
+                <View
+                    style="@style/line_grey_1dp"
+                    android:layout_alignParentBottom="true" />
+
+                <RatingBar
+                    android:id="@+id/id_star_evaluate"
+                    style="@style/ratingBar_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="4" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/id_evaluate_content"
+            style="@style/text_black_14sp"
+            android:layout_marginTop="9dp"
+            android:text="阿哒"
+            android:textColor="@color/grey776462"
 
-    <TextView
-        android:id="@+id/id_evaluate_content"
-        style="@style/text_black_14sp"
-        android:layout_marginTop="9dp"
-        android:text="阿哒"
-        android:textColor="@color/grey776462"
+            />
+    </LinearLayout>
 
-        />
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/greyede9e4" />
 </LinearLayout>
