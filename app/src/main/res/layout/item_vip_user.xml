@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@drawable/selector_bg_white_item"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <com.yuedong.youbutie_merchant_android.view.RoundImageView
-        android:id="@+id/id_user_pic"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
-        android:layout_centerVertical="true"
-        app:radius="3dp"
-        app:type="round" />
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/selector_bg_white_item"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-    <TextView
-        android:id="@+id/id_user_name"
-        style="@style/text_black_16sp"
-        android:layout_alignTop="@+id/id_user_pic"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="1dp"
-        android:layout_toRightOf="@+id/id_user_pic"
-        android:text="@string/str_test_nick"
-        android:textColor="@color/black81716f" />
+        <com.yuedong.youbutie_merchant_android.view.RoundImageView
+            android:id="@+id/id_user_pic"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_centerVertical="true"
+            app:radius="3dp"
+            app:type="round" />
 
-    <ImageView
-        android:layout_marginBottom="3dp"
-        android:id="@+id/id_icon_vip"
-        style="@style/w_h_ww"
-        android:layout_alignBottom="@+id/id_user_pic"
-        android:layout_alignLeft="@+id/id_user_name"
-        android:src="@drawable/icon_user_vip" />
+        <TextView
+            android:id="@+id/id_user_name"
+            style="@style/text_black_16sp"
+            android:layout_alignTop="@+id/id_user_pic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/id_user_pic"
+            android:text="@string/str_test_nick"
+            android:textColor="@color/black81716f" />
 
-
-    <TextView
-        android:id="@+id/id_buy_num"
-        style="@style/text_yellow_14sp"
-        android:layout_alignBottom="@+id/id_user_pic"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:text="来店20次" />
+        <ImageView
+            android:id="@+id/id_icon_vip"
+            style="@style/w_h_ww"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignLeft="@+id/id_user_name"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/icon_user_vip" />
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/id_buy_num"
+            style="@style/text_yellow_14sp"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:text="来店20次" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/line_grey_1px"
+       />
+</LinearLayout>

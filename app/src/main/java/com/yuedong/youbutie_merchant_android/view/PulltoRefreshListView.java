@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.utils.L;
+import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+
+import java.util.logging.Handler;
 
 public class PulltoRefreshListView extends ListView implements AbsListView.OnScrollListener {
     private static final String TAG = "PulltoRefreshListView";
@@ -41,12 +45,13 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
     private int scrollState;
     private int headerContentHeight;
     private int footerContentHeight;
-    // 只有在listview第一个item显示的时候（listview滑到了顶部）才进行下拉刷新， 否则此时的下拉只是滑动listview
+    //    // 只有在listview第一个item显示的时候（listview滑到了顶部）才进行下拉刷新， 否则此时的下拉只是滑动listview
     private boolean isRecorded;
     private boolean isLoading;// 判断是否正在加载
     private boolean isRefresh; // 判断是否正在刷新
     private boolean isLoadFull; // 没有更多数据了
     private OnRefreshListener onRefreshListener;
+    private android.os.Handler handler = new android.os.Handler();
 
     public PulltoRefreshListView(Context context) {
         super(context);
@@ -74,6 +79,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         footer = inflater.inflate(R.layout.footer_layout, this, false);
         more = (TextView) footer.findViewById(R.id.id_tips);
         measureView(footer);
+//        footer.measure(0,0);
         footerContentHeight = footer.getMeasuredHeight();
         header = inflater.inflate(R.layout.list_pull_head, this, false);
         car = (ImageView) header.findViewById(R.id.id_car);
@@ -96,6 +102,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
     }
 
     @Override
+
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         this.scrollState = scrollState;
         ifNeedLoad(view, scrollState);
@@ -121,34 +128,36 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
      */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        L.d(TAG + "---onTouchEvent");
         int action = ev.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 if (firstVisibleItem == 0) {
-                    isRecorded = true;
                     startY = (int) ev.getY();
+                    isRecorded = true;
                 }
                 break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-                if (state == PULL) {
-                    state = NONE;
-                    refreshHeaderViewByState();
-                } else if (state == RELEASE) {
-                    state = REFRESHING;
-                    refreshHeaderViewByState();
-                    onRefresh();
-                }
-                isRecorded = false;
-                break;
+
             case MotionEvent.ACTION_MOVE:
-                // 为了解决和item的onclick事件冲突 导致不走down
+                if (state == REFRESHING) {
+                    break;
+                }
                 if (firstVisibleItem == 0 && !isRecorded) {
                     isRecorded = true;
                     startY = (int) ev.getY();
                 }
                 whenMove(ev);
+                break;
+            case MotionEvent.ACTION_UP:
+                if (state == RELEASE) {
+                    state = REFRESHING;
+                    // 加载最新数据；
+                    refreshHeaderViewByState();
+                    onRefresh();
+                } else if (state == PULL) {
+                    state = NONE;
+                    refreshHeaderViewByState();
+                }
+                isRecorded = false;
                 break;
         }
         return super.onTouchEvent(ev);
@@ -172,8 +181,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
                 break;
             case PULL:
                 headTopPadding(topPadding);
-                if (scrollState == SCROLL_STATE_TOUCH_SCROLL
-                        && space > headerContentHeight + SPACE) {
+                if (/*scrollState == SCROLL_STATE_TOUCH_SCROLL
+                        &&*/ space > headerContentHeight + SPACE) {
                     state = RELEASE;
                     refreshHeaderViewByState();
                 }
@@ -185,6 +194,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
                     refreshHeaderViewByState();
                 } else if (space <= 0) {
                     state = NONE;
+                    isRecorded = false;
                     refreshHeaderViewByState();
                 }
                 break;
@@ -211,29 +221,20 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
             case NONE:
                 translateAnim(header.getPaddingTop(), -headerContentHeight);
                 tip.setText(R.string.pull_to_refresh);
-                car.clearAnimation();
+
                 car.setImageResource(R.drawable.action_1);
                 break;
             case PULL:
-                car.setVisibility(View.VISIBLE);
-                tip.setVisibility(View.VISIBLE);
+                ViewUtils.showLayout(car);
                 tip.setText(R.string.pull_to_refresh);
                 car.clearAnimation();
-                car.setImageResource(R.drawable.action_1);
                 break;
             case RELEASE:
-                car.setVisibility(View.VISIBLE);
-                tip.setVisibility(View.VISIBLE);
-                tip.setText(R.string.pull_to_refresh);
                 tip.setText(R.string.release_to_refresh);
-                car.clearAnimation();
-                car.setImageResource(R.drawable.action_1);
                 break;
             case REFRESHING:
                 translateAnim(header.getPaddingTop(), 0);
                 tip.setText("正在刷新");
-                car.setVisibility(View.VISIBLE);
-                car.clearAnimation();
                 car.setImageResource(R.drawable.car_anim);
                 final AnimationDrawable ad = (AnimationDrawable) car.getDrawable();
                 ad.start();
@@ -265,6 +266,11 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
             isRefresh = false;
             // 飞出动画
             car.clearAnimation();
+            AnimationDrawable animtionDrawable = (AnimationDrawable) car.getDrawable();
+            if (animtionDrawable != null) {
+                animtionDrawable.stop();
+                animtionDrawable = null;
+            }
             car.setImageResource(R.drawable.action_8);
             Animation loadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_right);
             car.startAnimation(loadAnimation);
@@ -278,6 +284,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
                 public void onAnimationEnd(Animation animation) {
                     car.setVisibility(View.GONE);
                     state = NONE;
+                    isRecorded = false;
                     refreshHeaderViewByState();
                 }
 
@@ -292,7 +299,6 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
             if (!isLoadFull)
                 footerTopPadding(-footerContentHeight);
         }
-
     }
 
     /**
@@ -304,11 +310,14 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         footerTopPadding(0);
     }
 
-
+    /**
+     * 自动刷新 场景例如进入的页面的时候调用
+     */
     public void autoRefresh() {
         state = REFRESHING;
         refreshHeaderViewByState();
         onRefresh();
+
     }
 
     // 用来计算header大小的。比较隐晦。
@@ -333,7 +342,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
 
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void translateAnim(int fromY, int toY) {
+    private void translateAnim(final int fromY, final int toY) {
+
         ValueAnimator valueAnimator = ValueAnimator.ofInt(fromY, toY);
         valueAnimator.setTarget(header);
         valueAnimator.setDuration(400);
@@ -342,6 +352,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int animatedValue = (int) animation.getAnimatedValue();
+                L.d("translateAnim fromY:" + fromY + "============toY:" + toY + "=====animatedValue:" + animatedValue);
                 headTopPadding(animatedValue);
             }
         });

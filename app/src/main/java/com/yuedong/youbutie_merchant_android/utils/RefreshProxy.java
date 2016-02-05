@@ -51,8 +51,6 @@ public class RefreshProxy<T> {
         listView.setOnRefreshListener(new PulltoRefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                datas.clear();
-                adapter.notifyDataSetChanged();
                 if (!refresh) refresh = true;
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -100,11 +98,13 @@ public class RefreshProxy<T> {
         proxyRefreshListener.executeTask(skip, limit, new FindListener<T>() {
             @Override
             public void onFinish() {
+                L.d("executeTask- onFinish");
                 listView.onRefreshComplete();
             }
 
             @Override
             public void onSuccess(List<T> list) {
+                listView.onRefreshComplete();
                 proxyRefreshListener.networkSucceed(list);
                 if (CommonUtils.listIsNotNull(list)) {
                     updateData(list, mode);
@@ -129,20 +129,15 @@ public class RefreshProxy<T> {
 
             @Override
             public void onError(int i, String s) {
-                L.i("executeTask-onError");
+                L.d("executeTask-onError");
                 context.error(i);
             }
         });
     }
 
     private void updateData(List<T> list, int mode) {
-//        datas.clear();
-//        adapter.notifyDataSetChanged();
         if (list.size() < Config.PAGER_SIZE) {
-            listView.onRefreshComplete();
             listView.setLoadFull();
-        } else {
-            listView.onRefreshComplete();
         }
         if (mode == 1) {
             datas.clear();
@@ -154,17 +149,19 @@ public class RefreshProxy<T> {
 
 
     public void refreshStatus() {
-        datas.clear();
+//        datas.clear();
         currentPager = 1;
     }
 
     public void setEmptyUi() {
+        L.d("setEmptyUi---------------->");
         if (adapter == null) return;
         datas.clear();
         adapter.notifyDataSetChanged();
     }
 
     public void setEmpty() {
+        L.d("setEmpty---------------->");
         adapter = null;
         listView = null;
     }

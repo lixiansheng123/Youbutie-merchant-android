@@ -22,8 +22,10 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,10 +41,10 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class IncomeDetailActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "IncomeDetailActivity";
-    private PullToRefreshListView pullToRefreshListView;
+    private PulltoRefreshListView pullToRefreshListView;
     private IncomeDetailListAdapter adapter;
     private List<IncomeDetailListBean> datas = new ArrayList<IncomeDetailListBean>();
-    private RefreshHelper<IncomeDetailListBean> refreshHelper = new RefreshHelper<IncomeDetailListBean>();
+    private RefreshProxy<IncomeDetailListBean> refreshHelper = new RefreshProxy<IncomeDetailListBean>();
     private Merchant merchant;
     private int totalMoney;
     private TextView curMonthTotalMoney, canWithdrawMoney, alreadyWithdrawNum, alreadyWithdrawMoney;
@@ -94,7 +96,7 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void listProxy() {
-        refreshHelper.setPulltoRefreshRefreshProxy(IncomeDetailActivity.this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<IncomeDetailListBean>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(IncomeDetailActivity.this, pullToRefreshListView, new RefreshProxy.ProxyRefreshListener<IncomeDetailListBean>() {
             @Override
             public BaseAdapter<IncomeDetailListBean> getAdapter(List<IncomeDetailListBean> data) {
                 return adapter = new IncomeDetailListAdapter(context, data);
@@ -162,15 +164,14 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initViews() {
         pullToRefreshListView = fvById(R.id.id_refresh_view);
-        ListView listView = pullToRefreshListView.getRefreshableView();
-        View headView = ViewUtils.inflaterView(context, R.layout.head_income_detail_list, listView);
+        View headView = ViewUtils.inflaterView(context, R.layout.head_income_detail_list, pullToRefreshListView);
         withDrawLayout = headView.findViewById(R.id.id_withdraw_layout);
         curMonthTotalMoney = (TextView) headView.findViewById(R.id.id_cur_month_sales);
         alreadyWithdrawMoney = (TextView) headView.findViewById(R.id.id_already_withdraw_money);
         alreadyWithdrawNum = (TextView) headView.findViewById(R.id.id_already_withdraw_num);
         canWithdrawMoney = (TextView) headView.findViewById(R.id.id_can_withdraw_money);
         requestWithdrawBtn = (Button) headView.findViewById(R.id.id_btn_request_withdraw);
-        listView.addHeaderView(headView, null, false);
+        pullToRefreshListView.addHeaderView(headView, null, false);
         listProxy();
 
     }

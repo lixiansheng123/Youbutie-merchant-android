@@ -24,7 +24,9 @@ import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 import com.yuedong.youbutie_merchant_android.view.SelectItemPop;
 
 import java.util.ArrayList;
@@ -35,10 +37,10 @@ import cn.bmob.v3.listener.FindListener;
 
 public class VipUserListActivity extends BaseActivity implements View.OnClickListener {
     private MultiStateView multiStateView;
-    private PullToRefreshListView listView;
+    private PulltoRefreshListView listView;
     private List<Vips> vipsList;
     private Merchant merchant;
-    private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
+    private RefreshProxy<Order> refreshHelper = new RefreshProxy<Order>();
     private SelectAdapter selectAdapter;
     private SelectItemPop selectItemPop;
     private List<BmobObject> serviceInfos = new ArrayList<BmobObject>();
@@ -148,7 +150,7 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setEmptyUi();
         refreshHelper.setEmpty();
-        refreshHelper.setPulltoRefreshRefreshProxy(this, listView, new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(this, listView, new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 return new VipUserListAdater(context, data);

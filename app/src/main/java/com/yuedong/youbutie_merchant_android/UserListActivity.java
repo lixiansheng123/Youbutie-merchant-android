@@ -25,7 +25,9 @@ import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
 import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 import com.yuedong.youbutie_merchant_android.view.SelectItemPop;
 
 import java.util.ArrayList;
@@ -47,8 +49,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private int action = ACTION_TOTAL_USER;
     public static final int ACTION_TOTAL_USER = 0x001;
     public static final int ACTION_MEMBER_USER = 0x002;
-    private PullToRefreshListView refreshListView;
-    private RefreshHelper<Order> refreshHelper;
+    private PulltoRefreshListView refreshListView;
+    private RefreshProxy<Order> refreshHelper;
     private ServiceInfo filterServiceBean;
     private Car filterCarBean;
     // 内部行为
@@ -102,7 +104,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         carInfos.add(car);
         carInfos.addAll(carData);
         filterLayout = fvById(R.id.id_filter_layout);
-        refreshHelper = new RefreshHelper<Order>();
+        refreshHelper = new RefreshProxy<Order>();
         refreshHelper.showEmptyView = false;
         multiStateView = fvById(R.id.id_multistateview);
         multiStateView.setViewForState(R.layout.content_user_list, MultiStateView.VIEW_STATE_CONTENT, true);
@@ -168,7 +170,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         multiStateView.setViewState(MultiStateView.VIEW_STATE_CONTENT);
         refreshHelper.setEmptyUi();
         refreshHelper.setEmpty();
-        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 adapter = new UserListAdapter(context, data);

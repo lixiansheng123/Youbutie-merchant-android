@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
+import com.yuedong.youbutie_merchant_android.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        L.d("BaseAdapter------------getView");
         ViewHolder viewHolder = ViewHolder.get(mCon, convertView, parent, layoutId, position);
         convert(viewHolder, getItem(position), position, viewHolder.getConvertView());
         return viewHolder.getConvertView();

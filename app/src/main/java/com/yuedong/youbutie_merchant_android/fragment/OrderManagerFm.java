@@ -106,13 +106,11 @@ public class OrderManagerFm extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
-            L.i("getItem---------------------->>");
             return fmLists.get(position);
         }
 
         @Override
         public int getCount() {
-            L.i("getCount---------------------->>");
             return tabTitles.length;
         }
 

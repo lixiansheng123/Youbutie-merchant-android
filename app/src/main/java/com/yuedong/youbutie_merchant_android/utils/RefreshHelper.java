@@ -57,8 +57,6 @@ public class RefreshHelper<T> {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 if (!refresh) refresh = true;
-                datas.clear();
-                adapter.notifyDataSetChanged();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
