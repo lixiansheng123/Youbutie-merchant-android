@@ -2,7 +2,6 @@ package com.yuedong.youbutie_merchant_android.fragment;
 
 import android.os.Bundle;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.adapter.UserEvaluateAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
@@ -14,7 +13,6 @@ import com.yuedong.youbutie_merchant_android.model.OrderEvent;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;

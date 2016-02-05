@@ -1,16 +1,15 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.ClientMerchantConsumeRecordAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.AbstractPagerAdapter;
@@ -22,9 +21,10 @@ import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
 import com.yuedong.youbutie_merchant_android.utils.DisplayImageByVolleyUtils;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 import com.yuedong.youbutie_merchant_android.view.RoundImageView;
 
 import org.json.JSONException;
@@ -47,10 +47,10 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
     private TextView userName, userMobile, carNum, carDesc, carMileageNum;
     private ImageView iconVip;
     private View editMileageLayout;
-    private PullToRefreshListView refreshListView;
+    private PulltoRefreshListView refreshListView;
     private String[] tabTitles = new String[]{"车辆信息", "消费记录"};
     private List<View> views;
-    private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
+    private RefreshProxy<Order> refreshHelper = new RefreshProxy<Order>();
     private Order order;
     private boolean isVip;
     private User orderUser;
@@ -89,12 +89,12 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
         View item2 = ViewUtils.inflaterView(context, R.layout.item_vp_consume_record);
         views.add(item1);
         views.add(item2);
-        refreshListView = (PullToRefreshListView) item2.findViewById(R.id.id_refresh_view);
+        refreshListView = (PulltoRefreshListView) item2.findViewById(R.id.id_refresh_view);
         carNum = (TextView) item1.findViewById(R.id.id_car_num);
         carDesc = (TextView) item1.findViewById(R.id.id_car_desc);
         carMileageNum = (TextView) item1.findViewById(R.id.id_mileage_num);
         editMileageLayout = item1.findViewById(R.id.id_mileage_layout);
-        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(this, refreshListView, new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 return new ClientMerchantConsumeRecordAdapter(context, data);

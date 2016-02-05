@@ -9,9 +9,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.RatingBar;
 
-
-import com.handmark.pulltorefresh.library.ILoadingLayout;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.app.Config;
@@ -98,17 +95,6 @@ public class AppUtils {
         }
     }
 
-    /**
-     * 设置刷新提示文字
-     *
-     * @param refreshView
-     */
-    public static void setRefreshBaseParams(PullToRefreshBase refreshView) {
-        ILoadingLayout loadingLayoutProxy = refreshView.getLoadingLayoutProxy(true, false);
-        loadingLayoutProxy.setPullLabel("刷新最新信息...");
-        loadingLayoutProxy.setRefreshingLabel("正在刷新最新信息...");
-        loadingLayoutProxy.setReleaseLabel("松开刷新...");
-    }
 
     /**
      * 统计门店客户人数

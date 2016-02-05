@@ -166,15 +166,6 @@
         <item name="android:background">@color/greyd6d1ca</item>
     </style>
 
-    <style name="style_refreshview" parent="@style/w_h_mm">
-        <item name="ptrHeaderTextColor">@color/grey938381</item>
-        <item name="ptrDrawableEnd">@color/transparent</item>
-        <!--<item name="ptrDrawableStart">@mipmap/ic_launcher</item>-->
-        <item name="ptrAnimationStyle">rotate</item>
-        <item name="ptrHeaderBackground">@color/transparent</item>
-        <!--<item name="ptrDrawable">@drawable/icon_desk_logn</item>-->
-        <!--<item name="ptrMode">both</item>-->
-    </style>
 
     <style name="ratingBar_star" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/drawable_star_ratingbar</item>

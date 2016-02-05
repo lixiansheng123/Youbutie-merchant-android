@@ -1,1 +1,1 @@
-include ':app', ':library_qrcode', ':library_refresh', ':library_wheel'
+include ':app', ':library_qrcode', ':library_wheel'

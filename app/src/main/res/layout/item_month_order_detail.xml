@@ -1,52 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="99dp"
-    android:background="@color/whiteffffff"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:background="@color/whiteffffff"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
 
-    <com.yuedong.youbutie_merchant_android.view.RoundImageView
-        android:id="@+id/id_user_pic"
-        android:layout_width="67dp"
-        android:layout_height="67dp"
-        android:layout_centerVertical="true"
-        app:radius="3dp"
-        app:type="round" />
+        <com.yuedong.youbutie_merchant_android.view.RoundImageView
+            android:id="@+id/id_user_pic"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:layout_centerVertical="true"
+            app:radius="3dp"
+            app:type="round" />
 
-    <TextView
-        android:id="@+id/id_user_name"
-        style="@style/text_black_16sp"
-        android:layout_alignTop="@+id/id_user_pic"
-        android:layout_marginLeft="21dp"
-        android:layout_toRightOf="@+id/id_user_pic"
-        android:text="@string/str_test_nick"
-        android:textColor="@color/greyff8b3e" />
+        <TextView
+            android:id="@+id/id_user_name"
+            style="@style/text_black_16sp"
+            android:layout_alignTop="@+id/id_user_pic"
+            android:layout_marginLeft="21dp"
+            android:layout_toRightOf="@+id/id_user_pic"
+            android:text="@string/str_test_nick"
+            android:textColor="@color/greyff8b3e" />
 
-    <TextView
-        android:id="@+id/id_order_service"
-        style="@style/text_deep_grey_14sp"
-        android:layout_alignBottom="@+id/id_user_pic"
-        android:layout_alignLeft="@+id/id_user_name"
-        android:layout_alignTop="@+id/id_user_pic"
-        android:gravity="center_vertical"
-        android:text="洗车" />
+        <TextView
+            android:id="@+id/id_order_service"
+            style="@style/text_deep_grey_14sp"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignLeft="@+id/id_user_name"
+            android:layout_alignTop="@+id/id_user_pic"
+            android:gravity="center_vertical"
+            android:text="洗车" />
 
-    <TextView
-        android:id="@+id/id_down_order_time"
-        style="@style/text_tint_grey_12sp"
-        android:layout_alignBottom="@+id/id_user_pic"
-        android:layout_alignLeft="@+id/id_user_name"
-        android:layout_marginBottom="2dp"
-        android:text="@string/str_test_time" />
+        <TextView
+            android:id="@+id/id_down_order_time"
+            style="@style/text_tint_grey_12sp"
+            android:layout_alignBottom="@+id/id_user_pic"
+            android:layout_alignLeft="@+id/id_user_name"
+            android:layout_marginBottom="2dp"
+            android:text="@string/str_test_time" />
 
-    <TextView
-        android:id="@+id/id_order_price"
-        style="@style/text_yellow_16sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/id_user_pic"
-        android:text="￥0" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/id_order_price"
+            style="@style/text_yellow_16sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/id_user_pic"
+            android:text="￥0" />
+    </RelativeLayout>
+
+    <View style="@style/line_grey_1px" />
+</LinearLayout>

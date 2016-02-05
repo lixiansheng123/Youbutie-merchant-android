@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.handmark.pulltorefresh.library.PullToRefreshListView
+<com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/style_refreshview"
     android:layout_width="match_parent"
     android:id="@+id/id_refresh_view"
+    android:divider="@null"
     android:layout_height="match_parent" />

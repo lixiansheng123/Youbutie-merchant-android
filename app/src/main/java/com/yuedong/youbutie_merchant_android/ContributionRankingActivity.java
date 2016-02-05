@@ -2,10 +2,8 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.MoneyContributionAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.bean.MoneyContributionBean;
@@ -15,11 +13,8 @@ import com.yuedong.youbutie_merchant_android.model.MoneyContributionEvent;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.RankingComparator;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
-import com.yuedong.youbutie_merchant_android.utils.T;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
 import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 

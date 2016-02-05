@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.AdListActivity;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.SendMessageActivity;
@@ -30,7 +29,6 @@ import com.yuedong.youbutie_merchant_android.utils.AppUtils;
 import com.yuedong.youbutie_merchant_android.utils.CommonUtils;
 import com.yuedong.youbutie_merchant_android.utils.L;
 import com.yuedong.youbutie_merchant_android.utils.LaunchWithExitUtils;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
 import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.view.MultiStateView;
 import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;

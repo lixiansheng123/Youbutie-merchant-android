@@ -2,8 +2,6 @@ package com.yuedong.youbutie_merchant_android.utils;
 
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.R;
 import com.yuedong.youbutie_merchant_android.app.Config;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;

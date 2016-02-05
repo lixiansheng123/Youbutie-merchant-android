@@ -2,7 +2,6 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.MonthOrderDetailAdapter;
 import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -11,15 +10,16 @@ import com.yuedong.youbutie_merchant_android.model.OrderEvent;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Order;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 
 public class MonthOrderDetailActivity extends BaseActivity {
-    private RefreshHelper<Order> refreshHelper = new RefreshHelper<Order>();
+    private RefreshProxy<Order> refreshHelper = new RefreshProxy<Order>();
     private Merchant merchant;
     private String dayDesc;
 
@@ -37,7 +37,7 @@ public class MonthOrderDetailActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        refreshHelper.setPulltoRefreshRefreshProxy(this, (PullToRefreshListView) fvById(R.id.id_refresh_view), new RefreshHelper.ProxyRefreshListener<Order>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(this, (PulltoRefreshListView) fvById(R.id.id_refresh_view), new RefreshProxy.ProxyRefreshListener<Order>() {
             @Override
             public BaseAdapter<Order> getAdapter(List<Order> data) {
                 return new MonthOrderDetailAdapter(context, data);

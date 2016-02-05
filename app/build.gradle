@@ -97,7 +97,6 @@ dependencies {
     compile 'com.squareup.okio:okio:1.4.0'
     compile files('libs/volley.jar')
     compile 'com.zhy:percent-support-extends:1.1.1'
-    compile project(':library_refresh')
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
     compile project(':library_qrcode')

@@ -2,10 +2,8 @@ package com.yuedong.youbutie_merchant_android;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuedong.youbutie_merchant_android.adapter.WithdrawRecordListAdapter;
 import com.yuedong.youbutie_merchant_android.app.App;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
@@ -14,16 +12,17 @@ import com.yuedong.youbutie_merchant_android.model.DrawMoneyRecordEvent;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.DrawMoneyRecord;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.User;
-import com.yuedong.youbutie_merchant_android.utils.RefreshHelper;
+import com.yuedong.youbutie_merchant_android.utils.RefreshProxy;
 import com.yuedong.youbutie_merchant_android.utils.ViewUtils;
+import com.yuedong.youbutie_merchant_android.view.PulltoRefreshListView;
 
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 
 public class WithdrawRecordActivity extends BaseActivity {
-    private PullToRefreshListView pullToRefreshListView;
-    private RefreshHelper<DrawMoneyRecord> refreshHelper = new RefreshHelper<DrawMoneyRecord>();
+    private PulltoRefreshListView pullToRefreshListView;
+    private RefreshProxy<DrawMoneyRecord> refreshHelper = new RefreshProxy<DrawMoneyRecord>();
     private TextView alreadyWithdrawMoneyTv, withdrawCountTv;
 
     @Override
@@ -35,11 +34,10 @@ public class WithdrawRecordActivity extends BaseActivity {
     @Override
     protected void initViews() {
         pullToRefreshListView = fvById(R.id.id_refresh_view);
-        ListView listView = pullToRefreshListView.getRefreshableView();
-        View headView = ViewUtils.inflaterView(context, R.layout.head_withdraw_record, listView);
+        View headView = ViewUtils.inflaterView(context, R.layout.head_withdraw_record, pullToRefreshListView);
         alreadyWithdrawMoneyTv = (TextView) headView.findViewById(R.id.id_already_withdraw_money);
         withdrawCountTv = (TextView) headView.findViewById(R.id.id_withdraw_count);
-        listView.addHeaderView(headView, null, false);
+        pullToRefreshListView.addHeaderView(headView, null, false);
     }
 
     @Override
@@ -58,7 +56,7 @@ public class WithdrawRecordActivity extends BaseActivity {
             withdrawCountTv.setText(user.getDrawCount() + "");
         refreshHelper.setEmptyUi();
         refreshHelper.setEmpty();
-        refreshHelper.setPulltoRefreshRefreshProxy(this, pullToRefreshListView, new RefreshHelper.ProxyRefreshListener<DrawMoneyRecord>() {
+        refreshHelper.setPulltoRefreshRefreshProxy(this, pullToRefreshListView, new RefreshProxy.ProxyRefreshListener<DrawMoneyRecord>() {
             @Override
             public BaseAdapter<DrawMoneyRecord> getAdapter(List<DrawMoneyRecord> data) {
                 return new WithdrawRecordListAdapter(context, data);
