@@ -56,8 +56,5 @@
         android:layout_height="0dp"
         android:layout_marginTop="6dp"
         android:layout_weight="1"
-        app:msv_emptyView="@layout/empty_view">
-
-    </com.yuedong.youbutie_merchant_android.view.MultiStateView>
-
+        app:msv_emptyView="@layout/empty_view"></com.yuedong.youbutie_merchant_android.view.MultiStateView>
 </LinearLayout>

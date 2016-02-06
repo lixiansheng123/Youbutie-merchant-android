@@ -35,7 +35,6 @@ import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.listener.FindListener;
 
 public class UserListActivity extends BaseActivity implements View.OnClickListener {
-    private UserListAdapter adapter;
     private Merchant meMerchant;
     private List<BmobObject> serviceInfos = new ArrayList<BmobObject>();
     private List<BmobObject> carInfos = new ArrayList<BmobObject>();
@@ -51,6 +50,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private RefreshProxy<Order> refreshHelper;
     private ServiceInfo filterServiceBean;
     private Car filterCarBean;
+    private UserListAdapter adapter;
     // 内部行为
     public int actionIn = ACTION_IN_NORMAL;
     private static final int ACTION_IN_NORMAL = 0x101;
@@ -60,6 +60,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private List<Vips> vipsList;
     private MultiStateView multiStateView;
     private String title;
+    private List<Order> data = new ArrayList<Order>();
 
 
     @Override
