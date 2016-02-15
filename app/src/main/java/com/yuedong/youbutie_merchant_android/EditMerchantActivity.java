@@ -48,7 +48,8 @@ public class EditMerchantActivity extends BasePhotoCropActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        buildUi(new TitleViewHelper().createDefaultTitleView3("编辑门店"), false, false, false, R.layout.activity_edit_merchant);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("编辑门店"),//
+                false, false, false, R.layout.activity_edit_merchant);
     }
 
     @Override

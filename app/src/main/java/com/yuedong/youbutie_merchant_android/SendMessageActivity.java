@@ -68,7 +68,8 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myMerchant = (Merchant) getIntent().getSerializableExtra(Constants.KEY_BEAN);
-        buildUi(new TitleViewHelper().createDefaultTitleView3("发广告"), false, false, false, R.layout.activity_send_message);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("发广告"),//
+                false, false, false, R.layout.activity_send_message);
     }
 
     @Override
@@ -170,6 +171,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 Intent it2 = new Intent(activity, InfoEditActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.KEY_TEXT, "填写广告标题");
+                bundle.putString(Constants.KEY_TEXT2, "请输入广告标题");
                 bundle.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_AD_TITLE);
                 it2.putExtras(bundle);
                 LaunchWithExitUtils.startActivityForResult(activity, it2, Constants.REQUESTCODE_INPUT_AD_TITLE);

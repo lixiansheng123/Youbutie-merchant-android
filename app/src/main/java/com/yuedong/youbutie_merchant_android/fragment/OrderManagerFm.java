@@ -56,7 +56,8 @@ public class OrderManagerFm extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        buildUi(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"), R.drawable.icon_grey_swip, new View.OnClickListener() {
+        buildUi(new TitleViewHelper().createDefaultTitleView6(getString(R.string.str_order_manager), getString(R.string.str_exchange_swip), Color.parseColor("#938381"),
+                R.drawable.icon_grey_swip, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 打开扫描界面扫描条形码或二维码

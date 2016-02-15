@@ -13,7 +13,6 @@
 
         <TextView
             style="@style/text_white_14sp"
-            android:drawableRight="@drawable/icon_white_point_triangle"
             android:text="本月销售额(元) " />
 
         <TextView
@@ -108,7 +107,6 @@
         style="@style/text_deep_grey_14sp"
         android:layout_width="match_parent"
         android:layout_height="33dp"
-        android:background="@color/greyecebe4"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="@string/str_money_bill"

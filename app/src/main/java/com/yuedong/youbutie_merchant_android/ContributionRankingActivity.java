@@ -44,6 +44,7 @@ public class ContributionRankingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         refreshHelper = new RefreshProxy<MoneyContributionBean>();
+        refreshHelper.showEmptyView = false;
         Bundle extras = getIntent().getExtras();
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         oliContributionNum = extras.getInt(Constants.KEY_INT, 0);

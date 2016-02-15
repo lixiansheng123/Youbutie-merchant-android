@@ -8,7 +8,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        style="@style/text_white_12sp"
+        style="@style/text_white_14sp"
         android:text="@string/str_total_oli_number" />
 
     <TextView

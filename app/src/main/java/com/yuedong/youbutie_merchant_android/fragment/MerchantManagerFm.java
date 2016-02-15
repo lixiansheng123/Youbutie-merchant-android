@@ -168,6 +168,7 @@ public class MerchantManagerFm extends BaseFragment implements View.OnClickListe
                     Bundle b3 = new Bundle();
                     b3.putSerializable(Constants.KEY_BEAN, merchant);
                     b3.putString(Constants.KEY_TEXT, "门店广告");
+                    b3.putString(Constants.KEY_TEXT2, "输入门店广告");
                     b3.putInt(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MEMBER_AD);
                     it.putExtras(b3);
                     LaunchWithExitUtils.startActivityForResult(MerchantManagerFm.this, it, Constants.REQUESTCODE_MERCHANT_AD);

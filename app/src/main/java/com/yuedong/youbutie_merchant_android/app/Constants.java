@@ -96,8 +96,10 @@ public class Constants {
     // 测试userId
     public static final String TEST_USER_ID = "5MWw666Q";
 
-    //--url
-    private static final String YD_URL = "http://youbutie.pkball.cn/";
+//    //--url
+//    private static final String YD_URL = "http://youbutie.pkball.cn/";
+    // 正式url
+    private static final String YD_URL = "http://youbutie.com.cn/";
     public static final String URL_UMENG_PUSH = YD_URL + "UmengPush/AndroidGroupcast";
     public static final String URL_GET_SECRETKEY = YD_URL + "SecretKey/GetSecretKey";
     public static final String URL_PUSH_SINGLE = YD_URL + "BaiduPush/pushMsgToSingle";

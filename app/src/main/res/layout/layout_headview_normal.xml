@@ -12,7 +12,7 @@
         android:paddingRight="12dp">
 
 
-    <LinearLayout
+        <LinearLayout
             android:id="@+id/ll_left_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -22,13 +22,12 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:clickable="false"
-                android:focusable="false"
                 android:id="@+id/id_likeBack_headView"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                />
+                android:clickable="false"
+                android:focusable="false" />
         </LinearLayout>
 
 
@@ -72,7 +71,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_shadow" />
+        android:background="@color/greyd6d1ca" />
 </RelativeLayout>

@@ -4,4 +4,5 @@
     android:layout_width="match_parent"
     android:id="@+id/id_refresh_view"
     android:divider="@null"
+    android:background="@color/greyede9e4"
     android:layout_height="match_parent" />

@@ -12,6 +12,7 @@ import com.yuedong.youbutie_merchant_android.app.Constants;
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
 import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 import com.yuedong.youbutie_merchant_android.model.bmob.bean.Merchant;
+import com.yuedong.youbutie_merchant_android.utils.KeyBoardUtils;
 import com.yuedong.youbutie_merchant_android.utils.StringUtil;
 import com.yuedong.youbutie_merchant_android.utils.T;
 
@@ -88,7 +89,7 @@ public class InfoEditActivity extends BaseActivity {
 
         }));
         if (StringUtil.isNotEmpty(tips)) {
-            inputbox.setHint("提示:" + tips);
+            inputbox.setHint(tips);
         }
         // 增加限制
         int maxLength = 999999999;
@@ -99,6 +100,7 @@ public class InfoEditActivity extends BaseActivity {
         } else if (action == ACTION_INPUT_MEMBER_TEL)
             maxLength = 15;
         inputbox.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+        KeyBoardUtils.openKeybord(inputbox, context);
 
     }
 

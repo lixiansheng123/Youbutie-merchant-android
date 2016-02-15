@@ -1,9 +1,12 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.adapter.SelectAdapter;
@@ -42,6 +45,7 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
     private SelectAdapter selectAdapter;
     private View filterLayout;
     private TextView filterServiceTv, filterCarTv;
+    private ImageView filterServiceIcon, filterCarIcon;
     // 外部行为 用来标识入口
     private int action = ACTION_TOTAL_USER;
     public static final int ACTION_TOTAL_USER = 0x001;
@@ -71,8 +75,6 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         title = params.getString(Constants.KEY_TEXT);
         action = params.getInt(Constants.KEY_ACTION, ACTION_TOTAL_USER);
         vipsList = (List<Vips>) params.getSerializable(Constants.KEY_LIST);
-
-
     }
 
     @Override
@@ -88,6 +90,8 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                 }
             });
         buildUi(titleView, false, false, false, R.layout.activity_user_list);
+        filterServiceIcon = fvById(R.id.id_filter_service_icon);
+        filterCarIcon = fvById(R.id.id_filter_car_icon);
         selectAdapter = new SelectAdapter(context);
         selectItemPop = new SelectItemPop(context, selectAdapter);
         filterServiceTv = fvById(R.id.id_filter_service_tv);
@@ -153,10 +157,25 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
                 setProxy();
             }
         });
+
+        selectItemPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                resetFilterStatus();
+            }
+        });
         fvById(R.id.id_filter_service_layout).setOnClickListener(this);
         fvById(R.id.id_filter_car_layout).setOnClickListener(this);
 
     }
+
+    private void resetFilterStatus() {
+        filterCarIcon.setImageResource(R.drawable.icon_tint_grey_down_arrows);
+        filterServiceIcon.setImageResource(R.drawable.icon_tint_grey_down_arrows);
+        filterServiceTv.setTextColor(Color.parseColor("#81706e"));
+        filterCarTv.setTextColor(Color.parseColor("#81706e"));
+    }
+
 
     @Override
     protected void ui() {
@@ -259,10 +278,14 @@ public class UserListActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.id_filter_service_layout:
                 buildDataToPop(serviceInfos, SelectAdapter.MODE_SERVICE);
+                filterServiceIcon.setImageResource(R.drawable.icon_yellow_top_arrows);
+                filterServiceTv.setTextColor(Color.parseColor("#f0c010"));
                 break;
 
             case R.id.id_filter_car_layout:
                 buildDataToPop(carInfos, SelectAdapter.MODE_CAR);
+                filterCarIcon.setImageResource(R.drawable.icon_yellow_top_arrows);
+                filterCarTv.setTextColor(Color.parseColor("#f0c010"));
                 break;
         }
     }

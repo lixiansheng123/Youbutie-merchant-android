@@ -149,7 +149,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_toLeftOf="@+id/id_arrows_3"
                     android:text="@string/str_select_end_time"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/id_arrows_3"
@@ -186,7 +186,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_toLeftOf="@+id/id_arrows_3_2"
                     android:text="@string/str_select_end_time"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     style="@style/w_h_ww"

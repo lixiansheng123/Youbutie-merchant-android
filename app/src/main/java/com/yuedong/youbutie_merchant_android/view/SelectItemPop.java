@@ -44,7 +44,7 @@ public class SelectItemPop extends PopupWindow {
     }
 
     private void init() {
-        contentView = ViewUtils.inflaterView(context,R.layout.pop_select, null);
+        contentView = ViewUtils.inflaterView(context, R.layout.pop_select, null);
         listView = (ListView) contentView.findViewById(R.id.id_select_list);
         listView.setAdapter(adapter);
         View clickDis = contentView.findViewById(R.id.id_click_dis);
@@ -65,7 +65,7 @@ public class SelectItemPop extends PopupWindow {
         setContentView(contentView);
     }
 
-    int standardValue = ViewUtils.getViewDisplaySize(490, ViewUtils.ViewEnum.H);
+    int standardValue = ViewUtils.getViewDisplaySize(552, ViewUtils.ViewEnum.H);
 
     public void changeHeight() {
         listView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -74,7 +74,6 @@ public class SelectItemPop extends PopupWindow {
             public void run() {
                 // 获取listview的高度
                 int listViewHeight = listView.getHeight();
-                L.d("listViewHeight:----------------"+listViewHeight);
                 if (listViewHeight > standardValue)
                     listView.getLayoutParams().height = standardValue;
             }

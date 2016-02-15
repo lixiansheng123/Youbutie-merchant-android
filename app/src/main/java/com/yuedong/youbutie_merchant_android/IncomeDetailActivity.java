@@ -54,7 +54,8 @@ public class IncomeDetailActivity extends BaseActivity implements View.OnClickLi
         Bundle extras = getIntent().getExtras();
         merchant = (Merchant) extras.getSerializable(Constants.KEY_BEAN);
         totalMoney = extras.getInt(Constants.KEY_INT, 0);
-        buildUi(new TitleViewHelper().createDefaultTitleView3("收入详情"), false, false, false, R.layout.activity_income_detail);
+        buildUi(new TitleViewHelper().createDefaultTitleView3("收入详情"),//
+                false, false, false, R.layout.activity_income_detail);
         refreshHelper.showEmptyView = false;
     }
 

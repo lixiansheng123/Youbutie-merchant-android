@@ -11,9 +11,10 @@
         android:id="@+id/id_input_box"
         android:layout_width="match_parent"
         android:layout_height="33dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="33dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/shape_round_white_band_frame"
         android:paddingLeft="12dp">
 

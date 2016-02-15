@@ -142,6 +142,7 @@
 
                 <TextView
                     style="@style/text_deep_grey_14sp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="9dp"
                     android:text="@string/str_cur_select_car" />
 
@@ -149,7 +150,7 @@
                     android:id="@+id/id_select_car_default"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp">
+                    android:layout_marginTop="6dp">
 
                     <TextView
                         android:id="@+id/id_flag_total_car_name"
@@ -195,6 +196,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:background="@color/whiteffffff"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -229,16 +231,16 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="15dp"
-                android:maxLength="40"
                 android:background="@drawable/bg_round_tint_grey"
                 android:gravity="center_horizontal|top"
                 android:hint="@string/str_send_ad_des"
+                android:maxLength="40"
                 android:minHeight="90dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="19dp"
                 android:paddingRight="19dp"
                 android:paddingTop="10dp"
-                android:textColor="@color/greycbc0bf"
+                android:textColor="@color/grey938381"
                 android:textColorHint="@color/greycbc0bf"
                 android:textSize="14sp" />
         </LinearLayout>

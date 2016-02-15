@@ -1,9 +1,12 @@
 package com.yuedong.youbutie_merchant_android;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.yuedong.youbutie_merchant_android.adapter.SelectAdapter;
@@ -47,6 +50,7 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
     private ServiceInfo filterServiceBean;
     private Car filterCarBean;
     private TextView filterServiceTv, filterCarTv;
+    private ImageView filterServiceIcon, filterCarIcon;
     // 内部行为
     public int actionIn = ACTION_IN_NORMAL;
     private static final int ACTION_IN_NORMAL = 0x101;
@@ -72,6 +76,8 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
     protected void initViews() {
         selectAdapter = new SelectAdapter(context);
         selectItemPop = new SelectItemPop(context, selectAdapter);
+        filterServiceIcon = fvById(R.id.id_filter_service_icon);
+        filterCarIcon = fvById(R.id.id_filter_car_icon);
         filterServiceTv = fvById(R.id.id_filter_service_tv);
         filterCarTv = fvById(R.id.id_filter_car_tv);
         filterLayout = fvById(R.id.id_filter_layout);
@@ -104,6 +110,12 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
                 LaunchWithExitUtils.startActivityForResult(activity, intent, 0x021);
             }
         });
+        selectItemPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                resetFilterStatus();
+            }
+        });
         selectItemPop.setSelectItemCallback(new SelectItemPop.ISelectItemCallback() {
             @Override
             public void selectItem(int pos, Object bean, View item) {
@@ -134,6 +146,13 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         });
         fvById(R.id.id_filter_service_layout).setOnClickListener(this);
         fvById(R.id.id_filter_car_layout).setOnClickListener(this);
+    }
+
+    private void resetFilterStatus() {
+        filterCarIcon.setImageResource(R.drawable.icon_tint_grey_down_arrows);
+        filterServiceIcon.setImageResource(R.drawable.icon_tint_grey_down_arrows);
+        filterServiceTv.setTextColor(Color.parseColor("#81706e"));
+        filterCarTv.setTextColor(Color.parseColor("#81706e"));
     }
 
 
@@ -209,10 +228,14 @@ public class VipUserListActivity extends BaseActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.id_filter_service_layout:
                 buildDataToPop(serviceInfos, SelectAdapter.MODE_SERVICE);
+                filterServiceIcon.setImageResource(R.drawable.icon_yellow_top_arrows);
+                filterServiceTv.setTextColor(Color.parseColor("#f0c010"));
                 break;
 
             case R.id.id_filter_car_layout:
                 buildDataToPop(carInfos, SelectAdapter.MODE_CAR);
+                filterCarIcon.setImageResource(R.drawable.icon_yellow_top_arrows);
+                filterCarTv.setTextColor(Color.parseColor("#f0c010"));
                 break;
         }
     }

@@ -150,6 +150,7 @@ public class ClientDetailActivity extends BaseActivity implements View.OnClickLi
             case R.id.id_mileage_layout:
                 Intent intent = new Intent(activity, InfoEditActivity.class);
                 intent.putExtra(Constants.KEY_TEXT, "行驶公里数");
+                intent.putExtra(Constants.KEY_TEXT2, "输入行驶公里数");
                 intent.putExtra(Constants.KEY_ACTION, InfoEditActivity.ACTION_INPUT_MILEAGE);
                 LaunchWithExitUtils.startActivityForResult(activity, intent, Constants.REQUESTCODE_INPUT_MILEAGE);
                 break;

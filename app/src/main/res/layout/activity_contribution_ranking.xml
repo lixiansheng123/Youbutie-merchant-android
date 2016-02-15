@@ -3,6 +3,7 @@
     android:id="@+id/id_refresh_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greyede9e4"
     android:divider="@null"
     android:listSelector="@color/transparent">
 

@@ -4,6 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <View
+        style="@style/line_grey_2px"
+        android:layout_alignParentBottom="true" />
+
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -94,9 +98,5 @@
                 android:visibility="gone" />
         </RelativeLayout>
     </RelativeLayout>
-
-    <View
-        style="@style/line_grey_2px"
-        android:layout_alignParentBottom="true" />
 
 </LinearLayout>
