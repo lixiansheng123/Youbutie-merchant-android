@@ -38,8 +38,8 @@ public class GuideActivity extends BaseActivity {
         for (int i = 0; i < 3; i++) {
             View itemView = LayoutInflater.from(context).inflate(R.layout.item_guide, null);
             View bg = itemView.findViewById(R.id.id_bg);
-            TextView go = (TextView) itemView.findViewById(R.id.id_go);
-            ViewUtils.hideLayout(fvById(R.id.id_go_layout));
+            View goLayout = itemView.findViewById(R.id.id_go_layout);
+            ViewUtils.hideLayout(goLayout);
             switch (i) {
                 case 0:
                     bg.setBackgroundResource(R.drawable.guide_1);
@@ -51,8 +51,8 @@ public class GuideActivity extends BaseActivity {
 
                 case 2:
                     bg.setBackgroundResource(R.drawable.guide_3);
-                    ViewUtils.showLayout(fvById(R.id.id_go_layout));
-                    go.setOnClickListener(new View.OnClickListener() {
+                    ViewUtils.showLayout(goLayout);
+                    goLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             LaunchWithExitUtils.startActivity(activity, LoginActivity.class);

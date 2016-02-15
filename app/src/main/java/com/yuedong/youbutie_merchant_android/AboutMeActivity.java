@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import com.yuedong.youbutie_merchant_android.framework.BaseActivity;
+import com.yuedong.youbutie_merchant_android.model.TitleViewHelper;
 
 /**
  */
