@@ -36,6 +36,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/not_anim_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,43 +46,96 @@
         </activity>
         <activity
             android:name=".GuideActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/not_anim_theme" />
-        <activity android:name=".OrderDetailActivity" />
-        <activity android:name=".MerchantCollectionActivity" />
-        <activity android:name=".SendMessageActivity" />
-        <activity android:name=".SelectCarActivity" />
-        <activity android:name=".InfoEditActivity" />
-        <activity android:name=".AdListActivity" />
-        <activity android:name=".UserListActivity" />
+        <activity
+            android:name=".OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MerchantCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SendMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectCarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InfoEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/not_anim_theme" />
-        <activity android:name=".ClientDetailActivity" />
-        <activity android:name=".InviteMemberActivity" />
-        <activity android:name=".SearchAddressBookFriendActivity" />
-        <activity android:name=".ServiceListActivity" />
-        <activity android:name=".EditMerchantActivity" />
-        <activity android:name=".CustomMerchantServiceActivity" />
+        <activity
+            android:name=".ClientDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InviteMemberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SearchAddressBookFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ServiceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditMerchantActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CustomMerchantServiceActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".IncomeDetailActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".ContributionRankingActivity" />
-        <activity android:name=".LoginActivity" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ApplyWithdrawActivity"
-            android:label="@string/title_activity_apply_withdraw"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ApplySucceedActivity" />
-        <activity android:name=".WithdrawRecordActivity" />
-        <activity android:name=".MonthOrderDetailActivity" />
-        <activity android:name=".ForgetPsdActivity" />
-        <activity android:name=".MerchantSettingActivity" />
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".GiftDetailActivity" />
-        <activity android:name=".GetSucceedActivity"></activity>
-        <activity android:name="com.umeng.fb.ConversationActivity" />
-        <activity android:name=".VipUserListActivity" />
+            android:name=".ContributionRankingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ApplyWithdrawActivity" />
+        <activity
+            android:name=".ApplySucceedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WithdrawRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MonthOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgetPsdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MerchantSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GiftDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GetSucceedActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.umeng.fb.ConversationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VipUserListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutMeActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="UMENG_CHANNEL"

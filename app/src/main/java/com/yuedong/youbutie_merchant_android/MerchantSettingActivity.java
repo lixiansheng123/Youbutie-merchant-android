@@ -40,6 +40,7 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void initEvents() {
+        fvById(R.id.id_about_me_layout).setOnClickListener(this);
         fvById(R.id.id_idea_feedback_layout).setOnClickListener(this);
         fvById(R.id.id_checkout_app_update_layout).setOnClickListener(this);
         quitBtn.setOnClickListener(this);
@@ -88,6 +89,10 @@ public class MerchantSettingActivity extends BaseActivity implements View.OnClic
 
             case R.id.id_idea_feedback_layout:
                 LaunchWithExitUtils.startActivity(activity, FeedbackActivity.class);
+                break;
+
+            case R.id.id_about_me_layout:
+                LaunchWithExitUtils.startActivity(activity, AboutMeActivity.class);
                 break;
 
         }

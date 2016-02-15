@@ -163,4 +163,5 @@
     <string name="pull_to_refresh">下拉刷新</string>
     <string name="release_to_refresh">松开手刷新</string>
     <string name="str_loading">正在加载更多</string>
+    <string name="str_about_me_desc">广州车悦会信息科技有限公司，成立于2014年12月。专注于连接车主与车后服务的市场，致力打造车主出行的便捷配套。在商家与车主之间建立有效互联并为商家打造精准的营销以及广告平台。</string>
 </resources>
