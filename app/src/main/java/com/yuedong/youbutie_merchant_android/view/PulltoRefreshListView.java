@@ -87,8 +87,8 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
         headerContentHeight = header.getMeasuredHeight();
         headTopPadding(-headerContentHeight);
         footerTopPadding(-footerContentHeight);
-        this.addHeaderView(header);
-        this.addFooterView(footer);
+        this.addHeaderView(header, null, false);
+        this.addFooterView(footer, null, false);
         this.setOnScrollListener(this);
     }
 
@@ -146,7 +146,7 @@ public class PulltoRefreshListView extends ListView implements AbsListView.OnScr
                 isRecorded = false;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (firstVisibleItem == 0 && !isRecorded ) {
+                if (firstVisibleItem == 0 && !isRecorded) {
                     isRecorded = true;
                     startY = (int) ev.getY();
                 }

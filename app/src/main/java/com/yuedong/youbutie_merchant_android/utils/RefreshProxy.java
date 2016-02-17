@@ -101,9 +101,15 @@ public class RefreshProxy<T> {
             }
 
             @Override
-            public void onSuccess(List<T> list) {
+            public void onSuccess(final List<T> list) {
+                L.d("Proxy onSucceed:" + list.toString());
                 listView.onRefreshComplete();
-                proxyRefreshListener.networkSucceed(list);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+                        proxyRefreshListener.networkSucceed(list);
+//                    }
+//                }, 300);
                 if (CommonUtils.listIsNotNull(list)) {
                     updateData(list, mode);
                 } else {

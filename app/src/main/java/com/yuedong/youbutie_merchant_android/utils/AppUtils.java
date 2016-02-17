@@ -73,11 +73,11 @@ public class AppUtils {
      */
     public static void merchantCall(Context context, String merchantPhoto) {
         if (StringUtil.isNotEmpty(merchantPhoto)) {
-            if (merchantPhoto.matches(Config.REGEX_NUM)) {
+//            if (merchantPhoto.matches(Config.REGEX_NUM)) {
                 SystemUtils.call(context, merchantPhoto);
-            } else {
-                T.showShort(context, "无法提供商家电话");
-            }
+//            } else {
+//                T.showShort(context, "无法提供商家电话");
+//            }
         } else {
             T.showShort(context, "商家暂无电话");
         }

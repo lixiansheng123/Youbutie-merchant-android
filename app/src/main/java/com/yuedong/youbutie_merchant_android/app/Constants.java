@@ -7,10 +7,10 @@ public class Constants {
     //第三方开发key
     // bmob测试版key
 //    public static final String APIKEY_BMOB = "643ed252af1996e42a33869912924261";
-//     bmob数据版key
-    public static final String APIKEY_BMOB = "d8cda36c4f3eae00e078f027e0264999";
-//    // bmob正式版
-//    public static final String APIKEY_BMOB = "9f0e812170da841f073f02618fa586d0";
+////     bmob数据版key
+//    public static final String APIKEY_BMOB = "d8cda36c4f3eae00e078f027e0264999";
+        // bmob正式版
+    public static final String APIKEY_BMOB = "9f0e812170da841f073f02618fa586d0";
     // 悦动推送apikey
     public static final String APIKEY_PUSH_YD = "android6ce073d5af79fa36986dadd3cd0e8a53";
     // 悦动推送secretKey
@@ -96,7 +96,7 @@ public class Constants {
     // 测试userId
     public static final String TEST_USER_ID = "5MWw666Q";
 
-//    //--url
+    //    //--url
 //    private static final String YD_URL = "http://youbutie.pkball.cn/";
     // 正式url
     private static final String YD_URL = "http://youbutie.com.cn/";
